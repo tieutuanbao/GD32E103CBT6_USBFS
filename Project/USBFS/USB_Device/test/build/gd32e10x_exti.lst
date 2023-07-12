@@ -1,0 +1,895 @@
+ARM GAS  /tmp/ccgn5K2k.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.eabi_attribute 27, 1
+   3              		.eabi_attribute 28, 1
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.file	"gd32e10x_exti.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.section	.text.exti_deinit,"ax",%progbits
+  18              		.align	1
+  19              		.global	exti_deinit
+  20              		.arch armv7e-m
+  21              		.syntax unified
+  22              		.thumb
+  23              		.thumb_func
+  24              		.fpu fpv4-sp-d16
+  26              	exti_deinit:
+  27              	.LFB116:
+  28              		.file 1 "../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c"
+   1:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c **** /*!
+   2:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****     \file  gd32e10x_exti.c
+   3:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****     \brief EXTI driver
+   4:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****         
+   5:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****     \version 2017-12-26, V1.0.0, firmware for GD32E10x
+   6:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c **** */
+   7:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c **** 
+   8:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c **** /*
+   9:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****     Copyright (c) 2017, GigaDevice Semiconductor Inc.
+  10:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c **** 
+  11:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****     All rights reserved.
+  12:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c **** 
+  13:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****     Redistribution and use in source and binary forms, with or without modification, 
+  14:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c **** are permitted provided that the following conditions are met:
+  15:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c **** 
+  16:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****     1. Redistributions of source code must retain the above copyright notice, this 
+  17:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****        list of conditions and the following disclaimer.
+  18:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****     2. Redistributions in binary form must reproduce the above copyright notice, 
+  19:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****        this list of conditions and the following disclaimer in the documentation 
+  20:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****        and/or other materials provided with the distribution.
+  21:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****     3. Neither the name of the copyright holder nor the names of its contributors 
+  22:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****        may be used to endorse or promote products derived from this software without 
+  23:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****        specific prior written permission.
+  24:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c **** 
+  25:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****     THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" 
+  26:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c **** AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED 
+  27:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c **** WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. 
+  28:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c **** IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, 
+  29:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c **** INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT 
+  30:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c **** NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR 
+ARM GAS  /tmp/ccgn5K2k.s 			page 2
+
+
+  31:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c **** PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, 
+  32:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c **** WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) 
+  33:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c **** ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY 
+  34:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c **** OF SUCH DAMAGE.
+  35:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c **** */
+  36:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c **** 
+  37:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c **** #include "gd32e10x_exti.h"
+  38:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c **** 
+  39:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c **** /*!
+  40:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****     \brief      deinitialize the EXTI
+  41:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****     \param[in]  none
+  42:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****     \param[out] none
+  43:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****     \retval     none
+  44:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c **** */
+  45:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c **** void exti_deinit(void)
+  46:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c **** {
+  29              		.loc 1 46 1 view -0
+  30              		.cfi_startproc
+  31              		@ args = 0, pretend = 0, frame = 0
+  32              		@ frame_needed = 0, uses_anonymous_args = 0
+  33              		@ link register save eliminated.
+  47:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****     /* reset the value of all the EXTI registers */
+  48:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****     EXTI_INTEN = (uint32_t)0x00000000U;
+  34              		.loc 1 48 5 view .LVU1
+  35              		.loc 1 48 16 is_stmt 0 view .LVU2
+  36 0000 064B     		ldr	r3, .L2
+  37 0002 0022     		movs	r2, #0
+  38 0004 C3F80024 		str	r2, [r3, #1024]
+  49:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****     EXTI_EVEN  = (uint32_t)0x00000000U;
+  39              		.loc 1 49 5 is_stmt 1 view .LVU3
+  40              		.loc 1 49 16 is_stmt 0 view .LVU4
+  41 0008 C3F80424 		str	r2, [r3, #1028]
+  50:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****     EXTI_RTEN  = (uint32_t)0x00000000U;
+  42              		.loc 1 50 5 is_stmt 1 view .LVU5
+  43              		.loc 1 50 16 is_stmt 0 view .LVU6
+  44 000c C3F80824 		str	r2, [r3, #1032]
+  51:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****     EXTI_FTEN  = (uint32_t)0x00000000U;
+  45              		.loc 1 51 5 is_stmt 1 view .LVU7
+  46              		.loc 1 51 16 is_stmt 0 view .LVU8
+  47 0010 C3F80C24 		str	r2, [r3, #1036]
+  52:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****     EXTI_SWIEV = (uint32_t)0x00000000U;
+  48              		.loc 1 52 5 is_stmt 1 view .LVU9
+  49              		.loc 1 52 16 is_stmt 0 view .LVU10
+  50 0014 C3F81024 		str	r2, [r3, #1040]
+  53:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c **** }
+  51              		.loc 1 53 1 view .LVU11
+  52 0018 7047     		bx	lr
+  53              	.L3:
+  54 001a 00BF     		.align	2
+  55              	.L2:
+  56 001c 00000140 		.word	1073807360
+  57              		.cfi_endproc
+  58              	.LFE116:
+  60              		.section	.text.exti_init,"ax",%progbits
+  61              		.align	1
+  62              		.global	exti_init
+  63              		.syntax unified
+ARM GAS  /tmp/ccgn5K2k.s 			page 3
+
+
+  64              		.thumb
+  65              		.thumb_func
+  66              		.fpu fpv4-sp-d16
+  68              	exti_init:
+  69              	.LVL0:
+  70              	.LFB117:
+  54:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c **** 
+  55:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c **** /*!
+  56:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****     \brief      initialize the EXTI
+  57:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****     \param[in]  linex: EXTI line number, refer to exti_line_enum
+  58:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****                 only one parameter can be selected which is shown as below:
+  59:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****       \arg        EXTI_x (x=0..18): EXTI line x
+  60:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****     \param[in]  mode: interrupt or event mode, refer to exti_mode_enum
+  61:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****                 only one parameter can be selected which is shown as below:
+  62:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****       \arg        EXTI_INTERRUPT: interrupt mode
+  63:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****       \arg        EXTI_EVENT: event mode
+  64:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****     \param[in]  trig_type: interrupt trigger type, refer to exti_trig_type_enum
+  65:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****                 only one parameter can be selected which is shown as below:
+  66:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****       \arg        EXTI_TRIG_RISING: rising edge trigger
+  67:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****       \arg        EXTI_TRIG_FALLING: falling trigger
+  68:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****       \arg        EXTI_TRIG_BOTH: rising and falling trigger
+  69:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****     \param[out] none
+  70:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****     \retval     none
+  71:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c **** */
+  72:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c **** void exti_init(exti_line_enum linex, exti_mode_enum mode, exti_trig_type_enum trig_type)
+  73:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c **** {
+  71              		.loc 1 73 1 is_stmt 1 view -0
+  72              		.cfi_startproc
+  73              		@ args = 0, pretend = 0, frame = 0
+  74              		@ frame_needed = 0, uses_anonymous_args = 0
+  75              		@ link register save eliminated.
+  76              		.loc 1 73 1 is_stmt 0 view .LVU13
+  77 0000 10B4     		push	{r4}
+  78              		.cfi_def_cfa_offset 4
+  79              		.cfi_offset 4, -4
+  74:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****     /* reset the EXTI line x */
+  75:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****     EXTI_INTEN &= ~(uint32_t)linex;
+  80              		.loc 1 75 5 is_stmt 1 view .LVU14
+  81              		.loc 1 75 16 is_stmt 0 view .LVU15
+  82 0002 2D4B     		ldr	r3, .L13
+  83 0004 D3F80044 		ldr	r4, [r3, #1024]
+  84              		.loc 1 75 19 view .LVU16
+  85 0008 6FEA000C 		mvn	ip, r0
+  86              		.loc 1 75 16 view .LVU17
+  87 000c 24EA0004 		bic	r4, r4, r0
+  88 0010 C3F80044 		str	r4, [r3, #1024]
+  76:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****     EXTI_EVEN &= ~(uint32_t)linex;
+  89              		.loc 1 76 5 is_stmt 1 view .LVU18
+  90              		.loc 1 76 15 is_stmt 0 view .LVU19
+  91 0014 D3F80444 		ldr	r4, [r3, #1028]
+  92 0018 24EA0004 		bic	r4, r4, r0
+  93 001c C3F80444 		str	r4, [r3, #1028]
+  77:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****     EXTI_RTEN &= ~(uint32_t)linex;
+  94              		.loc 1 77 5 is_stmt 1 view .LVU20
+  95              		.loc 1 77 15 is_stmt 0 view .LVU21
+  96 0020 D3F80844 		ldr	r4, [r3, #1032]
+  97 0024 24EA0004 		bic	r4, r4, r0
+ARM GAS  /tmp/ccgn5K2k.s 			page 4
+
+
+  98 0028 C3F80844 		str	r4, [r3, #1032]
+  78:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****     EXTI_FTEN &= ~(uint32_t)linex;
+  99              		.loc 1 78 5 is_stmt 1 view .LVU22
+ 100              		.loc 1 78 15 is_stmt 0 view .LVU23
+ 101 002c D3F80C44 		ldr	r4, [r3, #1036]
+ 102 0030 24EA0004 		bic	r4, r4, r0
+ 103 0034 C3F80C44 		str	r4, [r3, #1036]
+  79:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****     
+  80:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****     /* set the EXTI mode and enable the interrupts or events from EXTI line x */
+  81:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****     switch(mode){
+ 104              		.loc 1 81 5 is_stmt 1 view .LVU24
+ 105 0038 49B1     		cbz	r1, .L5
+ 106 003a 0129     		cmp	r1, #1
+ 107 003c 0ED0     		beq	.L6
+ 108              	.LVL1:
+ 109              	.L7:
+  82:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****     case EXTI_INTERRUPT:
+  83:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****         EXTI_INTEN |= (uint32_t)linex;
+  84:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****         break;
+  85:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****     case EXTI_EVENT:
+  86:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****         EXTI_EVEN |= (uint32_t)linex;
+  87:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****         break;
+  88:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****     default:
+  89:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****         break;
+  90:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****     }
+  91:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****     
+  92:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****     /* set the EXTI trigger type */
+  93:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****     switch(trig_type){
+ 110              		.loc 1 93 5 view .LVU25
+ 111 003e 012A     		cmp	r2, #1
+ 112 0040 20D0     		beq	.L8
+ 113 0042 022A     		cmp	r2, #2
+ 114 0044 2BD0     		beq	.L9
+ 115 0046 82B1     		cbz	r2, .L12
+ 116              	.LVL2:
+ 117              	.L4:
+  94:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****     case EXTI_TRIG_RISING:
+  95:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****         EXTI_RTEN |= (uint32_t)linex;
+  96:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****         EXTI_FTEN &= ~(uint32_t)linex;
+  97:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****         break;
+  98:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****     case EXTI_TRIG_FALLING:
+  99:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****         EXTI_RTEN &= ~(uint32_t)linex;
+ 100:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****         EXTI_FTEN |= (uint32_t)linex;
+ 101:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****         break;
+ 102:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****     case EXTI_TRIG_BOTH:
+ 103:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****         EXTI_RTEN |= (uint32_t)linex;
+ 104:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****         EXTI_FTEN |= (uint32_t)linex;
+ 105:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****         break;
+ 106:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****     default:
+ 107:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****         break;
+ 108:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****     }
+ 109:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c **** }
+ 118              		.loc 1 109 1 is_stmt 0 view .LVU26
+ 119 0048 5DF8044B 		ldr	r4, [sp], #4
+ 120              		.cfi_remember_state
+ 121              		.cfi_restore 4
+ 122              		.cfi_def_cfa_offset 0
+ARM GAS  /tmp/ccgn5K2k.s 			page 5
+
+
+ 123 004c 7047     		bx	lr
+ 124              	.LVL3:
+ 125              	.L5:
+ 126              		.cfi_restore_state
+  83:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****         break;
+ 127              		.loc 1 83 9 is_stmt 1 view .LVU27
+  83:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****         break;
+ 128              		.loc 1 83 20 is_stmt 0 view .LVU28
+ 129 004e 1A49     		ldr	r1, .L13
+ 130              	.LVL4:
+  83:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****         break;
+ 131              		.loc 1 83 20 view .LVU29
+ 132 0050 D1F80034 		ldr	r3, [r1, #1024]
+ 133 0054 0343     		orrs	r3, r3, r0
+ 134 0056 C1F80034 		str	r3, [r1, #1024]
+  84:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****     case EXTI_EVENT:
+ 135              		.loc 1 84 9 is_stmt 1 view .LVU30
+ 136 005a F0E7     		b	.L7
+ 137              	.LVL5:
+ 138              	.L6:
+  86:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****         break;
+ 139              		.loc 1 86 9 view .LVU31
+  86:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****         break;
+ 140              		.loc 1 86 19 is_stmt 0 view .LVU32
+ 141 005c 1649     		ldr	r1, .L13
+ 142              	.LVL6:
+  86:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****         break;
+ 143              		.loc 1 86 19 view .LVU33
+ 144 005e D1F80434 		ldr	r3, [r1, #1028]
+ 145 0062 0343     		orrs	r3, r3, r0
+ 146 0064 C1F80434 		str	r3, [r1, #1028]
+  87:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****     default:
+ 147              		.loc 1 87 9 is_stmt 1 view .LVU34
+ 148 0068 E9E7     		b	.L7
+ 149              	.L12:
+  95:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****         EXTI_FTEN &= ~(uint32_t)linex;
+ 150              		.loc 1 95 9 view .LVU35
+  95:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****         EXTI_FTEN &= ~(uint32_t)linex;
+ 151              		.loc 1 95 19 is_stmt 0 view .LVU36
+ 152 006a 134B     		ldr	r3, .L13
+ 153 006c D3F80824 		ldr	r2, [r3, #1032]
+ 154              	.LVL7:
+  95:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****         EXTI_FTEN &= ~(uint32_t)linex;
+ 155              		.loc 1 95 19 view .LVU37
+ 156 0070 1043     		orrs	r0, r0, r2
+ 157              	.LVL8:
+  95:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****         EXTI_FTEN &= ~(uint32_t)linex;
+ 158              		.loc 1 95 19 view .LVU38
+ 159 0072 C3F80804 		str	r0, [r3, #1032]
+  96:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****         break;
+ 160              		.loc 1 96 9 is_stmt 1 view .LVU39
+  96:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****         break;
+ 161              		.loc 1 96 19 is_stmt 0 view .LVU40
+ 162 0076 D3F80C24 		ldr	r2, [r3, #1036]
+ 163 007a 0CEA0202 		and	r2, ip, r2
+ 164 007e C3F80C24 		str	r2, [r3, #1036]
+  97:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****     case EXTI_TRIG_FALLING:
+ARM GAS  /tmp/ccgn5K2k.s 			page 6
+
+
+ 165              		.loc 1 97 9 is_stmt 1 view .LVU41
+ 166 0082 E1E7     		b	.L4
+ 167              	.LVL9:
+ 168              	.L8:
+  99:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****         EXTI_FTEN |= (uint32_t)linex;
+ 169              		.loc 1 99 9 view .LVU42
+  99:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****         EXTI_FTEN |= (uint32_t)linex;
+ 170              		.loc 1 99 19 is_stmt 0 view .LVU43
+ 171 0084 0C4A     		ldr	r2, .L13
+ 172              	.LVL10:
+  99:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****         EXTI_FTEN |= (uint32_t)linex;
+ 173              		.loc 1 99 19 view .LVU44
+ 174 0086 D2F80834 		ldr	r3, [r2, #1032]
+ 175 008a 0CEA0303 		and	r3, ip, r3
+ 176 008e C2F80834 		str	r3, [r2, #1032]
+ 100:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****         break;
+ 177              		.loc 1 100 9 is_stmt 1 view .LVU45
+ 100:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****         break;
+ 178              		.loc 1 100 19 is_stmt 0 view .LVU46
+ 179 0092 D2F80C34 		ldr	r3, [r2, #1036]
+ 180 0096 1843     		orrs	r0, r0, r3
+ 181              	.LVL11:
+ 100:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****         break;
+ 182              		.loc 1 100 19 view .LVU47
+ 183 0098 C2F80C04 		str	r0, [r2, #1036]
+ 101:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****     case EXTI_TRIG_BOTH:
+ 184              		.loc 1 101 9 is_stmt 1 view .LVU48
+ 185 009c D4E7     		b	.L4
+ 186              	.LVL12:
+ 187              	.L9:
+ 103:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****         EXTI_FTEN |= (uint32_t)linex;
+ 188              		.loc 1 103 9 view .LVU49
+ 103:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****         EXTI_FTEN |= (uint32_t)linex;
+ 189              		.loc 1 103 19 is_stmt 0 view .LVU50
+ 190 009e 064B     		ldr	r3, .L13
+ 191 00a0 D3F80824 		ldr	r2, [r3, #1032]
+ 192              	.LVL13:
+ 103:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****         EXTI_FTEN |= (uint32_t)linex;
+ 193              		.loc 1 103 19 view .LVU51
+ 194 00a4 0243     		orrs	r2, r2, r0
+ 195 00a6 C3F80824 		str	r2, [r3, #1032]
+ 104:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****         break;
+ 196              		.loc 1 104 9 is_stmt 1 view .LVU52
+ 104:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****         break;
+ 197              		.loc 1 104 19 is_stmt 0 view .LVU53
+ 198 00aa D3F80C24 		ldr	r2, [r3, #1036]
+ 199 00ae 1043     		orrs	r0, r0, r2
+ 200              	.LVL14:
+ 104:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****         break;
+ 201              		.loc 1 104 19 view .LVU54
+ 202 00b0 C3F80C04 		str	r0, [r3, #1036]
+ 105:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****     default:
+ 203              		.loc 1 105 9 is_stmt 1 view .LVU55
+ 204              		.loc 1 109 1 is_stmt 0 view .LVU56
+ 205 00b4 C8E7     		b	.L4
+ 206              	.L14:
+ 207 00b6 00BF     		.align	2
+ARM GAS  /tmp/ccgn5K2k.s 			page 7
+
+
+ 208              	.L13:
+ 209 00b8 00000140 		.word	1073807360
+ 210              		.cfi_endproc
+ 211              	.LFE117:
+ 213              		.section	.text.exti_interrupt_enable,"ax",%progbits
+ 214              		.align	1
+ 215              		.global	exti_interrupt_enable
+ 216              		.syntax unified
+ 217              		.thumb
+ 218              		.thumb_func
+ 219              		.fpu fpv4-sp-d16
+ 221              	exti_interrupt_enable:
+ 222              	.LVL15:
+ 223              	.LFB118:
+ 110:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c **** 
+ 111:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c **** /*!
+ 112:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****     \brief      enable the interrupts from EXTI line x
+ 113:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****     \param[in]  linex: EXTI line number, refer to exti_line_enum
+ 114:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****                 only one parameter can be selected which is shown as below:
+ 115:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****       \arg        EXTI_x (x=0..18): EXTI line x
+ 116:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****     \param[out] none
+ 117:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****     \retval     none
+ 118:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c **** */
+ 119:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c **** void exti_interrupt_enable(exti_line_enum linex)
+ 120:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c **** {
+ 224              		.loc 1 120 1 is_stmt 1 view -0
+ 225              		.cfi_startproc
+ 226              		@ args = 0, pretend = 0, frame = 0
+ 227              		@ frame_needed = 0, uses_anonymous_args = 0
+ 228              		@ link register save eliminated.
+ 121:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****     EXTI_INTEN |= (uint32_t)linex;
+ 229              		.loc 1 121 5 view .LVU58
+ 230              		.loc 1 121 16 is_stmt 0 view .LVU59
+ 231 0000 034A     		ldr	r2, .L16
+ 232 0002 D2F80034 		ldr	r3, [r2, #1024]
+ 233 0006 0343     		orrs	r3, r3, r0
+ 234 0008 C2F80034 		str	r3, [r2, #1024]
+ 122:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c **** }
+ 235              		.loc 1 122 1 view .LVU60
+ 236 000c 7047     		bx	lr
+ 237              	.L17:
+ 238 000e 00BF     		.align	2
+ 239              	.L16:
+ 240 0010 00000140 		.word	1073807360
+ 241              		.cfi_endproc
+ 242              	.LFE118:
+ 244              		.section	.text.exti_event_enable,"ax",%progbits
+ 245              		.align	1
+ 246              		.global	exti_event_enable
+ 247              		.syntax unified
+ 248              		.thumb
+ 249              		.thumb_func
+ 250              		.fpu fpv4-sp-d16
+ 252              	exti_event_enable:
+ 253              	.LVL16:
+ 254              	.LFB119:
+ 123:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c **** 
+ARM GAS  /tmp/ccgn5K2k.s 			page 8
+
+
+ 124:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c **** /*!
+ 125:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****     \brief      enable the events from EXTI line x
+ 126:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****     \param[in]  linex: EXTI line number, refer to exti_line_enum
+ 127:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****                 only one parameter can be selected which is shown as below:
+ 128:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****       \arg        EXTI_x (x=0..18): EXTI line x
+ 129:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****     \param[out] none
+ 130:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****     \retval     none
+ 131:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c **** */
+ 132:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c **** void exti_event_enable(exti_line_enum linex)
+ 133:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c **** {
+ 255              		.loc 1 133 1 is_stmt 1 view -0
+ 256              		.cfi_startproc
+ 257              		@ args = 0, pretend = 0, frame = 0
+ 258              		@ frame_needed = 0, uses_anonymous_args = 0
+ 259              		@ link register save eliminated.
+ 134:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****     EXTI_EVEN |= (uint32_t)linex;
+ 260              		.loc 1 134 5 view .LVU62
+ 261              		.loc 1 134 15 is_stmt 0 view .LVU63
+ 262 0000 034A     		ldr	r2, .L19
+ 263 0002 D2F80434 		ldr	r3, [r2, #1028]
+ 264 0006 0343     		orrs	r3, r3, r0
+ 265 0008 C2F80434 		str	r3, [r2, #1028]
+ 135:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c **** }
+ 266              		.loc 1 135 1 view .LVU64
+ 267 000c 7047     		bx	lr
+ 268              	.L20:
+ 269 000e 00BF     		.align	2
+ 270              	.L19:
+ 271 0010 00000140 		.word	1073807360
+ 272              		.cfi_endproc
+ 273              	.LFE119:
+ 275              		.section	.text.exti_interrupt_disable,"ax",%progbits
+ 276              		.align	1
+ 277              		.global	exti_interrupt_disable
+ 278              		.syntax unified
+ 279              		.thumb
+ 280              		.thumb_func
+ 281              		.fpu fpv4-sp-d16
+ 283              	exti_interrupt_disable:
+ 284              	.LVL17:
+ 285              	.LFB120:
+ 136:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c **** 
+ 137:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c **** /*!
+ 138:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****     \brief      disable the interrupt from EXTI line x
+ 139:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****     \param[in]  linex: EXTI line number, refer to exti_line_enum
+ 140:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****                 only one parameter can be selected which is shown as below:
+ 141:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****       \arg        EXTI_x (x=0..18): EXTI line x
+ 142:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****     \param[out] none
+ 143:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****     \retval     none
+ 144:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c **** */
+ 145:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c **** void exti_interrupt_disable(exti_line_enum linex)
+ 146:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c **** {
+ 286              		.loc 1 146 1 is_stmt 1 view -0
+ 287              		.cfi_startproc
+ 288              		@ args = 0, pretend = 0, frame = 0
+ 289              		@ frame_needed = 0, uses_anonymous_args = 0
+ 290              		@ link register save eliminated.
+ARM GAS  /tmp/ccgn5K2k.s 			page 9
+
+
+ 147:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****     EXTI_INTEN &= ~(uint32_t)linex;
+ 291              		.loc 1 147 5 view .LVU66
+ 292              		.loc 1 147 16 is_stmt 0 view .LVU67
+ 293 0000 034A     		ldr	r2, .L22
+ 294 0002 D2F80034 		ldr	r3, [r2, #1024]
+ 295 0006 23EA0003 		bic	r3, r3, r0
+ 296 000a C2F80034 		str	r3, [r2, #1024]
+ 148:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c **** }
+ 297              		.loc 1 148 1 view .LVU68
+ 298 000e 7047     		bx	lr
+ 299              	.L23:
+ 300              		.align	2
+ 301              	.L22:
+ 302 0010 00000140 		.word	1073807360
+ 303              		.cfi_endproc
+ 304              	.LFE120:
+ 306              		.section	.text.exti_event_disable,"ax",%progbits
+ 307              		.align	1
+ 308              		.global	exti_event_disable
+ 309              		.syntax unified
+ 310              		.thumb
+ 311              		.thumb_func
+ 312              		.fpu fpv4-sp-d16
+ 314              	exti_event_disable:
+ 315              	.LVL18:
+ 316              	.LFB121:
+ 149:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c **** 
+ 150:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c **** /*!
+ 151:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****     \brief      disable the events from EXTI line x
+ 152:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****     \param[in]  linex: EXTI line number, refer to exti_line_enum
+ 153:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****                 only one parameter can be selected which is shown as below:
+ 154:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****       \arg        EXTI_x (x=0..18): EXTI line x
+ 155:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****     \param[out] none
+ 156:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****     \retval     none
+ 157:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c **** */
+ 158:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c **** void exti_event_disable(exti_line_enum linex)
+ 159:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c **** {
+ 317              		.loc 1 159 1 is_stmt 1 view -0
+ 318              		.cfi_startproc
+ 319              		@ args = 0, pretend = 0, frame = 0
+ 320              		@ frame_needed = 0, uses_anonymous_args = 0
+ 321              		@ link register save eliminated.
+ 160:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****     EXTI_EVEN &= ~(uint32_t)linex;
+ 322              		.loc 1 160 5 view .LVU70
+ 323              		.loc 1 160 15 is_stmt 0 view .LVU71
+ 324 0000 034A     		ldr	r2, .L25
+ 325 0002 D2F80434 		ldr	r3, [r2, #1028]
+ 326 0006 23EA0003 		bic	r3, r3, r0
+ 327 000a C2F80434 		str	r3, [r2, #1028]
+ 161:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c **** }
+ 328              		.loc 1 161 1 view .LVU72
+ 329 000e 7047     		bx	lr
+ 330              	.L26:
+ 331              		.align	2
+ 332              	.L25:
+ 333 0010 00000140 		.word	1073807360
+ 334              		.cfi_endproc
+ARM GAS  /tmp/ccgn5K2k.s 			page 10
+
+
+ 335              	.LFE121:
+ 337              		.section	.text.exti_flag_get,"ax",%progbits
+ 338              		.align	1
+ 339              		.global	exti_flag_get
+ 340              		.syntax unified
+ 341              		.thumb
+ 342              		.thumb_func
+ 343              		.fpu fpv4-sp-d16
+ 345              	exti_flag_get:
+ 346              	.LVL19:
+ 347              	.LFB122:
+ 162:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c **** 
+ 163:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c **** /*!
+ 164:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****     \brief      get EXTI lines flag
+ 165:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****     \param[in]  linex: EXTI line number, refer to exti_line_enum
+ 166:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****                 only one parameter can be selected which is shown as below:
+ 167:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****       \arg        EXTI_x (x=0..18): EXTI line x
+ 168:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****     \param[out] none
+ 169:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****     \retval     FlagStatus: SET or RESET
+ 170:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c **** */
+ 171:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c **** FlagStatus exti_flag_get(exti_line_enum linex)
+ 172:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c **** {
+ 348              		.loc 1 172 1 is_stmt 1 view -0
+ 349              		.cfi_startproc
+ 350              		@ args = 0, pretend = 0, frame = 0
+ 351              		@ frame_needed = 0, uses_anonymous_args = 0
+ 352              		@ link register save eliminated.
+ 173:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****     if(RESET != (EXTI_PD & (uint32_t)linex)){
+ 353              		.loc 1 173 5 view .LVU74
+ 354              		.loc 1 173 18 is_stmt 0 view .LVU75
+ 355 0000 034B     		ldr	r3, .L28
+ 356 0002 D3F81434 		ldr	r3, [r3, #1044]
+ 357              		.loc 1 173 7 view .LVU76
+ 358 0006 0342     		tst	r3, r0
+ 174:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****         return SET;
+ 175:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****     }else{
+ 176:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****         return RESET;
+ 177:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****     } 
+ 178:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c **** }
+ 359              		.loc 1 178 1 view .LVU77
+ 360 0008 14BF     		ite	ne
+ 361 000a 0120     		movne	r0, #1
+ 362              	.LVL20:
+ 363              		.loc 1 178 1 view .LVU78
+ 364 000c 0020     		moveq	r0, #0
+ 365 000e 7047     		bx	lr
+ 366              	.L29:
+ 367              		.align	2
+ 368              	.L28:
+ 369 0010 00000140 		.word	1073807360
+ 370              		.cfi_endproc
+ 371              	.LFE122:
+ 373              		.section	.text.exti_flag_clear,"ax",%progbits
+ 374              		.align	1
+ 375              		.global	exti_flag_clear
+ 376              		.syntax unified
+ 377              		.thumb
+ARM GAS  /tmp/ccgn5K2k.s 			page 11
+
+
+ 378              		.thumb_func
+ 379              		.fpu fpv4-sp-d16
+ 381              	exti_flag_clear:
+ 382              	.LVL21:
+ 383              	.LFB123:
+ 179:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c **** 
+ 180:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c **** /*!
+ 181:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****     \brief      clear EXTI lines pending flag
+ 182:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****     \param[in]  linex: EXTI line number, refer to exti_line_enum
+ 183:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****                 only one parameter can be selected which is shown as below:
+ 184:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****       \arg        EXTI_x (x=0..18): EXTI line x
+ 185:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****     \param[out] none
+ 186:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****     \retval     none
+ 187:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c **** */
+ 188:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c **** void exti_flag_clear(exti_line_enum linex)
+ 189:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c **** {
+ 384              		.loc 1 189 1 is_stmt 1 view -0
+ 385              		.cfi_startproc
+ 386              		@ args = 0, pretend = 0, frame = 0
+ 387              		@ frame_needed = 0, uses_anonymous_args = 0
+ 388              		@ link register save eliminated.
+ 190:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****     EXTI_PD = (uint32_t)linex;
+ 389              		.loc 1 190 5 view .LVU80
+ 390              		.loc 1 190 13 is_stmt 0 view .LVU81
+ 391 0000 014B     		ldr	r3, .L31
+ 392 0002 C3F81404 		str	r0, [r3, #1044]
+ 191:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c **** }
+ 393              		.loc 1 191 1 view .LVU82
+ 394 0006 7047     		bx	lr
+ 395              	.L32:
+ 396              		.align	2
+ 397              	.L31:
+ 398 0008 00000140 		.word	1073807360
+ 399              		.cfi_endproc
+ 400              	.LFE123:
+ 402              		.section	.text.exti_interrupt_flag_get,"ax",%progbits
+ 403              		.align	1
+ 404              		.global	exti_interrupt_flag_get
+ 405              		.syntax unified
+ 406              		.thumb
+ 407              		.thumb_func
+ 408              		.fpu fpv4-sp-d16
+ 410              	exti_interrupt_flag_get:
+ 411              	.LVL22:
+ 412              	.LFB124:
+ 192:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c **** 
+ 193:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c **** /*!
+ 194:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****     \brief      get EXTI lines interrupt flag
+ 195:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****     \param[in]  linex: EXTI line number, refer to exti_line_enum
+ 196:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****                 only one parameter can be selected which is shown as below:
+ 197:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****       \arg        EXTI_x (x=0..18): EXTI line x
+ 198:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****     \param[out] none
+ 199:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****     \retval     FlagStatus: SET or RESET
+ 200:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c **** */
+ 201:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c **** FlagStatus exti_interrupt_flag_get(exti_line_enum linex)
+ 202:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c **** {
+ 413              		.loc 1 202 1 is_stmt 1 view -0
+ARM GAS  /tmp/ccgn5K2k.s 			page 12
+
+
+ 414              		.cfi_startproc
+ 415              		@ args = 0, pretend = 0, frame = 0
+ 416              		@ frame_needed = 0, uses_anonymous_args = 0
+ 417              		@ link register save eliminated.
+ 203:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****     uint32_t flag_left, flag_right;
+ 418              		.loc 1 203 5 view .LVU84
+ 204:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****     
+ 205:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****     flag_left = EXTI_PD & (uint32_t)linex;
+ 419              		.loc 1 205 5 view .LVU85
+ 420              		.loc 1 205 17 is_stmt 0 view .LVU86
+ 421 0000 064B     		ldr	r3, .L36
+ 422 0002 D3F81424 		ldr	r2, [r3, #1044]
+ 423              	.LVL23:
+ 206:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****     flag_right = EXTI_INTEN & (uint32_t)linex;
+ 424              		.loc 1 206 5 is_stmt 1 view .LVU87
+ 425              		.loc 1 206 18 is_stmt 0 view .LVU88
+ 426 0006 D3F80034 		ldr	r3, [r3, #1024]
+ 427              	.LVL24:
+ 207:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****     
+ 208:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****     if((RESET != flag_left) && (RESET != flag_right)){
+ 428              		.loc 1 208 5 is_stmt 1 view .LVU89
+ 429              		.loc 1 208 7 is_stmt 0 view .LVU90
+ 430 000a 0242     		tst	r2, r0
+ 431 000c 04D0     		beq	.L35
+ 432              		.loc 1 208 29 discriminator 1 view .LVU91
+ 433 000e 0342     		tst	r3, r0
+ 209:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****         return SET;
+ 210:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****     }else{
+ 211:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****         return RESET;
+ 434              		.loc 1 211 16 discriminator 1 view .LVU92
+ 435 0010 14BF     		ite	ne
+ 436 0012 0120     		movne	r0, #1
+ 437              	.LVL25:
+ 438              		.loc 1 211 16 discriminator 1 view .LVU93
+ 439 0014 0020     		moveq	r0, #0
+ 440 0016 7047     		bx	lr
+ 441              	.LVL26:
+ 442              	.L35:
+ 443              		.loc 1 211 16 view .LVU94
+ 444 0018 0020     		movs	r0, #0
+ 445              	.LVL27:
+ 212:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****     }
+ 213:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c **** }
+ 446              		.loc 1 213 1 view .LVU95
+ 447 001a 7047     		bx	lr
+ 448              	.L37:
+ 449              		.align	2
+ 450              	.L36:
+ 451 001c 00000140 		.word	1073807360
+ 452              		.cfi_endproc
+ 453              	.LFE124:
+ 455              		.section	.text.exti_interrupt_flag_clear,"ax",%progbits
+ 456              		.align	1
+ 457              		.global	exti_interrupt_flag_clear
+ 458              		.syntax unified
+ 459              		.thumb
+ 460              		.thumb_func
+ARM GAS  /tmp/ccgn5K2k.s 			page 13
+
+
+ 461              		.fpu fpv4-sp-d16
+ 463              	exti_interrupt_flag_clear:
+ 464              	.LVL28:
+ 465              	.LFB125:
+ 214:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c **** 
+ 215:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c **** /*!
+ 216:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****     \brief      clear EXTI lines pending flag
+ 217:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****     \param[in]  linex: EXTI line number, refer to exti_line_enum
+ 218:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****                 only one parameter can be selected which is shown as below:
+ 219:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****       \arg        EXTI_x (x=0..18): EXTI line x
+ 220:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****     \param[out] none
+ 221:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****     \retval     none
+ 222:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c **** */
+ 223:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c **** void exti_interrupt_flag_clear(exti_line_enum linex)
+ 224:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c **** {
+ 466              		.loc 1 224 1 is_stmt 1 view -0
+ 467              		.cfi_startproc
+ 468              		@ args = 0, pretend = 0, frame = 0
+ 469              		@ frame_needed = 0, uses_anonymous_args = 0
+ 470              		@ link register save eliminated.
+ 225:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****     EXTI_PD = (uint32_t)linex;
+ 471              		.loc 1 225 5 view .LVU97
+ 472              		.loc 1 225 13 is_stmt 0 view .LVU98
+ 473 0000 014B     		ldr	r3, .L39
+ 474 0002 C3F81404 		str	r0, [r3, #1044]
+ 226:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c **** }
+ 475              		.loc 1 226 1 view .LVU99
+ 476 0006 7047     		bx	lr
+ 477              	.L40:
+ 478              		.align	2
+ 479              	.L39:
+ 480 0008 00000140 		.word	1073807360
+ 481              		.cfi_endproc
+ 482              	.LFE125:
+ 484              		.section	.text.exti_software_interrupt_enable,"ax",%progbits
+ 485              		.align	1
+ 486              		.global	exti_software_interrupt_enable
+ 487              		.syntax unified
+ 488              		.thumb
+ 489              		.thumb_func
+ 490              		.fpu fpv4-sp-d16
+ 492              	exti_software_interrupt_enable:
+ 493              	.LVL29:
+ 494              	.LFB126:
+ 227:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c **** 
+ 228:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c **** /*!
+ 229:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****     \brief      enable EXTI software interrupt event
+ 230:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****     \param[in]  linex: EXTI line number, refer to exti_line_enum
+ 231:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****                 only one parameter can be selected which is shown as below:
+ 232:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****       \arg        EXTI_x (x=0..18): EXTI line x
+ 233:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****     \param[out] none
+ 234:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****     \retval     none
+ 235:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c **** */
+ 236:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c **** void exti_software_interrupt_enable(exti_line_enum linex)
+ 237:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c **** {
+ 495              		.loc 1 237 1 is_stmt 1 view -0
+ 496              		.cfi_startproc
+ARM GAS  /tmp/ccgn5K2k.s 			page 14
+
+
+ 497              		@ args = 0, pretend = 0, frame = 0
+ 498              		@ frame_needed = 0, uses_anonymous_args = 0
+ 499              		@ link register save eliminated.
+ 238:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****     EXTI_SWIEV |= (uint32_t)linex;
+ 500              		.loc 1 238 5 view .LVU101
+ 501              		.loc 1 238 16 is_stmt 0 view .LVU102
+ 502 0000 034A     		ldr	r2, .L42
+ 503 0002 D2F81034 		ldr	r3, [r2, #1040]
+ 504 0006 0343     		orrs	r3, r3, r0
+ 505 0008 C2F81034 		str	r3, [r2, #1040]
+ 239:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c **** }
+ 506              		.loc 1 239 1 view .LVU103
+ 507 000c 7047     		bx	lr
+ 508              	.L43:
+ 509 000e 00BF     		.align	2
+ 510              	.L42:
+ 511 0010 00000140 		.word	1073807360
+ 512              		.cfi_endproc
+ 513              	.LFE126:
+ 515              		.section	.text.exti_software_interrupt_disable,"ax",%progbits
+ 516              		.align	1
+ 517              		.global	exti_software_interrupt_disable
+ 518              		.syntax unified
+ 519              		.thumb
+ 520              		.thumb_func
+ 521              		.fpu fpv4-sp-d16
+ 523              	exti_software_interrupt_disable:
+ 524              	.LVL30:
+ 525              	.LFB127:
+ 240:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c **** 
+ 241:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c **** /*!
+ 242:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****     \brief      disable EXTI software interrupt event
+ 243:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****     \param[in]  linex: EXTI line number, refer to exti_line_enum
+ 244:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****                 only one parameter can be selected which is shown as below:
+ 245:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****       \arg        EXTI_x (x=0..18): EXTI line x
+ 246:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****     \param[out] none
+ 247:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****     \retval     none
+ 248:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c **** */
+ 249:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c **** void exti_software_interrupt_disable(exti_line_enum linex)
+ 250:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c **** {
+ 526              		.loc 1 250 1 is_stmt 1 view -0
+ 527              		.cfi_startproc
+ 528              		@ args = 0, pretend = 0, frame = 0
+ 529              		@ frame_needed = 0, uses_anonymous_args = 0
+ 530              		@ link register save eliminated.
+ 251:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c ****     EXTI_SWIEV &= ~(uint32_t)linex;
+ 531              		.loc 1 251 5 view .LVU105
+ 532              		.loc 1 251 16 is_stmt 0 view .LVU106
+ 533 0000 034A     		ldr	r2, .L45
+ 534 0002 D2F81034 		ldr	r3, [r2, #1040]
+ 535 0006 23EA0003 		bic	r3, r3, r0
+ 536 000a C2F81034 		str	r3, [r2, #1040]
+ 252:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exti.c **** }
+ 537              		.loc 1 252 1 view .LVU107
+ 538 000e 7047     		bx	lr
+ 539              	.L46:
+ 540              		.align	2
+ARM GAS  /tmp/ccgn5K2k.s 			page 15
+
+
+ 541              	.L45:
+ 542 0010 00000140 		.word	1073807360
+ 543              		.cfi_endproc
+ 544              	.LFE127:
+ 546              		.text
+ 547              	.Letext0:
+ 548              		.file 2 "/usr/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h"
+ 549              		.file 3 "../../../../Firmware/CMSIS/GD/GD32E10x/Include/gd32e10x.h"
+ 550              		.file 4 "../../../../Firmware/GD32E10x_standard_peripheral/Include/gd32e10x_exti.h"
+ARM GAS  /tmp/ccgn5K2k.s 			page 16
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 gd32e10x_exti.c
+     /tmp/ccgn5K2k.s:18     .text.exti_deinit:0000000000000000 $t
+     /tmp/ccgn5K2k.s:26     .text.exti_deinit:0000000000000000 exti_deinit
+     /tmp/ccgn5K2k.s:56     .text.exti_deinit:000000000000001c $d
+     /tmp/ccgn5K2k.s:61     .text.exti_init:0000000000000000 $t
+     /tmp/ccgn5K2k.s:68     .text.exti_init:0000000000000000 exti_init
+     /tmp/ccgn5K2k.s:209    .text.exti_init:00000000000000b8 $d
+     /tmp/ccgn5K2k.s:214    .text.exti_interrupt_enable:0000000000000000 $t
+     /tmp/ccgn5K2k.s:221    .text.exti_interrupt_enable:0000000000000000 exti_interrupt_enable
+     /tmp/ccgn5K2k.s:240    .text.exti_interrupt_enable:0000000000000010 $d
+     /tmp/ccgn5K2k.s:245    .text.exti_event_enable:0000000000000000 $t
+     /tmp/ccgn5K2k.s:252    .text.exti_event_enable:0000000000000000 exti_event_enable
+     /tmp/ccgn5K2k.s:271    .text.exti_event_enable:0000000000000010 $d
+     /tmp/ccgn5K2k.s:276    .text.exti_interrupt_disable:0000000000000000 $t
+     /tmp/ccgn5K2k.s:283    .text.exti_interrupt_disable:0000000000000000 exti_interrupt_disable
+     /tmp/ccgn5K2k.s:302    .text.exti_interrupt_disable:0000000000000010 $d
+     /tmp/ccgn5K2k.s:307    .text.exti_event_disable:0000000000000000 $t
+     /tmp/ccgn5K2k.s:314    .text.exti_event_disable:0000000000000000 exti_event_disable
+     /tmp/ccgn5K2k.s:333    .text.exti_event_disable:0000000000000010 $d
+     /tmp/ccgn5K2k.s:338    .text.exti_flag_get:0000000000000000 $t
+     /tmp/ccgn5K2k.s:345    .text.exti_flag_get:0000000000000000 exti_flag_get
+     /tmp/ccgn5K2k.s:369    .text.exti_flag_get:0000000000000010 $d
+     /tmp/ccgn5K2k.s:374    .text.exti_flag_clear:0000000000000000 $t
+     /tmp/ccgn5K2k.s:381    .text.exti_flag_clear:0000000000000000 exti_flag_clear
+     /tmp/ccgn5K2k.s:398    .text.exti_flag_clear:0000000000000008 $d
+     /tmp/ccgn5K2k.s:403    .text.exti_interrupt_flag_get:0000000000000000 $t
+     /tmp/ccgn5K2k.s:410    .text.exti_interrupt_flag_get:0000000000000000 exti_interrupt_flag_get
+     /tmp/ccgn5K2k.s:451    .text.exti_interrupt_flag_get:000000000000001c $d
+     /tmp/ccgn5K2k.s:456    .text.exti_interrupt_flag_clear:0000000000000000 $t
+     /tmp/ccgn5K2k.s:463    .text.exti_interrupt_flag_clear:0000000000000000 exti_interrupt_flag_clear
+     /tmp/ccgn5K2k.s:480    .text.exti_interrupt_flag_clear:0000000000000008 $d
+     /tmp/ccgn5K2k.s:485    .text.exti_software_interrupt_enable:0000000000000000 $t
+     /tmp/ccgn5K2k.s:492    .text.exti_software_interrupt_enable:0000000000000000 exti_software_interrupt_enable
+     /tmp/ccgn5K2k.s:511    .text.exti_software_interrupt_enable:0000000000000010 $d
+     /tmp/ccgn5K2k.s:516    .text.exti_software_interrupt_disable:0000000000000000 $t
+     /tmp/ccgn5K2k.s:523    .text.exti_software_interrupt_disable:0000000000000000 exti_software_interrupt_disable
+     /tmp/ccgn5K2k.s:542    .text.exti_software_interrupt_disable:0000000000000010 $d
+
+NO UNDEFINED SYMBOLS

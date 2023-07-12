@@ -1,0 +1,635 @@
+ARM GAS  /tmp/ccdyxsIC.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.eabi_attribute 27, 1
+   3              		.eabi_attribute 28, 1
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.file	"gd32e10x_misc.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.section	.text.nvic_priority_group_set,"ax",%progbits
+  18              		.align	1
+  19              		.global	nvic_priority_group_set
+  20              		.arch armv7e-m
+  21              		.syntax unified
+  22              		.thumb
+  23              		.thumb_func
+  24              		.fpu fpv4-sp-d16
+  26              	nvic_priority_group_set:
+  27              	.LVL0:
+  28              	.LFB116:
+  29              		.file 1 "../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c"
+   1:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c **** /*!
+   2:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c ****     \file    gd32e10x_misc.c
+   3:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c ****     \brief   MISC driver
+   4:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c ****     
+   5:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c ****     \version 2017-12-26, V1.0.0, firmware for GD32E10x
+   6:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c **** */
+   7:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c **** 
+   8:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c **** /*
+   9:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c ****     Copyright (c) 2017, GigaDevice Semiconductor Inc.
+  10:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c **** 
+  11:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c ****     All rights reserved.
+  12:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c **** 
+  13:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c ****     Redistribution and use in source and binary forms, with or without modification, 
+  14:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c **** are permitted provided that the following conditions are met:
+  15:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c **** 
+  16:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c ****     1. Redistributions of source code must retain the above copyright notice, this 
+  17:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c ****        list of conditions and the following disclaimer.
+  18:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c ****     2. Redistributions in binary form must reproduce the above copyright notice, 
+  19:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c ****        this list of conditions and the following disclaimer in the documentation 
+  20:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c ****        and/or other materials provided with the distribution.
+  21:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c ****     3. Neither the name of the copyright holder nor the names of its contributors 
+  22:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c ****        may be used to endorse or promote products derived from this software without 
+  23:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c ****        specific prior written permission.
+  24:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c **** 
+  25:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c ****     THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" 
+  26:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c **** AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED 
+  27:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c **** WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. 
+  28:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c **** IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, 
+  29:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c **** INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT 
+ARM GAS  /tmp/ccdyxsIC.s 			page 2
+
+
+  30:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c **** NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR 
+  31:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c **** PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, 
+  32:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c **** WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) 
+  33:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c **** ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY 
+  34:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c **** OF SUCH DAMAGE.
+  35:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c **** */
+  36:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c **** 
+  37:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c **** #include "gd32e10x_misc.h"
+  38:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c **** 
+  39:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c **** /*!
+  40:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c ****     \brief      set the priority group
+  41:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c ****     \param[in]  nvic_prigroup: the NVIC priority group
+  42:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c ****       \arg        NVIC_PRIGROUP_PRE0_SUB4:0 bits for pre-emption priority 4 bits for subpriority
+  43:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c ****       \arg        NVIC_PRIGROUP_PRE1_SUB3:1 bits for pre-emption priority 3 bits for subpriority
+  44:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c ****       \arg        NVIC_PRIGROUP_PRE2_SUB2:2 bits for pre-emption priority 2 bits for subpriority
+  45:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c ****       \arg        NVIC_PRIGROUP_PRE3_SUB1:3 bits for pre-emption priority 1 bits for subpriority
+  46:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c ****       \arg        NVIC_PRIGROUP_PRE4_SUB0:4 bits for pre-emption priority 0 bits for subpriority
+  47:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c ****     \param[out] none
+  48:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c ****     \retval     none
+  49:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c **** */
+  50:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c **** void nvic_priority_group_set(uint32_t nvic_prigroup)
+  51:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c **** {
+  30              		.loc 1 51 1 view -0
+  31              		.cfi_startproc
+  32              		@ args = 0, pretend = 0, frame = 0
+  33              		@ frame_needed = 0, uses_anonymous_args = 0
+  34              		@ link register save eliminated.
+  52:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c ****     /* set the priority group value */
+  53:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c ****     SCB->AIRCR = NVIC_AIRCR_VECTKEY_MASK | nvic_prigroup;
+  35              		.loc 1 53 5 view .LVU1
+  36              		.loc 1 53 42 is_stmt 0 view .LVU2
+  37 0000 40F0BF60 		orr	r0, r0, #100139008
+  38              	.LVL1:
+  39              		.loc 1 53 42 view .LVU3
+  40 0004 40F40030 		orr	r0, r0, #131072
+  41              		.loc 1 53 16 view .LVU4
+  42 0008 014B     		ldr	r3, .L2
+  43 000a D860     		str	r0, [r3, #12]
+  54:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c **** }
+  44              		.loc 1 54 1 view .LVU5
+  45 000c 7047     		bx	lr
+  46              	.L3:
+  47 000e 00BF     		.align	2
+  48              	.L2:
+  49 0010 00ED00E0 		.word	-536810240
+  50              		.cfi_endproc
+  51              	.LFE116:
+  53              		.section	.text.nvic_irq_enable,"ax",%progbits
+  54              		.align	1
+  55              		.global	nvic_irq_enable
+  56              		.syntax unified
+  57              		.thumb
+  58              		.thumb_func
+  59              		.fpu fpv4-sp-d16
+  61              	nvic_irq_enable:
+  62              	.LVL2:
+  63              	.LFB117:
+ARM GAS  /tmp/ccdyxsIC.s 			page 3
+
+
+  55:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c **** 
+  56:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c **** /*!
+  57:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c ****     \brief      enable NVIC request
+  58:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c ****     \param[in]  nvic_irq: the NVIC interrupt request, detailed in IRQn_Type
+  59:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c ****     \param[in]  nvic_irq_pre_priority: the pre-emption priority needed to set
+  60:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c ****     \param[in]  nvic_irq_sub_priority: the subpriority needed to set
+  61:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c ****     \param[out] none
+  62:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c ****     \retval     none
+  63:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c **** */
+  64:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c **** void nvic_irq_enable(uint8_t nvic_irq, 
+  65:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c ****                      uint8_t nvic_irq_pre_priority, 
+  66:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c ****                      uint8_t nvic_irq_sub_priority)
+  67:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c **** {
+  64              		.loc 1 67 1 is_stmt 1 view -0
+  65              		.cfi_startproc
+  66              		@ args = 0, pretend = 0, frame = 0
+  67              		@ frame_needed = 0, uses_anonymous_args = 0
+  68              		@ link register save eliminated.
+  69              		.loc 1 67 1 is_stmt 0 view .LVU7
+  70 0000 10B4     		push	{r4}
+  71              		.cfi_def_cfa_offset 4
+  72              		.cfi_offset 4, -4
+  68:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c ****     uint32_t temp_priority = 0x00U, temp_pre = 0x00U, temp_sub = 0x00U;
+  73              		.loc 1 68 5 is_stmt 1 view .LVU8
+  74              	.LVL3:
+  69:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c **** 
+  70:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c ****     /* use the priority group value to get the temp_pre and the temp_sub */
+  71:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c ****     switch ((SCB->AIRCR) & (uint32_t)0x700U) {
+  75              		.loc 1 71 5 view .LVU9
+  76              		.loc 1 71 17 is_stmt 0 view .LVU10
+  77 0002 244B     		ldr	r3, .L15
+  78 0004 DC68     		ldr	r4, [r3, #12]
+  79              		.loc 1 71 26 view .LVU11
+  80 0006 04F4E06C 		and	ip, r4, #1792
+  81              		.loc 1 71 5 view .LVU12
+  82 000a BCF5A06F 		cmp	ip, #1280
+  83 000e 35D0     		beq	.L8
+  84 0010 09D9     		bls	.L14
+  85 0012 BCF5C06F 		cmp	ip, #1536
+  86 0016 38D0     		beq	.L11
+  87 0018 BCF5E06F 		cmp	ip, #1792
+  88 001c 28D1     		bne	.L7
+  72:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c ****     case NVIC_PRIGROUP_PRE0_SUB4:
+  73:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c ****         temp_pre = 0U;
+  74:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c ****         temp_sub = 0x4U;
+  89              		.loc 1 74 18 view .LVU13
+  90 001e 0424     		movs	r4, #4
+  73:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c ****         temp_sub = 0x4U;
+  91              		.loc 1 73 18 view .LVU14
+  92 0020 4FF0000C 		mov	ip, #0
+  93 0024 08E0     		b	.L5
+  94              	.L14:
+  71:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c ****     case NVIC_PRIGROUP_PRE0_SUB4:
+  95              		.loc 1 71 5 view .LVU15
+  96 0026 BCF5407F 		cmp	ip, #768
+  97 002a 2AD0     		beq	.L9
+  98 002c BCF5806F 		cmp	ip, #1024
+ARM GAS  /tmp/ccdyxsIC.s 			page 4
+
+
+  99 0030 1ED1     		bne	.L7
+  75:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c ****         break;
+  76:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c ****     case NVIC_PRIGROUP_PRE1_SUB3:
+  77:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c ****         temp_pre = 1U;
+  78:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c ****         temp_sub = 0x3U;
+  79:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c ****         break;
+  80:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c ****     case NVIC_PRIGROUP_PRE2_SUB2:
+  81:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c ****         temp_pre = 2U;
+  82:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c ****         temp_sub = 0x2U;
+  83:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c ****         break;
+  84:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c ****     case NVIC_PRIGROUP_PRE3_SUB1:
+  85:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c ****         temp_pre = 3U;
+  86:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c ****         temp_sub = 0x1U;
+ 100              		.loc 1 86 18 view .LVU16
+ 101 0032 0124     		movs	r4, #1
+  85:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c ****         temp_sub = 0x1U;
+ 102              		.loc 1 85 18 view .LVU17
+ 103 0034 4FF0030C 		mov	ip, #3
+ 104              	.L5:
+ 105              	.LVL4:
+  87:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c ****         break;
+  88:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c ****     case NVIC_PRIGROUP_PRE4_SUB0:
+  89:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c ****         temp_pre = 4U;
+  90:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c ****         temp_sub = 0x0U;
+  91:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c ****         break;
+  92:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c ****     default:
+  93:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c ****         nvic_priority_group_set(NVIC_PRIGROUP_PRE2_SUB2);
+  94:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c ****         temp_pre = 2U;
+  95:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c ****         temp_sub = 0x2U;
+  96:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c ****         break;
+  97:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c ****     }
+  98:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c **** 
+  99:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c ****     /* get the temp_priority to fill the NVIC->IP register */
+ 100:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c ****     temp_priority = (uint32_t)nvic_irq_pre_priority << (0x4U - temp_pre);
+ 106              		.loc 1 100 5 is_stmt 1 view .LVU18
+ 107              		.loc 1 100 62 is_stmt 0 view .LVU19
+ 108 0038 CCF1040C 		rsb	ip, ip, #4
+ 109              	.LVL5:
+ 110              		.loc 1 100 19 view .LVU20
+ 111 003c 01FA0CFC 		lsl	ip, r1, ip
+ 112              	.LVL6:
+ 101:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c ****     temp_priority |= nvic_irq_sub_priority &(0x0FU >> (0x4U - temp_sub));
+ 113              		.loc 1 101 5 is_stmt 1 view .LVU21
+ 114              		.loc 1 101 61 is_stmt 0 view .LVU22
+ 115 0040 C4F10404 		rsb	r4, r4, #4
+ 116              	.LVL7:
+ 117              		.loc 1 101 52 view .LVU23
+ 118 0044 0F23     		movs	r3, #15
+ 119 0046 E340     		lsrs	r3, r3, r4
+ 120              		.loc 1 101 44 view .LVU24
+ 121 0048 1340     		ands	r3, r3, r2
+ 122              		.loc 1 101 19 view .LVU25
+ 123 004a 43EA0C03 		orr	r3, r3, ip
+ 124              	.LVL8:
+ 102:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c ****     temp_priority = temp_priority << 0x04U;
+ 125              		.loc 1 102 5 is_stmt 1 view .LVU26
+ 103:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c ****     NVIC->IP[nvic_irq] = (uint8_t)temp_priority;
+ARM GAS  /tmp/ccdyxsIC.s 			page 5
+
+
+ 126              		.loc 1 103 5 view .LVU27
+ 102:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c ****     temp_priority = temp_priority << 0x04U;
+ 127              		.loc 1 102 19 is_stmt 0 view .LVU28
+ 128 004e 1B01     		lsls	r3, r3, #4
+ 129              	.LVL9:
+ 130              		.loc 1 103 26 view .LVU29
+ 131 0050 DBB2     		uxtb	r3, r3
+ 132              	.LVL10:
+ 133              		.loc 1 103 24 view .LVU30
+ 134 0052 114A     		ldr	r2, .L15+4
+ 135              	.LVL11:
+ 136              		.loc 1 103 24 view .LVU31
+ 137 0054 1118     		adds	r1, r2, r0
+ 138              	.LVL12:
+ 139              		.loc 1 103 24 view .LVU32
+ 140 0056 81F80033 		strb	r3, [r1, #768]
+ 104:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c **** 
+ 105:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c ****     /* enable the selected IRQ */
+ 106:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c ****     NVIC->ISER[nvic_irq >> 0x05U] = (uint32_t)0x01U << (nvic_irq & (uint8_t)0x1FU);
+ 141              		.loc 1 106 5 is_stmt 1 view .LVU33
+ 142              		.loc 1 106 25 is_stmt 0 view .LVU34
+ 143 005a 4109     		lsrs	r1, r0, #5
+ 144              		.loc 1 106 66 view .LVU35
+ 145 005c 00F01F00 		and	r0, r0, #31
+ 146              	.LVL13:
+ 147              		.loc 1 106 53 view .LVU36
+ 148 0060 0123     		movs	r3, #1
+ 149 0062 03FA00F0 		lsl	r0, r3, r0
+ 150              		.loc 1 106 35 view .LVU37
+ 151 0066 42F82100 		str	r0, [r2, r1, lsl #2]
+ 107:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c **** }
+ 152              		.loc 1 107 1 view .LVU38
+ 153 006a 5DF8044B 		ldr	r4, [sp], #4
+ 154              		.cfi_remember_state
+ 155              		.cfi_restore 4
+ 156              		.cfi_def_cfa_offset 0
+ 157              		.loc 1 107 1 view .LVU39
+ 158 006e 7047     		bx	lr
+ 159              	.LVL14:
+ 160              	.L7:
+ 161              		.cfi_restore_state
+  93:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c ****         temp_pre = 2U;
+ 162              		.loc 1 93 9 is_stmt 1 view .LVU40
+ 163              	.LBB4:
+ 164              	.LBI4:
+  50:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c **** {
+ 165              		.loc 1 50 6 view .LVU41
+ 166              	.LBB5:
+  53:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c **** }
+ 167              		.loc 1 53 5 view .LVU42
+  53:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c **** }
+ 168              		.loc 1 53 16 is_stmt 0 view .LVU43
+ 169 0070 084B     		ldr	r3, .L15
+ 170 0072 0A4C     		ldr	r4, .L15+8
+ 171 0074 DC60     		str	r4, [r3, #12]
+ 172              	.LBE5:
+ 173              	.LBE4:
+ARM GAS  /tmp/ccdyxsIC.s 			page 6
+
+
+  95:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c ****         break;
+ 174              		.loc 1 95 18 view .LVU44
+ 175 0076 0224     		movs	r4, #2
+  94:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c ****         temp_sub = 0x2U;
+ 176              		.loc 1 94 18 view .LVU45
+ 177 0078 A446     		mov	ip, r4
+ 178              	.LBB7:
+ 179              	.LBB6:
+  54:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c **** 
+ 180              		.loc 1 54 1 view .LVU46
+ 181 007a DDE7     		b	.L5
+ 182              	.LVL15:
+ 183              	.L8:
+  54:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c **** 
+ 184              		.loc 1 54 1 view .LVU47
+ 185              	.LBE6:
+ 186              	.LBE7:
+  82:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c ****         break;
+ 187              		.loc 1 82 18 view .LVU48
+ 188 007c 0224     		movs	r4, #2
+  81:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c ****         temp_sub = 0x2U;
+ 189              		.loc 1 81 18 view .LVU49
+ 190 007e A446     		mov	ip, r4
+ 191 0080 DAE7     		b	.L5
+ 192              	.L9:
+  90:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c ****         break;
+ 193              		.loc 1 90 18 view .LVU50
+ 194 0082 0024     		movs	r4, #0
+  89:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c ****         temp_sub = 0x0U;
+ 195              		.loc 1 89 18 view .LVU51
+ 196 0084 4FF0040C 		mov	ip, #4
+ 197 0088 D6E7     		b	.L5
+ 198              	.L11:
+  71:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c ****     case NVIC_PRIGROUP_PRE0_SUB4:
+ 199              		.loc 1 71 5 view .LVU52
+ 200 008a 0324     		movs	r4, #3
+ 201 008c 4FF0010C 		mov	ip, #1
+ 202 0090 D2E7     		b	.L5
+ 203              	.L16:
+ 204 0092 00BF     		.align	2
+ 205              	.L15:
+ 206 0094 00ED00E0 		.word	-536810240
+ 207 0098 00E100E0 		.word	-536813312
+ 208 009c 0005FA05 		.word	100271360
+ 209              		.cfi_endproc
+ 210              	.LFE117:
+ 212              		.section	.text.nvic_irq_disable,"ax",%progbits
+ 213              		.align	1
+ 214              		.global	nvic_irq_disable
+ 215              		.syntax unified
+ 216              		.thumb
+ 217              		.thumb_func
+ 218              		.fpu fpv4-sp-d16
+ 220              	nvic_irq_disable:
+ 221              	.LVL16:
+ 222              	.LFB118:
+ 108:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c **** 
+ARM GAS  /tmp/ccdyxsIC.s 			page 7
+
+
+ 109:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c **** /*!
+ 110:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c ****     \brief      disable NVIC request
+ 111:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c ****     \param[in]  nvic_irq: the NVIC interrupt request, detailed in IRQn_Type
+ 112:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c ****     \param[out] none
+ 113:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c ****     \retval     none
+ 114:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c **** */
+ 115:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c **** void nvic_irq_disable(uint8_t nvic_irq)
+ 116:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c **** {
+ 223              		.loc 1 116 1 is_stmt 1 view -0
+ 224              		.cfi_startproc
+ 225              		@ args = 0, pretend = 0, frame = 0
+ 226              		@ frame_needed = 0, uses_anonymous_args = 0
+ 227              		@ link register save eliminated.
+ 117:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c ****     /* disable the selected IRQ.*/
+ 118:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c ****     NVIC->ICER[nvic_irq >> 0x05U] = (uint32_t)0x01U << (nvic_irq & (uint8_t)0x1FU);
+ 228              		.loc 1 118 5 view .LVU54
+ 229              		.loc 1 118 25 is_stmt 0 view .LVU55
+ 230 0000 4309     		lsrs	r3, r0, #5
+ 231              		.loc 1 118 66 view .LVU56
+ 232 0002 00F01F00 		and	r0, r0, #31
+ 233              	.LVL17:
+ 234              		.loc 1 118 53 view .LVU57
+ 235 0006 0122     		movs	r2, #1
+ 236 0008 02FA00F0 		lsl	r0, r2, r0
+ 237              		.loc 1 118 35 view .LVU58
+ 238 000c 2033     		adds	r3, r3, #32
+ 239 000e 024A     		ldr	r2, .L18
+ 240 0010 42F82300 		str	r0, [r2, r3, lsl #2]
+ 119:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c **** }
+ 241              		.loc 1 119 1 view .LVU59
+ 242 0014 7047     		bx	lr
+ 243              	.L19:
+ 244 0016 00BF     		.align	2
+ 245              	.L18:
+ 246 0018 00E100E0 		.word	-536813312
+ 247              		.cfi_endproc
+ 248              	.LFE118:
+ 250              		.section	.text.nvic_vector_table_set,"ax",%progbits
+ 251              		.align	1
+ 252              		.global	nvic_vector_table_set
+ 253              		.syntax unified
+ 254              		.thumb
+ 255              		.thumb_func
+ 256              		.fpu fpv4-sp-d16
+ 258              	nvic_vector_table_set:
+ 259              	.LVL18:
+ 260              	.LFB119:
+ 120:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c **** 
+ 121:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c **** /*!
+ 122:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c ****     \brief      set the NVIC vector table base address
+ 123:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c ****     \param[in]  nvic_vict_tab: the RAM or FLASH base address
+ 124:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c ****       \arg        NVIC_VECTTAB_RAM: RAM base address
+ 125:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c ****       \are        NVIC_VECTTAB_FLASH: Flash base address
+ 126:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c ****     \param[in]  offset: Vector Table offset
+ 127:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c ****     \param[out] none
+ 128:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c ****     \retval     none
+ 129:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c **** */
+ARM GAS  /tmp/ccdyxsIC.s 			page 8
+
+
+ 130:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c **** void nvic_vector_table_set(uint32_t nvic_vict_tab, uint32_t offset)
+ 131:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c **** {
+ 261              		.loc 1 131 1 is_stmt 1 view -0
+ 262              		.cfi_startproc
+ 263              		@ args = 0, pretend = 0, frame = 0
+ 264              		@ frame_needed = 0, uses_anonymous_args = 0
+ 265              		@ link register save eliminated.
+ 132:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c ****     SCB->VTOR = nvic_vict_tab | (offset & NVIC_VECTTAB_OFFSET_MASK);
+ 266              		.loc 1 132 5 view .LVU61
+ 267              		.loc 1 132 41 is_stmt 0 view .LVU62
+ 268 0000 21F06041 		bic	r1, r1, #-536870912
+ 269              	.LVL19:
+ 270              		.loc 1 132 41 view .LVU63
+ 271 0004 21F07F01 		bic	r1, r1, #127
+ 272              		.loc 1 132 31 view .LVU64
+ 273 0008 0143     		orrs	r1, r1, r0
+ 274              		.loc 1 132 15 view .LVU65
+ 275 000a 014B     		ldr	r3, .L21
+ 276 000c 9960     		str	r1, [r3, #8]
+ 133:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c **** }
+ 277              		.loc 1 133 1 view .LVU66
+ 278 000e 7047     		bx	lr
+ 279              	.L22:
+ 280              		.align	2
+ 281              	.L21:
+ 282 0010 00ED00E0 		.word	-536810240
+ 283              		.cfi_endproc
+ 284              	.LFE119:
+ 286              		.section	.text.system_lowpower_set,"ax",%progbits
+ 287              		.align	1
+ 288              		.global	system_lowpower_set
+ 289              		.syntax unified
+ 290              		.thumb
+ 291              		.thumb_func
+ 292              		.fpu fpv4-sp-d16
+ 294              	system_lowpower_set:
+ 295              	.LVL20:
+ 296              	.LFB120:
+ 134:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c **** 
+ 135:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c **** /*!
+ 136:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c ****     \brief      set the state of the low power mode
+ 137:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c ****     \param[in]  lowpower_mode: the low power mode state
+ 138:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c ****       \arg        SCB_LPM_SLEEP_EXIT_ISR: if chose this para, the system always enter low power 
+ 139:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c ****                     mode by exiting from ISR
+ 140:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c ****       \arg        SCB_LPM_DEEPSLEEP: if chose this para, the system will enter the DEEPSLEEP mode
+ 141:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c ****       \arg        SCB_LPM_WAKE_BY_ALL_INT: if chose this para, the lowpower mode can be woke up 
+ 142:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c ****                     by all the enable and disable interrupts
+ 143:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c ****     \param[out] none
+ 144:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c ****     \retval     none
+ 145:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c **** */
+ 146:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c **** void system_lowpower_set(uint8_t lowpower_mode)
+ 147:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c **** {
+ 297              		.loc 1 147 1 is_stmt 1 view -0
+ 298              		.cfi_startproc
+ 299              		@ args = 0, pretend = 0, frame = 0
+ 300              		@ frame_needed = 0, uses_anonymous_args = 0
+ 301              		@ link register save eliminated.
+ARM GAS  /tmp/ccdyxsIC.s 			page 9
+
+
+ 148:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c ****     SCB->SCR |= (uint32_t)lowpower_mode;
+ 302              		.loc 1 148 5 view .LVU68
+ 303              		.loc 1 148 14 is_stmt 0 view .LVU69
+ 304 0000 024B     		ldr	r3, .L24
+ 305 0002 1A69     		ldr	r2, [r3, #16]
+ 306 0004 1043     		orrs	r0, r0, r2
+ 307              	.LVL21:
+ 308              		.loc 1 148 14 view .LVU70
+ 309 0006 1861     		str	r0, [r3, #16]
+ 149:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c **** }
+ 310              		.loc 1 149 1 view .LVU71
+ 311 0008 7047     		bx	lr
+ 312              	.L25:
+ 313 000a 00BF     		.align	2
+ 314              	.L24:
+ 315 000c 00ED00E0 		.word	-536810240
+ 316              		.cfi_endproc
+ 317              	.LFE120:
+ 319              		.section	.text.system_lowpower_reset,"ax",%progbits
+ 320              		.align	1
+ 321              		.global	system_lowpower_reset
+ 322              		.syntax unified
+ 323              		.thumb
+ 324              		.thumb_func
+ 325              		.fpu fpv4-sp-d16
+ 327              	system_lowpower_reset:
+ 328              	.LVL22:
+ 329              	.LFB121:
+ 150:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c **** 
+ 151:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c **** /*!
+ 152:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c ****     \brief      reset the state of the low power mode
+ 153:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c ****     \param[in]  lowpower_mode: the low power mode state
+ 154:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c ****       \arg        SCB_LPM_SLEEP_EXIT_ISR: if chose this para, the system will exit low power 
+ 155:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c ****                     mode by exiting from ISR
+ 156:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c ****       \arg        SCB_LPM_DEEPSLEEP: if chose this para, the system will enter the SLEEP mode
+ 157:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c ****       \arg        SCB_LPM_WAKE_BY_ALL_INT: if chose this para, the lowpower mode only can be 
+ 158:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c ****                     woke up by the enable interrupts
+ 159:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c ****     \param[out] none
+ 160:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c ****     \retval     none
+ 161:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c **** */
+ 162:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c **** void system_lowpower_reset(uint8_t lowpower_mode)
+ 163:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c **** {
+ 330              		.loc 1 163 1 is_stmt 1 view -0
+ 331              		.cfi_startproc
+ 332              		@ args = 0, pretend = 0, frame = 0
+ 333              		@ frame_needed = 0, uses_anonymous_args = 0
+ 334              		@ link register save eliminated.
+ 164:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c ****     SCB->SCR &= (~(uint32_t)lowpower_mode);
+ 335              		.loc 1 164 5 view .LVU73
+ 336              		.loc 1 164 14 is_stmt 0 view .LVU74
+ 337 0000 024A     		ldr	r2, .L27
+ 338 0002 1369     		ldr	r3, [r2, #16]
+ 339 0004 23EA0003 		bic	r3, r3, r0
+ 340 0008 1361     		str	r3, [r2, #16]
+ 165:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c **** }
+ 341              		.loc 1 165 1 view .LVU75
+ 342 000a 7047     		bx	lr
+ARM GAS  /tmp/ccdyxsIC.s 			page 10
+
+
+ 343              	.L28:
+ 344              		.align	2
+ 345              	.L27:
+ 346 000c 00ED00E0 		.word	-536810240
+ 347              		.cfi_endproc
+ 348              	.LFE121:
+ 350              		.section	.text.systick_clksource_set,"ax",%progbits
+ 351              		.align	1
+ 352              		.global	systick_clksource_set
+ 353              		.syntax unified
+ 354              		.thumb
+ 355              		.thumb_func
+ 356              		.fpu fpv4-sp-d16
+ 358              	systick_clksource_set:
+ 359              	.LVL23:
+ 360              	.LFB122:
+ 166:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c **** 
+ 167:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c **** /*!
+ 168:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c ****     \brief      set the systick clock source
+ 169:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c ****     \param[in]  systick_clksource: the systick clock source needed to choose
+ 170:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c ****       \arg        SYSTICK_CLKSOURCE_HCLK: systick clock source is from HCLK
+ 171:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c ****       \arg        SYSTICK_CLKSOURCE_HCLK_DIV8: systick clock source is from HCLK/8
+ 172:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c ****     \param[out] none
+ 173:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c ****     \retval     none
+ 174:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c **** */
+ 175:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c **** 
+ 176:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c **** void systick_clksource_set(uint32_t systick_clksource)
+ 177:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c **** {
+ 361              		.loc 1 177 1 is_stmt 1 view -0
+ 362              		.cfi_startproc
+ 363              		@ args = 0, pretend = 0, frame = 0
+ 364              		@ frame_needed = 0, uses_anonymous_args = 0
+ 365              		@ link register save eliminated.
+ 178:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c ****     if(SYSTICK_CLKSOURCE_HCLK == systick_clksource ){
+ 366              		.loc 1 178 5 view .LVU77
+ 367              		.loc 1 178 7 is_stmt 0 view .LVU78
+ 368 0000 0428     		cmp	r0, #4
+ 179:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c ****         /* set the systick clock source from HCLK */
+ 180:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c ****         SysTick->CTRL |= SYSTICK_CLKSOURCE_HCLK;
+ 369              		.loc 1 180 9 is_stmt 1 view .LVU79
+ 370              		.loc 1 180 23 is_stmt 0 view .LVU80
+ 371 0002 4FF0E022 		mov	r2, #-536813568
+ 372 0006 1369     		ldr	r3, [r2, #16]
+ 373 0008 0CBF     		ite	eq
+ 374 000a 43F00403 		orreq	r3, r3, #4
+ 181:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c ****     }else{
+ 182:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c ****         /* set the systick clock source from HCLK/8 */
+ 183:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c ****         SysTick->CTRL &= SYSTICK_CLKSOURCE_HCLK_DIV8;
+ 375              		.loc 1 183 9 is_stmt 1 view .LVU81
+ 376              		.loc 1 183 23 is_stmt 0 view .LVU82
+ 377 000e 23F00403 		bicne	r3, r3, #4
+ 378 0012 1361     		str	r3, [r2, #16]
+ 184:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c ****     }
+ 185:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_misc.c **** }
+ 379              		.loc 1 185 1 view .LVU83
+ 380 0014 7047     		bx	lr
+ 381              		.cfi_endproc
+ARM GAS  /tmp/ccdyxsIC.s 			page 11
+
+
+ 382              	.LFE122:
+ 384              		.text
+ 385              	.Letext0:
+ 386              		.file 2 "/usr/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h"
+ 387              		.file 3 "../../../../Firmware/CMSIS/core_cm4.h"
+ARM GAS  /tmp/ccdyxsIC.s 			page 12
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 gd32e10x_misc.c
+     /tmp/ccdyxsIC.s:18     .text.nvic_priority_group_set:0000000000000000 $t
+     /tmp/ccdyxsIC.s:26     .text.nvic_priority_group_set:0000000000000000 nvic_priority_group_set
+     /tmp/ccdyxsIC.s:49     .text.nvic_priority_group_set:0000000000000010 $d
+     /tmp/ccdyxsIC.s:54     .text.nvic_irq_enable:0000000000000000 $t
+     /tmp/ccdyxsIC.s:61     .text.nvic_irq_enable:0000000000000000 nvic_irq_enable
+     /tmp/ccdyxsIC.s:206    .text.nvic_irq_enable:0000000000000094 $d
+     /tmp/ccdyxsIC.s:213    .text.nvic_irq_disable:0000000000000000 $t
+     /tmp/ccdyxsIC.s:220    .text.nvic_irq_disable:0000000000000000 nvic_irq_disable
+     /tmp/ccdyxsIC.s:246    .text.nvic_irq_disable:0000000000000018 $d
+     /tmp/ccdyxsIC.s:251    .text.nvic_vector_table_set:0000000000000000 $t
+     /tmp/ccdyxsIC.s:258    .text.nvic_vector_table_set:0000000000000000 nvic_vector_table_set
+     /tmp/ccdyxsIC.s:282    .text.nvic_vector_table_set:0000000000000010 $d
+     /tmp/ccdyxsIC.s:287    .text.system_lowpower_set:0000000000000000 $t
+     /tmp/ccdyxsIC.s:294    .text.system_lowpower_set:0000000000000000 system_lowpower_set
+     /tmp/ccdyxsIC.s:315    .text.system_lowpower_set:000000000000000c $d
+     /tmp/ccdyxsIC.s:320    .text.system_lowpower_reset:0000000000000000 $t
+     /tmp/ccdyxsIC.s:327    .text.system_lowpower_reset:0000000000000000 system_lowpower_reset
+     /tmp/ccdyxsIC.s:346    .text.system_lowpower_reset:000000000000000c $d
+     /tmp/ccdyxsIC.s:351    .text.systick_clksource_set:0000000000000000 $t
+     /tmp/ccdyxsIC.s:358    .text.systick_clksource_set:0000000000000000 systick_clksource_set
+
+NO UNDEFINED SYMBOLS

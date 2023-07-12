@@ -1,0 +1,20 @@
+{
+    "configurations": [
+        {
+            "name": "Win32",
+            "includePath": [
+                "${workspaceFolder}/../../../../Firmware/CMSIS",
+                "${workspaceFolder}/../../../../Firmware/CMSIS/GD/GD32E10x/Include",
+                "${workspaceFolder}/../../../../Firmware/GD32E10x_standard_peripheral/Include",
+                "${workspaceFolder}/../../../../Firmware/GD32E10x_usbfs_driver/Include"
+            ],
+            "defines": [
+                "USE_HAL_DRIVER",
+                "GD32E10X",
+                "GD32E103V_EVAL",
+                "USE_USBFS"
+            ]
+        }
+    ],
+    "version": 4
+}

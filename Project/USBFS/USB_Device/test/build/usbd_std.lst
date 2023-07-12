@@ -1,0 +1,2737 @@
+ARM GAS  /tmp/ccJsntlc.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.eabi_attribute 27, 1
+   3              		.eabi_attribute 28, 1
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.file	"usbd_std.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.section	.text.usbd_reserved,"ax",%progbits
+  18              		.align	1
+  19              		.arch armv7e-m
+  20              		.syntax unified
+  21              		.thumb
+  22              		.thumb_func
+  23              		.fpu fpv4-sp-d16
+  25              	usbd_reserved:
+  26              	.LVL0:
+  27              	.LFB122:
+  28              		.file 1 "../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c"
+   1:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** /*!
+   2:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     \file  usbd_std.c 
+   3:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     \brief USB 2.0 standard handler driver
+   4:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     
+   5:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     \version 2017-12-26, V1.0.0, firmware for GD32E10x
+   6:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** */
+   7:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+   8:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** /*
+   9:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     Copyright (c) 2017, GigaDevice Semiconductor Inc.
+  10:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+  11:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     All rights reserved.
+  12:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+  13:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     Redistribution and use in source and binary forms, with or without modification, 
+  14:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** are permitted provided that the following conditions are met:
+  15:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+  16:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     1. Redistributions of source code must retain the above copyright notice, this 
+  17:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****        list of conditions and the following disclaimer.
+  18:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     2. Redistributions in binary form must reproduce the above copyright notice, 
+  19:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****        this list of conditions and the following disclaimer in the documentation 
+  20:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****        and/or other materials provided with the distribution.
+  21:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     3. Neither the name of the copyright holder nor the names of its contributors 
+  22:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****        may be used to endorse or promote products derived from this software without 
+  23:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****        specific prior written permission.
+  24:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+  25:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" 
+  26:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED 
+  27:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. 
+  28:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, 
+  29:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT 
+  30:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR 
+ARM GAS  /tmp/ccJsntlc.s 			page 2
+
+
+  31:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, 
+  32:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) 
+  33:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY 
+  34:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** OF SUCH DAMAGE.
+  35:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** */
+  36:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+  37:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** #include "usbd_std.h"
+  38:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** #include "usb_core.h"
+  39:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+  40:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** /* request functions declaration */
+  41:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** static usbd_status_enum usbd_standard_request     (usb_core_handle_struct *pudev, usb_device_req_st
+  42:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** static usbd_status_enum usbd_device_class_request (usb_core_handle_struct *pudev, usb_device_req_st
+  43:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** static usbd_status_enum usbd_vendor_request       (usb_core_handle_struct *pudev, usb_device_req_st
+  44:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+  45:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** static void usbd_setup_request_parse(usb_core_handle_struct *pudev, usb_device_req_struct *req);
+  46:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+  47:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** /* standard request functions */
+  48:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** static void usbd_getdescriptor  (usb_core_handle_struct *pudev, usb_device_req_struct *req);
+  49:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** static void usbd_setaddress     (usb_core_handle_struct *pudev, usb_device_req_struct *req);
+  50:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** static void usbd_setconfig      (usb_core_handle_struct *pudev, usb_device_req_struct *req);
+  51:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** static void usbd_getconfig      (usb_core_handle_struct *pudev, usb_device_req_struct *req);
+  52:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** static void usbd_getstatus      (usb_core_handle_struct *pudev, usb_device_req_struct *req);
+  53:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** static void usbd_setfeature     (usb_core_handle_struct *pudev, usb_device_req_struct *req);
+  54:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** static void usbd_clrfeature     (usb_core_handle_struct *pudev, usb_device_req_struct *req);
+  55:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** static void usbd_reserved       (usb_core_handle_struct *pudev, usb_device_req_struct *req);
+  56:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** static void usbd_setdescriptor  (usb_core_handle_struct *pudev, usb_device_req_struct *req);
+  57:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** static void usbd_getinterface   (usb_core_handle_struct *pudev, usb_device_req_struct *req);
+  58:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** static void usbd_setinterface   (usb_core_handle_struct *pudev, usb_device_req_struct *req);
+  59:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** static void usbd_synchframe     (usb_core_handle_struct *pudev, usb_device_req_struct *req);
+  60:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+  61:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** /* standard request response functions */
+  62:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** static uint8_t* usbd_device_descriptor_get (usb_core_handle_struct *pudev, uint8_t index, uint16_t 
+  63:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** static uint8_t* usbd_configuration_descriptor_get (usb_core_handle_struct *pudev, uint8_t index, ui
+  64:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** static uint8_t* usbd_string_descriptor_get (usb_core_handle_struct *pudev, uint8_t index, uint16_t 
+  65:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+  66:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** /* init StandardDeviceRequest struct */
+  67:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** static void (*StandardDeviceRequest[])(usb_core_handle_struct *pudev, usb_device_req_struct *req) =
+  68:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** {
+  69:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     usbd_getstatus,
+  70:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     usbd_clrfeature,
+  71:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     usbd_reserved,
+  72:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     usbd_setfeature,
+  73:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     usbd_reserved,
+  74:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     usbd_setaddress,
+  75:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     usbd_getdescriptor,
+  76:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     usbd_setdescriptor,
+  77:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     usbd_getconfig,
+  78:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     usbd_setconfig,
+  79:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     usbd_getinterface,
+  80:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     usbd_setinterface,
+  81:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     usbd_synchframe,
+  82:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** };
+  83:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+  84:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** /* get standard descriptor handler */
+  85:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** static uint8_t* (*standard_descriptor_get[])(usb_core_handle_struct *pudev, uint8_t index, uint16_t
+  86:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** {
+  87:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     usbd_device_descriptor_get,
+ARM GAS  /tmp/ccJsntlc.s 			page 3
+
+
+  88:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     usbd_configuration_descriptor_get,
+  89:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     usbd_string_descriptor_get
+  90:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** };
+  91:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+  92:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** /*!
+  93:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     \brief      USB setup stage processing
+  94:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     \param[in]  pudev: pointer to USB device instance
+  95:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     \param[out] none
+  96:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     \retval     USB device operation status
+  97:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****       \arg        USBD_OK: USB device ok status
+  98:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****       \arg        USBD_BUSY: USB device busy status
+  99:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****       \arg        USBD_FAIL: USB device fail stauts
+ 100:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** */
+ 101:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** usbd_status_enum usbd_setup_transaction(usb_core_handle_struct *pudev)
+ 102:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** {
+ 103:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     usb_device_req_struct req;
+ 104:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+ 105:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     usbd_setup_request_parse(pudev, &req);
+ 106:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+ 107:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     switch (req.bmRequestType & USB_REQ_MASK) {
+ 108:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     /* standard device request */
+ 109:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     case USB_STANDARD_REQ:
+ 110:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         usbd_standard_request(pudev, &req);
+ 111:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         break;
+ 112:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     /* device class request */
+ 113:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     case USB_CLASS_REQ:
+ 114:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         usbd_device_class_request(pudev, &req);
+ 115:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         break;
+ 116:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     /* vendor defined request */
+ 117:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     case USB_VENDOR_REQ:
+ 118:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         usbd_vendor_request(pudev, &req);
+ 119:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         break;
+ 120:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     default:
+ 121:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         usbd_ep_stall(pudev, req.bmRequestType & 0x80U);
+ 122:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         break;
+ 123:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     }
+ 124:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+ 125:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     return USBD_OK;
+ 126:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** }
+ 127:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+ 128:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** /*!
+ 129:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     \brief      data out stage processing
+ 130:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     \param[in]  pudev: pointer to USB device instance
+ 131:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     \param[in]  endp_num: endpoint identifier(0..7)
+ 132:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     \param[out] none
+ 133:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     \retval     USB device operation status
+ 134:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****       \arg        USBD_OK: USB device ok status
+ 135:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****       \arg        USBD_BUSY: USB device busy status
+ 136:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****       \arg        USBD_FAIL: USB device fail stauts
+ 137:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** */
+ 138:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** usbd_status_enum usbd_out_transaction (usb_core_handle_struct *pudev, uint8_t endp_num)
+ 139:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** {
+ 140:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     usb_ep_struct *ep;
+ 141:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+ 142:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     /* check the endpoint number */
+ 143:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     if (0U == endp_num) {
+ 144:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         ep = &pudev->dev.out_ep[0];
+ARM GAS  /tmp/ccJsntlc.s 			page 4
+
+
+ 145:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+ 146:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         if (USB_CTRL_DATA_OUT == pudev->dev.ctl_status) {
+ 147:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****             if (pudev->dev.remain_len > ep->endp_mps) {
+ 148:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                 pudev->dev.remain_len -= ep->endp_mps;
+ 149:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+ 150:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                 /* ready to accept the next packet */
+ 151:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                 usbd_ep_rx (pudev, 
+ 152:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                             0U, 
+ 153:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                             ep->xfer_buff, 
+ 154:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                             (uint16_t)USB_MIN(pudev->dev.remain_len, ep->endp_mps));
+ 155:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****             } else {
+ 156:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                 if (USB_STATUS_CONFIGURED == pudev->dev.status) {
+ 157:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                     pudev->dev.class_data_handler(pudev, USB_RX, 0U);
+ 158:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                 }
+ 159:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+ 160:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                 /* send the control status packet */
+ 161:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                 usbd_ctlstatus_tx(pudev);
+ 162:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****             }
+ 163:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         }
+ 164:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     /* handle the device class output data */
+ 165:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     } else if (USB_STATUS_CONFIGURED == pudev->dev.status) {
+ 166:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         pudev->dev.class_data_handler(pudev, USB_RX, endp_num);
+ 167:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     } else {
+ 168:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         /* no operation */
+ 169:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     }
+ 170:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+ 171:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     return USBD_OK;
+ 172:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** }
+ 173:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+ 174:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** /*!
+ 175:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     \brief      data in stage processing
+ 176:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     \param[in]  pudev: pointer to USB device instance
+ 177:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     \param[in]  endp_num: endpoint identifier(0..7)
+ 178:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     \param[out] none
+ 179:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     \retval     USB device operation status
+ 180:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****       \arg        USBD_OK: USB device ok status
+ 181:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****       \arg        USBD_BUSY: USB device busy status
+ 182:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****       \arg        USBD_FAIL: USB device fail stauts
+ 183:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** */
+ 184:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** usbd_status_enum usbd_in_transaction (usb_core_handle_struct *pudev, uint8_t endp_num)
+ 185:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** {
+ 186:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     usb_ep_struct *ep;
+ 187:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+ 188:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     /* check the endpoint number */
+ 189:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     if (0U == endp_num) {
+ 190:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         ep = &pudev->dev.in_ep[0];
+ 191:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+ 192:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         if (USB_CTRL_DATA_IN == pudev->dev.ctl_status) {
+ 193:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****             if (pudev->dev.remain_len > ep->endp_mps) {
+ 194:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                 pudev->dev.remain_len -= ep->endp_mps;
+ 195:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+ 196:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                 /* ready to send the next packet */
+ 197:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                 usbd_ep_tx (pudev, 0U, ep->xfer_buff, pudev->dev.remain_len);
+ 198:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                 
+ 199:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                 usbd_ep_rx (pudev, 0U, NULL, 0U);
+ 200:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****             } else {
+ 201:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                 /* last packet is MPS multiple, so send ZLP packet */
+ARM GAS  /tmp/ccJsntlc.s 			page 5
+
+
+ 202:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                 if ((pudev->dev.sum_len % ep->endp_mps == 0U) &&
+ 203:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                      (pudev->dev.sum_len >= ep->endp_mps) &&
+ 204:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                       (pudev->dev.sum_len < pudev->dev.ctl_len)) {
+ 205:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                     /* ready to send the zero length data packet */
+ 206:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                     usbd_ep_tx (pudev, 0U, NULL, 0U);
+ 207:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                     
+ 208:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                     pudev->dev.ctl_len = 0U;
+ 209:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                     usbd_ep_rx (pudev, 0U, NULL, 0U);
+ 210:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                 } else {
+ 211:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                     if (USB_STATUS_CONFIGURED == pudev->dev.status) {
+ 212:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                         pudev->dev.class_data_handler(pudev, USB_TX, 0U);
+ 213:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                     }
+ 214:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+ 215:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                     /* ready to receive the status packet */
+ 216:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                     usbd_ctlstatus_rx(pudev);
+ 217:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                 }
+ 218:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****             }
+ 219:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         }
+ 220:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     } else if (USB_STATUS_CONFIGURED == pudev->dev.status) {
+ 221:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         pudev->dev.class_data_handler(pudev, USB_TX, endp_num);
+ 222:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     } else {
+ 223:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         /* no operation */
+ 224:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     }
+ 225:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+ 226:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     return USBD_OK;
+ 227:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** }
+ 228:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+ 229:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** /*!
+ 230:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     \brief      handle USB standard device request
+ 231:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     \param[in]  pudev: pointer to USB device instance
+ 232:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     \param[in]  req: pointer to USB device request
+ 233:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     \param[out] none
+ 234:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     \retval     USB device operation status
+ 235:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****       \arg        USBD_OK: USB device ok status
+ 236:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****       \arg        USBD_BUSY: USB device busy status
+ 237:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****       \arg        USBD_FAIL: USB device fail stauts
+ 238:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** */
+ 239:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** static usbd_status_enum  usbd_standard_request (usb_core_handle_struct *pudev, usb_device_req_struc
+ 240:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** {
+ 241:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     /* call device request handle function */
+ 242:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     (*StandardDeviceRequest[req->bRequest])(pudev, req);
+ 243:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+ 244:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     return USBD_OK;
+ 245:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** }
+ 246:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+ 247:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** /*!
+ 248:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     \brief      handle USB device class request
+ 249:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     \param[in]  pudev: pointer to USB device instance
+ 250:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     \param[in]  req: pointer to USB device class request
+ 251:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     \param[out] none
+ 252:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     \retval     USB device operation status
+ 253:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****       \arg        USBD_OK: USB device ok status
+ 254:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****       \arg        USBD_BUSY: USB device busy status
+ 255:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****       \arg        USBD_FAIL: USB device fail stauts
+ 256:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** */
+ 257:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** static usbd_status_enum usbd_device_class_request (usb_core_handle_struct *pudev, usb_device_req_st
+ 258:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** {
+ARM GAS  /tmp/ccJsntlc.s 			page 6
+
+
+ 259:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     usbd_status_enum ret = USBD_OK;
+ 260:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+ 261:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     /* judge the status of device */
+ 262:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     switch (pudev->dev.status) {
+ 263:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     case USB_STATUS_CONFIGURED:
+ 264:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         if (LOWBYTE(req->wIndex) <= USBD_ITF_MAX_NUM) {
+ 265:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****             ret = (usbd_status_enum)(pudev->dev.class_req_handler(pudev, req));
+ 266:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+ 267:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****             /* judge the length of request */
+ 268:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****             if ((0U == req->wLength) && (USBD_OK == ret)) {
+ 269:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                 /* no data stage */
+ 270:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                 usbd_ctlstatus_tx(pudev);
+ 271:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****             }
+ 272:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         } else {
+ 273:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****             usbd_enum_error(pudev, req);
+ 274:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         }
+ 275:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         break;
+ 276:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+ 277:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     default:
+ 278:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         usbd_enum_error(pudev, req);
+ 279:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         break;
+ 280:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     }
+ 281:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+ 282:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     return ret;
+ 283:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** }
+ 284:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+ 285:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** /*!
+ 286:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     \brief      handle USB vendor request
+ 287:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     \param[in]  pudev: pointer to USB device instance
+ 288:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     \param[in]  req: pointer to USB vendor request
+ 289:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     \param[out] none
+ 290:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     \retval     USB device operation status
+ 291:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****       \arg        USBD_OK: USB device ok status
+ 292:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****       \arg        USBD_BUSY: USB device busy status
+ 293:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****       \arg        USBD_FAIL: USB device fail stauts
+ 294:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** */
+ 295:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** static usbd_status_enum  usbd_vendor_request (usb_core_handle_struct *pudev, usb_device_req_struct 
+ 296:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** {
+ 297:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     /* added by user... */
+ 298:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+ 299:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     return USBD_OK;
+ 300:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** }
+ 301:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+ 302:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** /*!
+ 303:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     \brief      no operation, just for reserved
+ 304:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     \param[in]  pudev: pointer to USB device instance
+ 305:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     \param[in]  req: pointer to USB device request
+ 306:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     \param[out] none
+ 307:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     \retval     none
+ 308:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** */
+ 309:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** static void  usbd_reserved (usb_core_handle_struct *pudev, usb_device_req_struct *req)
+ 310:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** {
+  29              		.loc 1 310 1 view -0
+  30              		.cfi_startproc
+  31              		@ args = 0, pretend = 0, frame = 0
+  32              		@ frame_needed = 0, uses_anonymous_args = 0
+  33              		@ link register save eliminated.
+ARM GAS  /tmp/ccJsntlc.s 			page 7
+
+
+ 311:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     /* no operation... */
+ 312:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** }
+  34              		.loc 1 312 1 view .LVU1
+  35 0000 7047     		bx	lr
+  36              		.cfi_endproc
+  37              	.LFE122:
+  39              		.section	.text.usbd_device_descriptor_get,"ax",%progbits
+  40              		.align	1
+  41              		.syntax unified
+  42              		.thumb
+  43              		.thumb_func
+  44              		.fpu fpv4-sp-d16
+  46              	usbd_device_descriptor_get:
+  47              	.LVL1:
+  48              	.LFB123:
+ 313:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+ 314:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** /*!
+ 315:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     \brief      get the device descriptor
+ 316:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     \param[in]  pudev: pointer to USB device instance
+ 317:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     \param[in]  index: no use
+ 318:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     \param[out] plen: data length pointer
+ 319:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     \retval     descriptor buffer pointer
+ 320:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** */
+ 321:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** static uint8_t* usbd_device_descriptor_get (usb_core_handle_struct *pudev, uint8_t index, uint16_t 
+ 322:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** {
+  49              		.loc 1 322 1 view -0
+  50              		.cfi_startproc
+  51              		@ args = 0, pretend = 0, frame = 0
+  52              		@ frame_needed = 0, uses_anonymous_args = 0
+  53              		@ link register save eliminated.
+ 323:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     *plen = pudev->dev.dev_desc[0];
+  54              		.loc 1 323 5 view .LVU3
+  55              		.loc 1 323 32 is_stmt 0 view .LVU4
+  56 0000 D0F8DC30 		ldr	r3, [r0, #220]
+  57 0004 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+  58 0006 1380     		strh	r3, [r2]	@ movhi
+ 324:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+ 325:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     return pudev->dev.dev_desc;
+  59              		.loc 1 325 5 is_stmt 1 view .LVU5
+ 326:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** }
+  60              		.loc 1 326 1 is_stmt 0 view .LVU6
+  61 0008 D0F8DC00 		ldr	r0, [r0, #220]
+  62              	.LVL2:
+  63              		.loc 1 326 1 view .LVU7
+  64 000c 7047     		bx	lr
+  65              		.cfi_endproc
+  66              	.LFE123:
+  68              		.section	.text.usbd_configuration_descriptor_get,"ax",%progbits
+  69              		.align	1
+  70              		.syntax unified
+  71              		.thumb
+  72              		.thumb_func
+  73              		.fpu fpv4-sp-d16
+  75              	usbd_configuration_descriptor_get:
+  76              	.LVL3:
+  77              	.LFB124:
+ 327:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+ARM GAS  /tmp/ccJsntlc.s 			page 8
+
+
+ 328:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** /*!
+ 329:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     \brief      get the configuration descriptor
+ 330:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     \param[in]  pudev: pointer to USB device instance
+ 331:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     \param[in]  index: no use
+ 332:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     \param[out] plen: data length pointer
+ 333:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     \retval     descriptor buffer pointer
+ 334:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** */
+ 335:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** static uint8_t* usbd_configuration_descriptor_get (usb_core_handle_struct *pudev, uint8_t index, ui
+ 336:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** {
+  78              		.loc 1 336 1 is_stmt 1 view -0
+  79              		.cfi_startproc
+  80              		@ args = 0, pretend = 0, frame = 0
+  81              		@ frame_needed = 0, uses_anonymous_args = 0
+  82              		@ link register save eliminated.
+ 337:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     *plen = pudev->dev.config_desc[2];
+  83              		.loc 1 337 5 view .LVU9
+  84              		.loc 1 337 35 is_stmt 0 view .LVU10
+  85 0000 D0F8E030 		ldr	r3, [r0, #224]
+  86 0004 9B78     		ldrb	r3, [r3, #2]	@ zero_extendqisi2
+  87 0006 1380     		strh	r3, [r2]	@ movhi
+ 338:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+ 339:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     return pudev->dev.config_desc;
+  88              		.loc 1 339 5 is_stmt 1 view .LVU11
+ 340:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** }
+  89              		.loc 1 340 1 is_stmt 0 view .LVU12
+  90 0008 D0F8E000 		ldr	r0, [r0, #224]
+  91              	.LVL4:
+  92              		.loc 1 340 1 view .LVU13
+  93 000c 7047     		bx	lr
+  94              		.cfi_endproc
+  95              	.LFE124:
+  97              		.section	.text.usbd_string_descriptor_get,"ax",%progbits
+  98              		.align	1
+  99              		.syntax unified
+ 100              		.thumb
+ 101              		.thumb_func
+ 102              		.fpu fpv4-sp-d16
+ 104              	usbd_string_descriptor_get:
+ 105              	.LVL5:
+ 106              	.LFB125:
+ 341:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+ 342:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** /*!
+ 343:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     \brief      get string descriptor
+ 344:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     \param[in]  pudev: pointer to USB device instance
+ 345:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     \param[in]  index: string descriptor index
+ 346:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     \param[out] plen: pointer to string length
+ 347:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     \retval     descriptor buffer pointer
+ 348:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** */
+ 349:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** static uint8_t* usbd_string_descriptor_get (usb_core_handle_struct *pudev, uint8_t index, uint16_t 
+ 350:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** {
+ 107              		.loc 1 350 1 is_stmt 1 view -0
+ 108              		.cfi_startproc
+ 109              		@ args = 0, pretend = 0, frame = 0
+ 110              		@ frame_needed = 0, uses_anonymous_args = 0
+ 111              		@ link register save eliminated.
+ 351:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     uint8_t *desc;
+ 112              		.loc 1 351 5 view .LVU15
+ARM GAS  /tmp/ccJsntlc.s 			page 9
+
+
+ 352:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 	
+ 353:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 	//if (index < 4) {
+ 354:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 		desc = pudev->dev.strings[index];
+ 113              		.loc 1 354 3 view .LVU16
+ 114              		.loc 1 354 8 is_stmt 0 view .LVU17
+ 115 0000 D0F8E430 		ldr	r3, [r0, #228]
+ 116 0004 53F82100 		ldr	r0, [r3, r1, lsl #2]
+ 117              	.LVL6:
+ 355:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 		*plen = desc[0];
+ 118              		.loc 1 355 3 is_stmt 1 view .LVU18
+ 119              		.loc 1 355 15 is_stmt 0 view .LVU19
+ 120 0008 0378     		ldrb	r3, [r0]	@ zero_extendqisi2
+ 121 000a 1380     		strh	r3, [r2]	@ movhi
+ 356:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 	//} else {
+ 357:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 		//usbd_enum_error(pudev, (usb_device_req_struct *)0);
+ 358:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 	//}
+ 359:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+ 360:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     return desc;
+ 122              		.loc 1 360 5 is_stmt 1 view .LVU20
+ 361:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** }
+ 123              		.loc 1 361 1 is_stmt 0 view .LVU21
+ 124 000c 7047     		bx	lr
+ 125              		.cfi_endproc
+ 126              	.LFE125:
+ 128              		.section	.text.usbd_getstatus,"ax",%progbits
+ 129              		.align	1
+ 130              		.syntax unified
+ 131              		.thumb
+ 132              		.thumb_func
+ 133              		.fpu fpv4-sp-d16
+ 135              	usbd_getstatus:
+ 136              	.LVL7:
+ 137              	.LFB126:
+ 362:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+ 363:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** /*!
+ 364:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     \brief      handle Get_Status request
+ 365:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     \param[in]  pudev: pointer to USB device instance
+ 366:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     \param[in]  req: pointer to USB device request
+ 367:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     \param[out] none
+ 368:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     \retval     none
+ 369:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** */
+ 370:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** static void  usbd_getstatus (usb_core_handle_struct *pudev, usb_device_req_struct *req)
+ 371:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** {
+ 138              		.loc 1 371 1 is_stmt 1 view -0
+ 139              		.cfi_startproc
+ 140              		@ args = 0, pretend = 0, frame = 0
+ 141              		@ frame_needed = 0, uses_anonymous_args = 0
+ 142              		@ link register save eliminated.
+ 372:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     /* no operation... */
+ 373:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** }
+ 143              		.loc 1 373 1 view .LVU23
+ 144 0000 7047     		bx	lr
+ 145              		.cfi_endproc
+ 146              	.LFE126:
+ 148              		.section	.text.usbd_setdescriptor,"ax",%progbits
+ 149              		.align	1
+ 150              		.syntax unified
+ARM GAS  /tmp/ccJsntlc.s 			page 10
+
+
+ 151              		.thumb
+ 152              		.thumb_func
+ 153              		.fpu fpv4-sp-d16
+ 155              	usbd_setdescriptor:
+ 156              	.LVL8:
+ 157              	.LFB131:
+ 374:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+ 375:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** /*!
+ 376:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     \brief      handle USB Clear_Feature request
+ 377:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     \param[in]  pudev: pointer to USB device instance
+ 378:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     \param[in]  req: USB device request
+ 379:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     \param[out] none
+ 380:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     \retval     none
+ 381:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** */
+ 382:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** static void  usbd_clrfeature (usb_core_handle_struct *pudev, usb_device_req_struct *req)
+ 383:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** {
+ 384:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     uint8_t ep_addr = 0U;
+ 385:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+ 386:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     /* judge the type of request */
+ 387:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     switch (req->bmRequestType & USB_REQTYPE_MASK) {
+ 388:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     case USB_REQTYPE_DEVICE:
+ 389:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         switch (pudev->dev.status) {
+ 390:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         case USB_STATUS_ADDRESSED:
+ 391:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         case USB_STATUS_CONFIGURED:
+ 392:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****             if (USB_FEATURE_REMOTE_WAKEUP == req->wValue) {
+ 393:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                 pudev->dev.remote_wakeup = 0U;
+ 394:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                 pudev->dev.class_req_handler(pudev, req);
+ 395:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+ 396:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                 /* ready to send the status packet */
+ 397:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                 usbd_ctlstatus_tx(pudev);
+ 398:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****             }
+ 399:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****             break;
+ 400:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+ 401:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         default:
+ 402:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****             usbd_enum_error(pudev, req);
+ 403:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****             break;
+ 404:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         }
+ 405:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         break;
+ 406:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     case USB_REQTYPE_INTERFACE:
+ 407:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         switch (pudev->dev.status) {
+ 408:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         case USB_STATUS_ADDRESSED:
+ 409:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****             usbd_enum_error(pudev, req);
+ 410:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****             break;
+ 411:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         case USB_STATUS_CONFIGURED:
+ 412:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****             if (LOWBYTE(req->wIndex) <= USBD_ITF_MAX_NUM) {
+ 413:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                 /* no operation */
+ 414:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****             } else {
+ 415:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                 usbd_enum_error(pudev, req);
+ 416:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****             }
+ 417:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****             break;
+ 418:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         default:
+ 419:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****             break;
+ 420:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         }
+ 421:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         break;
+ 422:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     case USB_REQTYPE_ENDPOINT:
+ 423:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         ep_addr = LOWBYTE(req->wIndex);
+ 424:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+ARM GAS  /tmp/ccJsntlc.s 			page 11
+
+
+ 425:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         switch (pudev->dev.status) {
+ 426:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         case USB_STATUS_ADDRESSED:
+ 427:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****             if (IS_NOT_EP0(ep_addr)) {
+ 428:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                 /* set the stall status */
+ 429:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                 usbd_ep_stall(pudev, ep_addr);
+ 430:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****             }
+ 431:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****             break;
+ 432:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         case USB_STATUS_CONFIGURED:
+ 433:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****             if (USB_FEATURE_ENDP_HALT == req->wValue) {
+ 434:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                 if (IS_NOT_EP0(ep_addr)) {
+ 435:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                     /* clear the stall status */
+ 436:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                     usbd_ep_clear_stall(pudev, ep_addr);
+ 437:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+ 438:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                     /* call the request function of device class */
+ 439:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                     pudev->dev.class_req_handler(pudev, req);
+ 440:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                 }
+ 441:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****             }
+ 442:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****             /* ready to send the status packet */
+ 443:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****             usbd_ctlstatus_tx(pudev);
+ 444:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****             break;
+ 445:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         default:
+ 446:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****             break;
+ 447:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         }
+ 448:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         break;
+ 449:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     default:
+ 450:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         usbd_enum_error(pudev, req);
+ 451:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         break;
+ 452:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     }
+ 453:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** }
+ 454:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+ 455:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** /*!
+ 456:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     \brief      handle USB Set_Feature request
+ 457:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     \param[in]  pudev: pointer to USB device instance
+ 458:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     \param[in]  req: pointer to USB device request
+ 459:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     \param[out] none
+ 460:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     \retval     none
+ 461:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** */
+ 462:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** static void  usbd_setfeature (usb_core_handle_struct *pudev, usb_device_req_struct *req)
+ 463:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** {
+ 464:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     uint8_t ep_addr = 0U;
+ 465:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     __IO uint32_t DctlrStatus;
+ 466:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+ 467:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     /* judge the type of request */
+ 468:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     switch (req->bmRequestType & USB_REQ_MASK) {
+ 469:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     case USB_REQTYPE_DEVICE:
+ 470:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         switch (pudev->dev.status) {
+ 471:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         case USB_STATUS_ADDRESSED:
+ 472:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         case USB_STATUS_CONFIGURED:
+ 473:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****             if (USB_FEATURE_REMOTE_WAKEUP == req->wValue) {
+ 474:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                 /* set the remote_wakeup variable */
+ 475:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                 pudev->dev.remote_wakeup = 1U;
+ 476:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                 /* call the request function of device class */
+ 477:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                 pudev->dev.class_req_handler(pudev, req);
+ 478:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+ 479:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                 usbd_ctlstatus_tx(pudev);
+ 480:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****             } else if ((req->wValue == USB_FEATURE_TEST_MODE) && 
+ 481:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                         (0U == (req->wIndex & 0xFFU))) {
+ARM GAS  /tmp/ccJsntlc.s 			page 12
+
+
+ 482:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                 DctlrStatus = USB_DCTL;
+ 483:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+ 484:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                 /* ready to send the status packet */
+ 485:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                 usbd_ctlstatus_tx(pudev);
+ 486:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****             } else {
+ 487:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                 /* no operation */
+ 488:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****             }
+ 489:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****             break;
+ 490:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         default:
+ 491:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****             break;
+ 492:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         }
+ 493:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         break;
+ 494:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     case USB_REQTYPE_INTERFACE:
+ 495:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         switch (pudev->dev.status) {
+ 496:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         case USB_STATUS_ADDRESSED:
+ 497:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****             usbd_enum_error(pudev, req);
+ 498:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****             break;
+ 499:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         case USB_STATUS_CONFIGURED:
+ 500:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****             if (LOWBYTE(req->wIndex) <= USBD_ITF_MAX_NUM) {
+ 501:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                 /* no operation */
+ 502:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****             } else {
+ 503:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                 usbd_enum_error(pudev, req);
+ 504:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****             }
+ 505:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****             break;
+ 506:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         default:
+ 507:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****             break;
+ 508:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         }
+ 509:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         break;
+ 510:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     case USB_REQTYPE_ENDPOINT:
+ 511:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         switch (pudev->dev.status) {
+ 512:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         case USB_STATUS_ADDRESSED:
+ 513:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****             /* judge the endpoint whether or not EP0 */
+ 514:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****             if (IS_NOT_EP0(ep_addr)) {
+ 515:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                 usbd_ep_stall(pudev, ep_addr);
+ 516:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****             }
+ 517:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****             break;
+ 518:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         case USB_STATUS_CONFIGURED:
+ 519:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****             if (USB_FEATURE_ENDP_HALT == req->wValue) {
+ 520:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                 /* judge the endpoint whether or not EP0 */
+ 521:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                 if (IS_NOT_EP0(ep_addr)) {
+ 522:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                     usbd_ep_stall(pudev, ep_addr);
+ 523:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                 }
+ 524:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****             }
+ 525:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****             /* call the request function of device class */
+ 526:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****             pudev->dev.class_req_handler(pudev, req);
+ 527:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+ 528:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****             /* ready to send the status packet */
+ 529:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****             usbd_ctlstatus_tx(pudev);
+ 530:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****             break;
+ 531:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         default:
+ 532:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****             break;
+ 533:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         }
+ 534:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         break;
+ 535:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     default:
+ 536:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         usbd_enum_error(pudev, req);
+ 537:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         break;
+ 538:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     }
+ARM GAS  /tmp/ccJsntlc.s 			page 13
+
+
+ 539:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** }
+ 540:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+ 541:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** /*!
+ 542:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     \brief      handle USB Set_Address request
+ 543:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     \param[in]  pudev: pointer to USB device instance
+ 544:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     \param[in]  req: pointer to USB device request
+ 545:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     \param[out] none
+ 546:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     \retval     none
+ 547:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** */
+ 548:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** static void  usbd_setaddress (usb_core_handle_struct *pudev, usb_device_req_struct *req)
+ 549:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** {
+ 550:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     uint8_t dev_addr;
+ 551:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+ 552:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     if ((0U == req->wIndex) && (0U == req->wLength)) {
+ 553:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         dev_addr = (uint8_t)(req->wValue) & 0x7FU;
+ 554:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+ 555:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         /* judge device status */
+ 556:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         if (USB_STATUS_CONFIGURED == pudev->dev.status) {
+ 557:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****             usbd_enum_error(pudev, req);
+ 558:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         } else {
+ 559:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****             /* set the device address */
+ 560:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****             USB_SET_DEVADDR((uint32_t)dev_addr);
+ 561:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+ 562:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****             /* ready to send the status packet */
+ 563:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****             usbd_ctlstatus_tx(pudev);
+ 564:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+ 565:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****             if (0U != dev_addr) {
+ 566:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                 /* change device status */
+ 567:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                 pudev->dev.status = USB_STATUS_ADDRESSED;
+ 568:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****             } else {
+ 569:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                 pudev->dev.status = USB_STATUS_DEFAULT;
+ 570:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****             }
+ 571:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         }
+ 572:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     } else {
+ 573:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         usbd_enum_error(pudev, req);
+ 574:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     }
+ 575:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** }
+ 576:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+ 577:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** /*!
+ 578:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     \brief      handle USB Get_Descriptor request
+ 579:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     \param[in]  pudev: pointer to USB device instance
+ 580:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     \param[in]  req: pointer to USB device request
+ 581:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     \param[out] none
+ 582:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     \retval     none
+ 583:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** */
+ 584:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** static void  usbd_getdescriptor (usb_core_handle_struct *pudev, usb_device_req_struct *req)
+ 585:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** {
+ 586:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     /* judge the type of request */
+ 587:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     if (USB_REQTYPE_DEVICE == (req->bmRequestType & USB_REQTYPE_MASK)) {
+ 588:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         uint8_t  desc_type = (uint8_t)(req->wValue >> 8);
+ 589:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         uint8_t  desc_index = (uint8_t)(req->wValue) & 0xFFU;
+ 590:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+ 591:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         if ((desc_type <= 0x03U) && (desc_index <= 0x05U) ) {
+ 592:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****             uint16_t len;
+ 593:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****             uint8_t *pbuf;
+ 594:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+ 595:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****             /* call corresponding descriptor get function */
+ARM GAS  /tmp/ccJsntlc.s 			page 14
+
+
+ 596:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****             pbuf = standard_descriptor_get[desc_type - 1U](pudev, desc_index, &len);
+ 597:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+ 598:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****             /* judge the length of request */
+ 599:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****             if ((0U != len) && (0U != req->wLength)) {
+ 600:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                 len = USB_MIN(len, req->wLength);
+ 601:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+ 602:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                 if ((1U == desc_type) && (64U == req->wLength)) {
+ 603:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                     len = 8U;
+ 604:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                 }
+ 605:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+ 606:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                 /* ready to send data packet */
+ 607:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                 usbd_ctltx(pudev, pbuf, len);
+ 608:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****             }
+ 609:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         } else {
+ 610:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****             usbd_enum_error(pudev, req);
+ 611:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         }
+ 612:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     } else if (USB_REQTYPE_INTERFACE == (req->bmRequestType & USB_REQTYPE_MASK)) {
+ 613:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         pudev->dev.class_req_handler(pudev, req);
+ 614:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     } else {
+ 615:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         /* no operation */
+ 616:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     }
+ 617:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** }
+ 618:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+ 619:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** /*!
+ 620:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     \brief      handle USB Set_Descriptor request
+ 621:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     \param[in]  pudev: pointer to USB device instance
+ 622:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     \param[in]  req: pointer to USB device request
+ 623:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     \param[out] none
+ 624:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     \retval     none
+ 625:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** */
+ 626:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** static void  usbd_setdescriptor (usb_core_handle_struct *pudev, usb_device_req_struct *req)
+ 627:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** {
+ 158              		.loc 1 627 1 view -0
+ 159              		.cfi_startproc
+ 160              		@ args = 0, pretend = 0, frame = 0
+ 161              		@ frame_needed = 0, uses_anonymous_args = 0
+ 162              		@ link register save eliminated.
+ 628:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     /* no handle... */
+ 629:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** }
+ 163              		.loc 1 629 1 view .LVU25
+ 164 0000 7047     		bx	lr
+ 165              		.cfi_endproc
+ 166              	.LFE131:
+ 168              		.section	.text.usbd_getinterface,"ax",%progbits
+ 169              		.align	1
+ 170              		.syntax unified
+ 171              		.thumb
+ 172              		.thumb_func
+ 173              		.fpu fpv4-sp-d16
+ 175              	usbd_getinterface:
+ 176              	.LVL9:
+ 177              	.LFB134:
+ 630:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+ 631:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** /*!
+ 632:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     \brief      handle USB Get_Configuration request
+ 633:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     \param[in]  pudev: pointer to USB device instance
+ 634:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     \param[in]  req: pointer to USB device request
+ARM GAS  /tmp/ccJsntlc.s 			page 15
+
+
+ 635:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     \param[out] none
+ 636:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     \retval     none
+ 637:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** */
+ 638:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** static void  usbd_getconfig (usb_core_handle_struct *pudev, usb_device_req_struct *req)
+ 639:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** {
+ 640:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     uint32_t USBD_default_config = 0U;
+ 641:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+ 642:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     /* judge the length of request */
+ 643:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     if (1U != req->wLength) {
+ 644:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         usbd_enum_error(pudev, req);
+ 645:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     } else {
+ 646:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         switch (pudev->dev.status) {
+ 647:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         case USB_STATUS_ADDRESSED:
+ 648:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****             /* ready to send default configuration */
+ 649:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****             usbd_ctltx(pudev, (uint8_t *)&USBD_default_config, 1U);
+ 650:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****             break;
+ 651:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         case USB_STATUS_CONFIGURED:
+ 652:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****             /* ready to send configuration number */
+ 653:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****             usbd_ctltx(pudev, &pudev->dev.config_num, 1U);
+ 654:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****             break;
+ 655:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         default:
+ 656:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****             usbd_enum_error(pudev, req);
+ 657:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****             break;
+ 658:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         }
+ 659:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     }
+ 660:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** }
+ 661:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+ 662:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** /*!
+ 663:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     \brief      handle USB Set_Configuration request
+ 664:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     \param[in]  pudev: pointer to USB device instance
+ 665:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     \param[in]  req: pointer to USB device request
+ 666:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     \param[out] none
+ 667:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     \retval     none
+ 668:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** */
+ 669:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** static void  usbd_setconfig (usb_core_handle_struct *pudev, usb_device_req_struct *req)
+ 670:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** {
+ 671:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     static uint8_t  cfgidx;
+ 672:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+ 673:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     cfgidx = (uint8_t)(req->wValue);
+ 674:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+ 675:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     /* judge the index of configuration */
+ 676:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     if (cfgidx > USBD_CFG_MAX_NUM) {
+ 677:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         usbd_enum_error(pudev, req);
+ 678:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     } else {
+ 679:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         switch (pudev->dev.status) {
+ 680:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         case USB_STATUS_ADDRESSED:
+ 681:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****             if (cfgidx) {
+ 682:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                 pudev->dev.config_num = cfgidx;
+ 683:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                 pudev->dev.status = USB_STATUS_CONFIGURED;
+ 684:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                 /* call the function of class initialization */
+ 685:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                 pudev->dev.class_init(pudev, cfgidx);
+ 686:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****             }
+ 687:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+ 688:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****             usbd_ctlstatus_tx(pudev);
+ 689:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****             break;
+ 690:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         case USB_STATUS_CONFIGURED:
+ 691:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****             if (0U == cfgidx) {
+ARM GAS  /tmp/ccJsntlc.s 			page 16
+
+
+ 692:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                 pudev->dev.status = USB_STATUS_ADDRESSED;
+ 693:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                 pudev->dev.config_num = cfgidx;
+ 694:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                 /* call the function of class deinitialization */
+ 695:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                 pudev->dev.class_deinit(pudev, cfgidx);
+ 696:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****             } else if (cfgidx != pudev->dev.config_num) {
+ 697:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                 /* clear old configuration */
+ 698:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                 pudev->dev.class_deinit(pudev, pudev->dev.config_num);
+ 699:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+ 700:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                 /* set new configuration */
+ 701:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                 pudev->dev.config_num = cfgidx;
+ 702:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                 pudev->dev.class_init(pudev, cfgidx);
+ 703:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****             } else {
+ 704:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                 /* no operation */
+ 705:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****             }
+ 706:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+ 707:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****             usbd_ctlstatus_tx(pudev);
+ 708:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****             break;
+ 709:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         default:
+ 710:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****             usbd_enum_error(pudev, req);
+ 711:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****             break;
+ 712:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         }
+ 713:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     }
+ 714:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** }
+ 715:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+ 716:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** /*!
+ 717:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     \brief      handle USB Get_Interface request
+ 718:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     \param[in]  pudev: pointer to USB device instance
+ 719:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     \param[in]  req: pointer to USB device request
+ 720:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     \param[out] none
+ 721:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     \retval     none
+ 722:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** */
+ 723:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** static void  usbd_getinterface (usb_core_handle_struct *pudev, usb_device_req_struct *req)
+ 724:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** {
+ 178              		.loc 1 724 1 view -0
+ 179              		.cfi_startproc
+ 180              		@ args = 0, pretend = 0, frame = 0
+ 181              		@ frame_needed = 0, uses_anonymous_args = 0
+ 182              		.loc 1 724 1 is_stmt 0 view .LVU27
+ 183 0000 08B5     		push	{r3, lr}
+ 184              		.cfi_def_cfa_offset 8
+ 185              		.cfi_offset 3, -8
+ 186              		.cfi_offset 14, -4
+ 725:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     pudev->dev.class_req_handler(pudev, req);
+ 187              		.loc 1 725 5 is_stmt 1 view .LVU28
+ 188 0002 D0F8F030 		ldr	r3, [r0, #240]
+ 189 0006 9847     		blx	r3
+ 190              	.LVL10:
+ 726:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** }
+ 191              		.loc 1 726 1 is_stmt 0 view .LVU29
+ 192 0008 08BD     		pop	{r3, pc}
+ 193              		.cfi_endproc
+ 194              	.LFE134:
+ 196              		.section	.text.usbd_setinterface,"ax",%progbits
+ 197              		.align	1
+ 198              		.syntax unified
+ 199              		.thumb
+ 200              		.thumb_func
+ARM GAS  /tmp/ccJsntlc.s 			page 17
+
+
+ 201              		.fpu fpv4-sp-d16
+ 203              	usbd_setinterface:
+ 204              	.LVL11:
+ 205              	.LFB135:
+ 727:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+ 728:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** /*!
+ 729:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     \brief      handle USB Set_Interface request
+ 730:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     \param[in]  pudev: pointer to USB device instance
+ 731:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     \param[in]  req: pointer to USB device request
+ 732:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     \param[out] none
+ 733:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     \retval     none
+ 734:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** */
+ 735:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** static void  usbd_setinterface (usb_core_handle_struct *pudev, usb_device_req_struct *req)
+ 736:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** {
+ 206              		.loc 1 736 1 is_stmt 1 view -0
+ 207              		.cfi_startproc
+ 208              		@ args = 0, pretend = 0, frame = 0
+ 209              		@ frame_needed = 0, uses_anonymous_args = 0
+ 210              		.loc 1 736 1 is_stmt 0 view .LVU31
+ 211 0000 08B5     		push	{r3, lr}
+ 212              		.cfi_def_cfa_offset 8
+ 213              		.cfi_offset 3, -8
+ 214              		.cfi_offset 14, -4
+ 737:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     pudev->dev.class_req_handler(pudev, req);
+ 215              		.loc 1 737 5 is_stmt 1 view .LVU32
+ 216 0002 D0F8F030 		ldr	r3, [r0, #240]
+ 217 0006 9847     		blx	r3
+ 218              	.LVL12:
+ 738:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** }
+ 219              		.loc 1 738 1 is_stmt 0 view .LVU33
+ 220 0008 08BD     		pop	{r3, pc}
+ 221              		.cfi_endproc
+ 222              	.LFE135:
+ 224              		.section	.text.usbd_synchframe,"ax",%progbits
+ 225              		.align	1
+ 226              		.syntax unified
+ 227              		.thumb
+ 228              		.thumb_func
+ 229              		.fpu fpv4-sp-d16
+ 231              	usbd_synchframe:
+ 232              	.LVL13:
+ 233              	.LFB136:
+ 739:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+ 740:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** /*!
+ 741:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     \brief      handle USB SynchFrame request
+ 742:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     \param[in]  pudev: pointer to USB device instance
+ 743:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     \param[in]  req: pointer to USB device request
+ 744:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     \param[out] none
+ 745:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     \retval     none
+ 746:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** */
+ 747:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** static void  usbd_synchframe (usb_core_handle_struct *pudev, usb_device_req_struct *req)
+ 748:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** {
+ 234              		.loc 1 748 1 is_stmt 1 view -0
+ 235              		.cfi_startproc
+ 236              		@ args = 0, pretend = 0, frame = 0
+ 237              		@ frame_needed = 0, uses_anonymous_args = 0
+ 238              		@ link register save eliminated.
+ARM GAS  /tmp/ccJsntlc.s 			page 18
+
+
+ 749:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     /* no handle... */
+ 750:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** }
+ 239              		.loc 1 750 1 view .LVU35
+ 240 0000 7047     		bx	lr
+ 241              		.cfi_endproc
+ 242              	.LFE136:
+ 244              		.section	.text.usbd_out_transaction,"ax",%progbits
+ 245              		.align	1
+ 246              		.global	usbd_out_transaction
+ 247              		.syntax unified
+ 248              		.thumb
+ 249              		.thumb_func
+ 250              		.fpu fpv4-sp-d16
+ 252              	usbd_out_transaction:
+ 253              	.LVL14:
+ 254              	.LFB117:
+ 139:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     usb_ep_struct *ep;
+ 255              		.loc 1 139 1 view -0
+ 256              		.cfi_startproc
+ 257              		@ args = 0, pretend = 0, frame = 0
+ 258              		@ frame_needed = 0, uses_anonymous_args = 0
+ 139:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     usb_ep_struct *ep;
+ 259              		.loc 1 139 1 is_stmt 0 view .LVU37
+ 260 0000 10B5     		push	{r4, lr}
+ 261              		.cfi_def_cfa_offset 8
+ 262              		.cfi_offset 4, -8
+ 263              		.cfi_offset 14, -4
+ 264 0002 0446     		mov	r4, r0
+ 140:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+ 265              		.loc 1 140 5 is_stmt 1 view .LVU38
+ 143:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         ep = &pudev->dev.out_ep[0];
+ 266              		.loc 1 143 5 view .LVU39
+ 143:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         ep = &pudev->dev.out_ep[0];
+ 267              		.loc 1 143 8 is_stmt 0 view .LVU40
+ 268 0004 19BB     		cbnz	r1, .L13
+ 144:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+ 269              		.loc 1 144 9 is_stmt 1 view .LVU41
+ 270              	.LVL15:
+ 146:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****             if (pudev->dev.remain_len > ep->endp_mps) {
+ 271              		.loc 1 146 9 view .LVU42
+ 146:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****             if (pudev->dev.remain_len > ep->endp_mps) {
+ 272              		.loc 1 146 12 is_stmt 0 view .LVU43
+ 273 0006 837B     		ldrb	r3, [r0, #14]	@ zero_extendqisi2
+ 274 0008 032B     		cmp	r3, #3
+ 275 000a 01D0     		beq	.L20
+ 276              	.LVL16:
+ 277              	.L14:
+ 169:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+ 278              		.loc 1 169 5 is_stmt 1 view .LVU44
+ 171:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** }
+ 279              		.loc 1 171 5 view .LVU45
+ 172:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+ 280              		.loc 1 172 1 is_stmt 0 view .LVU46
+ 281 000c 0020     		movs	r0, #0
+ 282 000e 10BD     		pop	{r4, pc}
+ 283              	.LVL17:
+ 284              	.L20:
+ARM GAS  /tmp/ccJsntlc.s 			page 19
+
+
+ 147:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                 pudev->dev.remain_len -= ep->endp_mps;
+ 285              		.loc 1 147 13 is_stmt 1 view .LVU47
+ 147:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                 pudev->dev.remain_len -= ep->endp_mps;
+ 286              		.loc 1 147 27 is_stmt 0 view .LVU48
+ 287 0010 8369     		ldr	r3, [r0, #24]
+ 147:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                 pudev->dev.remain_len -= ep->endp_mps;
+ 288              		.loc 1 147 43 view .LVU49
+ 289 0012 D0F89010 		ldr	r1, [r0, #144]
+ 290              	.LVL18:
+ 147:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                 pudev->dev.remain_len -= ep->endp_mps;
+ 291              		.loc 1 147 16 view .LVU50
+ 292 0016 8B42     		cmp	r3, r1
+ 293 0018 0BD9     		bls	.L15
+ 148:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+ 294              		.loc 1 148 17 is_stmt 1 view .LVU51
+ 148:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+ 295              		.loc 1 148 39 is_stmt 0 view .LVU52
+ 296 001a 5B1A     		subs	r3, r3, r1
+ 297 001c 8361     		str	r3, [r0, #24]
+ 151:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                             0U, 
+ 298              		.loc 1 151 17 is_stmt 1 view .LVU53
+ 299 001e D0F89420 		ldr	r2, [r0, #148]
+ 300 0022 9942     		cmp	r1, r3
+ 301 0024 8CBF     		ite	hi
+ 302 0026 9BB2     		uxthhi	r3, r3
+ 303 0028 8BB2     		uxthls	r3, r1
+ 304 002a 0021     		movs	r1, #0
+ 305 002c FFF7FEFF 		bl	usbd_ep_rx
+ 306              	.LVL19:
+ 151:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                             0U, 
+ 307              		.loc 1 151 17 is_stmt 0 view .LVU54
+ 308 0030 ECE7     		b	.L14
+ 309              	.LVL20:
+ 310              	.L15:
+ 156:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                     pudev->dev.class_data_handler(pudev, USB_RX, 0U);
+ 311              		.loc 1 156 17 is_stmt 1 view .LVU55
+ 156:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                     pudev->dev.class_data_handler(pudev, USB_RX, 0U);
+ 312              		.loc 1 156 56 is_stmt 0 view .LVU56
+ 313 0032 437B     		ldrb	r3, [r0, #13]	@ zero_extendqisi2
+ 314 0034 DBB2     		uxtb	r3, r3
+ 156:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                     pudev->dev.class_data_handler(pudev, USB_RX, 0U);
+ 315              		.loc 1 156 20 view .LVU57
+ 316 0036 032B     		cmp	r3, #3
+ 317 0038 03D0     		beq	.L21
+ 318              	.LVL21:
+ 319              	.L18:
+ 161:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****             }
+ 320              		.loc 1 161 17 is_stmt 1 view .LVU58
+ 321 003a 2046     		mov	r0, r4
+ 322 003c FFF7FEFF 		bl	usbd_ctlstatus_tx
+ 323              	.LVL22:
+ 324 0040 E4E7     		b	.L14
+ 325              	.LVL23:
+ 326              	.L21:
+ 157:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                 }
+ 327              		.loc 1 157 21 view .LVU59
+ 328 0042 D0F8F430 		ldr	r3, [r0, #244]
+ARM GAS  /tmp/ccJsntlc.s 			page 20
+
+
+ 329 0046 0022     		movs	r2, #0
+ 330 0048 1146     		mov	r1, r2
+ 331 004a 9847     		blx	r3
+ 332              	.LVL24:
+ 157:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                 }
+ 333              		.loc 1 157 21 is_stmt 0 view .LVU60
+ 334 004c F5E7     		b	.L18
+ 335              	.LVL25:
+ 336              	.L13:
+ 157:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                 }
+ 337              		.loc 1 157 21 view .LVU61
+ 338 004e 0A46     		mov	r2, r1
+ 165:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         pudev->dev.class_data_handler(pudev, USB_RX, endp_num);
+ 339              		.loc 1 165 12 is_stmt 1 view .LVU62
+ 165:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         pudev->dev.class_data_handler(pudev, USB_RX, endp_num);
+ 340              		.loc 1 165 51 is_stmt 0 view .LVU63
+ 341 0050 437B     		ldrb	r3, [r0, #13]	@ zero_extendqisi2
+ 342 0052 DBB2     		uxtb	r3, r3
+ 165:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         pudev->dev.class_data_handler(pudev, USB_RX, endp_num);
+ 343              		.loc 1 165 15 view .LVU64
+ 344 0054 032B     		cmp	r3, #3
+ 345 0056 D9D1     		bne	.L14
+ 166:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     } else {
+ 346              		.loc 1 166 9 is_stmt 1 view .LVU65
+ 347 0058 D0F8F430 		ldr	r3, [r0, #244]
+ 348 005c 0021     		movs	r1, #0
+ 349              	.LVL26:
+ 166:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     } else {
+ 350              		.loc 1 166 9 is_stmt 0 view .LVU66
+ 351 005e 9847     		blx	r3
+ 352              	.LVL27:
+ 166:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     } else {
+ 353              		.loc 1 166 9 view .LVU67
+ 354 0060 D4E7     		b	.L14
+ 355              		.cfi_endproc
+ 356              	.LFE117:
+ 358              		.section	.text.usbd_in_transaction,"ax",%progbits
+ 359              		.align	1
+ 360              		.global	usbd_in_transaction
+ 361              		.syntax unified
+ 362              		.thumb
+ 363              		.thumb_func
+ 364              		.fpu fpv4-sp-d16
+ 366              	usbd_in_transaction:
+ 367              	.LVL28:
+ 368              	.LFB118:
+ 185:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     usb_ep_struct *ep;
+ 369              		.loc 1 185 1 is_stmt 1 view -0
+ 370              		.cfi_startproc
+ 371              		@ args = 0, pretend = 0, frame = 0
+ 372              		@ frame_needed = 0, uses_anonymous_args = 0
+ 185:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     usb_ep_struct *ep;
+ 373              		.loc 1 185 1 is_stmt 0 view .LVU69
+ 374 0000 10B5     		push	{r4, lr}
+ 375              		.cfi_def_cfa_offset 8
+ 376              		.cfi_offset 4, -8
+ 377              		.cfi_offset 14, -4
+ARM GAS  /tmp/ccJsntlc.s 			page 21
+
+
+ 378 0002 0446     		mov	r4, r0
+ 186:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+ 379              		.loc 1 186 5 is_stmt 1 view .LVU70
+ 189:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         ep = &pudev->dev.in_ep[0];
+ 380              		.loc 1 189 5 view .LVU71
+ 189:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         ep = &pudev->dev.in_ep[0];
+ 381              		.loc 1 189 8 is_stmt 0 view .LVU72
+ 382 0004 0029     		cmp	r1, #0
+ 383 0006 3BD1     		bne	.L23
+ 190:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+ 384              		.loc 1 190 9 is_stmt 1 view .LVU73
+ 385              	.LVL29:
+ 192:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****             if (pudev->dev.remain_len > ep->endp_mps) {
+ 386              		.loc 1 192 9 view .LVU74
+ 192:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****             if (pudev->dev.remain_len > ep->endp_mps) {
+ 387              		.loc 1 192 12 is_stmt 0 view .LVU75
+ 388 0008 837B     		ldrb	r3, [r0, #14]	@ zero_extendqisi2
+ 389 000a 022B     		cmp	r3, #2
+ 390 000c 01D0     		beq	.L29
+ 391              	.LVL30:
+ 392              	.L24:
+ 224:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+ 393              		.loc 1 224 5 is_stmt 1 view .LVU76
+ 226:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** }
+ 394              		.loc 1 226 5 view .LVU77
+ 227:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+ 395              		.loc 1 227 1 is_stmt 0 view .LVU78
+ 396 000e 0020     		movs	r0, #0
+ 397 0010 10BD     		pop	{r4, pc}
+ 398              	.LVL31:
+ 399              	.L29:
+ 193:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                 pudev->dev.remain_len -= ep->endp_mps;
+ 400              		.loc 1 193 13 is_stmt 1 view .LVU79
+ 193:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                 pudev->dev.remain_len -= ep->endp_mps;
+ 401              		.loc 1 193 27 is_stmt 0 view .LVU80
+ 402 0012 8269     		ldr	r2, [r0, #24]
+ 193:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                 pudev->dev.remain_len -= ep->endp_mps;
+ 403              		.loc 1 193 43 view .LVU81
+ 404 0014 036C     		ldr	r3, [r0, #64]
+ 193:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                 pudev->dev.remain_len -= ep->endp_mps;
+ 405              		.loc 1 193 16 view .LVU82
+ 406 0016 9A42     		cmp	r2, r3
+ 407 0018 12D8     		bhi	.L30
+ 202:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                      (pudev->dev.sum_len >= ep->endp_mps) &&
+ 408              		.loc 1 202 17 is_stmt 1 view .LVU83
+ 202:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                      (pudev->dev.sum_len >= ep->endp_mps) &&
+ 409              		.loc 1 202 32 is_stmt 0 view .LVU84
+ 410 001a C169     		ldr	r1, [r0, #28]
+ 411              	.LVL32:
+ 202:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                      (pudev->dev.sum_len >= ep->endp_mps) &&
+ 412              		.loc 1 202 41 view .LVU85
+ 413 001c B1FBF3F2 		udiv	r2, r1, r3
+ 414 0020 03FB1212 		mls	r2, r3, r2, r1
+ 202:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                      (pudev->dev.sum_len >= ep->endp_mps) &&
+ 415              		.loc 1 202 20 view .LVU86
+ 416 0024 22B9     		cbnz	r2, .L26
+ 202:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                      (pudev->dev.sum_len >= ep->endp_mps) &&
+ARM GAS  /tmp/ccJsntlc.s 			page 22
+
+
+ 417              		.loc 1 202 63 discriminator 1 view .LVU87
+ 418 0026 8B42     		cmp	r3, r1
+ 419 0028 02D8     		bhi	.L26
+ 203:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                       (pudev->dev.sum_len < pudev->dev.ctl_len)) {
+ 420              		.loc 1 203 59 view .LVU88
+ 421 002a 036A     		ldr	r3, [r0, #32]
+ 422 002c 9942     		cmp	r1, r3
+ 423 002e 13D3     		bcc	.L31
+ 424              	.L26:
+ 211:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                         pudev->dev.class_data_handler(pudev, USB_TX, 0U);
+ 425              		.loc 1 211 21 is_stmt 1 view .LVU89
+ 211:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                         pudev->dev.class_data_handler(pudev, USB_TX, 0U);
+ 426              		.loc 1 211 60 is_stmt 0 view .LVU90
+ 427 0030 637B     		ldrb	r3, [r4, #13]	@ zero_extendqisi2
+ 428 0032 DBB2     		uxtb	r3, r3
+ 211:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                         pudev->dev.class_data_handler(pudev, USB_TX, 0U);
+ 429              		.loc 1 211 24 view .LVU91
+ 430 0034 032B     		cmp	r3, #3
+ 431 0036 1CD0     		beq	.L32
+ 432              	.LVL33:
+ 433              	.L27:
+ 216:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                 }
+ 434              		.loc 1 216 21 is_stmt 1 view .LVU92
+ 435 0038 2046     		mov	r0, r4
+ 436 003a FFF7FEFF 		bl	usbd_ctlstatus_rx
+ 437              	.LVL34:
+ 438 003e E6E7     		b	.L24
+ 439              	.LVL35:
+ 440              	.L30:
+ 194:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+ 441              		.loc 1 194 17 view .LVU93
+ 194:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+ 442              		.loc 1 194 39 is_stmt 0 view .LVU94
+ 443 0040 D31A     		subs	r3, r2, r3
+ 444 0042 8361     		str	r3, [r0, #24]
+ 197:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                 
+ 445              		.loc 1 197 17 is_stmt 1 view .LVU95
+ 446 0044 426C     		ldr	r2, [r0, #68]
+ 447 0046 FFF7FEFF 		bl	usbd_ep_tx
+ 448              	.LVL36:
+ 199:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****             } else {
+ 449              		.loc 1 199 17 view .LVU96
+ 450 004a 0023     		movs	r3, #0
+ 451 004c 1A46     		mov	r2, r3
+ 452 004e 1946     		mov	r1, r3
+ 453 0050 2046     		mov	r0, r4
+ 454 0052 FFF7FEFF 		bl	usbd_ep_rx
+ 455              	.LVL37:
+ 456 0056 DAE7     		b	.L24
+ 457              	.LVL38:
+ 458              	.L31:
+ 206:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                     
+ 459              		.loc 1 206 21 view .LVU97
+ 460 0058 0023     		movs	r3, #0
+ 461 005a 1A46     		mov	r2, r3
+ 462 005c 1946     		mov	r1, r3
+ 463 005e FFF7FEFF 		bl	usbd_ep_tx
+ARM GAS  /tmp/ccJsntlc.s 			page 23
+
+
+ 464              	.LVL39:
+ 208:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                     usbd_ep_rx (pudev, 0U, NULL, 0U);
+ 465              		.loc 1 208 21 view .LVU98
+ 208:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                     usbd_ep_rx (pudev, 0U, NULL, 0U);
+ 466              		.loc 1 208 40 is_stmt 0 view .LVU99
+ 467 0062 0021     		movs	r1, #0
+ 468 0064 2162     		str	r1, [r4, #32]
+ 209:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                 } else {
+ 469              		.loc 1 209 21 is_stmt 1 view .LVU100
+ 470 0066 0B46     		mov	r3, r1
+ 471 0068 0A46     		mov	r2, r1
+ 472 006a 2046     		mov	r0, r4
+ 473 006c FFF7FEFF 		bl	usbd_ep_rx
+ 474              	.LVL40:
+ 475 0070 CDE7     		b	.L24
+ 476              	.LVL41:
+ 477              	.L32:
+ 212:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                     }
+ 478              		.loc 1 212 25 view .LVU101
+ 479 0072 D4F8F430 		ldr	r3, [r4, #244]
+ 480 0076 0022     		movs	r2, #0
+ 481 0078 0121     		movs	r1, #1
+ 482 007a 2046     		mov	r0, r4
+ 483              	.LVL42:
+ 212:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                     }
+ 484              		.loc 1 212 25 is_stmt 0 view .LVU102
+ 485 007c 9847     		blx	r3
+ 486              	.LVL43:
+ 487 007e DBE7     		b	.L27
+ 488              	.LVL44:
+ 489              	.L23:
+ 212:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                     }
+ 490              		.loc 1 212 25 view .LVU103
+ 491 0080 0A46     		mov	r2, r1
+ 220:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         pudev->dev.class_data_handler(pudev, USB_TX, endp_num);
+ 492              		.loc 1 220 12 is_stmt 1 view .LVU104
+ 220:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         pudev->dev.class_data_handler(pudev, USB_TX, endp_num);
+ 493              		.loc 1 220 51 is_stmt 0 view .LVU105
+ 494 0082 437B     		ldrb	r3, [r0, #13]	@ zero_extendqisi2
+ 495 0084 DBB2     		uxtb	r3, r3
+ 220:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         pudev->dev.class_data_handler(pudev, USB_TX, endp_num);
+ 496              		.loc 1 220 15 view .LVU106
+ 497 0086 032B     		cmp	r3, #3
+ 498 0088 C1D1     		bne	.L24
+ 221:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     } else {
+ 499              		.loc 1 221 9 is_stmt 1 view .LVU107
+ 500 008a D0F8F430 		ldr	r3, [r0, #244]
+ 501 008e 0121     		movs	r1, #1
+ 502              	.LVL45:
+ 221:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     } else {
+ 503              		.loc 1 221 9 is_stmt 0 view .LVU108
+ 504 0090 9847     		blx	r3
+ 505              	.LVL46:
+ 221:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     } else {
+ 506              		.loc 1 221 9 view .LVU109
+ 507 0092 BCE7     		b	.L24
+ 508              		.cfi_endproc
+ARM GAS  /tmp/ccJsntlc.s 			page 24
+
+
+ 509              	.LFE118:
+ 511              		.section	.text.usbd_enum_error,"ax",%progbits
+ 512              		.align	1
+ 513              		.global	usbd_enum_error
+ 514              		.syntax unified
+ 515              		.thumb
+ 516              		.thumb_func
+ 517              		.fpu fpv4-sp-d16
+ 519              	usbd_enum_error:
+ 520              	.LVL47:
+ 521              	.LFB138:
+ 751:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+ 752:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** /*!
+ 753:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     \brief      decode setup data packet
+ 754:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     \param[in]  pudev: pointer to USB device instance
+ 755:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     \param[in]  req: pointer to USB device request
+ 756:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     \param[out] none
+ 757:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     \retval     none
+ 758:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** */
+ 759:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** static void usbd_setup_request_parse(usb_core_handle_struct *pudev, usb_device_req_struct *req)
+ 760:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** {
+ 761:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     uint8_t *psetup = pudev->dev.setup_packet;
+ 762:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+ 763:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     /* decode the setup request */
+ 764:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     req->bmRequestType = *psetup;
+ 765:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     req->bRequest      = *(uint8_t *)(psetup + 1U);
+ 766:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     req->wValue        = SWAPBYTE (psetup + 2U);
+ 767:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     req->wIndex        = SWAPBYTE (psetup + 4U);
+ 768:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     req->wLength       = SWAPBYTE (psetup + 6U);
+ 769:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+ 770:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     pudev->dev.ctl_len = req->wLength;
+ 771:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** }
+ 772:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+ 773:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** /*!
+ 774:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     \brief      handle USB low level error event
+ 775:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     \param[in]  pudev: pointer to USB device instance
+ 776:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     \param[in]  req: pointer to USB device request
+ 777:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     \param[out] none
+ 778:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     \retval     none
+ 779:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** */
+ 780:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** void usbd_enum_error(usb_core_handle_struct *pudev, usb_device_req_struct *req)
+ 781:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** {
+ 522              		.loc 1 781 1 is_stmt 1 view -0
+ 523              		.cfi_startproc
+ 524              		@ args = 0, pretend = 0, frame = 0
+ 525              		@ frame_needed = 0, uses_anonymous_args = 0
+ 526              		.loc 1 781 1 is_stmt 0 view .LVU111
+ 527 0000 10B5     		push	{r4, lr}
+ 528              		.cfi_def_cfa_offset 8
+ 529              		.cfi_offset 4, -8
+ 530              		.cfi_offset 14, -4
+ 531 0002 0446     		mov	r4, r0
+ 782:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     usbd_ep_stall(pudev, 0x80U);
+ 532              		.loc 1 782 5 is_stmt 1 view .LVU112
+ 533 0004 8021     		movs	r1, #128
+ 534              	.LVL48:
+ 535              		.loc 1 782 5 is_stmt 0 view .LVU113
+ARM GAS  /tmp/ccJsntlc.s 			page 25
+
+
+ 536 0006 FFF7FEFF 		bl	usbd_ep_stall
+ 537              	.LVL49:
+ 783:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     usbd_ep_stall(pudev, 0x00U);
+ 538              		.loc 1 783 5 is_stmt 1 view .LVU114
+ 539 000a 0021     		movs	r1, #0
+ 540 000c 2046     		mov	r0, r4
+ 541 000e FFF7FEFF 		bl	usbd_ep_stall
+ 542              	.LVL50:
+ 784:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     usb_ep0_startout(pudev);
+ 543              		.loc 1 784 5 view .LVU115
+ 544 0012 2046     		mov	r0, r4
+ 545 0014 FFF7FEFF 		bl	usb_ep0_startout
+ 546              	.LVL51:
+ 785:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** }
+ 547              		.loc 1 785 1 is_stmt 0 view .LVU116
+ 548 0018 10BD     		pop	{r4, pc}
+ 549              		.loc 1 785 1 view .LVU117
+ 550              		.cfi_endproc
+ 551              	.LFE138:
+ 553              		.section	.text.usbd_setconfig,"ax",%progbits
+ 554              		.align	1
+ 555              		.syntax unified
+ 556              		.thumb
+ 557              		.thumb_func
+ 558              		.fpu fpv4-sp-d16
+ 560              	usbd_setconfig:
+ 561              	.LVL52:
+ 562              	.LFB133:
+ 670:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     static uint8_t  cfgidx;
+ 563              		.loc 1 670 1 is_stmt 1 view -0
+ 564              		.cfi_startproc
+ 565              		@ args = 0, pretend = 0, frame = 0
+ 566              		@ frame_needed = 0, uses_anonymous_args = 0
+ 670:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     static uint8_t  cfgidx;
+ 567              		.loc 1 670 1 is_stmt 0 view .LVU119
+ 568 0000 10B5     		push	{r4, lr}
+ 569              		.cfi_def_cfa_offset 8
+ 570              		.cfi_offset 4, -8
+ 571              		.cfi_offset 14, -4
+ 572 0002 0446     		mov	r4, r0
+ 671:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+ 573              		.loc 1 671 5 is_stmt 1 view .LVU120
+ 673:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+ 574              		.loc 1 673 5 view .LVU121
+ 673:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+ 575              		.loc 1 673 14 is_stmt 0 view .LVU122
+ 576 0004 8B78     		ldrb	r3, [r1, #2]	@ zero_extendqisi2
+ 673:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+ 577              		.loc 1 673 12 view .LVU123
+ 578 0006 1B4A     		ldr	r2, .L47
+ 579 0008 1370     		strb	r3, [r2]
+ 676:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         usbd_enum_error(pudev, req);
+ 580              		.loc 1 676 5 is_stmt 1 view .LVU124
+ 676:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         usbd_enum_error(pudev, req);
+ 581              		.loc 1 676 8 is_stmt 0 view .LVU125
+ 582 000a 012B     		cmp	r3, #1
+ 583 000c 08D8     		bhi	.L46
+ARM GAS  /tmp/ccJsntlc.s 			page 26
+
+
+ 679:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         case USB_STATUS_ADDRESSED:
+ 584              		.loc 1 679 9 is_stmt 1 view .LVU126
+ 679:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         case USB_STATUS_ADDRESSED:
+ 585              		.loc 1 679 27 is_stmt 0 view .LVU127
+ 586 000e 427B     		ldrb	r2, [r0, #13]	@ zero_extendqisi2
+ 587 0010 D2B2     		uxtb	r2, r2
+ 679:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         case USB_STATUS_ADDRESSED:
+ 588              		.loc 1 679 9 view .LVU128
+ 589 0012 022A     		cmp	r2, #2
+ 590 0014 07D0     		beq	.L38
+ 591 0016 032A     		cmp	r2, #3
+ 592 0018 11D0     		beq	.L39
+ 710:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****             break;
+ 593              		.loc 1 710 13 is_stmt 1 view .LVU129
+ 594 001a FFF7FEFF 		bl	usbd_enum_error
+ 595              	.LVL53:
+ 711:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         }
+ 596              		.loc 1 711 13 view .LVU130
+ 714:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+ 597              		.loc 1 714 1 is_stmt 0 view .LVU131
+ 598 001e 01E0     		b	.L35
+ 599              	.LVL54:
+ 600              	.L46:
+ 677:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     } else {
+ 601              		.loc 1 677 9 is_stmt 1 view .LVU132
+ 602 0020 FFF7FEFF 		bl	usbd_enum_error
+ 603              	.LVL55:
+ 604              	.L35:
+ 714:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+ 605              		.loc 1 714 1 is_stmt 0 view .LVU133
+ 606 0024 10BD     		pop	{r4, pc}
+ 607              	.LVL56:
+ 608              	.L38:
+ 681:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                 pudev->dev.config_num = cfgidx;
+ 609              		.loc 1 681 13 is_stmt 1 view .LVU134
+ 681:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                 pudev->dev.config_num = cfgidx;
+ 610              		.loc 1 681 16 is_stmt 0 view .LVU135
+ 611 0026 33B1     		cbz	r3, .L41
+ 682:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                 pudev->dev.status = USB_STATUS_CONFIGURED;
+ 612              		.loc 1 682 17 is_stmt 1 view .LVU136
+ 682:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                 pudev->dev.status = USB_STATUS_CONFIGURED;
+ 613              		.loc 1 682 39 is_stmt 0 view .LVU137
+ 614 0028 0121     		movs	r1, #1
+ 615              	.LVL57:
+ 682:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                 pudev->dev.status = USB_STATUS_CONFIGURED;
+ 616              		.loc 1 682 39 view .LVU138
+ 617 002a 0173     		strb	r1, [r0, #12]
+ 683:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                 /* call the function of class initialization */
+ 618              		.loc 1 683 17 is_stmt 1 view .LVU139
+ 683:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                 /* call the function of class initialization */
+ 619              		.loc 1 683 35 is_stmt 0 view .LVU140
+ 620 002c 0323     		movs	r3, #3
+ 621 002e 4373     		strb	r3, [r0, #13]
+ 685:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****             }
+ 622              		.loc 1 685 17 is_stmt 1 view .LVU141
+ 623 0030 D0F8E830 		ldr	r3, [r0, #232]
+ 624 0034 9847     		blx	r3
+ARM GAS  /tmp/ccJsntlc.s 			page 27
+
+
+ 625              	.LVL58:
+ 626              	.L41:
+ 688:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****             break;
+ 627              		.loc 1 688 13 view .LVU142
+ 628 0036 2046     		mov	r0, r4
+ 629 0038 FFF7FEFF 		bl	usbd_ctlstatus_tx
+ 630              	.LVL59:
+ 689:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         case USB_STATUS_CONFIGURED:
+ 631              		.loc 1 689 13 view .LVU143
+ 632 003c F2E7     		b	.L35
+ 633              	.LVL60:
+ 634              	.L39:
+ 691:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                 pudev->dev.status = USB_STATUS_ADDRESSED;
+ 635              		.loc 1 691 13 view .LVU144
+ 691:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                 pudev->dev.status = USB_STATUS_ADDRESSED;
+ 636              		.loc 1 691 16 is_stmt 0 view .LVU145
+ 637 003e 53B9     		cbnz	r3, .L42
+ 692:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                 pudev->dev.config_num = cfgidx;
+ 638              		.loc 1 692 17 is_stmt 1 view .LVU146
+ 692:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                 pudev->dev.config_num = cfgidx;
+ 639              		.loc 1 692 35 is_stmt 0 view .LVU147
+ 640 0040 0223     		movs	r3, #2
+ 641 0042 4373     		strb	r3, [r0, #13]
+ 693:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                 /* call the function of class deinitialization */
+ 642              		.loc 1 693 17 is_stmt 1 view .LVU148
+ 693:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                 /* call the function of class deinitialization */
+ 643              		.loc 1 693 39 is_stmt 0 view .LVU149
+ 644 0044 0021     		movs	r1, #0
+ 645              	.LVL61:
+ 693:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                 /* call the function of class deinitialization */
+ 646              		.loc 1 693 39 view .LVU150
+ 647 0046 0173     		strb	r1, [r0, #12]
+ 695:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****             } else if (cfgidx != pudev->dev.config_num) {
+ 648              		.loc 1 695 17 is_stmt 1 view .LVU151
+ 649 0048 D0F8EC30 		ldr	r3, [r0, #236]
+ 650 004c 9847     		blx	r3
+ 651              	.LVL62:
+ 652              	.L43:
+ 705:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+ 653              		.loc 1 705 13 view .LVU152
+ 707:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****             break;
+ 654              		.loc 1 707 13 view .LVU153
+ 655 004e 2046     		mov	r0, r4
+ 656 0050 FFF7FEFF 		bl	usbd_ctlstatus_tx
+ 657              	.LVL63:
+ 708:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         default:
+ 658              		.loc 1 708 13 view .LVU154
+ 659 0054 E6E7     		b	.L35
+ 660              	.LVL64:
+ 661              	.L42:
+ 696:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                 /* clear old configuration */
+ 662              		.loc 1 696 20 view .LVU155
+ 696:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                 /* clear old configuration */
+ 663              		.loc 1 696 44 is_stmt 0 view .LVU156
+ 664 0056 017B     		ldrb	r1, [r0, #12]	@ zero_extendqisi2
+ 665              	.LVL65:
+ 696:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                 /* clear old configuration */
+ARM GAS  /tmp/ccJsntlc.s 			page 28
+
+
+ 666              		.loc 1 696 23 view .LVU157
+ 667 0058 0129     		cmp	r1, #1
+ 668 005a F8D0     		beq	.L43
+ 698:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+ 669              		.loc 1 698 17 is_stmt 1 view .LVU158
+ 670 005c D0F8EC30 		ldr	r3, [r0, #236]
+ 671 0060 9847     		blx	r3
+ 672              	.LVL66:
+ 701:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                 pudev->dev.class_init(pudev, cfgidx);
+ 673              		.loc 1 701 17 view .LVU159
+ 701:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                 pudev->dev.class_init(pudev, cfgidx);
+ 674              		.loc 1 701 39 is_stmt 0 view .LVU160
+ 675 0062 044B     		ldr	r3, .L47
+ 676 0064 1978     		ldrb	r1, [r3]	@ zero_extendqisi2
+ 677 0066 2173     		strb	r1, [r4, #12]
+ 702:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****             } else {
+ 678              		.loc 1 702 17 is_stmt 1 view .LVU161
+ 679 0068 D4F8E830 		ldr	r3, [r4, #232]
+ 680 006c 2046     		mov	r0, r4
+ 681 006e 9847     		blx	r3
+ 682              	.LVL67:
+ 683 0070 EDE7     		b	.L43
+ 684              	.L48:
+ 685 0072 00BF     		.align	2
+ 686              	.L47:
+ 687 0074 00000000 		.word	.LANCHOR0
+ 688              		.cfi_endproc
+ 689              	.LFE133:
+ 691              		.section	.text.usbd_getconfig,"ax",%progbits
+ 692              		.align	1
+ 693              		.syntax unified
+ 694              		.thumb
+ 695              		.thumb_func
+ 696              		.fpu fpv4-sp-d16
+ 698              	usbd_getconfig:
+ 699              	.LVL68:
+ 700              	.LFB132:
+ 639:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     uint32_t USBD_default_config = 0U;
+ 701              		.loc 1 639 1 view -0
+ 702              		.cfi_startproc
+ 703              		@ args = 0, pretend = 0, frame = 8
+ 704              		@ frame_needed = 0, uses_anonymous_args = 0
+ 639:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     uint32_t USBD_default_config = 0U;
+ 705              		.loc 1 639 1 is_stmt 0 view .LVU163
+ 706 0000 00B5     		push	{lr}
+ 707              		.cfi_def_cfa_offset 4
+ 708              		.cfi_offset 14, -4
+ 709 0002 83B0     		sub	sp, sp, #12
+ 710              		.cfi_def_cfa_offset 16
+ 640:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+ 711              		.loc 1 640 5 is_stmt 1 view .LVU164
+ 640:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+ 712              		.loc 1 640 14 is_stmt 0 view .LVU165
+ 713 0004 0023     		movs	r3, #0
+ 714 0006 0193     		str	r3, [sp, #4]
+ 643:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         usbd_enum_error(pudev, req);
+ 715              		.loc 1 643 5 is_stmt 1 view .LVU166
+ARM GAS  /tmp/ccJsntlc.s 			page 29
+
+
+ 643:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         usbd_enum_error(pudev, req);
+ 716              		.loc 1 643 8 is_stmt 0 view .LVU167
+ 717 0008 CB88     		ldrh	r3, [r1, #6]
+ 718 000a 012B     		cmp	r3, #1
+ 719 000c 08D1     		bne	.L57
+ 646:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         case USB_STATUS_ADDRESSED:
+ 720              		.loc 1 646 9 is_stmt 1 view .LVU168
+ 646:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         case USB_STATUS_ADDRESSED:
+ 721              		.loc 1 646 27 is_stmt 0 view .LVU169
+ 722 000e 437B     		ldrb	r3, [r0, #13]	@ zero_extendqisi2
+ 723 0010 DBB2     		uxtb	r3, r3
+ 646:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         case USB_STATUS_ADDRESSED:
+ 724              		.loc 1 646 9 view .LVU170
+ 725 0012 022B     		cmp	r3, #2
+ 726 0014 09D0     		beq	.L52
+ 727 0016 032B     		cmp	r3, #3
+ 728 0018 0CD0     		beq	.L53
+ 656:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****             break;
+ 729              		.loc 1 656 13 is_stmt 1 view .LVU171
+ 730 001a FFF7FEFF 		bl	usbd_enum_error
+ 731              	.LVL69:
+ 657:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         }
+ 732              		.loc 1 657 13 view .LVU172
+ 660:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+ 733              		.loc 1 660 1 is_stmt 0 view .LVU173
+ 734 001e 01E0     		b	.L49
+ 735              	.LVL70:
+ 736              	.L57:
+ 644:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     } else {
+ 737              		.loc 1 644 9 is_stmt 1 view .LVU174
+ 738 0020 FFF7FEFF 		bl	usbd_enum_error
+ 739              	.LVL71:
+ 740              	.L49:
+ 660:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+ 741              		.loc 1 660 1 is_stmt 0 view .LVU175
+ 742 0024 03B0     		add	sp, sp, #12
+ 743              		.cfi_remember_state
+ 744              		.cfi_def_cfa_offset 4
+ 745              		@ sp needed
+ 746 0026 5DF804FB 		ldr	pc, [sp], #4
+ 747              	.LVL72:
+ 748              	.L52:
+ 749              		.cfi_restore_state
+ 649:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****             break;
+ 750              		.loc 1 649 13 is_stmt 1 view .LVU176
+ 751 002a 0122     		movs	r2, #1
+ 752 002c 01A9     		add	r1, sp, #4
+ 753              	.LVL73:
+ 649:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****             break;
+ 754              		.loc 1 649 13 is_stmt 0 view .LVU177
+ 755 002e FFF7FEFF 		bl	usbd_ctltx
+ 756              	.LVL74:
+ 650:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         case USB_STATUS_CONFIGURED:
+ 757              		.loc 1 650 13 is_stmt 1 view .LVU178
+ 758 0032 F7E7     		b	.L49
+ 759              	.LVL75:
+ 760              	.L53:
+ARM GAS  /tmp/ccJsntlc.s 			page 30
+
+
+ 653:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****             break;
+ 761              		.loc 1 653 13 view .LVU179
+ 762 0034 0122     		movs	r2, #1
+ 763 0036 00F10C01 		add	r1, r0, #12
+ 764              	.LVL76:
+ 653:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****             break;
+ 765              		.loc 1 653 13 is_stmt 0 view .LVU180
+ 766 003a FFF7FEFF 		bl	usbd_ctltx
+ 767              	.LVL77:
+ 654:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         default:
+ 768              		.loc 1 654 13 is_stmt 1 view .LVU181
+ 769 003e F1E7     		b	.L49
+ 770              		.cfi_endproc
+ 771              	.LFE132:
+ 773              		.section	.text.usbd_getdescriptor,"ax",%progbits
+ 774              		.align	1
+ 775              		.syntax unified
+ 776              		.thumb
+ 777              		.thumb_func
+ 778              		.fpu fpv4-sp-d16
+ 780              	usbd_getdescriptor:
+ 781              	.LVL78:
+ 782              	.LFB130:
+ 585:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     /* judge the type of request */
+ 783              		.loc 1 585 1 view -0
+ 784              		.cfi_startproc
+ 785              		@ args = 0, pretend = 0, frame = 8
+ 786              		@ frame_needed = 0, uses_anonymous_args = 0
+ 585:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     /* judge the type of request */
+ 787              		.loc 1 585 1 is_stmt 0 view .LVU183
+ 788 0000 70B5     		push	{r4, r5, r6, lr}
+ 789              		.cfi_def_cfa_offset 16
+ 790              		.cfi_offset 4, -16
+ 791              		.cfi_offset 5, -12
+ 792              		.cfi_offset 6, -8
+ 793              		.cfi_offset 14, -4
+ 794 0002 82B0     		sub	sp, sp, #8
+ 795              		.cfi_def_cfa_offset 24
+ 796 0004 0546     		mov	r5, r0
+ 797 0006 0C46     		mov	r4, r1
+ 587:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         uint8_t  desc_type = (uint8_t)(req->wValue >> 8);
+ 798              		.loc 1 587 5 is_stmt 1 view .LVU184
+ 799 0008 0B78     		ldrb	r3, [r1]	@ zero_extendqisi2
+ 587:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         uint8_t  desc_type = (uint8_t)(req->wValue >> 8);
+ 800              		.loc 1 587 8 is_stmt 0 view .LVU185
+ 801 000a 13F00303 		ands	r3, r3, #3
+ 802 000e 2DD1     		bne	.L59
+ 803              	.LBB2:
+ 588:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         uint8_t  desc_index = (uint8_t)(req->wValue) & 0xFFU;
+ 804              		.loc 1 588 9 is_stmt 1 view .LVU186
+ 588:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         uint8_t  desc_index = (uint8_t)(req->wValue) & 0xFFU;
+ 805              		.loc 1 588 43 is_stmt 0 view .LVU187
+ 806 0010 4988     		ldrh	r1, [r1, #2]
+ 807              	.LVL79:
+ 588:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         uint8_t  desc_index = (uint8_t)(req->wValue) & 0xFFU;
+ 808              		.loc 1 588 18 view .LVU188
+ 809 0012 0E0A     		lsrs	r6, r1, #8
+ARM GAS  /tmp/ccJsntlc.s 			page 31
+
+
+ 810              	.LVL80:
+ 589:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+ 811              		.loc 1 589 9 is_stmt 1 view .LVU189
+ 591:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****             uint16_t len;
+ 812              		.loc 1 591 9 view .LVU190
+ 591:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****             uint16_t len;
+ 813              		.loc 1 591 12 is_stmt 0 view .LVU191
+ 814 0014 B1F5806F 		cmp	r1, #1024
+ 815 0018 22D2     		bcs	.L60
+ 589:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+ 816              		.loc 1 589 18 discriminator 1 view .LVU192
+ 817 001a C9B2     		uxtb	r1, r1
+ 591:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****             uint16_t len;
+ 818              		.loc 1 591 34 discriminator 1 view .LVU193
+ 819 001c 0529     		cmp	r1, #5
+ 820 001e 1FD8     		bhi	.L60
+ 821              	.LBB3:
+ 592:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****             uint8_t *pbuf;
+ 822              		.loc 1 592 13 is_stmt 1 view .LVU194
+ 593:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+ 823              		.loc 1 593 13 view .LVU195
+ 596:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+ 824              		.loc 1 596 13 view .LVU196
+ 596:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+ 825              		.loc 1 596 43 is_stmt 0 view .LVU197
+ 826 0020 731E     		subs	r3, r6, #1
+ 596:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+ 827              		.loc 1 596 20 view .LVU198
+ 828 0022 154A     		ldr	r2, .L66
+ 829 0024 52F82330 		ldr	r3, [r2, r3, lsl #2]
+ 830 0028 0DF10602 		add	r2, sp, #6
+ 831 002c 9847     		blx	r3
+ 832              	.LVL81:
+ 599:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                 len = USB_MIN(len, req->wLength);
+ 833              		.loc 1 599 13 is_stmt 1 view .LVU199
+ 599:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                 len = USB_MIN(len, req->wLength);
+ 834              		.loc 1 599 21 is_stmt 0 view .LVU200
+ 835 002e BDF80630 		ldrh	r3, [sp, #6]
+ 599:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                 len = USB_MIN(len, req->wLength);
+ 836              		.loc 1 599 16 view .LVU201
+ 837 0032 CBB1     		cbz	r3, .L58
+ 599:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                 len = USB_MIN(len, req->wLength);
+ 838              		.loc 1 599 42 discriminator 1 view .LVU202
+ 839 0034 E288     		ldrh	r2, [r4, #6]
+ 599:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                 len = USB_MIN(len, req->wLength);
+ 840              		.loc 1 599 29 discriminator 1 view .LVU203
+ 841 0036 BAB1     		cbz	r2, .L58
+ 600:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+ 842              		.loc 1 600 17 is_stmt 1 view .LVU204
+ 600:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+ 843              		.loc 1 600 23 is_stmt 0 view .LVU205
+ 844 0038 9342     		cmp	r3, r2
+ 845 003a 28BF     		it	cs
+ 846 003c 1346     		movcs	r3, r2
+ 600:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+ 847              		.loc 1 600 21 view .LVU206
+ 848 003e ADF80630 		strh	r3, [sp, #6]	@ movhi
+ARM GAS  /tmp/ccJsntlc.s 			page 32
+
+
+ 602:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                     len = 8U;
+ 849              		.loc 1 602 17 is_stmt 1 view .LVU207
+ 602:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                     len = 8U;
+ 850              		.loc 1 602 20 is_stmt 0 view .LVU208
+ 851 0042 012E     		cmp	r6, #1
+ 852 0044 06D0     		beq	.L65
+ 853              	.L62:
+ 607:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****             }
+ 854              		.loc 1 607 17 is_stmt 1 view .LVU209
+ 855 0046 BDF80620 		ldrh	r2, [sp, #6]
+ 856 004a 0146     		mov	r1, r0
+ 857 004c 2846     		mov	r0, r5
+ 858              	.LVL82:
+ 607:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****             }
+ 859              		.loc 1 607 17 is_stmt 0 view .LVU210
+ 860 004e FFF7FEFF 		bl	usbd_ctltx
+ 861              	.LVL83:
+ 607:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****             }
+ 862              		.loc 1 607 17 view .LVU211
+ 863              	.LBE3:
+ 591:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****             uint16_t len;
+ 864              		.loc 1 591 61 view .LVU212
+ 865 0052 09E0     		b	.L58
+ 866              	.LVL84:
+ 867              	.L65:
+ 868              	.LBB4:
+ 602:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                     len = 8U;
+ 869              		.loc 1 602 39 discriminator 1 view .LVU213
+ 870 0054 402A     		cmp	r2, #64
+ 603:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                 }
+ 871              		.loc 1 603 21 is_stmt 1 discriminator 1 view .LVU214
+ 603:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                 }
+ 872              		.loc 1 603 25 is_stmt 0 discriminator 1 view .LVU215
+ 873 0056 04BF     		itt	eq
+ 874 0058 0823     		moveq	r3, #8
+ 875 005a ADF80630 		strheq	r3, [sp, #6]	@ movhi
+ 876 005e F2E7     		b	.L62
+ 877              	.LVL85:
+ 878              	.L60:
+ 603:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                 }
+ 879              		.loc 1 603 25 discriminator 1 view .LVU216
+ 880              	.LBE4:
+ 610:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         }
+ 881              		.loc 1 610 13 is_stmt 1 view .LVU217
+ 882 0060 2146     		mov	r1, r4
+ 883 0062 2846     		mov	r0, r5
+ 884              	.LVL86:
+ 610:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         }
+ 885              		.loc 1 610 13 is_stmt 0 view .LVU218
+ 886 0064 FFF7FEFF 		bl	usbd_enum_error
+ 887              	.LVL87:
+ 888              	.L58:
+ 610:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         }
+ 889              		.loc 1 610 13 view .LVU219
+ 890              	.LBE2:
+ 617:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+ 891              		.loc 1 617 1 view .LVU220
+ARM GAS  /tmp/ccJsntlc.s 			page 33
+
+
+ 892 0068 02B0     		add	sp, sp, #8
+ 893              		.cfi_remember_state
+ 894              		.cfi_def_cfa_offset 16
+ 895              		@ sp needed
+ 896 006a 70BD     		pop	{r4, r5, r6, pc}
+ 897              	.LVL88:
+ 898              	.L59:
+ 899              		.cfi_restore_state
+ 612:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         pudev->dev.class_req_handler(pudev, req);
+ 900              		.loc 1 612 12 is_stmt 1 view .LVU221
+ 612:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         pudev->dev.class_req_handler(pudev, req);
+ 901              		.loc 1 612 15 is_stmt 0 view .LVU222
+ 902 006c 012B     		cmp	r3, #1
+ 903 006e FBD1     		bne	.L58
+ 613:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     } else {
+ 904              		.loc 1 613 9 is_stmt 1 view .LVU223
+ 905 0070 D0F8F030 		ldr	r3, [r0, #240]
+ 906 0074 9847     		blx	r3
+ 907              	.LVL89:
+ 616:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** }
+ 908              		.loc 1 616 5 view .LVU224
+ 617:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+ 909              		.loc 1 617 1 is_stmt 0 view .LVU225
+ 910 0076 F7E7     		b	.L58
+ 911              	.L67:
+ 912              		.align	2
+ 913              	.L66:
+ 914 0078 00000000 		.word	.LANCHOR1
+ 915              		.cfi_endproc
+ 916              	.LFE130:
+ 918              		.section	.text.usbd_setaddress,"ax",%progbits
+ 919              		.align	1
+ 920              		.syntax unified
+ 921              		.thumb
+ 922              		.thumb_func
+ 923              		.fpu fpv4-sp-d16
+ 925              	usbd_setaddress:
+ 926              	.LVL90:
+ 927              	.LFB129:
+ 549:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     uint8_t dev_addr;
+ 928              		.loc 1 549 1 is_stmt 1 view -0
+ 929              		.cfi_startproc
+ 930              		@ args = 0, pretend = 0, frame = 0
+ 931              		@ frame_needed = 0, uses_anonymous_args = 0
+ 549:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     uint8_t dev_addr;
+ 932              		.loc 1 549 1 is_stmt 0 view .LVU227
+ 933 0000 38B5     		push	{r3, r4, r5, lr}
+ 934              		.cfi_def_cfa_offset 16
+ 935              		.cfi_offset 3, -16
+ 936              		.cfi_offset 4, -12
+ 937              		.cfi_offset 5, -8
+ 938              		.cfi_offset 14, -4
+ 939 0002 0446     		mov	r4, r0
+ 550:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+ 940              		.loc 1 550 5 is_stmt 1 view .LVU228
+ 552:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         dev_addr = (uint8_t)(req->wValue) & 0x7FU;
+ 941              		.loc 1 552 5 view .LVU229
+ARM GAS  /tmp/ccJsntlc.s 			page 34
+
+
+ 552:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         dev_addr = (uint8_t)(req->wValue) & 0x7FU;
+ 942              		.loc 1 552 8 is_stmt 0 view .LVU230
+ 943 0004 8B88     		ldrh	r3, [r1, #4]
+ 944 0006 E3B9     		cbnz	r3, .L69
+ 552:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         dev_addr = (uint8_t)(req->wValue) & 0x7FU;
+ 945              		.loc 1 552 29 discriminator 1 view .LVU231
+ 946 0008 CB88     		ldrh	r3, [r1, #6]
+ 947 000a D3B9     		cbnz	r3, .L69
+ 553:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+ 948              		.loc 1 553 9 is_stmt 1 view .LVU232
+ 949              	.LVL91:
+ 556:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****             usbd_enum_error(pudev, req);
+ 950              		.loc 1 556 9 view .LVU233
+ 556:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****             usbd_enum_error(pudev, req);
+ 951              		.loc 1 556 48 is_stmt 0 view .LVU234
+ 952 000c 437B     		ldrb	r3, [r0, #13]	@ zero_extendqisi2
+ 953 000e DBB2     		uxtb	r3, r3
+ 556:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****             usbd_enum_error(pudev, req);
+ 954              		.loc 1 556 12 view .LVU235
+ 955 0010 032B     		cmp	r3, #3
+ 956 0012 10D0     		beq	.L74
+ 553:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+ 957              		.loc 1 553 20 view .LVU236
+ 958 0014 4D88     		ldrh	r5, [r1, #2]
+ 553:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+ 959              		.loc 1 553 18 view .LVU237
+ 960 0016 05F07F05 		and	r5, r5, #127
+ 560:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+ 961              		.loc 1 560 13 is_stmt 1 view .LVU238
+ 962 001a 4FF0A042 		mov	r2, #1342177280
+ 963 001e D2F80038 		ldr	r3, [r2, #2048]
+ 964 0022 43EA0513 		orr	r3, r3, r5, lsl #4
+ 965 0026 C2F80038 		str	r3, [r2, #2048]
+ 966              	.LVL92:
+ 563:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+ 967              		.loc 1 563 13 view .LVU239
+ 968 002a FFF7FEFF 		bl	usbd_ctlstatus_tx
+ 969              	.LVL93:
+ 565:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                 /* change device status */
+ 970              		.loc 1 565 13 view .LVU240
+ 565:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                 /* change device status */
+ 971              		.loc 1 565 16 is_stmt 0 view .LVU241
+ 972 002e 2DB1     		cbz	r5, .L72
+ 567:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****             } else {
+ 973              		.loc 1 567 17 is_stmt 1 view .LVU242
+ 567:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****             } else {
+ 974              		.loc 1 567 35 is_stmt 0 view .LVU243
+ 975 0030 0223     		movs	r3, #2
+ 976 0032 6373     		strb	r3, [r4, #13]
+ 977 0034 08E0     		b	.L68
+ 978              	.LVL94:
+ 979              	.L74:
+ 557:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         } else {
+ 980              		.loc 1 557 13 is_stmt 1 view .LVU244
+ 981 0036 FFF7FEFF 		bl	usbd_enum_error
+ 982              	.LVL95:
+ 557:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         } else {
+ARM GAS  /tmp/ccJsntlc.s 			page 35
+
+
+ 983              		.loc 1 557 13 is_stmt 0 view .LVU245
+ 984 003a 05E0     		b	.L68
+ 985              	.L72:
+ 569:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****             }
+ 986              		.loc 1 569 17 is_stmt 1 view .LVU246
+ 569:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****             }
+ 987              		.loc 1 569 35 is_stmt 0 view .LVU247
+ 988 003c 0123     		movs	r3, #1
+ 989 003e 6373     		strb	r3, [r4, #13]
+ 990 0040 02E0     		b	.L68
+ 991              	.LVL96:
+ 992              	.L69:
+ 573:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     }
+ 993              		.loc 1 573 9 is_stmt 1 view .LVU248
+ 994 0042 2046     		mov	r0, r4
+ 995              	.LVL97:
+ 573:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     }
+ 996              		.loc 1 573 9 is_stmt 0 view .LVU249
+ 997 0044 FFF7FEFF 		bl	usbd_enum_error
+ 998              	.LVL98:
+ 999              	.L68:
+ 575:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+ 1000              		.loc 1 575 1 view .LVU250
+ 1001 0048 38BD     		pop	{r3, r4, r5, pc}
+ 575:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+ 1002              		.loc 1 575 1 view .LVU251
+ 1003              		.cfi_endproc
+ 1004              	.LFE129:
+ 1006              		.section	.text.usbd_setfeature,"ax",%progbits
+ 1007              		.align	1
+ 1008              		.syntax unified
+ 1009              		.thumb
+ 1010              		.thumb_func
+ 1011              		.fpu fpv4-sp-d16
+ 1013              	usbd_setfeature:
+ 1014              	.LVL99:
+ 1015              	.LFB128:
+ 463:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     uint8_t ep_addr = 0U;
+ 1016              		.loc 1 463 1 is_stmt 1 view -0
+ 1017              		.cfi_startproc
+ 1018              		@ args = 0, pretend = 0, frame = 8
+ 1019              		@ frame_needed = 0, uses_anonymous_args = 0
+ 463:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     uint8_t ep_addr = 0U;
+ 1020              		.loc 1 463 1 is_stmt 0 view .LVU253
+ 1021 0000 10B5     		push	{r4, lr}
+ 1022              		.cfi_def_cfa_offset 8
+ 1023              		.cfi_offset 4, -8
+ 1024              		.cfi_offset 14, -4
+ 1025 0002 82B0     		sub	sp, sp, #8
+ 1026              		.cfi_def_cfa_offset 16
+ 1027 0004 0446     		mov	r4, r0
+ 464:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     __IO uint32_t DctlrStatus;
+ 1028              		.loc 1 464 5 is_stmt 1 view .LVU254
+ 1029              	.LVL100:
+ 465:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+ 1030              		.loc 1 465 5 view .LVU255
+ 468:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     case USB_REQTYPE_DEVICE:
+ARM GAS  /tmp/ccJsntlc.s 			page 36
+
+
+ 1031              		.loc 1 468 5 view .LVU256
+ 1032 0006 0B78     		ldrb	r3, [r1]	@ zero_extendqisi2
+ 1033 0008 13F0600F 		tst	r3, #96
+ 1034 000c 03D0     		beq	.L80
+ 536:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         break;
+ 1035              		.loc 1 536 9 view .LVU257
+ 1036 000e FFF7FEFF 		bl	usbd_enum_error
+ 1037              	.LVL101:
+ 537:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     }
+ 1038              		.loc 1 537 9 view .LVU258
+ 1039              	.L75:
+ 539:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+ 1040              		.loc 1 539 1 is_stmt 0 view .LVU259
+ 1041 0012 02B0     		add	sp, sp, #8
+ 1042              		.cfi_remember_state
+ 1043              		.cfi_def_cfa_offset 8
+ 1044              		@ sp needed
+ 1045 0014 10BD     		pop	{r4, pc}
+ 1046              	.LVL102:
+ 1047              	.L80:
+ 1048              		.cfi_restore_state
+ 470:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         case USB_STATUS_ADDRESSED:
+ 1049              		.loc 1 470 9 is_stmt 1 view .LVU260
+ 470:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         case USB_STATUS_ADDRESSED:
+ 1050              		.loc 1 470 27 is_stmt 0 view .LVU261
+ 1051 0016 437B     		ldrb	r3, [r0, #13]	@ zero_extendqisi2
+ 1052 0018 023B     		subs	r3, r3, #2
+ 1053 001a 012B     		cmp	r3, #1
+ 1054 001c F9D8     		bhi	.L75
+ 473:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                 /* set the remote_wakeup variable */
+ 1055              		.loc 1 473 13 is_stmt 1 view .LVU262
+ 473:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                 /* set the remote_wakeup variable */
+ 1056              		.loc 1 473 49 is_stmt 0 view .LVU263
+ 1057 001e 4B88     		ldrh	r3, [r1, #2]
+ 473:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                 /* set the remote_wakeup variable */
+ 1058              		.loc 1 473 16 view .LVU264
+ 1059 0020 012B     		cmp	r3, #1
+ 1060 0022 0CD0     		beq	.L81
+ 480:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                         (0U == (req->wIndex & 0xFFU))) {
+ 1061              		.loc 1 480 20 is_stmt 1 view .LVU265
+ 480:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                         (0U == (req->wIndex & 0xFFU))) {
+ 1062              		.loc 1 480 23 is_stmt 0 view .LVU266
+ 1063 0024 022B     		cmp	r3, #2
+ 1064 0026 F4D1     		bne	.L75
+ 480:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                         (0U == (req->wIndex & 0xFFU))) {
+ 1065              		.loc 1 480 63 discriminator 1 view .LVU267
+ 1066 0028 0B79     		ldrb	r3, [r1, #4]	@ zero_extendqisi2
+ 1067 002a 002B     		cmp	r3, #0
+ 1068 002c F1D1     		bne	.L75
+ 482:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+ 1069              		.loc 1 482 17 is_stmt 1 view .LVU268
+ 482:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+ 1070              		.loc 1 482 31 is_stmt 0 view .LVU269
+ 1071 002e 4FF0A043 		mov	r3, #1342177280
+ 1072 0032 D3F80438 		ldr	r3, [r3, #2052]
+ 482:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+ 1073              		.loc 1 482 29 view .LVU270
+ARM GAS  /tmp/ccJsntlc.s 			page 37
+
+
+ 1074 0036 0193     		str	r3, [sp, #4]
+ 485:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****             } else {
+ 1075              		.loc 1 485 17 is_stmt 1 view .LVU271
+ 1076 0038 FFF7FEFF 		bl	usbd_ctlstatus_tx
+ 1077              	.LVL103:
+ 485:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****             } else {
+ 1078              		.loc 1 485 17 is_stmt 0 view .LVU272
+ 1079 003c E9E7     		b	.L75
+ 1080              	.LVL104:
+ 1081              	.L81:
+ 475:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                 /* call the request function of device class */
+ 1082              		.loc 1 475 17 is_stmt 1 view .LVU273
+ 475:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                 /* call the request function of device class */
+ 1083              		.loc 1 475 42 is_stmt 0 view .LVU274
+ 1084 003e 4361     		str	r3, [r0, #20]
+ 477:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+ 1085              		.loc 1 477 17 is_stmt 1 view .LVU275
+ 1086 0040 D0F8F030 		ldr	r3, [r0, #240]
+ 1087 0044 9847     		blx	r3
+ 1088              	.LVL105:
+ 479:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****             } else if ((req->wValue == USB_FEATURE_TEST_MODE) && 
+ 1089              		.loc 1 479 17 view .LVU276
+ 1090 0046 2046     		mov	r0, r4
+ 1091 0048 FFF7FEFF 		bl	usbd_ctlstatus_tx
+ 1092              	.LVL106:
+ 1093 004c E1E7     		b	.L75
+ 1094              		.cfi_endproc
+ 1095              	.LFE128:
+ 1097              		.section	.text.usbd_clrfeature,"ax",%progbits
+ 1098              		.align	1
+ 1099              		.syntax unified
+ 1100              		.thumb
+ 1101              		.thumb_func
+ 1102              		.fpu fpv4-sp-d16
+ 1104              	usbd_clrfeature:
+ 1105              	.LVL107:
+ 1106              	.LFB127:
+ 383:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     uint8_t ep_addr = 0U;
+ 1107              		.loc 1 383 1 view -0
+ 1108              		.cfi_startproc
+ 1109              		@ args = 0, pretend = 0, frame = 0
+ 1110              		@ frame_needed = 0, uses_anonymous_args = 0
+ 383:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     uint8_t ep_addr = 0U;
+ 1111              		.loc 1 383 1 is_stmt 0 view .LVU278
+ 1112 0000 38B5     		push	{r3, r4, r5, lr}
+ 1113              		.cfi_def_cfa_offset 16
+ 1114              		.cfi_offset 3, -16
+ 1115              		.cfi_offset 4, -12
+ 1116              		.cfi_offset 5, -8
+ 1117              		.cfi_offset 14, -4
+ 1118 0002 0546     		mov	r5, r0
+ 1119 0004 0C46     		mov	r4, r1
+ 384:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+ 1120              		.loc 1 384 5 is_stmt 1 view .LVU279
+ 1121              	.LVL108:
+ 387:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     case USB_REQTYPE_DEVICE:
+ 1122              		.loc 1 387 5 view .LVU280
+ARM GAS  /tmp/ccJsntlc.s 			page 38
+
+
+ 1123 0006 0B78     		ldrb	r3, [r1]	@ zero_extendqisi2
+ 1124 0008 03F00303 		and	r3, r3, #3
+ 1125 000c 012B     		cmp	r3, #1
+ 1126 000e 18D0     		beq	.L83
+ 1127 0010 022B     		cmp	r3, #2
+ 1128 0012 25D0     		beq	.L84
+ 1129 0014 13B1     		cbz	r3, .L94
+ 450:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         break;
+ 1130              		.loc 1 450 9 view .LVU281
+ 1131 0016 FFF7FEFF 		bl	usbd_enum_error
+ 1132              	.LVL109:
+ 451:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     }
+ 1133              		.loc 1 451 9 view .LVU282
+ 1134              	.L82:
+ 453:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+ 1135              		.loc 1 453 1 is_stmt 0 view .LVU283
+ 1136 001a 38BD     		pop	{r3, r4, r5, pc}
+ 1137              	.LVL110:
+ 1138              	.L94:
+ 389:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         case USB_STATUS_ADDRESSED:
+ 1139              		.loc 1 389 9 is_stmt 1 view .LVU284
+ 389:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         case USB_STATUS_ADDRESSED:
+ 1140              		.loc 1 389 27 is_stmt 0 view .LVU285
+ 1141 001c 437B     		ldrb	r3, [r0, #13]	@ zero_extendqisi2
+ 1142 001e 023B     		subs	r3, r3, #2
+ 1143 0020 012B     		cmp	r3, #1
+ 1144 0022 0BD8     		bhi	.L86
+ 392:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                 pudev->dev.remote_wakeup = 0U;
+ 1145              		.loc 1 392 13 is_stmt 1 view .LVU286
+ 392:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                 pudev->dev.remote_wakeup = 0U;
+ 1146              		.loc 1 392 16 is_stmt 0 view .LVU287
+ 1147 0024 4B88     		ldrh	r3, [r1, #2]
+ 1148 0026 012B     		cmp	r3, #1
+ 1149 0028 F7D1     		bne	.L82
+ 393:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                 pudev->dev.class_req_handler(pudev, req);
+ 1150              		.loc 1 393 17 is_stmt 1 view .LVU288
+ 393:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                 pudev->dev.class_req_handler(pudev, req);
+ 1151              		.loc 1 393 42 is_stmt 0 view .LVU289
+ 1152 002a 0023     		movs	r3, #0
+ 1153 002c 4361     		str	r3, [r0, #20]
+ 394:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+ 1154              		.loc 1 394 17 is_stmt 1 view .LVU290
+ 1155 002e D0F8F030 		ldr	r3, [r0, #240]
+ 1156 0032 9847     		blx	r3
+ 1157              	.LVL111:
+ 397:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****             }
+ 1158              		.loc 1 397 17 view .LVU291
+ 1159 0034 2846     		mov	r0, r5
+ 1160 0036 FFF7FEFF 		bl	usbd_ctlstatus_tx
+ 1161              	.LVL112:
+ 1162 003a EEE7     		b	.L82
+ 1163              	.LVL113:
+ 1164              	.L86:
+ 402:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****             break;
+ 1165              		.loc 1 402 13 view .LVU292
+ 1166 003c FFF7FEFF 		bl	usbd_enum_error
+ 1167              	.LVL114:
+ARM GAS  /tmp/ccJsntlc.s 			page 39
+
+
+ 403:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         }
+ 1168              		.loc 1 403 13 view .LVU293
+ 1169 0040 EBE7     		b	.L82
+ 1170              	.LVL115:
+ 1171              	.L83:
+ 407:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         case USB_STATUS_ADDRESSED:
+ 1172              		.loc 1 407 9 view .LVU294
+ 407:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         case USB_STATUS_ADDRESSED:
+ 1173              		.loc 1 407 27 is_stmt 0 view .LVU295
+ 1174 0042 437B     		ldrb	r3, [r0, #13]	@ zero_extendqisi2
+ 1175 0044 DBB2     		uxtb	r3, r3
+ 1176 0046 022B     		cmp	r3, #2
+ 1177 0048 07D0     		beq	.L88
+ 1178 004a 032B     		cmp	r3, #3
+ 1179 004c E5D1     		bne	.L82
+ 412:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                 /* no operation */
+ 1180              		.loc 1 412 13 is_stmt 1 view .LVU296
+ 412:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                 /* no operation */
+ 1181              		.loc 1 412 16 is_stmt 0 view .LVU297
+ 1182 004e 0B79     		ldrb	r3, [r1, #4]	@ zero_extendqisi2
+ 1183 0050 012B     		cmp	r3, #1
+ 1184 0052 E2D9     		bls	.L82
+ 415:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****             }
+ 1185              		.loc 1 415 17 is_stmt 1 view .LVU298
+ 1186 0054 FFF7FEFF 		bl	usbd_enum_error
+ 1187              	.LVL116:
+ 415:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****             }
+ 1188              		.loc 1 415 17 is_stmt 0 view .LVU299
+ 1189 0058 DFE7     		b	.L82
+ 1190              	.LVL117:
+ 1191              	.L88:
+ 409:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****             break;
+ 1192              		.loc 1 409 13 is_stmt 1 view .LVU300
+ 1193 005a FFF7FEFF 		bl	usbd_enum_error
+ 1194              	.LVL118:
+ 410:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         case USB_STATUS_CONFIGURED:
+ 1195              		.loc 1 410 13 view .LVU301
+ 1196 005e DCE7     		b	.L82
+ 1197              	.LVL119:
+ 1198              	.L84:
+ 423:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+ 1199              		.loc 1 423 9 view .LVU302
+ 423:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+ 1200              		.loc 1 423 17 is_stmt 0 view .LVU303
+ 1201 0060 0979     		ldrb	r1, [r1, #4]	@ zero_extendqisi2
+ 1202              	.LVL120:
+ 425:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         case USB_STATUS_ADDRESSED:
+ 1203              		.loc 1 425 9 is_stmt 1 view .LVU304
+ 425:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         case USB_STATUS_ADDRESSED:
+ 1204              		.loc 1 425 27 is_stmt 0 view .LVU305
+ 1205 0062 437B     		ldrb	r3, [r0, #13]	@ zero_extendqisi2
+ 1206 0064 DBB2     		uxtb	r3, r3
+ 1207 0066 022B     		cmp	r3, #2
+ 1208 0068 11D0     		beq	.L90
+ 1209 006a 032B     		cmp	r3, #3
+ 1210 006c D5D1     		bne	.L82
+ 433:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                 if (IS_NOT_EP0(ep_addr)) {
+ARM GAS  /tmp/ccJsntlc.s 			page 40
+
+
+ 1211              		.loc 1 433 13 is_stmt 1 view .LVU306
+ 433:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                 if (IS_NOT_EP0(ep_addr)) {
+ 1212              		.loc 1 433 16 is_stmt 0 view .LVU307
+ 1213 006e 6388     		ldrh	r3, [r4, #2]
+ 1214 0070 4BB9     		cbnz	r3, .L92
+ 434:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                     /* clear the stall status */
+ 1215              		.loc 1 434 17 is_stmt 1 view .LVU308
+ 434:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                     /* clear the stall status */
+ 1216              		.loc 1 434 20 is_stmt 0 view .LVU309
+ 1217 0072 11F07F0F 		tst	r1, #127
+ 1218 0076 06D0     		beq	.L92
+ 436:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+ 1219              		.loc 1 436 21 is_stmt 1 view .LVU310
+ 1220 0078 FFF7FEFF 		bl	usbd_ep_clear_stall
+ 1221              	.LVL121:
+ 439:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                 }
+ 1222              		.loc 1 439 21 view .LVU311
+ 1223 007c D5F8F030 		ldr	r3, [r5, #240]
+ 1224 0080 2146     		mov	r1, r4
+ 1225 0082 2846     		mov	r0, r5
+ 1226 0084 9847     		blx	r3
+ 1227              	.LVL122:
+ 1228              	.L92:
+ 443:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****             break;
+ 1229              		.loc 1 443 13 view .LVU312
+ 1230 0086 2846     		mov	r0, r5
+ 1231 0088 FFF7FEFF 		bl	usbd_ctlstatus_tx
+ 1232              	.LVL123:
+ 444:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         default:
+ 1233              		.loc 1 444 13 view .LVU313
+ 1234 008c C5E7     		b	.L82
+ 1235              	.LVL124:
+ 1236              	.L90:
+ 427:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                 /* set the stall status */
+ 1237              		.loc 1 427 13 view .LVU314
+ 427:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                 /* set the stall status */
+ 1238              		.loc 1 427 16 is_stmt 0 view .LVU315
+ 1239 008e 11F07F0F 		tst	r1, #127
+ 1240 0092 C2D0     		beq	.L82
+ 429:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****             }
+ 1241              		.loc 1 429 17 is_stmt 1 view .LVU316
+ 1242 0094 FFF7FEFF 		bl	usbd_ep_stall
+ 1243              	.LVL125:
+ 429:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****             }
+ 1244              		.loc 1 429 17 is_stmt 0 view .LVU317
+ 1245 0098 BFE7     		b	.L82
+ 1246              		.cfi_endproc
+ 1247              	.LFE127:
+ 1249              		.section	.text.usbd_setup_transaction,"ax",%progbits
+ 1250              		.align	1
+ 1251              		.global	usbd_setup_transaction
+ 1252              		.syntax unified
+ 1253              		.thumb
+ 1254              		.thumb_func
+ 1255              		.fpu fpv4-sp-d16
+ 1257              	usbd_setup_transaction:
+ 1258              	.LVL126:
+ARM GAS  /tmp/ccJsntlc.s 			page 41
+
+
+ 1259              	.LFB116:
+ 102:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     usb_device_req_struct req;
+ 1260              		.loc 1 102 1 is_stmt 1 view -0
+ 1261              		.cfi_startproc
+ 1262              		@ args = 0, pretend = 0, frame = 8
+ 1263              		@ frame_needed = 0, uses_anonymous_args = 0
+ 102:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     usb_device_req_struct req;
+ 1264              		.loc 1 102 1 is_stmt 0 view .LVU319
+ 1265 0000 10B5     		push	{r4, lr}
+ 1266              		.cfi_def_cfa_offset 8
+ 1267              		.cfi_offset 4, -8
+ 1268              		.cfi_offset 14, -4
+ 1269 0002 82B0     		sub	sp, sp, #8
+ 1270              		.cfi_def_cfa_offset 16
+ 1271 0004 0446     		mov	r4, r0
+ 103:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+ 1272              		.loc 1 103 5 is_stmt 1 view .LVU320
+ 105:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+ 1273              		.loc 1 105 5 view .LVU321
+ 1274              	.LVL127:
+ 1275              	.LBB11:
+ 1276              	.LBI11:
+ 759:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** {
+ 1277              		.loc 1 759 13 view .LVU322
+ 1278              	.LBB12:
+ 761:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+ 1279              		.loc 1 761 5 view .LVU323
+ 764:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     req->bRequest      = *(uint8_t *)(psetup + 1U);
+ 1280              		.loc 1 764 5 view .LVU324
+ 764:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     req->bRequest      = *(uint8_t *)(psetup + 1U);
+ 1281              		.loc 1 764 26 is_stmt 0 view .LVU325
+ 1282 0006 90F82410 		ldrb	r1, [r0, #36]	@ zero_extendqisi2
+ 764:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     req->bRequest      = *(uint8_t *)(psetup + 1U);
+ 1283              		.loc 1 764 24 view .LVU326
+ 1284 000a 8DF80010 		strb	r1, [sp]
+ 765:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     req->wValue        = SWAPBYTE (psetup + 2U);
+ 1285              		.loc 1 765 5 is_stmt 1 view .LVU327
+ 765:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     req->wValue        = SWAPBYTE (psetup + 2U);
+ 1286              		.loc 1 765 24 is_stmt 0 view .LVU328
+ 1287 000e 90F82500 		ldrb	r0, [r0, #37]	@ zero_extendqisi2
+ 1288              	.LVL128:
+ 765:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     req->wValue        = SWAPBYTE (psetup + 2U);
+ 1289              		.loc 1 765 24 view .LVU329
+ 1290 0012 8DF80100 		strb	r0, [sp, #1]
+ 766:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     req->wIndex        = SWAPBYTE (psetup + 4U);
+ 1291              		.loc 1 766 5 is_stmt 1 view .LVU330
+ 766:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     req->wIndex        = SWAPBYTE (psetup + 4U);
+ 1292              		.loc 1 766 26 is_stmt 0 view .LVU331
+ 1293 0016 94F82720 		ldrb	r2, [r4, #39]	@ zero_extendqisi2
+ 1294 001a 94F82630 		ldrb	r3, [r4, #38]	@ zero_extendqisi2
+ 1295 001e 03EB0223 		add	r3, r3, r2, lsl #8
+ 766:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     req->wIndex        = SWAPBYTE (psetup + 4U);
+ 1296              		.loc 1 766 24 view .LVU332
+ 1297 0022 ADF80230 		strh	r3, [sp, #2]	@ movhi
+ 767:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     req->wLength       = SWAPBYTE (psetup + 6U);
+ 1298              		.loc 1 767 5 is_stmt 1 view .LVU333
+ 767:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     req->wLength       = SWAPBYTE (psetup + 6U);
+ARM GAS  /tmp/ccJsntlc.s 			page 42
+
+
+ 1299              		.loc 1 767 26 is_stmt 0 view .LVU334
+ 1300 0026 94F82930 		ldrb	r3, [r4, #41]	@ zero_extendqisi2
+ 1301 002a 94F82820 		ldrb	r2, [r4, #40]	@ zero_extendqisi2
+ 1302 002e 02EB0322 		add	r2, r2, r3, lsl #8
+ 1303 0032 92B2     		uxth	r2, r2
+ 767:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     req->wLength       = SWAPBYTE (psetup + 6U);
+ 1304              		.loc 1 767 24 view .LVU335
+ 1305 0034 ADF80420 		strh	r2, [sp, #4]	@ movhi
+ 768:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+ 1306              		.loc 1 768 5 is_stmt 1 view .LVU336
+ 768:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+ 1307              		.loc 1 768 26 is_stmt 0 view .LVU337
+ 1308 0038 94F82BC0 		ldrb	ip, [r4, #43]	@ zero_extendqisi2
+ 1309 003c 94F82A30 		ldrb	r3, [r4, #42]	@ zero_extendqisi2
+ 1310 0040 03EB0C23 		add	r3, r3, ip, lsl #8
+ 1311 0044 9BB2     		uxth	r3, r3
+ 768:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+ 1312              		.loc 1 768 24 view .LVU338
+ 1313 0046 ADF80630 		strh	r3, [sp, #6]	@ movhi
+ 770:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** }
+ 1314              		.loc 1 770 5 is_stmt 1 view .LVU339
+ 770:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** }
+ 1315              		.loc 1 770 29 is_stmt 0 view .LVU340
+ 1316 004a 2362     		str	r3, [r4, #32]
+ 1317              	.LVL129:
+ 770:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** }
+ 1318              		.loc 1 770 29 view .LVU341
+ 1319              	.LBE12:
+ 1320              	.LBE11:
+ 107:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     /* standard device request */
+ 1321              		.loc 1 107 5 is_stmt 1 view .LVU342
+ 1322 004c 01F06003 		and	r3, r1, #96
+ 1323 0050 202B     		cmp	r3, #32
+ 1324 0052 11D0     		beq	.L96
+ 1325 0054 402B     		cmp	r3, #64
+ 1326 0056 0CD0     		beq	.L97
+ 1327 0058 2BB1     		cbz	r3, .L102
+ 121:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         break;
+ 1328              		.loc 1 121 9 view .LVU343
+ 1329 005a 01F08001 		and	r1, r1, #128
+ 1330 005e 2046     		mov	r0, r4
+ 1331 0060 FFF7FEFF 		bl	usbd_ep_stall
+ 1332              	.LVL130:
+ 122:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     }
+ 1333              		.loc 1 122 9 view .LVU344
+ 1334 0064 05E0     		b	.L97
+ 1335              	.L102:
+ 110:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         break;
+ 1336              		.loc 1 110 9 view .LVU345
+ 1337              	.LVL131:
+ 1338              	.LBB13:
+ 1339              	.LBI13:
+ 239:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** {
+ 1340              		.loc 1 239 26 view .LVU346
+ 1341              	.LBB14:
+ 242:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+ 1342              		.loc 1 242 5 view .LVU347
+ARM GAS  /tmp/ccJsntlc.s 			page 43
+
+
+ 242:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+ 1343              		.loc 1 242 6 is_stmt 0 view .LVU348
+ 1344 0066 144B     		ldr	r3, .L103
+ 1345 0068 53F82030 		ldr	r3, [r3, r0, lsl #2]
+ 1346 006c 6946     		mov	r1, sp
+ 1347 006e 2046     		mov	r0, r4
+ 1348 0070 9847     		blx	r3
+ 1349              	.LVL132:
+ 244:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** }
+ 1350              		.loc 1 244 5 is_stmt 1 view .LVU349
+ 1351              	.L97:
+ 244:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** }
+ 1352              		.loc 1 244 5 is_stmt 0 view .LVU350
+ 1353              	.LBE14:
+ 1354              	.LBE13:
+ 125:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** }
+ 1355              		.loc 1 125 5 is_stmt 1 view .LVU351
+ 126:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+ 1356              		.loc 1 126 1 is_stmt 0 view .LVU352
+ 1357 0072 0020     		movs	r0, #0
+ 1358 0074 02B0     		add	sp, sp, #8
+ 1359              		.cfi_remember_state
+ 1360              		.cfi_def_cfa_offset 8
+ 1361              		@ sp needed
+ 1362 0076 10BD     		pop	{r4, pc}
+ 1363              	.LVL133:
+ 1364              	.L96:
+ 1365              		.cfi_restore_state
+ 114:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         break;
+ 1366              		.loc 1 114 9 is_stmt 1 view .LVU353
+ 1367              	.LBB15:
+ 1368              	.LBI15:
+ 257:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** {
+ 1369              		.loc 1 257 25 view .LVU354
+ 1370              	.LBB16:
+ 259:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+ 1371              		.loc 1 259 5 view .LVU355
+ 262:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     case USB_STATUS_CONFIGURED:
+ 1372              		.loc 1 262 5 view .LVU356
+ 262:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     case USB_STATUS_CONFIGURED:
+ 1373              		.loc 1 262 23 is_stmt 0 view .LVU357
+ 1374 0078 637B     		ldrb	r3, [r4, #13]	@ zero_extendqisi2
+ 1375 007a DBB2     		uxtb	r3, r3
+ 262:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     case USB_STATUS_CONFIGURED:
+ 1376              		.loc 1 262 5 view .LVU358
+ 1377 007c 032B     		cmp	r3, #3
+ 1378 007e 16D1     		bne	.L99
+ 264:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****             ret = (usbd_status_enum)(pudev->dev.class_req_handler(pudev, req));
+ 1379              		.loc 1 264 9 is_stmt 1 view .LVU359
+ 264:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****             ret = (usbd_status_enum)(pudev->dev.class_req_handler(pudev, req));
+ 1380              		.loc 1 264 12 is_stmt 0 view .LVU360
+ 1381 0080 D2B2     		uxtb	r2, r2
+ 1382 0082 012A     		cmp	r2, #1
+ 1383 0084 0ED8     		bhi	.L100
+ 265:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+ 1384              		.loc 1 265 13 is_stmt 1 view .LVU361
+ 265:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c **** 
+ARM GAS  /tmp/ccJsntlc.s 			page 44
+
+
+ 1385              		.loc 1 265 38 is_stmt 0 view .LVU362
+ 1386 0086 D4F8F030 		ldr	r3, [r4, #240]
+ 1387 008a 6946     		mov	r1, sp
+ 1388 008c 2046     		mov	r0, r4
+ 1389 008e 9847     		blx	r3
+ 1390              	.LVL134:
+ 268:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                 /* no data stage */
+ 1391              		.loc 1 268 13 is_stmt 1 view .LVU363
+ 268:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                 /* no data stage */
+ 1392              		.loc 1 268 16 is_stmt 0 view .LVU364
+ 1393 0090 BDF80630 		ldrh	r3, [sp, #6]
+ 1394 0094 002B     		cmp	r3, #0
+ 1395 0096 ECD1     		bne	.L97
+ 268:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****                 /* no data stage */
+ 1396              		.loc 1 268 38 view .LVU365
+ 1397 0098 0028     		cmp	r0, #0
+ 1398 009a EAD1     		bne	.L97
+ 270:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****             }
+ 1399              		.loc 1 270 17 is_stmt 1 view .LVU366
+ 1400 009c 2046     		mov	r0, r4
+ 1401              	.LVL135:
+ 270:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****             }
+ 1402              		.loc 1 270 17 is_stmt 0 view .LVU367
+ 1403 009e FFF7FEFF 		bl	usbd_ctlstatus_tx
+ 1404              	.LVL136:
+ 1405 00a2 E6E7     		b	.L97
+ 1406              	.LVL137:
+ 1407              	.L100:
+ 273:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         }
+ 1408              		.loc 1 273 13 is_stmt 1 view .LVU368
+ 1409 00a4 6946     		mov	r1, sp
+ 1410 00a6 2046     		mov	r0, r4
+ 1411 00a8 FFF7FEFF 		bl	usbd_enum_error
+ 1412              	.LVL138:
+ 1413 00ac E1E7     		b	.L97
+ 1414              	.L99:
+ 278:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****         break;
+ 1415              		.loc 1 278 9 view .LVU369
+ 1416 00ae 6946     		mov	r1, sp
+ 1417 00b0 2046     		mov	r0, r4
+ 1418 00b2 FFF7FEFF 		bl	usbd_enum_error
+ 1419              	.LVL139:
+ 279:../../../../Firmware/GD32E10x_usbfs_driver/Source/usbd_std.c ****     }
+ 1420              		.loc 1 279 9 view .LVU370
+ 1421 00b6 DCE7     		b	.L97
+ 1422              	.L104:
+ 1423              		.align	2
+ 1424              	.L103:
+ 1425 00b8 00000000 		.word	.LANCHOR2
+ 1426              	.LBE16:
+ 1427              	.LBE15:
+ 1428              		.cfi_endproc
+ 1429              	.LFE116:
+ 1431              		.section	.bss.cfgidx.0,"aw",%nobits
+ 1432              		.set	.LANCHOR0,. + 0
+ 1435              	cfgidx.0:
+ 1436 0000 00       		.space	1
+ARM GAS  /tmp/ccJsntlc.s 			page 45
+
+
+ 1437              		.section	.rodata.StandardDeviceRequest,"a"
+ 1438              		.align	2
+ 1439              		.set	.LANCHOR2,. + 0
+ 1442              	StandardDeviceRequest:
+ 1443 0000 00000000 		.word	usbd_getstatus
+ 1444 0004 00000000 		.word	usbd_clrfeature
+ 1445 0008 00000000 		.word	usbd_reserved
+ 1446 000c 00000000 		.word	usbd_setfeature
+ 1447 0010 00000000 		.word	usbd_reserved
+ 1448 0014 00000000 		.word	usbd_setaddress
+ 1449 0018 00000000 		.word	usbd_getdescriptor
+ 1450 001c 00000000 		.word	usbd_setdescriptor
+ 1451 0020 00000000 		.word	usbd_getconfig
+ 1452 0024 00000000 		.word	usbd_setconfig
+ 1453 0028 00000000 		.word	usbd_getinterface
+ 1454 002c 00000000 		.word	usbd_setinterface
+ 1455 0030 00000000 		.word	usbd_synchframe
+ 1456              		.section	.rodata.standard_descriptor_get,"a"
+ 1457              		.align	2
+ 1458              		.set	.LANCHOR1,. + 0
+ 1461              	standard_descriptor_get:
+ 1462 0000 00000000 		.word	usbd_device_descriptor_get
+ 1463 0004 00000000 		.word	usbd_configuration_descriptor_get
+ 1464 0008 00000000 		.word	usbd_string_descriptor_get
+ 1465              		.text
+ 1466              	.Letext0:
+ 1467              		.file 2 "/usr/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h"
+ 1468              		.file 3 "../../../../Firmware/GD32E10x_usbfs_driver/Include/usb_core.h"
+ 1469              		.file 4 "../../../../Firmware/GD32E10x_usbfs_driver/Include/usbd_core.h"
+ARM GAS  /tmp/ccJsntlc.s 			page 46
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 usbd_std.c
+     /tmp/ccJsntlc.s:18     .text.usbd_reserved:0000000000000000 $t
+     /tmp/ccJsntlc.s:25     .text.usbd_reserved:0000000000000000 usbd_reserved
+     /tmp/ccJsntlc.s:40     .text.usbd_device_descriptor_get:0000000000000000 $t
+     /tmp/ccJsntlc.s:46     .text.usbd_device_descriptor_get:0000000000000000 usbd_device_descriptor_get
+     /tmp/ccJsntlc.s:69     .text.usbd_configuration_descriptor_get:0000000000000000 $t
+     /tmp/ccJsntlc.s:75     .text.usbd_configuration_descriptor_get:0000000000000000 usbd_configuration_descriptor_get
+     /tmp/ccJsntlc.s:98     .text.usbd_string_descriptor_get:0000000000000000 $t
+     /tmp/ccJsntlc.s:104    .text.usbd_string_descriptor_get:0000000000000000 usbd_string_descriptor_get
+     /tmp/ccJsntlc.s:129    .text.usbd_getstatus:0000000000000000 $t
+     /tmp/ccJsntlc.s:135    .text.usbd_getstatus:0000000000000000 usbd_getstatus
+     /tmp/ccJsntlc.s:149    .text.usbd_setdescriptor:0000000000000000 $t
+     /tmp/ccJsntlc.s:155    .text.usbd_setdescriptor:0000000000000000 usbd_setdescriptor
+     /tmp/ccJsntlc.s:169    .text.usbd_getinterface:0000000000000000 $t
+     /tmp/ccJsntlc.s:175    .text.usbd_getinterface:0000000000000000 usbd_getinterface
+     /tmp/ccJsntlc.s:197    .text.usbd_setinterface:0000000000000000 $t
+     /tmp/ccJsntlc.s:203    .text.usbd_setinterface:0000000000000000 usbd_setinterface
+     /tmp/ccJsntlc.s:225    .text.usbd_synchframe:0000000000000000 $t
+     /tmp/ccJsntlc.s:231    .text.usbd_synchframe:0000000000000000 usbd_synchframe
+     /tmp/ccJsntlc.s:245    .text.usbd_out_transaction:0000000000000000 $t
+     /tmp/ccJsntlc.s:252    .text.usbd_out_transaction:0000000000000000 usbd_out_transaction
+     /tmp/ccJsntlc.s:359    .text.usbd_in_transaction:0000000000000000 $t
+     /tmp/ccJsntlc.s:366    .text.usbd_in_transaction:0000000000000000 usbd_in_transaction
+     /tmp/ccJsntlc.s:512    .text.usbd_enum_error:0000000000000000 $t
+     /tmp/ccJsntlc.s:519    .text.usbd_enum_error:0000000000000000 usbd_enum_error
+     /tmp/ccJsntlc.s:554    .text.usbd_setconfig:0000000000000000 $t
+     /tmp/ccJsntlc.s:560    .text.usbd_setconfig:0000000000000000 usbd_setconfig
+     /tmp/ccJsntlc.s:687    .text.usbd_setconfig:0000000000000074 $d
+     /tmp/ccJsntlc.s:692    .text.usbd_getconfig:0000000000000000 $t
+     /tmp/ccJsntlc.s:698    .text.usbd_getconfig:0000000000000000 usbd_getconfig
+     /tmp/ccJsntlc.s:774    .text.usbd_getdescriptor:0000000000000000 $t
+     /tmp/ccJsntlc.s:780    .text.usbd_getdescriptor:0000000000000000 usbd_getdescriptor
+     /tmp/ccJsntlc.s:914    .text.usbd_getdescriptor:0000000000000078 $d
+     /tmp/ccJsntlc.s:919    .text.usbd_setaddress:0000000000000000 $t
+     /tmp/ccJsntlc.s:925    .text.usbd_setaddress:0000000000000000 usbd_setaddress
+     /tmp/ccJsntlc.s:1007   .text.usbd_setfeature:0000000000000000 $t
+     /tmp/ccJsntlc.s:1013   .text.usbd_setfeature:0000000000000000 usbd_setfeature
+     /tmp/ccJsntlc.s:1098   .text.usbd_clrfeature:0000000000000000 $t
+     /tmp/ccJsntlc.s:1104   .text.usbd_clrfeature:0000000000000000 usbd_clrfeature
+     /tmp/ccJsntlc.s:1250   .text.usbd_setup_transaction:0000000000000000 $t
+     /tmp/ccJsntlc.s:1257   .text.usbd_setup_transaction:0000000000000000 usbd_setup_transaction
+     /tmp/ccJsntlc.s:1425   .text.usbd_setup_transaction:00000000000000b8 $d
+     /tmp/ccJsntlc.s:1435   .bss.cfgidx.0:0000000000000000 cfgidx.0
+     /tmp/ccJsntlc.s:1436   .bss.cfgidx.0:0000000000000000 $d
+     /tmp/ccJsntlc.s:1438   .rodata.StandardDeviceRequest:0000000000000000 $d
+     /tmp/ccJsntlc.s:1442   .rodata.StandardDeviceRequest:0000000000000000 StandardDeviceRequest
+     /tmp/ccJsntlc.s:1457   .rodata.standard_descriptor_get:0000000000000000 $d
+     /tmp/ccJsntlc.s:1461   .rodata.standard_descriptor_get:0000000000000000 standard_descriptor_get
+
+UNDEFINED SYMBOLS
+usbd_ep_rx
+usbd_ctlstatus_tx
+usbd_ctlstatus_rx
+usbd_ep_tx
+usbd_ep_stall
+usb_ep0_startout
+ARM GAS  /tmp/ccJsntlc.s 			page 47
+
+
+usbd_ctltx
+usbd_ep_clear_stall

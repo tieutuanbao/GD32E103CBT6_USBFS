@@ -1,0 +1,480 @@
+ARM GAS  /tmp/ccqRGOTh.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.eabi_attribute 27, 1
+   3              		.eabi_attribute 28, 1
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.file	"gd32e10x_wwdgt.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.section	.text.wwdgt_deinit,"ax",%progbits
+  18              		.align	1
+  19              		.global	wwdgt_deinit
+  20              		.arch armv7e-m
+  21              		.syntax unified
+  22              		.thumb
+  23              		.thumb_func
+  24              		.fpu fpv4-sp-d16
+  26              	wwdgt_deinit:
+  27              	.LFB116:
+  28              		.file 1 "../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c"
+   1:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c **** /*!
+   2:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c ****     \file  gd32e10x_wwdgt.c
+   3:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c ****     \brief WWDGT driver
+   4:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c ****         
+   5:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c ****     \version 2017-12-26, V1.0.0, firmware for GD32E10x
+   6:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c **** */
+   7:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c **** 
+   8:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c **** /*
+   9:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c ****     Copyright (c) 2017, GigaDevice Semiconductor Inc.
+  10:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c **** 
+  11:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c ****     All rights reserved.
+  12:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c **** 
+  13:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c ****     Redistribution and use in source and binary forms, with or without modification, 
+  14:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c **** are permitted provided that the following conditions are met:
+  15:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c **** 
+  16:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c ****     1. Redistributions of source code must retain the above copyright notice, this 
+  17:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c ****        list of conditions and the following disclaimer.
+  18:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c ****     2. Redistributions in binary form must reproduce the above copyright notice, 
+  19:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c ****        this list of conditions and the following disclaimer in the documentation 
+  20:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c ****        and/or other materials provided with the distribution.
+  21:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c ****     3. Neither the name of the copyright holder nor the names of its contributors 
+  22:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c ****        may be used to endorse or promote products derived from this software without 
+  23:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c ****        specific prior written permission.
+  24:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c **** 
+  25:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c ****     THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" 
+  26:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c **** AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED 
+  27:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c **** WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. 
+  28:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c **** IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, 
+  29:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c **** INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT 
+  30:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c **** NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR 
+ARM GAS  /tmp/ccqRGOTh.s 			page 2
+
+
+  31:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c **** PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, 
+  32:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c **** WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) 
+  33:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c **** ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY 
+  34:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c **** OF SUCH DAMAGE.
+  35:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c **** */
+  36:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c **** 
+  37:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c **** #include "gd32e10x_wwdgt.h"
+  38:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c **** 
+  39:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c **** /* write value to WWDGT_CTL_CNT bit field */
+  40:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c **** #define CTL_CNT(regval)             (BITS(0,6) & ((uint32_t)(regval) << 0))
+  41:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c **** /* write value to WWDGT_CFG_WIN bit field */
+  42:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c **** #define CFG_WIN(regval)             (BITS(0,6) & ((uint32_t)(regval) << 0))
+  43:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c **** 
+  44:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c **** /*!
+  45:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c ****     \brief      reset the window watchdog timer configuration
+  46:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c ****     \param[in]  none
+  47:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c ****     \param[out] none
+  48:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c ****     \retval     none
+  49:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c **** */
+  50:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c **** void wwdgt_deinit(void)
+  51:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c **** {
+  29              		.loc 1 51 1 view -0
+  30              		.cfi_startproc
+  31              		@ args = 0, pretend = 0, frame = 0
+  32              		@ frame_needed = 0, uses_anonymous_args = 0
+  33 0000 08B5     		push	{r3, lr}
+  34              		.cfi_def_cfa_offset 8
+  35              		.cfi_offset 3, -8
+  36              		.cfi_offset 14, -4
+  52:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c ****     rcu_periph_reset_enable(RCU_WWDGTRST);
+  37              		.loc 1 52 5 view .LVU1
+  38 0002 40F20B40 		movw	r0, #1035
+  39 0006 FFF7FEFF 		bl	rcu_periph_reset_enable
+  40              	.LVL0:
+  53:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c ****     rcu_periph_reset_disable(RCU_WWDGTRST);
+  41              		.loc 1 53 5 view .LVU2
+  42 000a 40F20B40 		movw	r0, #1035
+  43 000e FFF7FEFF 		bl	rcu_periph_reset_disable
+  44              	.LVL1:
+  54:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c **** }
+  45              		.loc 1 54 1 is_stmt 0 view .LVU3
+  46 0012 08BD     		pop	{r3, pc}
+  47              		.cfi_endproc
+  48              	.LFE116:
+  50              		.section	.text.wwdgt_enable,"ax",%progbits
+  51              		.align	1
+  52              		.global	wwdgt_enable
+  53              		.syntax unified
+  54              		.thumb
+  55              		.thumb_func
+  56              		.fpu fpv4-sp-d16
+  58              	wwdgt_enable:
+  59              	.LFB117:
+  55:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c **** 
+  56:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c **** /*!
+  57:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c ****     \brief      start the window watchdog timer counter
+  58:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c ****     \param[in]  none
+ARM GAS  /tmp/ccqRGOTh.s 			page 3
+
+
+  59:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c ****     \param[out] none
+  60:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c ****     \retval     none
+  61:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c **** */
+  62:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c **** void wwdgt_enable(void)
+  63:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c **** {
+  60              		.loc 1 63 1 is_stmt 1 view -0
+  61              		.cfi_startproc
+  62              		@ args = 0, pretend = 0, frame = 0
+  63              		@ frame_needed = 0, uses_anonymous_args = 0
+  64              		@ link register save eliminated.
+  64:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c ****     WWDGT_CTL |= WWDGT_CTL_WDGTEN;
+  65              		.loc 1 64 5 view .LVU5
+  66              		.loc 1 64 15 is_stmt 0 view .LVU6
+  67 0000 034A     		ldr	r2, .L4
+  68 0002 D2F8003C 		ldr	r3, [r2, #3072]
+  69 0006 43F08003 		orr	r3, r3, #128
+  70 000a C2F8003C 		str	r3, [r2, #3072]
+  65:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c **** }
+  71              		.loc 1 65 1 view .LVU7
+  72 000e 7047     		bx	lr
+  73              	.L5:
+  74              		.align	2
+  75              	.L4:
+  76 0010 00200040 		.word	1073750016
+  77              		.cfi_endproc
+  78              	.LFE117:
+  80              		.section	.text.wwdgt_counter_update,"ax",%progbits
+  81              		.align	1
+  82              		.global	wwdgt_counter_update
+  83              		.syntax unified
+  84              		.thumb
+  85              		.thumb_func
+  86              		.fpu fpv4-sp-d16
+  88              	wwdgt_counter_update:
+  89              	.LVL2:
+  90              	.LFB118:
+  66:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c **** 
+  67:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c **** /*!
+  68:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c ****     \brief      configure the window watchdog timer counter value
+  69:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c ****     \param[in]  counter_value: 0x00 - 0x7F
+  70:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c ****     \param[out] none
+  71:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c ****     \retval     none
+  72:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c **** */
+  73:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c **** void wwdgt_counter_update(uint16_t counter_value)
+  74:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c **** {
+  91              		.loc 1 74 1 is_stmt 1 view -0
+  92              		.cfi_startproc
+  93              		@ args = 0, pretend = 0, frame = 0
+  94              		@ frame_needed = 0, uses_anonymous_args = 0
+  95              		@ link register save eliminated.
+  75:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c ****     uint32_t reg = 0U;
+  96              		.loc 1 75 5 view .LVU9
+  76:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c ****     
+  77:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c ****     reg = (WWDGT_CTL & (~WWDGT_CTL_CNT));
+  97              		.loc 1 77 5 view .LVU10
+  98              		.loc 1 77 12 is_stmt 0 view .LVU11
+  99 0000 054A     		ldr	r2, .L7
+ARM GAS  /tmp/ccqRGOTh.s 			page 4
+
+
+ 100 0002 D2F8003C 		ldr	r3, [r2, #3072]
+ 101              		.loc 1 77 9 view .LVU12
+ 102 0006 23F07F03 		bic	r3, r3, #127
+ 103              	.LVL3:
+  78:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c ****     reg |= CTL_CNT(counter_value);
+ 104              		.loc 1 78 5 is_stmt 1 view .LVU13
+ 105              		.loc 1 78 12 is_stmt 0 view .LVU14
+ 106 000a 00F07F00 		and	r0, r0, #127
+ 107              	.LVL4:
+ 108              		.loc 1 78 9 view .LVU15
+ 109 000e 1843     		orrs	r0, r0, r3
+ 110              	.LVL5:
+  79:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c ****     
+  80:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c ****     WWDGT_CTL = reg;
+ 111              		.loc 1 80 5 is_stmt 1 view .LVU16
+ 112              		.loc 1 80 15 is_stmt 0 view .LVU17
+ 113 0010 C2F8000C 		str	r0, [r2, #3072]
+  81:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c **** }
+ 114              		.loc 1 81 1 view .LVU18
+ 115 0014 7047     		bx	lr
+ 116              	.L8:
+ 117 0016 00BF     		.align	2
+ 118              	.L7:
+ 119 0018 00200040 		.word	1073750016
+ 120              		.cfi_endproc
+ 121              	.LFE118:
+ 123              		.section	.text.wwdgt_config,"ax",%progbits
+ 124              		.align	1
+ 125              		.global	wwdgt_config
+ 126              		.syntax unified
+ 127              		.thumb
+ 128              		.thumb_func
+ 129              		.fpu fpv4-sp-d16
+ 131              	wwdgt_config:
+ 132              	.LVL6:
+ 133              	.LFB119:
+  82:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c **** 
+  83:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c **** /*!
+  84:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c ****     \brief      configure counter value, window value, and prescaler divider value  
+  85:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c ****     \param[in]  counter: 0x00 - 0x7F   
+  86:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c ****     \param[in]  window: 0x00 - 0x7F
+  87:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c ****     \param[in]  prescaler: wwdgt prescaler value
+  88:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c ****                 only one parameter can be selected which is shown as below:
+  89:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c ****       \arg        WWDGT_CFG_PSC_DIV1: the time base of window watchdog counter = (PCLK1/4096)/1
+  90:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c ****       \arg        WWDGT_CFG_PSC_DIV2: the time base of window watchdog counter = (PCLK1/4096)/2
+  91:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c ****       \arg        WWDGT_CFG_PSC_DIV4: the time base of window watchdog counter = (PCLK1/4096)/4
+  92:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c ****       \arg        WWDGT_CFG_PSC_DIV8: the time base of window watchdog counter = (PCLK1/4096)/8
+  93:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c ****     \param[out] none
+  94:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c ****     \retval     none
+  95:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c **** */
+  96:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c **** void wwdgt_config(uint16_t counter, uint16_t window, uint32_t prescaler)
+  97:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c **** {
+ 134              		.loc 1 97 1 is_stmt 1 view -0
+ 135              		.cfi_startproc
+ 136              		@ args = 0, pretend = 0, frame = 0
+ 137              		@ frame_needed = 0, uses_anonymous_args = 0
+ 138              		@ link register save eliminated.
+ARM GAS  /tmp/ccqRGOTh.s 			page 5
+
+
+ 139              		.loc 1 97 1 is_stmt 0 view .LVU20
+ 140 0000 30B4     		push	{r4, r5}
+ 141              		.cfi_def_cfa_offset 8
+ 142              		.cfi_offset 4, -8
+ 143              		.cfi_offset 5, -4
+  98:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c ****     uint32_t reg_cfg = 0U, reg_ctl = 0U;
+ 144              		.loc 1 98 5 is_stmt 1 view .LVU21
+ 145              	.LVL7:
+  99:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c **** 
+ 100:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c ****     /* clear WIN and PSC bits, clear CNT bit */
+ 101:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c ****     reg_cfg = (WWDGT_CFG &(~(WWDGT_CFG_WIN|WWDGT_CFG_PSC)));
+ 146              		.loc 1 101 5 view .LVU22
+ 147              		.loc 1 101 16 is_stmt 0 view .LVU23
+ 148 0002 0C4C     		ldr	r4, .L11
+ 149 0004 D4F8043C 		ldr	r3, [r4, #3076]
+ 150              	.LVL8:
+ 102:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c ****     reg_ctl = (WWDGT_CTL &(~WWDGT_CTL_CNT));
+ 151              		.loc 1 102 5 is_stmt 1 view .LVU24
+ 152              		.loc 1 102 16 is_stmt 0 view .LVU25
+ 153 0008 D4F8005C 		ldr	r5, [r4, #3072]
+ 154              		.loc 1 102 13 view .LVU26
+ 155 000c 25F07F0C 		bic	ip, r5, #127
+ 156              	.LVL9:
+ 103:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c ****   
+ 104:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c ****     /* configure WIN and PSC bits, configure CNT bit */
+ 105:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c ****     reg_cfg |= CFG_WIN(window);
+ 157              		.loc 1 105 5 is_stmt 1 view .LVU27
+ 101:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c ****     reg_ctl = (WWDGT_CTL &(~WWDGT_CTL_CNT));
+ 158              		.loc 1 101 13 is_stmt 0 view .LVU28
+ 159 0010 23F4FF73 		bic	r3, r3, #510
+ 160              	.LVL10:
+ 101:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c ****     reg_ctl = (WWDGT_CTL &(~WWDGT_CTL_CNT));
+ 161              		.loc 1 101 13 view .LVU29
+ 162 0014 23F00103 		bic	r3, r3, #1
+ 163 0018 1343     		orrs	r3, r3, r2
+ 106:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c ****     reg_cfg |= prescaler;
+ 164              		.loc 1 106 5 is_stmt 1 view .LVU30
+ 105:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c ****     reg_cfg |= prescaler;
+ 165              		.loc 1 105 16 is_stmt 0 view .LVU31
+ 166 001a 01F07F01 		and	r1, r1, #127
+ 167              	.LVL11:
+ 168              		.loc 1 106 13 view .LVU32
+ 169 001e 0B43     		orrs	r3, r3, r1
+ 170              	.LVL12:
+ 107:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c ****     reg_ctl |= CTL_CNT(counter);
+ 171              		.loc 1 107 5 is_stmt 1 view .LVU33
+ 172              		.loc 1 107 16 is_stmt 0 view .LVU34
+ 173 0020 00F07F00 		and	r0, r0, #127
+ 174              	.LVL13:
+ 175              		.loc 1 107 13 view .LVU35
+ 176 0024 40EA0C00 		orr	r0, r0, ip
+ 177              	.LVL14:
+ 108:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c ****     
+ 109:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c ****     WWDGT_CTL = reg_ctl;
+ 178              		.loc 1 109 5 is_stmt 1 view .LVU36
+ 179              		.loc 1 109 15 is_stmt 0 view .LVU37
+ 180 0028 C4F8000C 		str	r0, [r4, #3072]
+ARM GAS  /tmp/ccqRGOTh.s 			page 6
+
+
+ 110:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c ****     WWDGT_CFG = reg_cfg;
+ 181              		.loc 1 110 5 is_stmt 1 view .LVU38
+ 182              		.loc 1 110 15 is_stmt 0 view .LVU39
+ 183 002c C4F8043C 		str	r3, [r4, #3076]
+ 111:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c **** }
+ 184              		.loc 1 111 1 view .LVU40
+ 185 0030 30BC     		pop	{r4, r5}
+ 186              		.cfi_restore 5
+ 187              		.cfi_restore 4
+ 188              		.cfi_def_cfa_offset 0
+ 189 0032 7047     		bx	lr
+ 190              	.L12:
+ 191              		.align	2
+ 192              	.L11:
+ 193 0034 00200040 		.word	1073750016
+ 194              		.cfi_endproc
+ 195              	.LFE119:
+ 197              		.section	.text.wwdgt_interrupt_enable,"ax",%progbits
+ 198              		.align	1
+ 199              		.global	wwdgt_interrupt_enable
+ 200              		.syntax unified
+ 201              		.thumb
+ 202              		.thumb_func
+ 203              		.fpu fpv4-sp-d16
+ 205              	wwdgt_interrupt_enable:
+ 206              	.LFB120:
+ 112:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c **** 
+ 113:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c **** /*!
+ 114:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c ****     \brief      enable early wakeup interrupt of WWDGT
+ 115:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c ****     \param[in]  none
+ 116:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c ****     \param[out] none
+ 117:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c ****     \retval     none
+ 118:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c **** */
+ 119:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c **** void wwdgt_interrupt_enable(void)
+ 120:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c **** {
+ 207              		.loc 1 120 1 is_stmt 1 view -0
+ 208              		.cfi_startproc
+ 209              		@ args = 0, pretend = 0, frame = 0
+ 210              		@ frame_needed = 0, uses_anonymous_args = 0
+ 211              		@ link register save eliminated.
+ 121:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c ****     WWDGT_CFG |= WWDGT_CFG_EWIE;
+ 212              		.loc 1 121 5 view .LVU42
+ 213              		.loc 1 121 15 is_stmt 0 view .LVU43
+ 214 0000 034A     		ldr	r2, .L14
+ 215 0002 D2F8043C 		ldr	r3, [r2, #3076]
+ 216 0006 43F40073 		orr	r3, r3, #512
+ 217 000a C2F8043C 		str	r3, [r2, #3076]
+ 122:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c **** }
+ 218              		.loc 1 122 1 view .LVU44
+ 219 000e 7047     		bx	lr
+ 220              	.L15:
+ 221              		.align	2
+ 222              	.L14:
+ 223 0010 00200040 		.word	1073750016
+ 224              		.cfi_endproc
+ 225              	.LFE120:
+ 227              		.section	.text.wwdgt_flag_get,"ax",%progbits
+ARM GAS  /tmp/ccqRGOTh.s 			page 7
+
+
+ 228              		.align	1
+ 229              		.global	wwdgt_flag_get
+ 230              		.syntax unified
+ 231              		.thumb
+ 232              		.thumb_func
+ 233              		.fpu fpv4-sp-d16
+ 235              	wwdgt_flag_get:
+ 236              	.LFB121:
+ 123:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c **** 
+ 124:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c **** /*!
+ 125:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c ****     \brief      check early wakeup interrupt state of WWDGT
+ 126:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c ****     \param[in]  none
+ 127:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c ****     \param[out] none
+ 128:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c ****     \retval     FlagStatus: SET or RESET
+ 129:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c **** */
+ 130:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c **** FlagStatus wwdgt_flag_get(void)
+ 131:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c **** {
+ 237              		.loc 1 131 1 is_stmt 1 view -0
+ 238              		.cfi_startproc
+ 239              		@ args = 0, pretend = 0, frame = 0
+ 240              		@ frame_needed = 0, uses_anonymous_args = 0
+ 241              		@ link register save eliminated.
+ 132:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c ****     if(RESET != (WWDGT_STAT & WWDGT_STAT_EWIF)){
+ 242              		.loc 1 132 5 view .LVU46
+ 243              		.loc 1 132 18 is_stmt 0 view .LVU47
+ 244 0000 024B     		ldr	r3, .L17
+ 245 0002 D3F8080C 		ldr	r0, [r3, #3080]
+ 133:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c ****         return SET;
+ 134:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c ****     }
+ 135:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c **** 
+ 136:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c ****     return RESET;
+ 137:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c **** }
+ 246              		.loc 1 137 1 view .LVU48
+ 247 0006 00F00100 		and	r0, r0, #1
+ 248 000a 7047     		bx	lr
+ 249              	.L18:
+ 250              		.align	2
+ 251              	.L17:
+ 252 000c 00200040 		.word	1073750016
+ 253              		.cfi_endproc
+ 254              	.LFE121:
+ 256              		.section	.text.wwdgt_flag_clear,"ax",%progbits
+ 257              		.align	1
+ 258              		.global	wwdgt_flag_clear
+ 259              		.syntax unified
+ 260              		.thumb
+ 261              		.thumb_func
+ 262              		.fpu fpv4-sp-d16
+ 264              	wwdgt_flag_clear:
+ 265              	.LFB122:
+ 138:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c **** 
+ 139:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c **** /*!
+ 140:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c ****     \brief      clear early wakeup interrupt state of WWDGT
+ 141:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c ****     \param[in]  none
+ 142:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c ****     \param[out] none
+ 143:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c ****     \retval     none
+ 144:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c **** */
+ARM GAS  /tmp/ccqRGOTh.s 			page 8
+
+
+ 145:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c **** void wwdgt_flag_clear(void)
+ 146:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c **** {
+ 266              		.loc 1 146 1 is_stmt 1 view -0
+ 267              		.cfi_startproc
+ 268              		@ args = 0, pretend = 0, frame = 0
+ 269              		@ frame_needed = 0, uses_anonymous_args = 0
+ 270              		@ link register save eliminated.
+ 147:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c ****     WWDGT_STAT &= (~WWDGT_STAT_EWIF);
+ 271              		.loc 1 147 5 view .LVU50
+ 272              		.loc 1 147 16 is_stmt 0 view .LVU51
+ 273 0000 034A     		ldr	r2, .L20
+ 274 0002 D2F8083C 		ldr	r3, [r2, #3080]
+ 275 0006 23F00103 		bic	r3, r3, #1
+ 276 000a C2F8083C 		str	r3, [r2, #3080]
+ 148:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_wwdgt.c **** }
+ 277              		.loc 1 148 1 view .LVU52
+ 278 000e 7047     		bx	lr
+ 279              	.L21:
+ 280              		.align	2
+ 281              	.L20:
+ 282 0010 00200040 		.word	1073750016
+ 283              		.cfi_endproc
+ 284              	.LFE122:
+ 286              		.text
+ 287              	.Letext0:
+ 288              		.file 2 "/usr/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h"
+ 289              		.file 3 "../../../../Firmware/CMSIS/GD/GD32E10x/Include/gd32e10x.h"
+ 290              		.file 4 "../../../../Firmware/GD32E10x_standard_peripheral/Include/gd32e10x_rcu.h"
+ARM GAS  /tmp/ccqRGOTh.s 			page 9
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 gd32e10x_wwdgt.c
+     /tmp/ccqRGOTh.s:18     .text.wwdgt_deinit:0000000000000000 $t
+     /tmp/ccqRGOTh.s:26     .text.wwdgt_deinit:0000000000000000 wwdgt_deinit
+     /tmp/ccqRGOTh.s:51     .text.wwdgt_enable:0000000000000000 $t
+     /tmp/ccqRGOTh.s:58     .text.wwdgt_enable:0000000000000000 wwdgt_enable
+     /tmp/ccqRGOTh.s:76     .text.wwdgt_enable:0000000000000010 $d
+     /tmp/ccqRGOTh.s:81     .text.wwdgt_counter_update:0000000000000000 $t
+     /tmp/ccqRGOTh.s:88     .text.wwdgt_counter_update:0000000000000000 wwdgt_counter_update
+     /tmp/ccqRGOTh.s:119    .text.wwdgt_counter_update:0000000000000018 $d
+     /tmp/ccqRGOTh.s:124    .text.wwdgt_config:0000000000000000 $t
+     /tmp/ccqRGOTh.s:131    .text.wwdgt_config:0000000000000000 wwdgt_config
+     /tmp/ccqRGOTh.s:193    .text.wwdgt_config:0000000000000034 $d
+     /tmp/ccqRGOTh.s:198    .text.wwdgt_interrupt_enable:0000000000000000 $t
+     /tmp/ccqRGOTh.s:205    .text.wwdgt_interrupt_enable:0000000000000000 wwdgt_interrupt_enable
+     /tmp/ccqRGOTh.s:223    .text.wwdgt_interrupt_enable:0000000000000010 $d
+     /tmp/ccqRGOTh.s:228    .text.wwdgt_flag_get:0000000000000000 $t
+     /tmp/ccqRGOTh.s:235    .text.wwdgt_flag_get:0000000000000000 wwdgt_flag_get
+     /tmp/ccqRGOTh.s:252    .text.wwdgt_flag_get:000000000000000c $d
+     /tmp/ccqRGOTh.s:257    .text.wwdgt_flag_clear:0000000000000000 $t
+     /tmp/ccqRGOTh.s:264    .text.wwdgt_flag_clear:0000000000000000 wwdgt_flag_clear
+     /tmp/ccqRGOTh.s:282    .text.wwdgt_flag_clear:0000000000000010 $d
+
+UNDEFINED SYMBOLS
+rcu_periph_reset_enable
+rcu_periph_reset_disable

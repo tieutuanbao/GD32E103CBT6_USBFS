@@ -1,0 +1,1290 @@
+ARM GAS  /tmp/ccJ8E7Vh.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.eabi_attribute 27, 1
+   3              		.eabi_attribute 28, 1
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.file	"custom_hid_core.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.section	.text.custom_hid_init,"ax",%progbits
+  18              		.align	1
+  19              		.global	custom_hid_init
+  20              		.arch armv7e-m
+  21              		.syntax unified
+  22              		.thumb
+  23              		.thumb_func
+  24              		.fpu fpv4-sp-d16
+  26              	custom_hid_init:
+  27              	.LVL0:
+  28              	.LFB116:
+  29              		.file 1 "custom_hid_core.c"
+   1:custom_hid_core.c **** /*!
+   2:custom_hid_core.c ****     \file  custom_hid_core.c
+   3:custom_hid_core.c ****     \brief custom HID class driver
+   4:custom_hid_core.c ****     
+   5:custom_hid_core.c ****     \version 2017-12-26, V1.0.0, firmware for GD32E10x
+   6:custom_hid_core.c **** */
+   7:custom_hid_core.c **** 
+   8:custom_hid_core.c **** /*
+   9:custom_hid_core.c ****     Copyright (c) 2017, GigaDevice Semiconductor Inc.
+  10:custom_hid_core.c **** 
+  11:custom_hid_core.c ****     All rights reserved.
+  12:custom_hid_core.c **** 
+  13:custom_hid_core.c ****     Redistribution and use in source and binary forms, with or without modification, 
+  14:custom_hid_core.c **** are permitted provided that the following conditions are met:
+  15:custom_hid_core.c **** 
+  16:custom_hid_core.c ****     1. Redistributions of source code must retain the above copyright notice, this 
+  17:custom_hid_core.c ****        list of conditions and the following disclaimer.
+  18:custom_hid_core.c ****     2. Redistributions in binary form must reproduce the above copyright notice, 
+  19:custom_hid_core.c ****        this list of conditions and the following disclaimer in the documentation 
+  20:custom_hid_core.c ****        and/or other materials provided with the distribution.
+  21:custom_hid_core.c ****     3. Neither the name of the copyright holder nor the names of its contributors 
+  22:custom_hid_core.c ****        may be used to endorse or promote products derived from this software without 
+  23:custom_hid_core.c ****        specific prior written permission.
+  24:custom_hid_core.c **** 
+  25:custom_hid_core.c ****     THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" 
+  26:custom_hid_core.c **** AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED 
+  27:custom_hid_core.c **** WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. 
+  28:custom_hid_core.c **** IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, 
+  29:custom_hid_core.c **** INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT 
+ARM GAS  /tmp/ccJ8E7Vh.s 			page 2
+
+
+  30:custom_hid_core.c **** NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR 
+  31:custom_hid_core.c **** PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, 
+  32:custom_hid_core.c **** WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) 
+  33:custom_hid_core.c **** ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY 
+  34:custom_hid_core.c **** OF SUCH DAMAGE.
+  35:custom_hid_core.c **** */
+  36:custom_hid_core.c **** 
+  37:custom_hid_core.c **** #include "custom_hid_core.h"
+  38:custom_hid_core.c **** #include "usbd_int.h"
+  39:custom_hid_core.c **** 
+  40:custom_hid_core.c **** #define USBD_VID                     0x0483
+  41:custom_hid_core.c **** #define USBD_PID                     0x1986
+  42:custom_hid_core.c **** 
+  43:custom_hid_core.c **** uint8_t rxBuff[64];
+  44:custom_hid_core.c **** uint8_t txBuff[64];
+  45:custom_hid_core.c **** uint8_t usbd_customhid_report_id = 0;
+  46:custom_hid_core.c **** uint8_t flag = 0;
+  47:custom_hid_core.c **** 
+  48:custom_hid_core.c **** static uint32_t usbd_customhid_altset = 0;
+  49:custom_hid_core.c **** static uint32_t usbd_customhid_protocol = 0;
+  50:custom_hid_core.c **** static uint32_t usbd_customhid_idlestate = 0;
+  51:custom_hid_core.c **** 
+  52:custom_hid_core.c **** usbd_int_cb_struct *usbd_int_fops = NULL;
+  53:custom_hid_core.c **** 
+  54:custom_hid_core.c **** /* Note:it should use the C99 standard when compiling the below codes */
+  55:custom_hid_core.c **** /* USB standard device descriptor */
+  56:custom_hid_core.c **** __ALIGN_BEGIN const usb_descriptor_device_struct device_descripter __ALIGN_END =
+  57:custom_hid_core.c **** {
+  58:custom_hid_core.c ****     .Header = 
+  59:custom_hid_core.c ****      {
+  60:custom_hid_core.c ****          .bLength = USB_DEVICE_DESC_SIZE, 
+  61:custom_hid_core.c ****          .bDescriptorType = USB_DESCTYPE_DEVICE
+  62:custom_hid_core.c ****      },
+  63:custom_hid_core.c ****     .bcdUSB = 0x0200,
+  64:custom_hid_core.c ****     .bDeviceClass = 0x00,
+  65:custom_hid_core.c ****     .bDeviceSubClass = 0x00,
+  66:custom_hid_core.c ****     .bDeviceProtocol = 0x00,
+  67:custom_hid_core.c ****     .bMaxPacketSize0 = USB_MAX_EP0_SIZE,
+  68:custom_hid_core.c ****     .idVendor = USBD_VID,
+  69:custom_hid_core.c ****     .idProduct = USBD_PID,
+  70:custom_hid_core.c ****     .bcdDevice = 0x0100,
+  71:custom_hid_core.c ****     .iManufacturer = USBD_MFC_STR_IDX,
+  72:custom_hid_core.c ****     .iProduct = USBD_PRODUCT_STR_IDX,
+  73:custom_hid_core.c ****     .iSerialNumber = USBD_SERIAL_STR_IDX,
+  74:custom_hid_core.c ****     .bNumberConfigurations = USBD_CFG_MAX_NUM
+  75:custom_hid_core.c **** };
+  76:custom_hid_core.c **** 
+  77:custom_hid_core.c **** __ALIGN_BEGIN const usb_descriptor_configuration_set_struct configuration_descriptor __ALIGN_END = 
+  78:custom_hid_core.c **** {
+  79:custom_hid_core.c ****     .Config = 
+  80:custom_hid_core.c ****     {
+  81:custom_hid_core.c ****         .Header = 
+  82:custom_hid_core.c ****          {
+  83:custom_hid_core.c ****              .bLength = sizeof(usb_descriptor_configuration_struct), 
+  84:custom_hid_core.c ****              .bDescriptorType = USB_DESCTYPE_CONFIGURATION 
+  85:custom_hid_core.c ****          },
+  86:custom_hid_core.c ****         .wTotalLength = CUSTOMHID_CONFIG_DESC_SIZE,
+ARM GAS  /tmp/ccJ8E7Vh.s 			page 3
+
+
+  87:custom_hid_core.c ****         .bNumInterfaces = 0x01,
+  88:custom_hid_core.c ****         .bConfigurationValue = 0x01,
+  89:custom_hid_core.c ****         .iConfiguration = 0x00,
+  90:custom_hid_core.c ****         .bmAttributes = 0x80,
+  91:custom_hid_core.c ****         .bMaxPower = 0x32
+  92:custom_hid_core.c ****     },
+  93:custom_hid_core.c **** 
+  94:custom_hid_core.c ****     .HID_Interface = 
+  95:custom_hid_core.c ****     {
+  96:custom_hid_core.c ****         .Header = 
+  97:custom_hid_core.c ****          {
+  98:custom_hid_core.c ****              .bLength = sizeof(usb_descriptor_interface_struct), 
+  99:custom_hid_core.c ****              .bDescriptorType = USB_DESCTYPE_INTERFACE 
+ 100:custom_hid_core.c ****          },
+ 101:custom_hid_core.c ****         .bInterfaceNumber = 0x00,
+ 102:custom_hid_core.c ****         .bAlternateSetting = 0x00,
+ 103:custom_hid_core.c ****         .bNumEndpoints = 0x02,
+ 104:custom_hid_core.c ****         .bInterfaceClass = 0x03,
+ 105:custom_hid_core.c ****         .bInterfaceSubClass = 0x00,
+ 106:custom_hid_core.c ****         .bInterfaceProtocol = 0x00,
+ 107:custom_hid_core.c ****         .iInterface = 0x00
+ 108:custom_hid_core.c ****     },
+ 109:custom_hid_core.c **** 
+ 110:custom_hid_core.c ****     .HID_VendorHID = 
+ 111:custom_hid_core.c ****     {
+ 112:custom_hid_core.c ****         .Header = 
+ 113:custom_hid_core.c ****          {
+ 114:custom_hid_core.c ****              .bLength = sizeof(usb_hid_descriptor_hid_struct),
+ 115:custom_hid_core.c ****              .bDescriptorType = CUSTOMHID_DESC_TYPE 
+ 116:custom_hid_core.c ****          },
+ 117:custom_hid_core.c ****         .bcdHID = 0x0111,
+ 118:custom_hid_core.c ****         .bCountryCode = 0x00,
+ 119:custom_hid_core.c ****         .bNumDescriptors = 0x01,
+ 120:custom_hid_core.c ****         .bDescriptorType = CUSTOMHID_REPORT_DESCTYPE,
+ 121:custom_hid_core.c ****         .wDescriptorLength = CUSTOMHID_REPORT_DESC_SIZE,
+ 122:custom_hid_core.c ****     },
+ 123:custom_hid_core.c **** 
+ 124:custom_hid_core.c ****     .HID_ReportINEndpoint = 
+ 125:custom_hid_core.c ****     {
+ 126:custom_hid_core.c ****         .Header = 
+ 127:custom_hid_core.c ****          {
+ 128:custom_hid_core.c ****              .bLength = sizeof(usb_descriptor_endpoint_struct), 
+ 129:custom_hid_core.c ****              .bDescriptorType = USB_DESCTYPE_ENDPOINT 
+ 130:custom_hid_core.c ****          },
+ 131:custom_hid_core.c ****         .bEndpointAddress = CUSTOMHID_IN_EP,
+ 132:custom_hid_core.c ****         .bmAttributes = 0x03,
+ 133:custom_hid_core.c ****         .wMaxPacketSize = CUSTOMHID_IN_PACKET,
+ 134:custom_hid_core.c ****         .bInterval = 0x01
+ 135:custom_hid_core.c ****     },
+ 136:custom_hid_core.c **** 
+ 137:custom_hid_core.c ****     .HID_ReportOUTEndpoint = 
+ 138:custom_hid_core.c ****     {
+ 139:custom_hid_core.c ****         .Header = 
+ 140:custom_hid_core.c ****          {
+ 141:custom_hid_core.c ****              .bLength = sizeof(usb_descriptor_endpoint_struct), 
+ 142:custom_hid_core.c ****              .bDescriptorType = USB_DESCTYPE_ENDPOINT
+ 143:custom_hid_core.c ****          },
+ARM GAS  /tmp/ccJ8E7Vh.s 			page 4
+
+
+ 144:custom_hid_core.c ****         .bEndpointAddress = CUSTOMHID_OUT_EP,
+ 145:custom_hid_core.c ****         .bmAttributes = 0x03,
+ 146:custom_hid_core.c ****         .wMaxPacketSize = CUSTOMHID_OUT_PACKET,
+ 147:custom_hid_core.c ****         .bInterval = 0x01
+ 148:custom_hid_core.c ****     }
+ 149:custom_hid_core.c **** };
+ 150:custom_hid_core.c **** 
+ 151:custom_hid_core.c **** /* USB language ID Descriptor */
+ 152:custom_hid_core.c **** __ALIGN_BEGIN const usb_descriptor_language_id_struct usbd_language_id_desc __ALIGN_END = 
+ 153:custom_hid_core.c **** {
+ 154:custom_hid_core.c ****     .Header = 
+ 155:custom_hid_core.c ****      {
+ 156:custom_hid_core.c ****          .bLength = sizeof(usb_descriptor_language_id_struct), 
+ 157:custom_hid_core.c ****          .bDescriptorType = USB_DESCTYPE_STRING
+ 158:custom_hid_core.c ****      },
+ 159:custom_hid_core.c ****     .wLANGID = ENG_LANGID
+ 160:custom_hid_core.c **** };
+ 161:custom_hid_core.c **** 
+ 162:custom_hid_core.c **** __ALIGN_BEGIN uint8_t* usbd_strings[] __ALIGN_END = 
+ 163:custom_hid_core.c **** {
+ 164:custom_hid_core.c ****     [USBD_LANGID_STR_IDX] = (uint8_t *)&usbd_language_id_desc,
+ 165:custom_hid_core.c ****     [USBD_MFC_STR_IDX] = USBD_STRING_DESC("BOOT"),
+ 166:custom_hid_core.c ****     [USBD_PRODUCT_STR_IDX] = USBD_STRING_DESC("USB BOOT"),
+ 167:custom_hid_core.c ****     [USBD_SERIAL_STR_IDX] = USBD_STRING_DESC("GD32E103"),
+ 168:custom_hid_core.c **** 	[4] = USBD_STRING_DESC("NHC"),
+ 169:custom_hid_core.c **** 	[5] = USBD_STRING_DESC("NHC")
+ 170:custom_hid_core.c **** };
+ 171:custom_hid_core.c **** 
+ 172:custom_hid_core.c **** /* USB custom HID device report descriptor */
+ 173:custom_hid_core.c **** __ALIGN_BEGIN const uint8_t customhid_report_descriptor[CUSTOMHID_REPORT_DESC_SIZE] __ALIGN_END =
+ 174:custom_hid_core.c **** {
+ 175:custom_hid_core.c ****     0x06, 0x00, 0xFF,       // Usage Page = 0xFF00 (Vendor Defined Page 1)
+ 176:custom_hid_core.c ****     0x09, 0x01,             // Usage (Vendor Usage 1)
+ 177:custom_hid_core.c ****     0xA1, 0x01,             // Collection (Application)
+ 178:custom_hid_core.c ****     0x19, 0x01,             //      Usage Minimum 
+ 179:custom_hid_core.c ****     0x29, 0x40,             //      Usage Maximum 	//64 input usages total (0x01 to 0x40)
+ 180:custom_hid_core.c ****     0x15, 0x01,             //      Logical Minimum (data bytes in the report may have minimum valu
+ 181:custom_hid_core.c ****     0x25, 0x40,      	  	//      Logical Maximum (data bytes in the report may have maximum value =
+ 182:custom_hid_core.c ****     0x75, 0x08,             //      Report Size: 8-bit field size
+ 183:custom_hid_core.c ****     0x95, 0x40,             //      Report Count: Make sixty-four 8-bit fields (the next time the p
+ 184:custom_hid_core.c ****     0x81, 0x00,             //      Input (Data, Array, Abs): Instantiates input packet fields base
+ 185:custom_hid_core.c ****     0x19, 0x01,             //      Usage Minimum 
+ 186:custom_hid_core.c ****     0x29, 0x40,             //      Usage Maximum 	//64 output usages total (0x01 to 0x40)
+ 187:custom_hid_core.c ****     0x91, 0x00,             //      Output (Data, Array, Abs): Instantiates output packet fields.  
+ 188:custom_hid_core.c ****     0xC0
+ 189:custom_hid_core.c **** };
+ 190:custom_hid_core.c **** 
+ 191:custom_hid_core.c **** /*!
+ 192:custom_hid_core.c ****     \brief      initialize the HID device
+ 193:custom_hid_core.c ****     \param[in]  pudev: pointer to USB device instance
+ 194:custom_hid_core.c ****     \param[in]  config_index: configuration index
+ 195:custom_hid_core.c ****     \param[out] none
+ 196:custom_hid_core.c ****     \retval     USB device operation status
+ 197:custom_hid_core.c **** */
+ 198:custom_hid_core.c **** uint8_t custom_hid_init (void *pudev, uint8_t config_index)
+ 199:custom_hid_core.c **** {
+  30              		.loc 1 199 1 view -0
+ARM GAS  /tmp/ccJ8E7Vh.s 			page 5
+
+
+  31              		.cfi_startproc
+  32              		@ args = 0, pretend = 0, frame = 0
+  33              		@ frame_needed = 0, uses_anonymous_args = 0
+  34              		.loc 1 199 1 is_stmt 0 view .LVU1
+  35 0000 38B5     		push	{r3, r4, r5, lr}
+  36              		.cfi_def_cfa_offset 16
+  37              		.cfi_offset 3, -16
+  38              		.cfi_offset 4, -12
+  39              		.cfi_offset 5, -8
+  40              		.cfi_offset 14, -4
+  41 0002 0446     		mov	r4, r0
+ 200:custom_hid_core.c ****     /* initialize Tx endpoint */
+ 201:custom_hid_core.c ****     usbd_ep_init(pudev, &(configuration_descriptor.HID_ReportINEndpoint));
+  42              		.loc 1 201 5 is_stmt 1 view .LVU2
+  43 0004 084D     		ldr	r5, .L3
+  44 0006 05F11B01 		add	r1, r5, #27
+  45              	.LVL1:
+  46              		.loc 1 201 5 is_stmt 0 view .LVU3
+  47 000a FFF7FEFF 		bl	usbd_ep_init
+  48              	.LVL2:
+ 202:custom_hid_core.c **** 
+ 203:custom_hid_core.c ****     /* initialize Rx endpoint */
+ 204:custom_hid_core.c ****     usbd_ep_init(pudev, &(configuration_descriptor.HID_ReportOUTEndpoint));
+  49              		.loc 1 204 5 is_stmt 1 view .LVU4
+  50 000e 05F12201 		add	r1, r5, #34
+  51 0012 2046     		mov	r0, r4
+  52 0014 FFF7FEFF 		bl	usbd_ep_init
+  53              	.LVL3:
+ 205:custom_hid_core.c **** 
+ 206:custom_hid_core.c ****     /* prepare receive data */
+ 207:custom_hid_core.c ****     usbd_ep_rx(pudev, CUSTOMHID_OUT_EP, rxBuff, 64);
+  54              		.loc 1 207 5 view .LVU5
+  55 0018 4023     		movs	r3, #64
+  56 001a 044A     		ldr	r2, .L3+4
+  57 001c 0121     		movs	r1, #1
+  58 001e 2046     		mov	r0, r4
+  59 0020 FFF7FEFF 		bl	usbd_ep_rx
+  60              	.LVL4:
+ 208:custom_hid_core.c **** 
+ 209:custom_hid_core.c ****     return USBD_OK;
+  61              		.loc 1 209 5 view .LVU6
+ 210:custom_hid_core.c **** }
+  62              		.loc 1 210 1 is_stmt 0 view .LVU7
+  63 0024 0020     		movs	r0, #0
+  64 0026 38BD     		pop	{r3, r4, r5, pc}
+  65              	.LVL5:
+  66              	.L4:
+  67              		.loc 1 210 1 view .LVU8
+  68              		.align	2
+  69              	.L3:
+  70 0028 00000000 		.word	.LANCHOR0
+  71 002c 00000000 		.word	.LANCHOR1
+  72              		.cfi_endproc
+  73              	.LFE116:
+  75              		.section	.text.custom_hid_deinit,"ax",%progbits
+  76              		.align	1
+  77              		.global	custom_hid_deinit
+ARM GAS  /tmp/ccJ8E7Vh.s 			page 6
+
+
+  78              		.syntax unified
+  79              		.thumb
+  80              		.thumb_func
+  81              		.fpu fpv4-sp-d16
+  83              	custom_hid_deinit:
+  84              	.LVL6:
+  85              	.LFB117:
+ 211:custom_hid_core.c **** 
+ 212:custom_hid_core.c **** /*!
+ 213:custom_hid_core.c ****     \brief      de-initialize the HID device
+ 214:custom_hid_core.c ****     \param[in]  pudev: pointer to USB device instance
+ 215:custom_hid_core.c ****     \param[in]  config_index: configuration index
+ 216:custom_hid_core.c ****     \param[out] none
+ 217:custom_hid_core.c ****     \retval     USB device operation status
+ 218:custom_hid_core.c **** */
+ 219:custom_hid_core.c **** uint8_t  custom_hid_deinit (void *pudev, uint8_t config_index)
+ 220:custom_hid_core.c **** {
+  86              		.loc 1 220 1 is_stmt 1 view -0
+  87              		.cfi_startproc
+  88              		@ args = 0, pretend = 0, frame = 0
+  89              		@ frame_needed = 0, uses_anonymous_args = 0
+  90              		.loc 1 220 1 is_stmt 0 view .LVU10
+  91 0000 10B5     		push	{r4, lr}
+  92              		.cfi_def_cfa_offset 8
+  93              		.cfi_offset 4, -8
+  94              		.cfi_offset 14, -4
+  95 0002 0446     		mov	r4, r0
+ 221:custom_hid_core.c ****     /* deinitialize HID endpoints */
+ 222:custom_hid_core.c ****     usbd_ep_deinit (pudev, CUSTOMHID_IN_EP);
+  96              		.loc 1 222 5 is_stmt 1 view .LVU11
+  97 0004 8121     		movs	r1, #129
+  98              	.LVL7:
+  99              		.loc 1 222 5 is_stmt 0 view .LVU12
+ 100 0006 FFF7FEFF 		bl	usbd_ep_deinit
+ 101              	.LVL8:
+ 223:custom_hid_core.c ****     usbd_ep_deinit (pudev, CUSTOMHID_OUT_EP);
+ 102              		.loc 1 223 5 is_stmt 1 view .LVU13
+ 103 000a 0121     		movs	r1, #1
+ 104 000c 2046     		mov	r0, r4
+ 105 000e FFF7FEFF 		bl	usbd_ep_deinit
+ 106              	.LVL9:
+ 224:custom_hid_core.c **** 
+ 225:custom_hid_core.c ****     return USBD_OK;
+ 107              		.loc 1 225 5 view .LVU14
+ 226:custom_hid_core.c **** }
+ 108              		.loc 1 226 1 is_stmt 0 view .LVU15
+ 109 0012 0020     		movs	r0, #0
+ 110 0014 10BD     		pop	{r4, pc}
+ 111              		.loc 1 226 1 view .LVU16
+ 112              		.cfi_endproc
+ 113              	.LFE117:
+ 115              		.section	.text.custom_hid_req_handler,"ax",%progbits
+ 116              		.align	1
+ 117              		.global	custom_hid_req_handler
+ 118              		.syntax unified
+ 119              		.thumb
+ 120              		.thumb_func
+ARM GAS  /tmp/ccJ8E7Vh.s 			page 7
+
+
+ 121              		.fpu fpv4-sp-d16
+ 123              	custom_hid_req_handler:
+ 124              	.LVL10:
+ 125              	.LFB118:
+ 227:custom_hid_core.c **** 
+ 228:custom_hid_core.c **** /*!
+ 229:custom_hid_core.c ****     \brief      handle the HID class-specific requests
+ 230:custom_hid_core.c ****     \param[in]  pudev: pointer to USB device instance
+ 231:custom_hid_core.c ****     \param[in]  req: device class-specific request
+ 232:custom_hid_core.c ****     \param[out] none
+ 233:custom_hid_core.c ****     \retval     USB device operation status
+ 234:custom_hid_core.c **** */
+ 235:custom_hid_core.c **** uint8_t custom_hid_req_handler (void *pudev, usb_device_req_struct *req)
+ 236:custom_hid_core.c **** {
+ 126              		.loc 1 236 1 is_stmt 1 view -0
+ 127              		.cfi_startproc
+ 128              		@ args = 0, pretend = 0, frame = 0
+ 129              		@ frame_needed = 0, uses_anonymous_args = 0
+ 130              		.loc 1 236 1 is_stmt 0 view .LVU18
+ 131 0000 10B5     		push	{r4, lr}
+ 132              		.cfi_def_cfa_offset 8
+ 133              		.cfi_offset 4, -8
+ 134              		.cfi_offset 14, -4
+ 237:custom_hid_core.c ****     uint16_t len = 0;
+ 135              		.loc 1 237 5 is_stmt 1 view .LVU19
+ 136              	.LVL11:
+ 238:custom_hid_core.c ****     uint8_t *pbuf = NULL;
+ 137              		.loc 1 238 5 view .LVU20
+ 239:custom_hid_core.c ****     uint8_t usbd_customhid_report_length = 0;
+ 138              		.loc 1 239 5 view .LVU21
+ 240:custom_hid_core.c **** 
+ 241:custom_hid_core.c ****     switch (req->bmRequestType & USB_REQ_MASK) {
+ 139              		.loc 1 241 5 view .LVU22
+ 140 0002 0C78     		ldrb	r4, [r1]	@ zero_extendqisi2
+ 141 0004 14F06004 		ands	r4, r4, #96
+ 142 0008 34D0     		beq	.L8
+ 143 000a 202C     		cmp	r4, #32
+ 144 000c 59D1     		bne	.L21
+ 242:custom_hid_core.c ****     case USB_CLASS_REQ:
+ 243:custom_hid_core.c ****         switch (req->bRequest) {
+ 145              		.loc 1 243 9 view .LVU23
+ 146 000e 4B78     		ldrb	r3, [r1, #1]	@ zero_extendqisi2
+ 147 0010 013B     		subs	r3, r3, #1
+ 148 0012 0A2B     		cmp	r3, #10
+ 149 0014 2AD8     		bhi	.L10
+ 150 0016 DFE803F0 		tbb	[pc, r3]
+ 151              	.L12:
+ 152 001a 57       		.byte	(.L22-.L12)/2
+ 153 001b 06       		.byte	(.L16-.L12)/2
+ 154 001c 0C       		.byte	(.L15-.L12)/2
+ 155 001d 29       		.byte	(.L10-.L12)/2
+ 156 001e 29       		.byte	(.L10-.L12)/2
+ 157 001f 29       		.byte	(.L10-.L12)/2
+ 158 0020 29       		.byte	(.L10-.L12)/2
+ 159 0021 29       		.byte	(.L10-.L12)/2
+ 160 0022 12       		.byte	(.L14-.L12)/2
+ 161 0023 1E       		.byte	(.L13-.L12)/2
+ARM GAS  /tmp/ccJ8E7Vh.s 			page 8
+
+
+ 162 0024 24       		.byte	(.L11-.L12)/2
+ 163 0025 00       		.p2align 1
+ 164              	.L16:
+ 244:custom_hid_core.c ****         case GET_REPORT:
+ 245:custom_hid_core.c ****             /* no use for this driver */
+ 246:custom_hid_core.c ****             break;
+ 247:custom_hid_core.c ****         case GET_IDLE:
+ 248:custom_hid_core.c ****             usbd_ctltx (pudev, (uint8_t *)&usbd_customhid_idlestate, 1);
+ 165              		.loc 1 248 13 view .LVU24
+ 166 0026 0122     		movs	r2, #1
+ 167 0028 2849     		ldr	r1, .L25
+ 168              	.LVL12:
+ 169              		.loc 1 248 13 is_stmt 0 view .LVU25
+ 170 002a FFF7FEFF 		bl	usbd_ctltx
+ 171              	.LVL13:
+ 249:custom_hid_core.c ****             break;
+ 172              		.loc 1 249 13 is_stmt 1 view .LVU26
+ 250:custom_hid_core.c ****         case GET_PROTOCOL:
+ 251:custom_hid_core.c ****             usbd_ctltx (pudev, (uint8_t *)&usbd_customhid_protocol, 1);
+ 252:custom_hid_core.c ****             break;
+ 253:custom_hid_core.c ****         case SET_REPORT:
+ 254:custom_hid_core.c ****             flag = 1;
+ 255:custom_hid_core.c ****             usbd_customhid_report_id = (uint8_t)(req->wValue);
+ 256:custom_hid_core.c ****             usbd_customhid_report_length = (uint8_t)(req->wLength);
+ 257:custom_hid_core.c ****             usbd_ctlrx (pudev, rxBuff, usbd_customhid_report_length);
+ 258:custom_hid_core.c ****             break;
+ 259:custom_hid_core.c ****         case SET_IDLE:
+ 260:custom_hid_core.c ****             usbd_customhid_idlestate = (uint8_t)(req->wValue >> 8);
+ 261:custom_hid_core.c ****             break;
+ 262:custom_hid_core.c ****         case SET_PROTOCOL:
+ 263:custom_hid_core.c ****             usbd_customhid_protocol = (uint8_t)(req->wValue);
+ 264:custom_hid_core.c ****             break;
+ 265:custom_hid_core.c ****         default:
+ 266:custom_hid_core.c ****             usbd_enum_error (pudev, req);
+ 267:custom_hid_core.c ****             return USBD_FAIL;
+ 268:custom_hid_core.c ****         }
+ 269:custom_hid_core.c ****         break;
+ 270:custom_hid_core.c ****     case USB_STANDARD_REQ:
+ 271:custom_hid_core.c ****         /* standard device request */
+ 272:custom_hid_core.c ****         switch(req->bRequest) {
+ 273:custom_hid_core.c ****         case USBREQ_GET_DESCRIPTOR:
+ 274:custom_hid_core.c ****             switch(req->wValue >> 8) {
+ 275:custom_hid_core.c ****             case CUSTOMHID_REPORT_DESCTYPE:
+ 276:custom_hid_core.c ****                 len = USB_MIN(CUSTOMHID_REPORT_DESC_SIZE, req->wLength);
+ 277:custom_hid_core.c ****                 pbuf = (uint8_t *)customhid_report_descriptor;
+ 278:custom_hid_core.c ****                 break;
+ 279:custom_hid_core.c ****             case CUSTOMHID_DESC_TYPE:
+ 280:custom_hid_core.c ****                 len = USB_MIN(USB_CUSTOMHID_DESC_SIZE, req->wLength);
+ 281:custom_hid_core.c ****                 pbuf = (uint8_t *)(&(configuration_descriptor.HID_VendorHID));
+ 282:custom_hid_core.c ****                 break;
+ 283:custom_hid_core.c ****             default:
+ 284:custom_hid_core.c ****                 break;
+ 285:custom_hid_core.c ****             }
+ 286:custom_hid_core.c ****             usbd_ctltx (pudev, pbuf, len);
+ 287:custom_hid_core.c ****             break;
+ 288:custom_hid_core.c ****         case USBREQ_GET_INTERFACE:
+ 289:custom_hid_core.c ****             usbd_ctltx (pudev, (uint8_t *)&usbd_customhid_altset, 1);
+ARM GAS  /tmp/ccJ8E7Vh.s 			page 9
+
+
+ 290:custom_hid_core.c ****             break;
+ 291:custom_hid_core.c ****         case USBREQ_SET_INTERFACE:
+ 292:custom_hid_core.c ****             usbd_customhid_altset = (uint8_t)(req->wValue);
+ 293:custom_hid_core.c ****             break;
+ 294:custom_hid_core.c ****         }
+ 295:custom_hid_core.c ****         break;
+ 296:custom_hid_core.c ****     }
+ 297:custom_hid_core.c **** 
+ 298:custom_hid_core.c ****     return USBD_OK;
+ 173              		.loc 1 298 12 is_stmt 0 view .LVU27
+ 174 002e 0024     		movs	r4, #0
+ 249:custom_hid_core.c ****             break;
+ 175              		.loc 1 249 13 view .LVU28
+ 176 0030 48E0     		b	.L9
+ 177              	.LVL14:
+ 178              	.L15:
+ 251:custom_hid_core.c ****             break;
+ 179              		.loc 1 251 13 is_stmt 1 view .LVU29
+ 180 0032 0122     		movs	r2, #1
+ 181 0034 2649     		ldr	r1, .L25+4
+ 182              	.LVL15:
+ 251:custom_hid_core.c ****             break;
+ 183              		.loc 1 251 13 is_stmt 0 view .LVU30
+ 184 0036 FFF7FEFF 		bl	usbd_ctltx
+ 185              	.LVL16:
+ 252:custom_hid_core.c ****         case SET_REPORT:
+ 186              		.loc 1 252 13 is_stmt 1 view .LVU31
+ 187              		.loc 1 298 12 is_stmt 0 view .LVU32
+ 188 003a 0024     		movs	r4, #0
+ 252:custom_hid_core.c ****         case SET_REPORT:
+ 189              		.loc 1 252 13 view .LVU33
+ 190 003c 42E0     		b	.L9
+ 191              	.LVL17:
+ 192              	.L14:
+ 254:custom_hid_core.c ****             usbd_customhid_report_id = (uint8_t)(req->wValue);
+ 193              		.loc 1 254 13 is_stmt 1 view .LVU34
+ 254:custom_hid_core.c ****             usbd_customhid_report_id = (uint8_t)(req->wValue);
+ 194              		.loc 1 254 18 is_stmt 0 view .LVU35
+ 195 003e 254B     		ldr	r3, .L25+8
+ 196 0040 0122     		movs	r2, #1
+ 197 0042 1A70     		strb	r2, [r3]
+ 255:custom_hid_core.c ****             usbd_customhid_report_length = (uint8_t)(req->wLength);
+ 198              		.loc 1 255 13 is_stmt 1 view .LVU36
+ 255:custom_hid_core.c ****             usbd_customhid_report_length = (uint8_t)(req->wLength);
+ 199              		.loc 1 255 40 is_stmt 0 view .LVU37
+ 200 0044 4A88     		ldrh	r2, [r1, #2]
+ 201 0046 244B     		ldr	r3, .L25+12
+ 202 0048 1A70     		strb	r2, [r3]
+ 256:custom_hid_core.c ****             usbd_ctlrx (pudev, rxBuff, usbd_customhid_report_length);
+ 203              		.loc 1 256 13 is_stmt 1 view .LVU38
+ 204              	.LVL18:
+ 257:custom_hid_core.c ****             break;
+ 205              		.loc 1 257 13 view .LVU39
+ 206 004a 8A79     		ldrb	r2, [r1, #6]	@ zero_extendqisi2
+ 207 004c 2349     		ldr	r1, .L25+16
+ 208              	.LVL19:
+ 257:custom_hid_core.c ****             break;
+ARM GAS  /tmp/ccJ8E7Vh.s 			page 10
+
+
+ 209              		.loc 1 257 13 is_stmt 0 view .LVU40
+ 210 004e FFF7FEFF 		bl	usbd_ctlrx
+ 211              	.LVL20:
+ 258:custom_hid_core.c ****         case SET_IDLE:
+ 212              		.loc 1 258 13 is_stmt 1 view .LVU41
+ 213              		.loc 1 298 12 is_stmt 0 view .LVU42
+ 214 0052 0024     		movs	r4, #0
+ 258:custom_hid_core.c ****         case SET_IDLE:
+ 215              		.loc 1 258 13 view .LVU43
+ 216 0054 36E0     		b	.L9
+ 217              	.LVL21:
+ 218              	.L13:
+ 260:custom_hid_core.c ****             break;
+ 219              		.loc 1 260 13 is_stmt 1 view .LVU44
+ 260:custom_hid_core.c ****             break;
+ 220              		.loc 1 260 40 is_stmt 0 view .LVU45
+ 221 0056 4B88     		ldrh	r3, [r1, #2]
+ 222 0058 1B0A     		lsrs	r3, r3, #8
+ 223 005a 1C4A     		ldr	r2, .L25
+ 224 005c 1360     		str	r3, [r2]
+ 261:custom_hid_core.c ****         case SET_PROTOCOL:
+ 225              		.loc 1 261 13 is_stmt 1 view .LVU46
+ 226              		.loc 1 298 12 is_stmt 0 view .LVU47
+ 227 005e 0024     		movs	r4, #0
+ 261:custom_hid_core.c ****         case SET_PROTOCOL:
+ 228              		.loc 1 261 13 view .LVU48
+ 229 0060 30E0     		b	.L9
+ 230              	.L11:
+ 263:custom_hid_core.c ****             break;
+ 231              		.loc 1 263 13 is_stmt 1 view .LVU49
+ 263:custom_hid_core.c ****             break;
+ 232              		.loc 1 263 39 is_stmt 0 view .LVU50
+ 233 0062 8A78     		ldrb	r2, [r1, #2]	@ zero_extendqisi2
+ 234 0064 1A4B     		ldr	r3, .L25+4
+ 235 0066 1A60     		str	r2, [r3]
+ 264:custom_hid_core.c ****         default:
+ 236              		.loc 1 264 13 is_stmt 1 view .LVU51
+ 237              		.loc 1 298 12 is_stmt 0 view .LVU52
+ 238 0068 0024     		movs	r4, #0
+ 264:custom_hid_core.c ****         default:
+ 239              		.loc 1 264 13 view .LVU53
+ 240 006a 2BE0     		b	.L9
+ 241              	.L10:
+ 266:custom_hid_core.c ****             return USBD_FAIL;
+ 242              		.loc 1 266 13 is_stmt 1 view .LVU54
+ 243 006c FFF7FEFF 		bl	usbd_enum_error
+ 244              	.LVL22:
+ 267:custom_hid_core.c ****         }
+ 245              		.loc 1 267 13 view .LVU55
+ 267:custom_hid_core.c ****         }
+ 246              		.loc 1 267 20 is_stmt 0 view .LVU56
+ 247 0070 0224     		movs	r4, #2
+ 248 0072 27E0     		b	.L9
+ 249              	.LVL23:
+ 250              	.L8:
+ 272:custom_hid_core.c ****         case USBREQ_GET_DESCRIPTOR:
+ 251              		.loc 1 272 9 is_stmt 1 view .LVU57
+ARM GAS  /tmp/ccJ8E7Vh.s 			page 11
+
+
+ 272:custom_hid_core.c ****         case USBREQ_GET_DESCRIPTOR:
+ 252              		.loc 1 272 19 is_stmt 0 view .LVU58
+ 253 0074 4B78     		ldrb	r3, [r1, #1]	@ zero_extendqisi2
+ 254 0076 0A2B     		cmp	r3, #10
+ 255 0078 1AD0     		beq	.L17
+ 256 007a 0B2B     		cmp	r3, #11
+ 257 007c 1DD0     		beq	.L18
+ 258 007e 062B     		cmp	r3, #6
+ 259 0080 20D1     		bne	.L9
+ 274:custom_hid_core.c ****             case CUSTOMHID_REPORT_DESCTYPE:
+ 260              		.loc 1 274 13 is_stmt 1 discriminator 1 view .LVU59
+ 274:custom_hid_core.c ****             case CUSTOMHID_REPORT_DESCTYPE:
+ 261              		.loc 1 274 32 is_stmt 0 discriminator 1 view .LVU60
+ 262 0082 4B88     		ldrh	r3, [r1, #2]
+ 263 0084 1B0A     		lsrs	r3, r3, #8
+ 264 0086 212B     		cmp	r3, #33
+ 265 0088 07D0     		beq	.L19
+ 266 008a 222B     		cmp	r3, #34
+ 267 008c 0BD1     		bne	.L23
+ 276:custom_hid_core.c ****                 pbuf = (uint8_t *)customhid_report_descriptor;
+ 268              		.loc 1 276 17 is_stmt 1 view .LVU61
+ 276:custom_hid_core.c ****                 pbuf = (uint8_t *)customhid_report_descriptor;
+ 269              		.loc 1 276 21 is_stmt 0 view .LVU62
+ 270 008e CA88     		ldrh	r2, [r1, #6]
+ 271 0090 1C2A     		cmp	r2, #28
+ 272 0092 28BF     		it	cs
+ 273 0094 1C22     		movcs	r2, #28
+ 274              	.LVL24:
+ 277:custom_hid_core.c ****                 break;
+ 275              		.loc 1 277 17 is_stmt 1 view .LVU63
+ 278:custom_hid_core.c ****             case CUSTOMHID_DESC_TYPE:
+ 276              		.loc 1 278 17 view .LVU64
+ 277:custom_hid_core.c ****                 break;
+ 277              		.loc 1 277 22 is_stmt 0 view .LVU65
+ 278 0096 1249     		ldr	r1, .L25+20
+ 279              	.LVL25:
+ 278:custom_hid_core.c ****             case CUSTOMHID_DESC_TYPE:
+ 280              		.loc 1 278 17 view .LVU66
+ 281 0098 07E0     		b	.L20
+ 282              	.LVL26:
+ 283              	.L19:
+ 280:custom_hid_core.c ****                 pbuf = (uint8_t *)(&(configuration_descriptor.HID_VendorHID));
+ 284              		.loc 1 280 17 is_stmt 1 view .LVU67
+ 280:custom_hid_core.c ****                 pbuf = (uint8_t *)(&(configuration_descriptor.HID_VendorHID));
+ 285              		.loc 1 280 21 is_stmt 0 view .LVU68
+ 286 009a CA88     		ldrh	r2, [r1, #6]
+ 287 009c 092A     		cmp	r2, #9
+ 288 009e 28BF     		it	cs
+ 289 00a0 0922     		movcs	r2, #9
+ 290              	.LVL27:
+ 281:custom_hid_core.c ****                 break;
+ 291              		.loc 1 281 17 is_stmt 1 view .LVU69
+ 282:custom_hid_core.c ****             default:
+ 292              		.loc 1 282 17 view .LVU70
+ 281:custom_hid_core.c ****                 break;
+ 293              		.loc 1 281 22 is_stmt 0 view .LVU71
+ 294 00a2 1049     		ldr	r1, .L25+24
+ARM GAS  /tmp/ccJ8E7Vh.s 			page 12
+
+
+ 295              	.LVL28:
+ 282:custom_hid_core.c ****             default:
+ 296              		.loc 1 282 17 view .LVU72
+ 297 00a4 01E0     		b	.L20
+ 298              	.LVL29:
+ 299              	.L23:
+ 282:custom_hid_core.c ****             default:
+ 300              		.loc 1 282 17 view .LVU73
+ 301 00a6 0021     		movs	r1, #0
+ 302              	.LVL30:
+ 282:custom_hid_core.c ****             default:
+ 303              		.loc 1 282 17 view .LVU74
+ 304 00a8 0A46     		mov	r2, r1
+ 305              	.LVL31:
+ 306              	.L20:
+ 286:custom_hid_core.c ****             break;
+ 307              		.loc 1 286 13 is_stmt 1 view .LVU75
+ 308 00aa FFF7FEFF 		bl	usbd_ctltx
+ 309              	.LVL32:
+ 287:custom_hid_core.c ****         case USBREQ_GET_INTERFACE:
+ 310              		.loc 1 287 13 view .LVU76
+ 311 00ae 09E0     		b	.L9
+ 312              	.LVL33:
+ 313              	.L17:
+ 289:custom_hid_core.c ****             break;
+ 314              		.loc 1 289 13 view .LVU77
+ 315 00b0 0122     		movs	r2, #1
+ 316 00b2 0D49     		ldr	r1, .L25+28
+ 317              	.LVL34:
+ 289:custom_hid_core.c ****             break;
+ 318              		.loc 1 289 13 is_stmt 0 view .LVU78
+ 319 00b4 FFF7FEFF 		bl	usbd_ctltx
+ 320              	.LVL35:
+ 290:custom_hid_core.c ****         case USBREQ_SET_INTERFACE:
+ 321              		.loc 1 290 13 is_stmt 1 view .LVU79
+ 322 00b8 04E0     		b	.L9
+ 323              	.LVL36:
+ 324              	.L18:
+ 292:custom_hid_core.c ****             break;
+ 325              		.loc 1 292 13 view .LVU80
+ 292:custom_hid_core.c ****             break;
+ 326              		.loc 1 292 37 is_stmt 0 view .LVU81
+ 327 00ba 8A78     		ldrb	r2, [r1, #2]	@ zero_extendqisi2
+ 328 00bc 0A4B     		ldr	r3, .L25+28
+ 329 00be 1A60     		str	r2, [r3]
+ 293:custom_hid_core.c ****         }
+ 330              		.loc 1 293 13 is_stmt 1 view .LVU82
+ 331 00c0 00E0     		b	.L9
+ 332              	.L21:
+ 241:custom_hid_core.c ****     case USB_CLASS_REQ:
+ 333              		.loc 1 241 5 is_stmt 0 view .LVU83
+ 334 00c2 0024     		movs	r4, #0
+ 335              	.LVL37:
+ 336              	.L9:
+ 299:custom_hid_core.c **** }
+ 337              		.loc 1 299 1 view .LVU84
+ 338 00c4 2046     		mov	r0, r4
+ARM GAS  /tmp/ccJ8E7Vh.s 			page 13
+
+
+ 339 00c6 10BD     		pop	{r4, pc}
+ 340              	.LVL38:
+ 341              	.L22:
+ 342              		.loc 1 299 1 view .LVU85
+ 343 00c8 0024     		movs	r4, #0
+ 344 00ca FBE7     		b	.L9
+ 345              	.L26:
+ 346              		.align	2
+ 347              	.L25:
+ 348 00cc 00000000 		.word	.LANCHOR3
+ 349 00d0 00000000 		.word	.LANCHOR4
+ 350 00d4 00000000 		.word	.LANCHOR5
+ 351 00d8 00000000 		.word	.LANCHOR6
+ 352 00dc 00000000 		.word	.LANCHOR1
+ 353 00e0 00000000 		.word	.LANCHOR2
+ 354 00e4 12000000 		.word	.LANCHOR0+18
+ 355 00e8 00000000 		.word	.LANCHOR7
+ 356              		.cfi_endproc
+ 357              	.LFE118:
+ 359              		.section	.text.custom_hid_data_handler,"ax",%progbits
+ 360              		.align	1
+ 361              		.global	custom_hid_data_handler
+ 362              		.syntax unified
+ 363              		.thumb
+ 364              		.thumb_func
+ 365              		.fpu fpv4-sp-d16
+ 367              	custom_hid_data_handler:
+ 368              	.LVL39:
+ 369              	.LFB119:
+ 300:custom_hid_core.c **** 
+ 301:custom_hid_core.c **** /*!
+ 302:custom_hid_core.c ****     \brief      handle data stage
+ 303:custom_hid_core.c ****     \param[in]  pudev: pointer to USB device instance
+ 304:custom_hid_core.c ****     \param[in]  rx_tx: data transfer direction:
+ 305:custom_hid_core.c ****       \arg        USBD_TX
+ 306:custom_hid_core.c ****       \arg        USBD_RX
+ 307:custom_hid_core.c ****     \param[in]  ep_id: endpoint identifier
+ 308:custom_hid_core.c ****     \param[out] none
+ 309:custom_hid_core.c ****     \retval     USB device operation status
+ 310:custom_hid_core.c **** */
+ 311:custom_hid_core.c **** uint8_t  custom_hid_data_handler (void *pudev, usb_dir_enum rx_tx, uint8_t ep_id)
+ 312:custom_hid_core.c **** {
+ 370              		.loc 1 312 1 is_stmt 1 view -0
+ 371              		.cfi_startproc
+ 372              		@ args = 0, pretend = 0, frame = 0
+ 373              		@ frame_needed = 0, uses_anonymous_args = 0
+ 313:custom_hid_core.c **** 	uint8_t i;
+ 374              		.loc 1 313 2 view .LVU87
+ 314:custom_hid_core.c **** 	
+ 315:custom_hid_core.c **** 	if((USB_TX == rx_tx) && ((CUSTOMHID_IN_EP & 0x7F) == ep_id)) {
+ 375              		.loc 1 315 2 view .LVU88
+ 376              		.loc 1 315 4 is_stmt 0 view .LVU89
+ 377 0000 0129     		cmp	r1, #1
+ 378 0002 08D0     		beq	.L41
+ 312:custom_hid_core.c **** 	uint8_t i;
+ 379              		.loc 1 312 1 view .LVU90
+ 380 0004 38B5     		push	{r3, r4, r5, lr}
+ARM GAS  /tmp/ccJ8E7Vh.s 			page 14
+
+
+ 381              		.cfi_def_cfa_offset 16
+ 382              		.cfi_offset 3, -16
+ 383              		.cfi_offset 4, -12
+ 384              		.cfi_offset 5, -8
+ 385              		.cfi_offset 14, -4
+ 386 0006 0546     		mov	r5, r0
+ 387 0008 0C46     		mov	r4, r1
+ 316:custom_hid_core.c ****         return USBD_OK;
+ 317:custom_hid_core.c ****     } else if ((USB_RX == rx_tx) && (CUSTOMHID_OUT_EP == ep_id)) {
+ 388              		.loc 1 317 12 is_stmt 1 view .LVU91
+ 389              		.loc 1 317 15 is_stmt 0 view .LVU92
+ 390 000a 0029     		cmp	r1, #0
+ 391 000c 35D1     		bne	.L35
+ 392              		.loc 1 317 34 discriminator 1 view .LVU93
+ 393 000e 012A     		cmp	r2, #1
+ 394 0010 06D0     		beq	.L42
+ 318:custom_hid_core.c ****         switch(rxBuff[0]) {
+ 319:custom_hid_core.c **** 		case 0:
+ 320:custom_hid_core.c **** 			gpio_bit_set(GPIOC, GPIO_PIN_13);
+ 321:custom_hid_core.c **** 			break;
+ 322:custom_hid_core.c **** 		case 1:
+ 323:custom_hid_core.c **** 			gpio_bit_reset(GPIOC, GPIO_PIN_13);
+ 324:custom_hid_core.c **** 			break;
+ 325:custom_hid_core.c **** 		case 2:
+ 326:custom_hid_core.c **** 			for (i = 0; i < 64; ++i)
+ 327:custom_hid_core.c **** 			{
+ 328:custom_hid_core.c **** 				txBuff[i] = rxBuff[i] + 1;
+ 329:custom_hid_core.c **** 			}
+ 330:custom_hid_core.c **** 			usbd_ep_tx (pudev, CUSTOMHID_IN_EP, txBuff, 64);
+ 331:custom_hid_core.c **** 			break;
+ 332:custom_hid_core.c **** 		}
+ 333:custom_hid_core.c **** 		
+ 334:custom_hid_core.c ****         usbd_ep_rx(pudev, CUSTOMHID_OUT_EP, rxBuff, 64);
+ 335:custom_hid_core.c ****         return USBD_OK;
+ 336:custom_hid_core.c ****     }
+ 337:custom_hid_core.c **** 	
+ 338:custom_hid_core.c ****     return USBD_FAIL;
+ 395              		.loc 1 338 12 view .LVU94
+ 396 0012 0220     		movs	r0, #2
+ 397              	.LVL40:
+ 398              	.L29:
+ 339:custom_hid_core.c **** }
+ 399              		.loc 1 339 1 view .LVU95
+ 400 0014 38BD     		pop	{r3, r4, r5, pc}
+ 401              	.LVL41:
+ 402              	.L41:
+ 403              		.cfi_def_cfa_offset 0
+ 404              		.cfi_restore 3
+ 405              		.cfi_restore 4
+ 406              		.cfi_restore 5
+ 407              		.cfi_restore 14
+ 338:custom_hid_core.c **** }
+ 408              		.loc 1 338 12 discriminator 1 view .LVU96
+ 409 0016 012A     		cmp	r2, #1
+ 410 0018 0CBF     		ite	eq
+ 411 001a 0020     		moveq	r0, #0
+ 412              	.LVL42:
+ARM GAS  /tmp/ccJ8E7Vh.s 			page 15
+
+
+ 338:custom_hid_core.c **** }
+ 413              		.loc 1 338 12 discriminator 1 view .LVU97
+ 414 001c 0220     		movne	r0, #2
+ 415              		.loc 1 339 1 discriminator 1 view .LVU98
+ 416 001e 7047     		bx	lr
+ 417              	.LVL43:
+ 418              	.L42:
+ 419              		.cfi_def_cfa_offset 16
+ 420              		.cfi_offset 3, -16
+ 421              		.cfi_offset 4, -12
+ 422              		.cfi_offset 5, -8
+ 423              		.cfi_offset 14, -4
+ 318:custom_hid_core.c ****         switch(rxBuff[0]) {
+ 424              		.loc 1 318 9 is_stmt 1 view .LVU99
+ 318:custom_hid_core.c ****         switch(rxBuff[0]) {
+ 425              		.loc 1 318 22 is_stmt 0 view .LVU100
+ 426 0020 174B     		ldr	r3, .L44
+ 427 0022 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 318:custom_hid_core.c ****         switch(rxBuff[0]) {
+ 428              		.loc 1 318 9 view .LVU101
+ 429 0024 012B     		cmp	r3, #1
+ 430 0026 10D0     		beq	.L30
+ 431 0028 022B     		cmp	r3, #2
+ 432 002a 14D0     		beq	.L31
+ 433 002c 3BB1     		cbz	r3, .L43
+ 434              	.LVL44:
+ 435              	.L32:
+ 334:custom_hid_core.c ****         return USBD_OK;
+ 436              		.loc 1 334 9 is_stmt 1 view .LVU102
+ 437 002e 4023     		movs	r3, #64
+ 438 0030 134A     		ldr	r2, .L44
+ 439 0032 0121     		movs	r1, #1
+ 440 0034 2846     		mov	r0, r5
+ 441 0036 FFF7FEFF 		bl	usbd_ep_rx
+ 442              	.LVL45:
+ 335:custom_hid_core.c ****     }
+ 443              		.loc 1 335 9 view .LVU103
+ 335:custom_hid_core.c ****     }
+ 444              		.loc 1 335 16 is_stmt 0 view .LVU104
+ 445 003a 2046     		mov	r0, r4
+ 446 003c EAE7     		b	.L29
+ 447              	.LVL46:
+ 448              	.L43:
+ 320:custom_hid_core.c **** 			break;
+ 449              		.loc 1 320 4 is_stmt 1 view .LVU105
+ 450 003e 4FF40051 		mov	r1, #8192
+ 451              	.LVL47:
+ 320:custom_hid_core.c **** 			break;
+ 452              		.loc 1 320 4 is_stmt 0 view .LVU106
+ 453 0042 1048     		ldr	r0, .L44+4
+ 454              	.LVL48:
+ 320:custom_hid_core.c **** 			break;
+ 455              		.loc 1 320 4 view .LVU107
+ 456 0044 FFF7FEFF 		bl	gpio_bit_set
+ 457              	.LVL49:
+ 321:custom_hid_core.c **** 		case 1:
+ 458              		.loc 1 321 4 is_stmt 1 view .LVU108
+ARM GAS  /tmp/ccJ8E7Vh.s 			page 16
+
+
+ 459 0048 F1E7     		b	.L32
+ 460              	.LVL50:
+ 461              	.L30:
+ 323:custom_hid_core.c **** 			break;
+ 462              		.loc 1 323 4 view .LVU109
+ 463 004a 4FF40051 		mov	r1, #8192
+ 464              	.LVL51:
+ 323:custom_hid_core.c **** 			break;
+ 465              		.loc 1 323 4 is_stmt 0 view .LVU110
+ 466 004e 0D48     		ldr	r0, .L44+4
+ 467              	.LVL52:
+ 323:custom_hid_core.c **** 			break;
+ 468              		.loc 1 323 4 view .LVU111
+ 469 0050 FFF7FEFF 		bl	gpio_bit_reset
+ 470              	.LVL53:
+ 324:custom_hid_core.c **** 		case 2:
+ 471              		.loc 1 324 4 is_stmt 1 view .LVU112
+ 472 0054 EBE7     		b	.L32
+ 473              	.LVL54:
+ 474              	.L31:
+ 324:custom_hid_core.c **** 		case 2:
+ 475              		.loc 1 324 4 is_stmt 0 view .LVU113
+ 476 0056 0A48     		ldr	r0, .L44
+ 477              	.LVL55:
+ 324:custom_hid_core.c **** 		case 2:
+ 478              		.loc 1 324 4 view .LVU114
+ 479 0058 421E     		subs	r2, r0, #1
+ 480              	.LVL56:
+ 324:custom_hid_core.c **** 		case 2:
+ 481              		.loc 1 324 4 view .LVU115
+ 482 005a 0B49     		ldr	r1, .L44+8
+ 483              	.LVL57:
+ 324:custom_hid_core.c **** 		case 2:
+ 484              		.loc 1 324 4 view .LVU116
+ 485 005c 3F30     		adds	r0, r0, #63
+ 486              	.L33:
+ 487              	.LVL58:
+ 328:custom_hid_core.c **** 			}
+ 488              		.loc 1 328 5 is_stmt 1 discriminator 3 view .LVU117
+ 328:custom_hid_core.c **** 			}
+ 489              		.loc 1 328 27 is_stmt 0 discriminator 3 view .LVU118
+ 490 005e 12F8013F 		ldrb	r3, [r2, #1]!	@ zero_extendqisi2
+ 491              	.LVL59:
+ 328:custom_hid_core.c **** 			}
+ 492              		.loc 1 328 27 discriminator 3 view .LVU119
+ 493 0062 0133     		adds	r3, r3, #1
+ 328:custom_hid_core.c **** 			}
+ 494              		.loc 1 328 15 discriminator 3 view .LVU120
+ 495 0064 01F8013F 		strb	r3, [r1, #1]!
+ 326:custom_hid_core.c **** 			{
+ 496              		.loc 1 326 24 is_stmt 1 discriminator 3 view .LVU121
+ 497              	.LVL60:
+ 326:custom_hid_core.c **** 			{
+ 498              		.loc 1 326 16 discriminator 3 view .LVU122
+ 326:custom_hid_core.c **** 			{
+ 499              		.loc 1 326 4 is_stmt 0 discriminator 3 view .LVU123
+ 500 0068 8242     		cmp	r2, r0
+ARM GAS  /tmp/ccJ8E7Vh.s 			page 17
+
+
+ 501 006a F8D1     		bne	.L33
+ 330:custom_hid_core.c **** 			break;
+ 502              		.loc 1 330 4 is_stmt 1 view .LVU124
+ 503 006c 4023     		movs	r3, #64
+ 504 006e 074A     		ldr	r2, .L44+12
+ 505              	.LVL61:
+ 330:custom_hid_core.c **** 			break;
+ 506              		.loc 1 330 4 is_stmt 0 view .LVU125
+ 507 0070 8121     		movs	r1, #129
+ 508 0072 2846     		mov	r0, r5
+ 509 0074 FFF7FEFF 		bl	usbd_ep_tx
+ 510              	.LVL62:
+ 331:custom_hid_core.c **** 		}
+ 511              		.loc 1 331 4 is_stmt 1 view .LVU126
+ 512 0078 D9E7     		b	.L32
+ 513              	.LVL63:
+ 514              	.L35:
+ 338:custom_hid_core.c **** }
+ 515              		.loc 1 338 12 is_stmt 0 view .LVU127
+ 516 007a 0220     		movs	r0, #2
+ 517              	.LVL64:
+ 338:custom_hid_core.c **** }
+ 518              		.loc 1 338 12 view .LVU128
+ 519 007c CAE7     		b	.L29
+ 520              	.L45:
+ 521 007e 00BF     		.align	2
+ 522              	.L44:
+ 523 0080 00000000 		.word	.LANCHOR1
+ 524 0084 00100140 		.word	1073811456
+ 525 0088 FFFFFFFF 		.word	.LANCHOR8-1
+ 526 008c 00000000 		.word	.LANCHOR8
+ 527              		.cfi_endproc
+ 528              	.LFE119:
+ 530              		.global	customhid_report_descriptor
+ 531              		.global	usbd_strings
+ 532              		.global	usbd_language_id_desc
+ 533              		.global	configuration_descriptor
+ 534              		.global	device_descripter
+ 535              		.global	usbd_int_fops
+ 536              		.global	flag
+ 537              		.global	usbd_customhid_report_id
+ 538              		.global	txBuff
+ 539              		.global	rxBuff
+ 540              		.section	.bss.flag,"aw",%nobits
+ 541              		.set	.LANCHOR5,. + 0
+ 544              	flag:
+ 545 0000 00       		.space	1
+ 546              		.section	.bss.rxBuff,"aw",%nobits
+ 547              		.align	2
+ 548              		.set	.LANCHOR1,. + 0
+ 551              	rxBuff:
+ 552 0000 00000000 		.space	64
+ 552      00000000 
+ 552      00000000 
+ 552      00000000 
+ 552      00000000 
+ 553              		.section	.bss.txBuff,"aw",%nobits
+ARM GAS  /tmp/ccJ8E7Vh.s 			page 18
+
+
+ 554              		.align	2
+ 555              		.set	.LANCHOR8,. + 0
+ 558              	txBuff:
+ 559 0000 00000000 		.space	64
+ 559      00000000 
+ 559      00000000 
+ 559      00000000 
+ 559      00000000 
+ 560              		.section	.bss.usbd_customhid_altset,"aw",%nobits
+ 561              		.align	2
+ 562              		.set	.LANCHOR7,. + 0
+ 565              	usbd_customhid_altset:
+ 566 0000 00000000 		.space	4
+ 567              		.section	.bss.usbd_customhid_idlestate,"aw",%nobits
+ 568              		.align	2
+ 569              		.set	.LANCHOR3,. + 0
+ 572              	usbd_customhid_idlestate:
+ 573 0000 00000000 		.space	4
+ 574              		.section	.bss.usbd_customhid_protocol,"aw",%nobits
+ 575              		.align	2
+ 576              		.set	.LANCHOR4,. + 0
+ 579              	usbd_customhid_protocol:
+ 580 0000 00000000 		.space	4
+ 581              		.section	.bss.usbd_customhid_report_id,"aw",%nobits
+ 582              		.set	.LANCHOR6,. + 0
+ 585              	usbd_customhid_report_id:
+ 586 0000 00       		.space	1
+ 587              		.section	.bss.usbd_int_fops,"aw",%nobits
+ 588              		.align	2
+ 591              	usbd_int_fops:
+ 592 0000 00000000 		.space	4
+ 593              		.section	.data.__compound_literal.0,"aw"
+ 594              		.align	2
+ 597              	__compound_literal.0:
+ 598 0000 14       		.byte	20
+ 599 0001 03       		.byte	3
+ 600 0002 0000     		.space	2
+ 601 0004 42000000 		.ascii	"B\000\000\000O\000\000\000O\000\000\000T\000\000\000"
+ 601      4F000000 
+ 601      4F000000 
+ 601      54000000 
+ 602 0014 00000000 		.ascii	"\000\000\000\000"
+ 603              		.section	.data.__compound_literal.1,"aw"
+ 604              		.align	2
+ 607              	__compound_literal.1:
+ 608 0000 24       		.byte	36
+ 609 0001 03       		.byte	3
+ 610 0002 0000     		.space	2
+ 611 0004 55000000 		.ascii	"U\000\000\000S\000\000\000B\000\000\000 \000\000\000"
+ 611      53000000 
+ 611      42000000 
+ 611      20000000 
+ 612 0014 42000000 		.ascii	"B\000\000\000O\000\000\000O\000\000\000T\000\000\000"
+ 612      4F000000 
+ 612      4F000000 
+ 612      54000000 
+ 613 0024 00000000 		.ascii	"\000\000\000\000"
+ARM GAS  /tmp/ccJ8E7Vh.s 			page 19
+
+
+ 614              		.section	.data.__compound_literal.2,"aw"
+ 615              		.align	2
+ 618              	__compound_literal.2:
+ 619 0000 24       		.byte	36
+ 620 0001 03       		.byte	3
+ 621 0002 0000     		.space	2
+ 622 0004 47000000 		.ascii	"G\000\000\000D\000\000\0003\000\000\0002\000\000\000"
+ 622      44000000 
+ 622      33000000 
+ 622      32000000 
+ 623 0014 45000000 		.ascii	"E\000\000\0001\000\000\0000\000\000\0003\000\000\000"
+ 623      31000000 
+ 623      30000000 
+ 623      33000000 
+ 624 0024 00000000 		.ascii	"\000\000\000\000"
+ 625              		.section	.data.__compound_literal.3,"aw"
+ 626              		.align	2
+ 629              	__compound_literal.3:
+ 630 0000 10       		.byte	16
+ 631 0001 03       		.byte	3
+ 632 0002 0000     		.space	2
+ 633 0004 4E000000 		.ascii	"N\000\000\000H\000\000\000C\000\000\000\000\000\000"
+ 633      48000000 
+ 633      43000000 
+ 633      000000
+ 634 0013 00       		.ascii	"\000"
+ 635              		.section	.data.__compound_literal.4,"aw"
+ 636              		.align	2
+ 639              	__compound_literal.4:
+ 640 0000 10       		.byte	16
+ 641 0001 03       		.byte	3
+ 642 0002 0000     		.space	2
+ 643 0004 4E000000 		.ascii	"N\000\000\000H\000\000\000C\000\000\000\000\000\000"
+ 643      48000000 
+ 643      43000000 
+ 643      000000
+ 644 0013 00       		.ascii	"\000"
+ 645              		.section	.data.usbd_strings,"aw"
+ 646              		.align	2
+ 649              	usbd_strings:
+ 650 0000 00000000 		.word	usbd_language_id_desc
+ 651 0004 00000000 		.word	__compound_literal.0
+ 652 0008 00000000 		.word	__compound_literal.1
+ 653 000c 00000000 		.word	__compound_literal.2
+ 654 0010 00000000 		.word	__compound_literal.3
+ 655 0014 00000000 		.word	__compound_literal.4
+ 656              		.section	.rodata.configuration_descriptor,"a"
+ 657              		.align	2
+ 658              		.set	.LANCHOR0,. + 0
+ 661              	configuration_descriptor:
+ 662 0000 09       		.byte	9
+ 663 0001 02       		.byte	2
+ 664 0002 2900     		.short	41
+ 665 0004 01       		.byte	1
+ 666 0005 01       		.byte	1
+ 667 0006 00       		.byte	0
+ 668 0007 80       		.byte	-128
+ARM GAS  /tmp/ccJ8E7Vh.s 			page 20
+
+
+ 669 0008 32       		.byte	50
+ 670 0009 09       		.byte	9
+ 671 000a 04       		.byte	4
+ 672 000b 00       		.byte	0
+ 673 000c 00       		.byte	0
+ 674 000d 02       		.byte	2
+ 675 000e 03       		.byte	3
+ 676 000f 00       		.byte	0
+ 677 0010 00       		.byte	0
+ 678 0011 00       		.byte	0
+ 679 0012 09       		.byte	9
+ 680 0013 21       		.byte	33
+ 681 0014 1101     		.short	273
+ 682 0016 00       		.byte	0
+ 683 0017 01       		.byte	1
+ 684 0018 22       		.byte	34
+ 685 0019 1C00     		.2byte	28
+ 686 001b 07       		.byte	7
+ 687 001c 05       		.byte	5
+ 688 001d 81       		.byte	-127
+ 689 001e 03       		.byte	3
+ 690 001f 4000     		.2byte	64
+ 691 0021 01       		.byte	1
+ 692 0022 07       		.byte	7
+ 693 0023 05       		.byte	5
+ 694 0024 01       		.byte	1
+ 695 0025 03       		.byte	3
+ 696 0026 4000     		.short	64
+ 697 0028 01       		.byte	1
+ 698              		.section	.rodata.customhid_report_descriptor,"a"
+ 699              		.align	2
+ 700              		.set	.LANCHOR2,. + 0
+ 703              	customhid_report_descriptor:
+ 704 0000 0600FF09 		.ascii	"\006\000\377\011\001\241\001\031\001)@\025\001%@u\010"
+ 704      01A10119 
+ 704      01294015 
+ 704      01254075 
+ 704      08
+ 705 0011 95408100 		.ascii	"\225@\201\000\031\001)@\221\000\300"
+ 705      19012940 
+ 705      9100C0
+ 706              		.section	.rodata.device_descripter,"a"
+ 707              		.align	2
+ 710              	device_descripter:
+ 711 0000 12       		.byte	18
+ 712 0001 01       		.byte	1
+ 713 0002 0002     		.short	512
+ 714 0004 00       		.byte	0
+ 715 0005 00       		.byte	0
+ 716 0006 00       		.byte	0
+ 717 0007 40       		.byte	64
+ 718 0008 8304     		.short	1155
+ 719 000a 8619     		.short	6534
+ 720 000c 0001     		.short	256
+ 721 000e 01       		.byte	1
+ 722 000f 02       		.byte	2
+ 723 0010 03       		.byte	3
+ARM GAS  /tmp/ccJ8E7Vh.s 			page 21
+
+
+ 724 0011 01       		.byte	1
+ 725              		.section	.rodata.usbd_language_id_desc,"a"
+ 726              		.align	2
+ 729              	usbd_language_id_desc:
+ 730 0000 04       		.byte	4
+ 731 0001 03       		.byte	3
+ 732 0002 0904     		.short	1033
+ 733              		.text
+ 734              	.Letext0:
+ 735              		.file 2 "/usr/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h"
+ 736              		.file 3 "../../../../Firmware/GD32E10x_usbfs_driver/Include/usb_std.h"
+ 737              		.file 4 "../../../../Firmware/GD32E10x_usbfs_driver/Include/usb_core.h"
+ 738              		.file 5 "/usr/lib/gcc/arm-none-eabi/10.3.1/include/stddef.h"
+ 739              		.file 6 "custom_hid_core.h"
+ 740              		.file 7 "../../../../Firmware/GD32E10x_usbfs_driver/Include/usbd_int.h"
+ 741              		.file 8 "../../../../Firmware/GD32E10x_usbfs_driver/Include/usbd_core.h"
+ 742              		.file 9 "../../../../Firmware/GD32E10x_standard_peripheral/Include/gd32e10x_gpio.h"
+ 743              		.file 10 "../../../../Firmware/GD32E10x_usbfs_driver/Include/usbd_std.h"
+ARM GAS  /tmp/ccJ8E7Vh.s 			page 22
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 custom_hid_core.c
+     /tmp/ccJ8E7Vh.s:18     .text.custom_hid_init:0000000000000000 $t
+     /tmp/ccJ8E7Vh.s:26     .text.custom_hid_init:0000000000000000 custom_hid_init
+     /tmp/ccJ8E7Vh.s:70     .text.custom_hid_init:0000000000000028 $d
+     /tmp/ccJ8E7Vh.s:76     .text.custom_hid_deinit:0000000000000000 $t
+     /tmp/ccJ8E7Vh.s:83     .text.custom_hid_deinit:0000000000000000 custom_hid_deinit
+     /tmp/ccJ8E7Vh.s:116    .text.custom_hid_req_handler:0000000000000000 $t
+     /tmp/ccJ8E7Vh.s:123    .text.custom_hid_req_handler:0000000000000000 custom_hid_req_handler
+     /tmp/ccJ8E7Vh.s:152    .text.custom_hid_req_handler:000000000000001a $d
+     /tmp/ccJ8E7Vh.s:348    .text.custom_hid_req_handler:00000000000000cc $d
+     /tmp/ccJ8E7Vh.s:360    .text.custom_hid_data_handler:0000000000000000 $t
+     /tmp/ccJ8E7Vh.s:367    .text.custom_hid_data_handler:0000000000000000 custom_hid_data_handler
+     /tmp/ccJ8E7Vh.s:523    .text.custom_hid_data_handler:0000000000000080 $d
+     /tmp/ccJ8E7Vh.s:703    .rodata.customhid_report_descriptor:0000000000000000 customhid_report_descriptor
+     /tmp/ccJ8E7Vh.s:649    .data.usbd_strings:0000000000000000 usbd_strings
+     /tmp/ccJ8E7Vh.s:729    .rodata.usbd_language_id_desc:0000000000000000 usbd_language_id_desc
+     /tmp/ccJ8E7Vh.s:661    .rodata.configuration_descriptor:0000000000000000 configuration_descriptor
+     /tmp/ccJ8E7Vh.s:710    .rodata.device_descripter:0000000000000000 device_descripter
+     /tmp/ccJ8E7Vh.s:591    .bss.usbd_int_fops:0000000000000000 usbd_int_fops
+     /tmp/ccJ8E7Vh.s:544    .bss.flag:0000000000000000 flag
+     /tmp/ccJ8E7Vh.s:585    .bss.usbd_customhid_report_id:0000000000000000 usbd_customhid_report_id
+     /tmp/ccJ8E7Vh.s:558    .bss.txBuff:0000000000000000 txBuff
+     /tmp/ccJ8E7Vh.s:551    .bss.rxBuff:0000000000000000 rxBuff
+     /tmp/ccJ8E7Vh.s:545    .bss.flag:0000000000000000 $d
+     /tmp/ccJ8E7Vh.s:547    .bss.rxBuff:0000000000000000 $d
+     /tmp/ccJ8E7Vh.s:554    .bss.txBuff:0000000000000000 $d
+     /tmp/ccJ8E7Vh.s:561    .bss.usbd_customhid_altset:0000000000000000 $d
+     /tmp/ccJ8E7Vh.s:565    .bss.usbd_customhid_altset:0000000000000000 usbd_customhid_altset
+     /tmp/ccJ8E7Vh.s:568    .bss.usbd_customhid_idlestate:0000000000000000 $d
+     /tmp/ccJ8E7Vh.s:572    .bss.usbd_customhid_idlestate:0000000000000000 usbd_customhid_idlestate
+     /tmp/ccJ8E7Vh.s:575    .bss.usbd_customhid_protocol:0000000000000000 $d
+     /tmp/ccJ8E7Vh.s:579    .bss.usbd_customhid_protocol:0000000000000000 usbd_customhid_protocol
+     /tmp/ccJ8E7Vh.s:586    .bss.usbd_customhid_report_id:0000000000000000 $d
+     /tmp/ccJ8E7Vh.s:588    .bss.usbd_int_fops:0000000000000000 $d
+     /tmp/ccJ8E7Vh.s:594    .data.__compound_literal.0:0000000000000000 $d
+     /tmp/ccJ8E7Vh.s:597    .data.__compound_literal.0:0000000000000000 __compound_literal.0
+     /tmp/ccJ8E7Vh.s:604    .data.__compound_literal.1:0000000000000000 $d
+     /tmp/ccJ8E7Vh.s:607    .data.__compound_literal.1:0000000000000000 __compound_literal.1
+     /tmp/ccJ8E7Vh.s:615    .data.__compound_literal.2:0000000000000000 $d
+     /tmp/ccJ8E7Vh.s:618    .data.__compound_literal.2:0000000000000000 __compound_literal.2
+     /tmp/ccJ8E7Vh.s:626    .data.__compound_literal.3:0000000000000000 $d
+     /tmp/ccJ8E7Vh.s:629    .data.__compound_literal.3:0000000000000000 __compound_literal.3
+     /tmp/ccJ8E7Vh.s:636    .data.__compound_literal.4:0000000000000000 $d
+     /tmp/ccJ8E7Vh.s:639    .data.__compound_literal.4:0000000000000000 __compound_literal.4
+     /tmp/ccJ8E7Vh.s:646    .data.usbd_strings:0000000000000000 $d
+     /tmp/ccJ8E7Vh.s:657    .rodata.configuration_descriptor:0000000000000000 $d
+     /tmp/ccJ8E7Vh.s:699    .rodata.customhid_report_descriptor:0000000000000000 $d
+     /tmp/ccJ8E7Vh.s:707    .rodata.device_descripter:0000000000000000 $d
+     /tmp/ccJ8E7Vh.s:726    .rodata.usbd_language_id_desc:0000000000000000 $d
+     /tmp/ccJ8E7Vh.s:163    .text.custom_hid_req_handler:0000000000000025 $d
+     /tmp/ccJ8E7Vh.s:163    .text.custom_hid_req_handler:0000000000000026 $t
+
+UNDEFINED SYMBOLS
+usbd_ep_init
+usbd_ep_rx
+usbd_ep_deinit
+ARM GAS  /tmp/ccJ8E7Vh.s 			page 23
+
+
+usbd_ctltx
+usbd_ctlrx
+usbd_enum_error
+gpio_bit_set
+gpio_bit_reset
+usbd_ep_tx

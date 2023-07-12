@@ -1,0 +1,1207 @@
+ARM GAS  /tmp/cc4gufNn.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.eabi_attribute 27, 1
+   3              		.eabi_attribute 28, 1
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.file	"gd32e10x_bkp.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.section	.text.bkp_deinit,"ax",%progbits
+  18              		.align	1
+  19              		.global	bkp_deinit
+  20              		.arch armv7e-m
+  21              		.syntax unified
+  22              		.thumb
+  23              		.thumb_func
+  24              		.fpu fpv4-sp-d16
+  26              	bkp_deinit:
+  27              	.LFB116:
+  28              		.file 1 "../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c"
+   1:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c **** /*!
+   2:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     \file    gd32e10x_bkp.c
+   3:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     \brief   BKP driver
+   4:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     
+   5:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     \version 2017-12-26, V1.0.0, firmware for GD32E10x
+   6:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c **** */
+   7:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c **** 
+   8:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c **** /*
+   9:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     Copyright (c) 2017, GigaDevice Semiconductor Inc.
+  10:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c **** 
+  11:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     All rights reserved.
+  12:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c **** 
+  13:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     Redistribution and use in source and binary forms, with or without modification, 
+  14:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c **** are permitted provided that the following conditions are met:
+  15:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c **** 
+  16:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     1. Redistributions of source code must retain the above copyright notice, this 
+  17:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****        list of conditions and the following disclaimer.
+  18:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     2. Redistributions in binary form must reproduce the above copyright notice, 
+  19:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****        this list of conditions and the following disclaimer in the documentation 
+  20:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****        and/or other materials provided with the distribution.
+  21:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     3. Neither the name of the copyright holder nor the names of its contributors 
+  22:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****        may be used to endorse or promote products derived from this software without 
+  23:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****        specific prior written permission.
+  24:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c **** 
+  25:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" 
+  26:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c **** AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED 
+  27:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c **** WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. 
+  28:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c **** IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, 
+  29:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c **** INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT 
+  30:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c **** NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR 
+ARM GAS  /tmp/cc4gufNn.s 			page 2
+
+
+  31:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c **** PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, 
+  32:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c **** WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) 
+  33:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c **** ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY 
+  34:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c **** OF SUCH DAMAGE.
+  35:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c **** */
+  36:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c **** 
+  37:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c **** #include "gd32e10x_bkp.h"
+  38:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c **** 
+  39:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c **** /* BKP register bits offset */
+  40:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c **** #define BKP_TAMPER_BITS_OFFSET          ((uint32_t)8U)
+  41:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c **** 
+  42:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c **** /*!
+  43:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     \brief      reset BKP registers
+  44:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     \param[in]  none
+  45:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     \param[out] none
+  46:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     \retval     none
+  47:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c **** */
+  48:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c **** void bkp_deinit(void)
+  49:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c **** {
+  29              		.loc 1 49 1 view -0
+  30              		.cfi_startproc
+  31              		@ args = 0, pretend = 0, frame = 0
+  32              		@ frame_needed = 0, uses_anonymous_args = 0
+  33 0000 08B5     		push	{r3, lr}
+  34              		.cfi_def_cfa_offset 8
+  35              		.cfi_offset 3, -8
+  36              		.cfi_offset 14, -4
+  50:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     /* reset BKP domain register*/
+  51:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     rcu_bkp_reset_enable();
+  37              		.loc 1 51 5 view .LVU1
+  38 0002 FFF7FEFF 		bl	rcu_bkp_reset_enable
+  39              	.LVL0:
+  52:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     rcu_bkp_reset_disable();
+  40              		.loc 1 52 5 view .LVU2
+  41 0006 FFF7FEFF 		bl	rcu_bkp_reset_disable
+  42              	.LVL1:
+  53:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c **** }
+  43              		.loc 1 53 1 is_stmt 0 view .LVU3
+  44 000a 08BD     		pop	{r3, pc}
+  45              		.cfi_endproc
+  46              	.LFE116:
+  48              		.section	.text.bkp_data_write,"ax",%progbits
+  49              		.align	1
+  50              		.global	bkp_data_write
+  51              		.syntax unified
+  52              		.thumb
+  53              		.thumb_func
+  54              		.fpu fpv4-sp-d16
+  56              	bkp_data_write:
+  57              	.LVL2:
+  58              	.LFB117:
+  54:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c **** 
+  55:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c **** /*!
+  56:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     \brief      write BKP data register
+  57:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     \param[in]  register_number: refer to bkp_data_register_enum
+  58:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****                 only one parameter can be selected which is shown as below:
+  59:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****       \arg        BKP_DATA_x(x = 0..41): bkp data register number x
+ARM GAS  /tmp/cc4gufNn.s 			page 3
+
+
+  60:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     \param[in]  data: the data to be write in BKP data register
+  61:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     \param[out] none
+  62:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     \retval     none
+  63:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c **** */
+  64:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c **** void bkp_data_write(bkp_data_register_enum register_number, uint16_t data)
+  65:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c **** {
+  59              		.loc 1 65 1 is_stmt 1 view -0
+  60              		.cfi_startproc
+  61              		@ args = 0, pretend = 0, frame = 0
+  62              		@ frame_needed = 0, uses_anonymous_args = 0
+  63              		@ link register save eliminated.
+  66:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     if((register_number >= BKP_DATA_10) && (register_number <= BKP_DATA_41)){
+  64              		.loc 1 66 5 view .LVU5
+  65              		.loc 1 66 41 is_stmt 0 view .LVU6
+  66 0000 A0F10B03 		sub	r3, r0, #11
+  67              		.loc 1 66 7 view .LVU7
+  68 0004 DBB2     		uxtb	r3, r3
+  69 0006 1F2B     		cmp	r3, #31
+  70 0008 04D8     		bhi	.L4
+  67:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****         BKP_DATA10_41(register_number-1U) = data;
+  71              		.loc 1 67 9 is_stmt 1 view .LVU8
+  72 000a 084B     		ldr	r3, .L6
+  73 000c 0344     		add	r3, r3, r0
+  74 000e 9B00     		lsls	r3, r3, #2
+  75              		.loc 1 67 43 is_stmt 0 view .LVU9
+  76 0010 1980     		strh	r1, [r3]	@ movhi
+  77 0012 7047     		bx	lr
+  78              	.L4:
+  68:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     }else if((register_number >= BKP_DATA_0) && (register_number <= BKP_DATA_9)){
+  79              		.loc 1 68 11 is_stmt 1 view .LVU10
+  80              		.loc 1 68 46 is_stmt 0 view .LVU11
+  81 0014 431E     		subs	r3, r0, #1
+  82              		.loc 1 68 13 view .LVU12
+  83 0016 DBB2     		uxtb	r3, r3
+  84 0018 092B     		cmp	r3, #9
+  85 001a 05D8     		bhi	.L3
+  69:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****         BKP_DATA0_9(register_number-1U) = data;
+  86              		.loc 1 69 9 is_stmt 1 view .LVU13
+  87 001c 00F18050 		add	r0, r0, #268435456
+  88              	.LVL3:
+  89              		.loc 1 69 9 is_stmt 0 view .LVU14
+  90 0020 00F5D850 		add	r0, r0, #6912
+  91 0024 8000     		lsls	r0, r0, #2
+  92              		.loc 1 69 41 view .LVU15
+  93 0026 0180     		strh	r1, [r0]	@ movhi
+  70:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     }else{
+  71:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****         /* illegal parameters */
+  72:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     }
+  94              		.loc 1 72 5 is_stmt 1 view .LVU16
+  95              	.L3:
+  73:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c **** }
+  96              		.loc 1 73 1 is_stmt 0 view .LVU17
+  97 0028 7047     		bx	lr
+  98              	.L7:
+  99 002a 00BF     		.align	2
+ 100              	.L6:
+ 101 002c 051B0010 		.word	268442373
+ARM GAS  /tmp/cc4gufNn.s 			page 4
+
+
+ 102              		.cfi_endproc
+ 103              	.LFE117:
+ 105              		.section	.text.bkp_data_read,"ax",%progbits
+ 106              		.align	1
+ 107              		.global	bkp_data_read
+ 108              		.syntax unified
+ 109              		.thumb
+ 110              		.thumb_func
+ 111              		.fpu fpv4-sp-d16
+ 113              	bkp_data_read:
+ 114              	.LVL4:
+ 115              	.LFB118:
+  74:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c **** 
+  75:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c **** /*!
+  76:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     \brief      read BKP data register
+  77:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     \param[in]  register_number: refer to bkp_data_register_enum
+  78:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****                 only one parameter can be selected which is shown as below:
+  79:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****       \arg        BKP_DATA_x(x = 0..41): bkp data register number x
+  80:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     \param[out] none
+  81:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     \retval     data of BKP data register
+  82:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c **** */
+  83:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c **** uint16_t bkp_data_read(bkp_data_register_enum register_number)
+  84:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c **** {
+ 116              		.loc 1 84 1 is_stmt 1 view -0
+ 117              		.cfi_startproc
+ 118              		@ args = 0, pretend = 0, frame = 0
+ 119              		@ frame_needed = 0, uses_anonymous_args = 0
+ 120              		@ link register save eliminated.
+  85:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     uint16_t data = 0U;
+ 121              		.loc 1 85 5 view .LVU19
+  86:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     
+  87:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     /* get the data from the BKP data register */
+  88:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     if((register_number >= BKP_DATA_10) && (register_number <= BKP_DATA_41)){
+ 122              		.loc 1 88 5 view .LVU20
+ 123              		.loc 1 88 41 is_stmt 0 view .LVU21
+ 124 0000 A0F10B03 		sub	r3, r0, #11
+ 125              		.loc 1 88 7 view .LVU22
+ 126 0004 DBB2     		uxtb	r3, r3
+ 127 0006 1F2B     		cmp	r3, #31
+ 128 0008 05D8     		bhi	.L9
+  89:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****         data = BKP_DATA10_41(register_number-1U);
+ 129              		.loc 1 89 9 is_stmt 1 view .LVU23
+ 130              		.loc 1 89 16 is_stmt 0 view .LVU24
+ 131 000a 0A4B     		ldr	r3, .L12
+ 132 000c 0344     		add	r3, r3, r0
+ 133 000e 9B00     		lsls	r3, r3, #2
+ 134              		.loc 1 89 14 view .LVU25
+ 135 0010 1888     		ldrh	r0, [r3]
+ 136              	.LVL5:
+ 137              		.loc 1 89 14 view .LVU26
+ 138 0012 80B2     		uxth	r0, r0
+ 139              	.LVL6:
+ 140              		.loc 1 89 14 view .LVU27
+ 141 0014 7047     		bx	lr
+ 142              	.LVL7:
+ 143              	.L9:
+  90:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     }else if((register_number >= BKP_DATA_0) && (register_number <= BKP_DATA_9)){
+ARM GAS  /tmp/cc4gufNn.s 			page 5
+
+
+ 144              		.loc 1 90 11 is_stmt 1 view .LVU28
+ 145              		.loc 1 90 46 is_stmt 0 view .LVU29
+ 146 0016 431E     		subs	r3, r0, #1
+ 147              		.loc 1 90 13 view .LVU30
+ 148 0018 DBB2     		uxtb	r3, r3
+ 149 001a 092B     		cmp	r3, #9
+ 150 001c 07D8     		bhi	.L11
+  91:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****         data = BKP_DATA0_9(register_number-1U);
+ 151              		.loc 1 91 9 is_stmt 1 view .LVU31
+ 152              		.loc 1 91 16 is_stmt 0 view .LVU32
+ 153 001e 00F18050 		add	r0, r0, #268435456
+ 154              	.LVL8:
+ 155              		.loc 1 91 16 view .LVU33
+ 156 0022 00F5D850 		add	r0, r0, #6912
+ 157 0026 8000     		lsls	r0, r0, #2
+ 158              		.loc 1 91 14 view .LVU34
+ 159 0028 0088     		ldrh	r0, [r0]
+ 160 002a 80B2     		uxth	r0, r0
+ 161              	.LVL9:
+ 162              		.loc 1 91 14 view .LVU35
+ 163 002c 7047     		bx	lr
+ 164              	.LVL10:
+ 165              	.L11:
+  85:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     
+ 166              		.loc 1 85 14 view .LVU36
+ 167 002e 0020     		movs	r0, #0
+ 168              	.LVL11:
+  92:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     }else{
+  93:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****         /* illegal parameters */
+  94:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     }
+ 169              		.loc 1 94 5 is_stmt 1 view .LVU37
+  95:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     return data;
+ 170              		.loc 1 95 5 view .LVU38
+  96:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c **** }
+ 171              		.loc 1 96 1 is_stmt 0 view .LVU39
+ 172 0030 7047     		bx	lr
+ 173              	.L13:
+ 174 0032 00BF     		.align	2
+ 175              	.L12:
+ 176 0034 051B0010 		.word	268442373
+ 177              		.cfi_endproc
+ 178              	.LFE118:
+ 180              		.section	.text.bkp_rtc_calibration_output_enable,"ax",%progbits
+ 181              		.align	1
+ 182              		.global	bkp_rtc_calibration_output_enable
+ 183              		.syntax unified
+ 184              		.thumb
+ 185              		.thumb_func
+ 186              		.fpu fpv4-sp-d16
+ 188              	bkp_rtc_calibration_output_enable:
+ 189              	.LFB119:
+  97:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c **** 
+  98:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c **** /*!
+  99:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     \brief      enable RTC clock calibration output
+ 100:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     \param[in]  none
+ 101:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     \param[out] none
+ 102:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     \retval     none
+ARM GAS  /tmp/cc4gufNn.s 			page 6
+
+
+ 103:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c **** */
+ 104:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c **** void bkp_rtc_calibration_output_enable(void)
+ 105:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c **** {
+ 190              		.loc 1 105 1 is_stmt 1 view -0
+ 191              		.cfi_startproc
+ 192              		@ args = 0, pretend = 0, frame = 0
+ 193              		@ frame_needed = 0, uses_anonymous_args = 0
+ 194              		@ link register save eliminated.
+ 106:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     BKP_OCTL |= (uint16_t)BKP_OCTL_COEN;
+ 195              		.loc 1 106 5 view .LVU41
+ 196              		.loc 1 106 14 is_stmt 0 view .LVU42
+ 197 0000 034A     		ldr	r2, .L15
+ 198 0002 938D     		ldrh	r3, [r2, #44]
+ 199 0004 9BB2     		uxth	r3, r3
+ 200 0006 43F08003 		orr	r3, r3, #128
+ 201 000a 9385     		strh	r3, [r2, #44]	@ movhi
+ 107:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c **** }
+ 202              		.loc 1 107 1 view .LVU43
+ 203 000c 7047     		bx	lr
+ 204              	.L16:
+ 205 000e 00BF     		.align	2
+ 206              	.L15:
+ 207 0010 006C0040 		.word	1073769472
+ 208              		.cfi_endproc
+ 209              	.LFE119:
+ 211              		.section	.text.bkp_rtc_calibration_output_disable,"ax",%progbits
+ 212              		.align	1
+ 213              		.global	bkp_rtc_calibration_output_disable
+ 214              		.syntax unified
+ 215              		.thumb
+ 216              		.thumb_func
+ 217              		.fpu fpv4-sp-d16
+ 219              	bkp_rtc_calibration_output_disable:
+ 220              	.LFB120:
+ 108:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c **** 
+ 109:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c **** /*!
+ 110:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     \brief      disable RTC clock calibration output
+ 111:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     \param[in]  none
+ 112:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     \param[out] none
+ 113:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     \retval     none
+ 114:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c **** */
+ 115:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c **** void bkp_rtc_calibration_output_disable(void)
+ 116:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c **** {
+ 221              		.loc 1 116 1 is_stmt 1 view -0
+ 222              		.cfi_startproc
+ 223              		@ args = 0, pretend = 0, frame = 0
+ 224              		@ frame_needed = 0, uses_anonymous_args = 0
+ 225              		@ link register save eliminated.
+ 117:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     BKP_OCTL &= (uint16_t)~BKP_OCTL_COEN;
+ 226              		.loc 1 117 5 view .LVU45
+ 227              		.loc 1 117 14 is_stmt 0 view .LVU46
+ 228 0000 034A     		ldr	r2, .L18
+ 229 0002 938D     		ldrh	r3, [r2, #44]
+ 230 0004 23F08003 		bic	r3, r3, #128
+ 231 0008 1B04     		lsls	r3, r3, #16
+ 232 000a 1B0C     		lsrs	r3, r3, #16
+ 233 000c 9385     		strh	r3, [r2, #44]	@ movhi
+ARM GAS  /tmp/cc4gufNn.s 			page 7
+
+
+ 118:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c **** }
+ 234              		.loc 1 118 1 view .LVU47
+ 235 000e 7047     		bx	lr
+ 236              	.L19:
+ 237              		.align	2
+ 238              	.L18:
+ 239 0010 006C0040 		.word	1073769472
+ 240              		.cfi_endproc
+ 241              	.LFE120:
+ 243              		.section	.text.bkp_rtc_signal_output_enable,"ax",%progbits
+ 244              		.align	1
+ 245              		.global	bkp_rtc_signal_output_enable
+ 246              		.syntax unified
+ 247              		.thumb
+ 248              		.thumb_func
+ 249              		.fpu fpv4-sp-d16
+ 251              	bkp_rtc_signal_output_enable:
+ 252              	.LFB121:
+ 119:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c **** 
+ 120:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c **** /*!
+ 121:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     \brief      enable RTC alarm or second signal output
+ 122:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     \param[in]  none
+ 123:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     \param[out] none
+ 124:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     \retval     none
+ 125:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c **** */
+ 126:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c **** void bkp_rtc_signal_output_enable(void)
+ 127:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c **** {
+ 253              		.loc 1 127 1 is_stmt 1 view -0
+ 254              		.cfi_startproc
+ 255              		@ args = 0, pretend = 0, frame = 0
+ 256              		@ frame_needed = 0, uses_anonymous_args = 0
+ 257              		@ link register save eliminated.
+ 128:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     BKP_OCTL |= (uint16_t)BKP_OCTL_ASOEN;
+ 258              		.loc 1 128 5 view .LVU49
+ 259              		.loc 1 128 14 is_stmt 0 view .LVU50
+ 260 0000 034A     		ldr	r2, .L21
+ 261 0002 938D     		ldrh	r3, [r2, #44]
+ 262 0004 9BB2     		uxth	r3, r3
+ 263 0006 43F48073 		orr	r3, r3, #256
+ 264 000a 9385     		strh	r3, [r2, #44]	@ movhi
+ 129:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c **** }
+ 265              		.loc 1 129 1 view .LVU51
+ 266 000c 7047     		bx	lr
+ 267              	.L22:
+ 268 000e 00BF     		.align	2
+ 269              	.L21:
+ 270 0010 006C0040 		.word	1073769472
+ 271              		.cfi_endproc
+ 272              	.LFE121:
+ 274              		.section	.text.bkp_rtc_signal_output_disable,"ax",%progbits
+ 275              		.align	1
+ 276              		.global	bkp_rtc_signal_output_disable
+ 277              		.syntax unified
+ 278              		.thumb
+ 279              		.thumb_func
+ 280              		.fpu fpv4-sp-d16
+ 282              	bkp_rtc_signal_output_disable:
+ARM GAS  /tmp/cc4gufNn.s 			page 8
+
+
+ 283              	.LFB122:
+ 130:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c **** 
+ 131:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c **** /*!
+ 132:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     \brief      disable RTC alarm or second signal output
+ 133:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     \param[in]  none
+ 134:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     \param[out] none
+ 135:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     \retval     none
+ 136:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c **** */
+ 137:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c **** void bkp_rtc_signal_output_disable(void)
+ 138:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c **** {
+ 284              		.loc 1 138 1 is_stmt 1 view -0
+ 285              		.cfi_startproc
+ 286              		@ args = 0, pretend = 0, frame = 0
+ 287              		@ frame_needed = 0, uses_anonymous_args = 0
+ 288              		@ link register save eliminated.
+ 139:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     BKP_OCTL &= (uint16_t)~BKP_OCTL_ASOEN;
+ 289              		.loc 1 139 5 view .LVU53
+ 290              		.loc 1 139 14 is_stmt 0 view .LVU54
+ 291 0000 034A     		ldr	r2, .L24
+ 292 0002 938D     		ldrh	r3, [r2, #44]
+ 293 0004 23F48073 		bic	r3, r3, #256
+ 294 0008 1B04     		lsls	r3, r3, #16
+ 295 000a 1B0C     		lsrs	r3, r3, #16
+ 296 000c 9385     		strh	r3, [r2, #44]	@ movhi
+ 140:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c **** }
+ 297              		.loc 1 140 1 view .LVU55
+ 298 000e 7047     		bx	lr
+ 299              	.L25:
+ 300              		.align	2
+ 301              	.L24:
+ 302 0010 006C0040 		.word	1073769472
+ 303              		.cfi_endproc
+ 304              	.LFE122:
+ 306              		.section	.text.bkp_rtc_output_select,"ax",%progbits
+ 307              		.align	1
+ 308              		.global	bkp_rtc_output_select
+ 309              		.syntax unified
+ 310              		.thumb
+ 311              		.thumb_func
+ 312              		.fpu fpv4-sp-d16
+ 314              	bkp_rtc_output_select:
+ 315              	.LVL12:
+ 316              	.LFB123:
+ 141:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c **** 
+ 142:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c **** /*!
+ 143:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     \brief      select RTC output
+ 144:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     \param[in]  outputsel: RTC output selection
+ 145:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****                 only one parameter can be selected which is shown as below:
+ 146:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****       \arg        RTC_OUTPUT_ALARM_PULSE: RTC alarm pulse is selected as the RTC output
+ 147:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****       \arg        RTC_OUTPUT_SECOND_PULSE: RTC second pulse is selected as the RTC output
+ 148:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     \param[out] none
+ 149:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     \retval     none
+ 150:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c **** */
+ 151:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c **** void bkp_rtc_output_select(uint16_t outputsel)
+ 152:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c **** {
+ 317              		.loc 1 152 1 is_stmt 1 view -0
+ 318              		.cfi_startproc
+ARM GAS  /tmp/cc4gufNn.s 			page 9
+
+
+ 319              		@ args = 0, pretend = 0, frame = 0
+ 320              		@ frame_needed = 0, uses_anonymous_args = 0
+ 321              		@ link register save eliminated.
+ 153:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     uint16_t ctl = 0U;
+ 322              		.loc 1 153 5 view .LVU57
+ 154:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     
+ 155:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     /* configure BKP_OCTL_ROSEL with outputsel */
+ 156:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     ctl = BKP_OCTL;
+ 323              		.loc 1 156 5 view .LVU58
+ 324              		.loc 1 156 9 is_stmt 0 view .LVU59
+ 325 0000 044A     		ldr	r2, .L27
+ 326 0002 938D     		ldrh	r3, [r2, #44]
+ 327              	.LVL13:
+ 157:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     ctl &= (uint16_t)~BKP_OCTL_ROSEL;
+ 328              		.loc 1 157 5 is_stmt 1 view .LVU60
+ 329              		.loc 1 157 9 is_stmt 0 view .LVU61
+ 330 0004 23F40073 		bic	r3, r3, #512
+ 331              	.LVL14:
+ 332              		.loc 1 157 9 view .LVU62
+ 333 0008 1B04     		lsls	r3, r3, #16
+ 334 000a 1B0C     		lsrs	r3, r3, #16
+ 335              	.LVL15:
+ 158:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     ctl |= outputsel;
+ 336              		.loc 1 158 5 is_stmt 1 view .LVU63
+ 337              		.loc 1 158 9 is_stmt 0 view .LVU64
+ 338 000c 0343     		orrs	r3, r3, r0
+ 339              	.LVL16:
+ 159:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     BKP_OCTL = ctl;
+ 340              		.loc 1 159 5 is_stmt 1 view .LVU65
+ 341              		.loc 1 159 14 is_stmt 0 view .LVU66
+ 342 000e 9385     		strh	r3, [r2, #44]	@ movhi
+ 160:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c **** }
+ 343              		.loc 1 160 1 view .LVU67
+ 344 0010 7047     		bx	lr
+ 345              	.L28:
+ 346 0012 00BF     		.align	2
+ 347              	.L27:
+ 348 0014 006C0040 		.word	1073769472
+ 349              		.cfi_endproc
+ 350              	.LFE123:
+ 352              		.section	.text.bkp_rtc_clock_output_select,"ax",%progbits
+ 353              		.align	1
+ 354              		.global	bkp_rtc_clock_output_select
+ 355              		.syntax unified
+ 356              		.thumb
+ 357              		.thumb_func
+ 358              		.fpu fpv4-sp-d16
+ 360              	bkp_rtc_clock_output_select:
+ 361              	.LVL17:
+ 362              	.LFB124:
+ 161:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c **** 
+ 162:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c **** /*!
+ 163:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     \brief      select RTC clock output
+ 164:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     \param[in]  clocksel: RTC clock output selection
+ 165:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****                 only one parameter can be selected which is shown as below:
+ 166:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****       \arg        RTC_CLOCK_DIV_64: RTC clock div 64
+ 167:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****       \arg        RTC_CLOCK_DIV_1: RTC clock
+ARM GAS  /tmp/cc4gufNn.s 			page 10
+
+
+ 168:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     \param[out] none
+ 169:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     \retval     none
+ 170:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c **** */
+ 171:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c **** void bkp_rtc_clock_output_select(uint16_t clocksel)
+ 172:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c **** {
+ 363              		.loc 1 172 1 is_stmt 1 view -0
+ 364              		.cfi_startproc
+ 365              		@ args = 0, pretend = 0, frame = 0
+ 366              		@ frame_needed = 0, uses_anonymous_args = 0
+ 367              		@ link register save eliminated.
+ 173:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     uint16_t ctl = 0U;
+ 368              		.loc 1 173 5 view .LVU69
+ 174:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     
+ 175:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     /* configure BKP_OCTL_CCOSEL with clocksel */
+ 176:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     ctl = BKP_OCTL;
+ 369              		.loc 1 176 5 view .LVU70
+ 370              		.loc 1 176 9 is_stmt 0 view .LVU71
+ 371 0000 044A     		ldr	r2, .L30
+ 372 0002 938D     		ldrh	r3, [r2, #44]
+ 373              	.LVL18:
+ 177:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     ctl &= (uint16_t)~BKP_OCTL_CCOSEL;
+ 374              		.loc 1 177 5 is_stmt 1 view .LVU72
+ 375              		.loc 1 177 9 is_stmt 0 view .LVU73
+ 376 0004 23F48043 		bic	r3, r3, #16384
+ 377              	.LVL19:
+ 378              		.loc 1 177 9 view .LVU74
+ 379 0008 1B04     		lsls	r3, r3, #16
+ 380 000a 1B0C     		lsrs	r3, r3, #16
+ 381              	.LVL20:
+ 178:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     ctl |= clocksel;
+ 382              		.loc 1 178 5 is_stmt 1 view .LVU75
+ 383              		.loc 1 178 9 is_stmt 0 view .LVU76
+ 384 000c 0343     		orrs	r3, r3, r0
+ 385              	.LVL21:
+ 179:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     BKP_OCTL = ctl;
+ 386              		.loc 1 179 5 is_stmt 1 view .LVU77
+ 387              		.loc 1 179 14 is_stmt 0 view .LVU78
+ 388 000e 9385     		strh	r3, [r2, #44]	@ movhi
+ 180:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c **** }
+ 389              		.loc 1 180 1 view .LVU79
+ 390 0010 7047     		bx	lr
+ 391              	.L31:
+ 392 0012 00BF     		.align	2
+ 393              	.L30:
+ 394 0014 006C0040 		.word	1073769472
+ 395              		.cfi_endproc
+ 396              	.LFE124:
+ 398              		.section	.text.bkp_rtc_clock_calibration_direction_select,"ax",%progbits
+ 399              		.align	1
+ 400              		.global	bkp_rtc_clock_calibration_direction_select
+ 401              		.syntax unified
+ 402              		.thumb
+ 403              		.thumb_func
+ 404              		.fpu fpv4-sp-d16
+ 406              	bkp_rtc_clock_calibration_direction_select:
+ 407              	.LVL22:
+ 408              	.LFB125:
+ARM GAS  /tmp/cc4gufNn.s 			page 11
+
+
+ 181:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c **** 
+ 182:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c **** /*!
+ 183:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     \brief      select RTC clock calibration direction
+ 184:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     \param[in]  direction: RTC clock calibration direction
+ 185:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****                 only one parameter can be selected which is shown as below:
+ 186:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****       \arg        RTC_CLOCK_SLOWED_DOWN: RTC clock slow down
+ 187:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****       \arg        RTC_CLOCK_SPEED_UP: RTC clock speed up
+ 188:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     \param[out] none
+ 189:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     \retval     none
+ 190:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c **** */
+ 191:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c **** void bkp_rtc_clock_calibration_direction_select(uint16_t direction)
+ 192:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c **** {
+ 409              		.loc 1 192 1 is_stmt 1 view -0
+ 410              		.cfi_startproc
+ 411              		@ args = 0, pretend = 0, frame = 0
+ 412              		@ frame_needed = 0, uses_anonymous_args = 0
+ 413              		@ link register save eliminated.
+ 193:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     uint16_t ctl = 0U;
+ 414              		.loc 1 193 5 view .LVU81
+ 194:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     
+ 195:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     /* configure BKP_OCTL_CALDIR with direction */
+ 196:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     ctl = BKP_OCTL;
+ 415              		.loc 1 196 5 view .LVU82
+ 416              		.loc 1 196 9 is_stmt 0 view .LVU83
+ 417 0000 034A     		ldr	r2, .L33
+ 418 0002 938D     		ldrh	r3, [r2, #44]
+ 419              	.LVL23:
+ 197:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     ctl &= (uint16_t)~BKP_OCTL_CALDIR;
+ 420              		.loc 1 197 5 is_stmt 1 view .LVU84
+ 421              		.loc 1 197 9 is_stmt 0 view .LVU85
+ 422 0004 C3F30E03 		ubfx	r3, r3, #0, #15
+ 423              	.LVL24:
+ 198:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     ctl |= direction;
+ 424              		.loc 1 198 5 is_stmt 1 view .LVU86
+ 425              		.loc 1 198 9 is_stmt 0 view .LVU87
+ 426 0008 0343     		orrs	r3, r3, r0
+ 427              	.LVL25:
+ 199:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     BKP_OCTL = ctl;
+ 428              		.loc 1 199 5 is_stmt 1 view .LVU88
+ 429              		.loc 1 199 14 is_stmt 0 view .LVU89
+ 430 000a 9385     		strh	r3, [r2, #44]	@ movhi
+ 200:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c **** }
+ 431              		.loc 1 200 1 view .LVU90
+ 432 000c 7047     		bx	lr
+ 433              	.L34:
+ 434 000e 00BF     		.align	2
+ 435              	.L33:
+ 436 0010 006C0040 		.word	1073769472
+ 437              		.cfi_endproc
+ 438              	.LFE125:
+ 440              		.section	.text.bkp_rtc_calibration_value_set,"ax",%progbits
+ 441              		.align	1
+ 442              		.global	bkp_rtc_calibration_value_set
+ 443              		.syntax unified
+ 444              		.thumb
+ 445              		.thumb_func
+ 446              		.fpu fpv4-sp-d16
+ARM GAS  /tmp/cc4gufNn.s 			page 12
+
+
+ 448              	bkp_rtc_calibration_value_set:
+ 449              	.LVL26:
+ 450              	.LFB126:
+ 201:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c **** 
+ 202:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c **** /*!
+ 203:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     \brief      set RTC clock calibration value 
+ 204:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     \param[in]  value: RTC clock calibration value
+ 205:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****       \arg        0x00 - 0x7F
+ 206:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     \param[out] none
+ 207:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     \retval     none
+ 208:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c **** */
+ 209:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c **** void bkp_rtc_calibration_value_set(uint8_t value)
+ 210:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c **** {
+ 451              		.loc 1 210 1 is_stmt 1 view -0
+ 452              		.cfi_startproc
+ 453              		@ args = 0, pretend = 0, frame = 0
+ 454              		@ frame_needed = 0, uses_anonymous_args = 0
+ 455              		@ link register save eliminated.
+ 211:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     uint16_t ctl;
+ 456              		.loc 1 211 5 view .LVU92
+ 212:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     
+ 213:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     /* configure BKP_OCTL_RCCV with value */
+ 214:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     ctl = BKP_OCTL;
+ 457              		.loc 1 214 5 view .LVU93
+ 458              		.loc 1 214 9 is_stmt 0 view .LVU94
+ 459 0000 044A     		ldr	r2, .L36
+ 460 0002 938D     		ldrh	r3, [r2, #44]
+ 461 0004 9BB2     		uxth	r3, r3
+ 462              	.LVL27:
+ 215:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     ctl &= (uint16_t)~BKP_OCTL_RCCV;
+ 463              		.loc 1 215 5 is_stmt 1 view .LVU95
+ 216:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     ctl |= (uint16_t)OCTL_RCCV(value);
+ 464              		.loc 1 216 5 view .LVU96
+ 465              		.loc 1 216 12 is_stmt 0 view .LVU97
+ 466 0006 00F07F00 		and	r0, r0, #127
+ 467              	.LVL28:
+ 215:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     ctl &= (uint16_t)~BKP_OCTL_RCCV;
+ 468              		.loc 1 215 9 view .LVU98
+ 469 000a 23F07F03 		bic	r3, r3, #127
+ 470              	.LVL29:
+ 471              		.loc 1 216 9 view .LVU99
+ 472 000e 1843     		orrs	r0, r0, r3
+ 473              	.LVL30:
+ 217:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     BKP_OCTL = ctl;
+ 474              		.loc 1 217 5 is_stmt 1 view .LVU100
+ 475              		.loc 1 217 14 is_stmt 0 view .LVU101
+ 476 0010 9085     		strh	r0, [r2, #44]	@ movhi
+ 218:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c **** }
+ 477              		.loc 1 218 1 view .LVU102
+ 478 0012 7047     		bx	lr
+ 479              	.L37:
+ 480              		.align	2
+ 481              	.L36:
+ 482 0014 006C0040 		.word	1073769472
+ 483              		.cfi_endproc
+ 484              	.LFE126:
+ 486              		.section	.text.bkp_tamper_detection_enable,"ax",%progbits
+ARM GAS  /tmp/cc4gufNn.s 			page 13
+
+
+ 487              		.align	1
+ 488              		.global	bkp_tamper_detection_enable
+ 489              		.syntax unified
+ 490              		.thumb
+ 491              		.thumb_func
+ 492              		.fpu fpv4-sp-d16
+ 494              	bkp_tamper_detection_enable:
+ 495              	.LFB127:
+ 219:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c **** 
+ 220:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c **** /*!
+ 221:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     \brief      enable tamper detection
+ 222:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     \param[in]  none
+ 223:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     \param[out] none
+ 224:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     \retval     none
+ 225:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c **** */
+ 226:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c **** void bkp_tamper_detection_enable(void)
+ 227:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c **** {
+ 496              		.loc 1 227 1 is_stmt 1 view -0
+ 497              		.cfi_startproc
+ 498              		@ args = 0, pretend = 0, frame = 0
+ 499              		@ frame_needed = 0, uses_anonymous_args = 0
+ 500              		@ link register save eliminated.
+ 228:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     BKP_TPCTL |= (uint16_t)BKP_TPCTL_TPEN;
+ 501              		.loc 1 228 5 view .LVU104
+ 502              		.loc 1 228 15 is_stmt 0 view .LVU105
+ 503 0000 034A     		ldr	r2, .L39
+ 504 0002 138E     		ldrh	r3, [r2, #48]
+ 505 0004 9BB2     		uxth	r3, r3
+ 506 0006 43F00103 		orr	r3, r3, #1
+ 507 000a 1386     		strh	r3, [r2, #48]	@ movhi
+ 229:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c **** }
+ 508              		.loc 1 229 1 view .LVU106
+ 509 000c 7047     		bx	lr
+ 510              	.L40:
+ 511 000e 00BF     		.align	2
+ 512              	.L39:
+ 513 0010 006C0040 		.word	1073769472
+ 514              		.cfi_endproc
+ 515              	.LFE127:
+ 517              		.section	.text.bkp_tamper_detection_disable,"ax",%progbits
+ 518              		.align	1
+ 519              		.global	bkp_tamper_detection_disable
+ 520              		.syntax unified
+ 521              		.thumb
+ 522              		.thumb_func
+ 523              		.fpu fpv4-sp-d16
+ 525              	bkp_tamper_detection_disable:
+ 526              	.LFB128:
+ 230:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c **** 
+ 231:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c **** /*!
+ 232:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     \brief      disable tamper detection
+ 233:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     \param[in]  none
+ 234:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     \param[out] none
+ 235:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     \retval     none
+ 236:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c **** */
+ 237:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c **** void bkp_tamper_detection_disable(void)
+ 238:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c **** {
+ARM GAS  /tmp/cc4gufNn.s 			page 14
+
+
+ 527              		.loc 1 238 1 is_stmt 1 view -0
+ 528              		.cfi_startproc
+ 529              		@ args = 0, pretend = 0, frame = 0
+ 530              		@ frame_needed = 0, uses_anonymous_args = 0
+ 531              		@ link register save eliminated.
+ 239:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     BKP_TPCTL &= (uint16_t)~BKP_TPCTL_TPEN;
+ 532              		.loc 1 239 5 view .LVU108
+ 533              		.loc 1 239 15 is_stmt 0 view .LVU109
+ 534 0000 034A     		ldr	r2, .L42
+ 535 0002 138E     		ldrh	r3, [r2, #48]
+ 536 0004 23F00103 		bic	r3, r3, #1
+ 537 0008 1B04     		lsls	r3, r3, #16
+ 538 000a 1B0C     		lsrs	r3, r3, #16
+ 539 000c 1386     		strh	r3, [r2, #48]	@ movhi
+ 240:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c **** }
+ 540              		.loc 1 240 1 view .LVU110
+ 541 000e 7047     		bx	lr
+ 542              	.L43:
+ 543              		.align	2
+ 544              	.L42:
+ 545 0010 006C0040 		.word	1073769472
+ 546              		.cfi_endproc
+ 547              	.LFE128:
+ 549              		.section	.text.bkp_tamper_active_level_set,"ax",%progbits
+ 550              		.align	1
+ 551              		.global	bkp_tamper_active_level_set
+ 552              		.syntax unified
+ 553              		.thumb
+ 554              		.thumb_func
+ 555              		.fpu fpv4-sp-d16
+ 557              	bkp_tamper_active_level_set:
+ 558              	.LVL31:
+ 559              	.LFB129:
+ 241:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c **** 
+ 242:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c **** /*!
+ 243:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     \brief      set tamper pin active level
+ 244:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     \param[in]  level: tamper active level
+ 245:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****                 only one parameter can be selected which is shown as below:
+ 246:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****       \arg        TAMPER_PIN_ACTIVE_HIGH: the tamper pin is active high
+ 247:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****       \arg        TAMPER_PIN_ACTIVE_LOW: the tamper pin is active low
+ 248:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     \param[out] none
+ 249:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     \retval     none
+ 250:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c **** */
+ 251:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c **** void bkp_tamper_active_level_set(uint16_t level)
+ 252:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c **** {
+ 560              		.loc 1 252 1 is_stmt 1 view -0
+ 561              		.cfi_startproc
+ 562              		@ args = 0, pretend = 0, frame = 0
+ 563              		@ frame_needed = 0, uses_anonymous_args = 0
+ 564              		@ link register save eliminated.
+ 253:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     uint16_t ctl = 0U;
+ 565              		.loc 1 253 5 view .LVU112
+ 254:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     
+ 255:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     /* configure BKP_TPCTL_TPAL with level */
+ 256:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     ctl = BKP_TPCTL;
+ 566              		.loc 1 256 5 view .LVU113
+ 567              		.loc 1 256 9 is_stmt 0 view .LVU114
+ARM GAS  /tmp/cc4gufNn.s 			page 15
+
+
+ 568 0000 044A     		ldr	r2, .L45
+ 569 0002 138E     		ldrh	r3, [r2, #48]
+ 570              	.LVL32:
+ 257:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     ctl &= (uint16_t)~BKP_TPCTL_TPAL;
+ 571              		.loc 1 257 5 is_stmt 1 view .LVU115
+ 572              		.loc 1 257 9 is_stmt 0 view .LVU116
+ 573 0004 23F00203 		bic	r3, r3, #2
+ 574              	.LVL33:
+ 575              		.loc 1 257 9 view .LVU117
+ 576 0008 1B04     		lsls	r3, r3, #16
+ 577 000a 1B0C     		lsrs	r3, r3, #16
+ 578              	.LVL34:
+ 258:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     ctl |= level;
+ 579              		.loc 1 258 5 is_stmt 1 view .LVU118
+ 580              		.loc 1 258 9 is_stmt 0 view .LVU119
+ 581 000c 0343     		orrs	r3, r3, r0
+ 582              	.LVL35:
+ 259:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     BKP_TPCTL = ctl;
+ 583              		.loc 1 259 5 is_stmt 1 view .LVU120
+ 584              		.loc 1 259 15 is_stmt 0 view .LVU121
+ 585 000e 1386     		strh	r3, [r2, #48]	@ movhi
+ 260:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c **** }
+ 586              		.loc 1 260 1 view .LVU122
+ 587 0010 7047     		bx	lr
+ 588              	.L46:
+ 589 0012 00BF     		.align	2
+ 590              	.L45:
+ 591 0014 006C0040 		.word	1073769472
+ 592              		.cfi_endproc
+ 593              	.LFE129:
+ 595              		.section	.text.bkp_interrupt_enable,"ax",%progbits
+ 596              		.align	1
+ 597              		.global	bkp_interrupt_enable
+ 598              		.syntax unified
+ 599              		.thumb
+ 600              		.thumb_func
+ 601              		.fpu fpv4-sp-d16
+ 603              	bkp_interrupt_enable:
+ 604              	.LFB130:
+ 261:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c **** 
+ 262:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c **** /*!
+ 263:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     \brief      enable tamper interrupt
+ 264:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     \param[in]  none
+ 265:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     \param[out] none
+ 266:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     \retval     none
+ 267:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c **** */
+ 268:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c **** void bkp_interrupt_enable(void)
+ 269:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c **** {
+ 605              		.loc 1 269 1 is_stmt 1 view -0
+ 606              		.cfi_startproc
+ 607              		@ args = 0, pretend = 0, frame = 0
+ 608              		@ frame_needed = 0, uses_anonymous_args = 0
+ 609              		@ link register save eliminated.
+ 270:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     BKP_TPCS |= (uint16_t)BKP_TPCS_TPIE;
+ 610              		.loc 1 270 5 view .LVU124
+ 611              		.loc 1 270 14 is_stmt 0 view .LVU125
+ 612 0000 034A     		ldr	r2, .L48
+ARM GAS  /tmp/cc4gufNn.s 			page 16
+
+
+ 613 0002 938E     		ldrh	r3, [r2, #52]
+ 614 0004 9BB2     		uxth	r3, r3
+ 615 0006 43F00403 		orr	r3, r3, #4
+ 616 000a 9386     		strh	r3, [r2, #52]	@ movhi
+ 271:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c **** }
+ 617              		.loc 1 271 1 view .LVU126
+ 618 000c 7047     		bx	lr
+ 619              	.L49:
+ 620 000e 00BF     		.align	2
+ 621              	.L48:
+ 622 0010 006C0040 		.word	1073769472
+ 623              		.cfi_endproc
+ 624              	.LFE130:
+ 626              		.section	.text.bkp_interrupt_disable,"ax",%progbits
+ 627              		.align	1
+ 628              		.global	bkp_interrupt_disable
+ 629              		.syntax unified
+ 630              		.thumb
+ 631              		.thumb_func
+ 632              		.fpu fpv4-sp-d16
+ 634              	bkp_interrupt_disable:
+ 635              	.LFB131:
+ 272:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c **** 
+ 273:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c **** /*!
+ 274:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     \brief      disable tamper interrupt
+ 275:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     \param[in]  none
+ 276:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     \param[out] none
+ 277:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     \retval     none
+ 278:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c **** */
+ 279:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c **** void bkp_interrupt_disable(void)
+ 280:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c **** {
+ 636              		.loc 1 280 1 is_stmt 1 view -0
+ 637              		.cfi_startproc
+ 638              		@ args = 0, pretend = 0, frame = 0
+ 639              		@ frame_needed = 0, uses_anonymous_args = 0
+ 640              		@ link register save eliminated.
+ 281:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     BKP_TPCS &= (uint16_t)~BKP_TPCS_TPIE;
+ 641              		.loc 1 281 5 view .LVU128
+ 642              		.loc 1 281 14 is_stmt 0 view .LVU129
+ 643 0000 034A     		ldr	r2, .L51
+ 644 0002 938E     		ldrh	r3, [r2, #52]
+ 645 0004 23F00403 		bic	r3, r3, #4
+ 646 0008 1B04     		lsls	r3, r3, #16
+ 647 000a 1B0C     		lsrs	r3, r3, #16
+ 648 000c 9386     		strh	r3, [r2, #52]	@ movhi
+ 282:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c **** }
+ 649              		.loc 1 282 1 view .LVU130
+ 650 000e 7047     		bx	lr
+ 651              	.L52:
+ 652              		.align	2
+ 653              	.L51:
+ 654 0010 006C0040 		.word	1073769472
+ 655              		.cfi_endproc
+ 656              	.LFE131:
+ 658              		.section	.text.bkp_flag_get,"ax",%progbits
+ 659              		.align	1
+ 660              		.global	bkp_flag_get
+ARM GAS  /tmp/cc4gufNn.s 			page 17
+
+
+ 661              		.syntax unified
+ 662              		.thumb
+ 663              		.thumb_func
+ 664              		.fpu fpv4-sp-d16
+ 666              	bkp_flag_get:
+ 667              	.LFB132:
+ 283:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c **** 
+ 284:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c **** /*!
+ 285:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     \brief      get tamper flag state
+ 286:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     \param[in]  none
+ 287:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     \param[out] none
+ 288:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     \retval     FlagStatus: SET or RESET
+ 289:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c **** */
+ 290:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c **** FlagStatus bkp_flag_get(void)
+ 291:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c **** {
+ 668              		.loc 1 291 1 is_stmt 1 view -0
+ 669              		.cfi_startproc
+ 670              		@ args = 0, pretend = 0, frame = 0
+ 671              		@ frame_needed = 0, uses_anonymous_args = 0
+ 672              		@ link register save eliminated.
+ 292:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     if(RESET != (BKP_TPCS & BKP_FLAG_TAMPER)){
+ 673              		.loc 1 292 5 view .LVU132
+ 674              		.loc 1 292 18 is_stmt 0 view .LVU133
+ 675 0000 024B     		ldr	r3, .L54
+ 676 0002 988E     		ldrh	r0, [r3, #52]
+ 293:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****         return SET;
+ 294:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     }else{
+ 295:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****         return RESET;
+ 296:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     }
+ 297:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c **** }
+ 677              		.loc 1 297 1 view .LVU134
+ 678 0004 C0F30020 		ubfx	r0, r0, #8, #1
+ 679 0008 7047     		bx	lr
+ 680              	.L55:
+ 681 000a 00BF     		.align	2
+ 682              	.L54:
+ 683 000c 006C0040 		.word	1073769472
+ 684              		.cfi_endproc
+ 685              	.LFE132:
+ 687              		.section	.text.bkp_flag_clear,"ax",%progbits
+ 688              		.align	1
+ 689              		.global	bkp_flag_clear
+ 690              		.syntax unified
+ 691              		.thumb
+ 692              		.thumb_func
+ 693              		.fpu fpv4-sp-d16
+ 695              	bkp_flag_clear:
+ 696              	.LFB133:
+ 298:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c **** 
+ 299:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c **** /*!
+ 300:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     \brief      clear tamper flag state
+ 301:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     \param[in]  none
+ 302:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     \param[out] none
+ 303:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     \retval     none
+ 304:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c **** */
+ 305:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c **** void bkp_flag_clear(void)
+ 306:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c **** {
+ARM GAS  /tmp/cc4gufNn.s 			page 18
+
+
+ 697              		.loc 1 306 1 is_stmt 1 view -0
+ 698              		.cfi_startproc
+ 699              		@ args = 0, pretend = 0, frame = 0
+ 700              		@ frame_needed = 0, uses_anonymous_args = 0
+ 701              		@ link register save eliminated.
+ 307:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     BKP_TPCS |= (uint16_t)(BKP_FLAG_TAMPER >> BKP_TAMPER_BITS_OFFSET);
+ 702              		.loc 1 307 5 view .LVU136
+ 703              		.loc 1 307 14 is_stmt 0 view .LVU137
+ 704 0000 034A     		ldr	r2, .L57
+ 705 0002 938E     		ldrh	r3, [r2, #52]
+ 706 0004 9BB2     		uxth	r3, r3
+ 707 0006 43F00103 		orr	r3, r3, #1
+ 708 000a 9386     		strh	r3, [r2, #52]	@ movhi
+ 308:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c **** }
+ 709              		.loc 1 308 1 view .LVU138
+ 710 000c 7047     		bx	lr
+ 711              	.L58:
+ 712 000e 00BF     		.align	2
+ 713              	.L57:
+ 714 0010 006C0040 		.word	1073769472
+ 715              		.cfi_endproc
+ 716              	.LFE133:
+ 718              		.section	.text.bkp_interrupt_flag_get,"ax",%progbits
+ 719              		.align	1
+ 720              		.global	bkp_interrupt_flag_get
+ 721              		.syntax unified
+ 722              		.thumb
+ 723              		.thumb_func
+ 724              		.fpu fpv4-sp-d16
+ 726              	bkp_interrupt_flag_get:
+ 727              	.LFB134:
+ 309:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c **** 
+ 310:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c **** /*!
+ 311:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     \brief      get tamper interrupt flag state
+ 312:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     \param[in]  none
+ 313:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     \param[out] none
+ 314:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     \retval     FlagStatus: SET or RESET
+ 315:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c **** */
+ 316:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c **** FlagStatus bkp_interrupt_flag_get(void)
+ 317:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c **** {
+ 728              		.loc 1 317 1 is_stmt 1 view -0
+ 729              		.cfi_startproc
+ 730              		@ args = 0, pretend = 0, frame = 0
+ 731              		@ frame_needed = 0, uses_anonymous_args = 0
+ 732              		@ link register save eliminated.
+ 318:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     if(RESET != (BKP_TPCS & BKP_INT_FLAG_TAMPER)){
+ 733              		.loc 1 318 5 view .LVU140
+ 734              		.loc 1 318 18 is_stmt 0 view .LVU141
+ 735 0000 024B     		ldr	r3, .L60
+ 736 0002 988E     		ldrh	r0, [r3, #52]
+ 319:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****         return SET;
+ 320:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     }else{
+ 321:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****         return RESET;
+ 322:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     }
+ 323:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c **** }
+ 737              		.loc 1 323 1 view .LVU142
+ 738 0004 C0F34020 		ubfx	r0, r0, #9, #1
+ARM GAS  /tmp/cc4gufNn.s 			page 19
+
+
+ 739 0008 7047     		bx	lr
+ 740              	.L61:
+ 741 000a 00BF     		.align	2
+ 742              	.L60:
+ 743 000c 006C0040 		.word	1073769472
+ 744              		.cfi_endproc
+ 745              	.LFE134:
+ 747              		.section	.text.bkp_interrupt_flag_clear,"ax",%progbits
+ 748              		.align	1
+ 749              		.global	bkp_interrupt_flag_clear
+ 750              		.syntax unified
+ 751              		.thumb
+ 752              		.thumb_func
+ 753              		.fpu fpv4-sp-d16
+ 755              	bkp_interrupt_flag_clear:
+ 756              	.LFB135:
+ 324:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c **** 
+ 325:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c **** /*!
+ 326:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     \brief      clear tamper interrupt flag state
+ 327:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     \param[in]  none
+ 328:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     \param[out] none
+ 329:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     \retval     none
+ 330:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c **** */
+ 331:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c **** void bkp_interrupt_flag_clear(void)
+ 332:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c **** {
+ 757              		.loc 1 332 1 is_stmt 1 view -0
+ 758              		.cfi_startproc
+ 759              		@ args = 0, pretend = 0, frame = 0
+ 760              		@ frame_needed = 0, uses_anonymous_args = 0
+ 761              		@ link register save eliminated.
+ 333:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c ****     BKP_TPCS |= (uint16_t)(BKP_INT_FLAG_TAMPER >> BKP_TAMPER_BITS_OFFSET);
+ 762              		.loc 1 333 5 view .LVU144
+ 763              		.loc 1 333 14 is_stmt 0 view .LVU145
+ 764 0000 034A     		ldr	r2, .L63
+ 765 0002 938E     		ldrh	r3, [r2, #52]
+ 766 0004 9BB2     		uxth	r3, r3
+ 767 0006 43F00203 		orr	r3, r3, #2
+ 768 000a 9386     		strh	r3, [r2, #52]	@ movhi
+ 334:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_bkp.c **** }
+ 769              		.loc 1 334 1 view .LVU146
+ 770 000c 7047     		bx	lr
+ 771              	.L64:
+ 772 000e 00BF     		.align	2
+ 773              	.L63:
+ 774 0010 006C0040 		.word	1073769472
+ 775              		.cfi_endproc
+ 776              	.LFE135:
+ 778              		.text
+ 779              	.Letext0:
+ 780              		.file 2 "/usr/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h"
+ 781              		.file 3 "../../../../Firmware/CMSIS/GD/GD32E10x/Include/gd32e10x.h"
+ 782              		.file 4 "../../../../Firmware/GD32E10x_standard_peripheral/Include/gd32e10x_bkp.h"
+ 783              		.file 5 "../../../../Firmware/GD32E10x_standard_peripheral/Include/gd32e10x_rcu.h"
+ARM GAS  /tmp/cc4gufNn.s 			page 20
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 gd32e10x_bkp.c
+     /tmp/cc4gufNn.s:18     .text.bkp_deinit:0000000000000000 $t
+     /tmp/cc4gufNn.s:26     .text.bkp_deinit:0000000000000000 bkp_deinit
+     /tmp/cc4gufNn.s:49     .text.bkp_data_write:0000000000000000 $t
+     /tmp/cc4gufNn.s:56     .text.bkp_data_write:0000000000000000 bkp_data_write
+     /tmp/cc4gufNn.s:101    .text.bkp_data_write:000000000000002c $d
+     /tmp/cc4gufNn.s:106    .text.bkp_data_read:0000000000000000 $t
+     /tmp/cc4gufNn.s:113    .text.bkp_data_read:0000000000000000 bkp_data_read
+     /tmp/cc4gufNn.s:176    .text.bkp_data_read:0000000000000034 $d
+     /tmp/cc4gufNn.s:181    .text.bkp_rtc_calibration_output_enable:0000000000000000 $t
+     /tmp/cc4gufNn.s:188    .text.bkp_rtc_calibration_output_enable:0000000000000000 bkp_rtc_calibration_output_enable
+     /tmp/cc4gufNn.s:207    .text.bkp_rtc_calibration_output_enable:0000000000000010 $d
+     /tmp/cc4gufNn.s:212    .text.bkp_rtc_calibration_output_disable:0000000000000000 $t
+     /tmp/cc4gufNn.s:219    .text.bkp_rtc_calibration_output_disable:0000000000000000 bkp_rtc_calibration_output_disable
+     /tmp/cc4gufNn.s:239    .text.bkp_rtc_calibration_output_disable:0000000000000010 $d
+     /tmp/cc4gufNn.s:244    .text.bkp_rtc_signal_output_enable:0000000000000000 $t
+     /tmp/cc4gufNn.s:251    .text.bkp_rtc_signal_output_enable:0000000000000000 bkp_rtc_signal_output_enable
+     /tmp/cc4gufNn.s:270    .text.bkp_rtc_signal_output_enable:0000000000000010 $d
+     /tmp/cc4gufNn.s:275    .text.bkp_rtc_signal_output_disable:0000000000000000 $t
+     /tmp/cc4gufNn.s:282    .text.bkp_rtc_signal_output_disable:0000000000000000 bkp_rtc_signal_output_disable
+     /tmp/cc4gufNn.s:302    .text.bkp_rtc_signal_output_disable:0000000000000010 $d
+     /tmp/cc4gufNn.s:307    .text.bkp_rtc_output_select:0000000000000000 $t
+     /tmp/cc4gufNn.s:314    .text.bkp_rtc_output_select:0000000000000000 bkp_rtc_output_select
+     /tmp/cc4gufNn.s:348    .text.bkp_rtc_output_select:0000000000000014 $d
+     /tmp/cc4gufNn.s:353    .text.bkp_rtc_clock_output_select:0000000000000000 $t
+     /tmp/cc4gufNn.s:360    .text.bkp_rtc_clock_output_select:0000000000000000 bkp_rtc_clock_output_select
+     /tmp/cc4gufNn.s:394    .text.bkp_rtc_clock_output_select:0000000000000014 $d
+     /tmp/cc4gufNn.s:399    .text.bkp_rtc_clock_calibration_direction_select:0000000000000000 $t
+     /tmp/cc4gufNn.s:406    .text.bkp_rtc_clock_calibration_direction_select:0000000000000000 bkp_rtc_clock_calibration_direction_select
+     /tmp/cc4gufNn.s:436    .text.bkp_rtc_clock_calibration_direction_select:0000000000000010 $d
+     /tmp/cc4gufNn.s:441    .text.bkp_rtc_calibration_value_set:0000000000000000 $t
+     /tmp/cc4gufNn.s:448    .text.bkp_rtc_calibration_value_set:0000000000000000 bkp_rtc_calibration_value_set
+     /tmp/cc4gufNn.s:482    .text.bkp_rtc_calibration_value_set:0000000000000014 $d
+     /tmp/cc4gufNn.s:487    .text.bkp_tamper_detection_enable:0000000000000000 $t
+     /tmp/cc4gufNn.s:494    .text.bkp_tamper_detection_enable:0000000000000000 bkp_tamper_detection_enable
+     /tmp/cc4gufNn.s:513    .text.bkp_tamper_detection_enable:0000000000000010 $d
+     /tmp/cc4gufNn.s:518    .text.bkp_tamper_detection_disable:0000000000000000 $t
+     /tmp/cc4gufNn.s:525    .text.bkp_tamper_detection_disable:0000000000000000 bkp_tamper_detection_disable
+     /tmp/cc4gufNn.s:545    .text.bkp_tamper_detection_disable:0000000000000010 $d
+     /tmp/cc4gufNn.s:550    .text.bkp_tamper_active_level_set:0000000000000000 $t
+     /tmp/cc4gufNn.s:557    .text.bkp_tamper_active_level_set:0000000000000000 bkp_tamper_active_level_set
+     /tmp/cc4gufNn.s:591    .text.bkp_tamper_active_level_set:0000000000000014 $d
+     /tmp/cc4gufNn.s:596    .text.bkp_interrupt_enable:0000000000000000 $t
+     /tmp/cc4gufNn.s:603    .text.bkp_interrupt_enable:0000000000000000 bkp_interrupt_enable
+     /tmp/cc4gufNn.s:622    .text.bkp_interrupt_enable:0000000000000010 $d
+     /tmp/cc4gufNn.s:627    .text.bkp_interrupt_disable:0000000000000000 $t
+     /tmp/cc4gufNn.s:634    .text.bkp_interrupt_disable:0000000000000000 bkp_interrupt_disable
+     /tmp/cc4gufNn.s:654    .text.bkp_interrupt_disable:0000000000000010 $d
+     /tmp/cc4gufNn.s:659    .text.bkp_flag_get:0000000000000000 $t
+     /tmp/cc4gufNn.s:666    .text.bkp_flag_get:0000000000000000 bkp_flag_get
+     /tmp/cc4gufNn.s:683    .text.bkp_flag_get:000000000000000c $d
+     /tmp/cc4gufNn.s:688    .text.bkp_flag_clear:0000000000000000 $t
+     /tmp/cc4gufNn.s:695    .text.bkp_flag_clear:0000000000000000 bkp_flag_clear
+     /tmp/cc4gufNn.s:714    .text.bkp_flag_clear:0000000000000010 $d
+     /tmp/cc4gufNn.s:719    .text.bkp_interrupt_flag_get:0000000000000000 $t
+     /tmp/cc4gufNn.s:726    .text.bkp_interrupt_flag_get:0000000000000000 bkp_interrupt_flag_get
+ARM GAS  /tmp/cc4gufNn.s 			page 21
+
+
+     /tmp/cc4gufNn.s:743    .text.bkp_interrupt_flag_get:000000000000000c $d
+     /tmp/cc4gufNn.s:748    .text.bkp_interrupt_flag_clear:0000000000000000 $t
+     /tmp/cc4gufNn.s:755    .text.bkp_interrupt_flag_clear:0000000000000000 bkp_interrupt_flag_clear
+     /tmp/cc4gufNn.s:774    .text.bkp_interrupt_flag_clear:0000000000000010 $d
+
+UNDEFINED SYMBOLS
+rcu_bkp_reset_enable
+rcu_bkp_reset_disable

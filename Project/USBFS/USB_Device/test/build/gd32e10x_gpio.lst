@@ -1,0 +1,1840 @@
+ARM GAS  /tmp/ccrICber.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.eabi_attribute 27, 1
+   3              		.eabi_attribute 28, 1
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.file	"gd32e10x_gpio.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.section	.text.gpio_deinit,"ax",%progbits
+  18              		.align	1
+  19              		.global	gpio_deinit
+  20              		.arch armv7e-m
+  21              		.syntax unified
+  22              		.thumb
+  23              		.thumb_func
+  24              		.fpu fpv4-sp-d16
+  26              	gpio_deinit:
+  27              	.LVL0:
+  28              	.LFB116:
+  29              		.file 1 "../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c"
+   1:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** /*!
+   2:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     \file  gd32e10x_gpio.c
+   3:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     \brief GPIO driver
+   4:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     
+   5:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     \version 2017-12-26, V1.0.0, firmware for GD32E10x
+   6:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** */
+   7:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** 
+   8:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** /*
+   9:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     Copyright (c) 2017, GigaDevice Semiconductor Inc.
+  10:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** 
+  11:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     All rights reserved.
+  12:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** 
+  13:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     Redistribution and use in source and binary forms, with or without modification, 
+  14:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** are permitted provided that the following conditions are met:
+  15:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** 
+  16:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     1. Redistributions of source code must retain the above copyright notice, this 
+  17:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****        list of conditions and the following disclaimer.
+  18:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     2. Redistributions in binary form must reproduce the above copyright notice, 
+  19:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****        this list of conditions and the following disclaimer in the documentation 
+  20:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****        and/or other materials provided with the distribution.
+  21:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     3. Neither the name of the copyright holder nor the names of its contributors 
+  22:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****        may be used to endorse or promote products derived from this software without 
+  23:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****        specific prior written permission.
+  24:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** 
+  25:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" 
+  26:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED 
+  27:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. 
+  28:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, 
+  29:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT 
+ARM GAS  /tmp/ccrICber.s 			page 2
+
+
+  30:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR 
+  31:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, 
+  32:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) 
+  33:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY 
+  34:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** OF SUCH DAMAGE.
+  35:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** */
+  36:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** 
+  37:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** #include "gd32e10x_gpio.h"
+  38:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** 
+  39:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** #define AFIO_EXTI_SOURCE_MASK              ((uint8_t)0x03U)         /*!< AFIO exti source selection
+  40:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** #define AFIO_EXTI_SOURCE_FIELDS            ((uint8_t)0x04U)         /*!< select AFIO exti source re
+  41:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** #define LSB_16BIT_MASK                     ((uint16_t)0xFFFFU)      /*!< LSB 16-bit mask */
+  42:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** #define PCF_POSITION_MASK                  ((uint32_t)0x000F0000U)  /*!< AFIO_PCF register position
+  43:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** #define PCF_SWJCFG_MASK                    ((uint32_t)0xF8FFFFFFU)  /*!< AFIO_PCF register SWJCFG m
+  44:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** #define PCF_LOCATION1_MASK                 ((uint32_t)0x00200000U)  /*!< AFIO_PCF register location
+  45:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** #define PCF_LOCATION2_MASK                 ((uint32_t)0x00100000U)  /*!< AFIO_PCF register location
+  46:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** #define AFIO_PCF1_FIELDS                   ((uint32_t)0x80000000U)  /*!< select AFIO_PCF1 register 
+  47:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** #define GPIO_OUTPUT_PORT_OFFSET            ((uint32_t)4U)           /*!< GPIO event output port off
+  48:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** 
+  49:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** /*!
+  50:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     \brief      reset GPIO port
+  51:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     \param[in]  gpio_periph: GPIOx(x = A,B,C,D,E)
+  52:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     \param[out] none
+  53:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     \retval     none
+  54:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** */
+  55:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** void gpio_deinit(uint32_t gpio_periph)
+  56:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** {
+  30              		.loc 1 56 1 view -0
+  31              		.cfi_startproc
+  32              		@ args = 0, pretend = 0, frame = 0
+  33              		@ frame_needed = 0, uses_anonymous_args = 0
+  34              		.loc 1 56 1 is_stmt 0 view .LVU1
+  35 0000 08B5     		push	{r3, lr}
+  36              		.cfi_def_cfa_offset 8
+  37              		.cfi_offset 3, -8
+  38              		.cfi_offset 14, -4
+  57:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     switch(gpio_periph){
+  39              		.loc 1 57 5 is_stmt 1 view .LVU2
+  40 0002 204B     		ldr	r3, .L11
+  41 0004 9842     		cmp	r0, r3
+  42 0006 2AD0     		beq	.L2
+  43 0008 0FD9     		bls	.L10
+  44 000a 1F4B     		ldr	r3, .L11+4
+  45 000c 9842     		cmp	r0, r3
+  46 000e 2FD0     		beq	.L7
+  47 0010 03F58063 		add	r3, r3, #1024
+  48 0014 9842     		cmp	r0, r3
+  49 0016 21D1     		bne	.L1
+  58:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     case GPIOA:
+  59:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****         /* reset GPIOA */
+  60:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****         rcu_periph_reset_enable(RCU_GPIOARST);
+  61:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****         rcu_periph_reset_disable(RCU_GPIOARST);
+  62:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****         break;
+  63:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     case GPIOB:
+  64:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****         /* reset GPIOB */
+  65:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****         rcu_periph_reset_enable(RCU_GPIOBRST);
+  66:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****         rcu_periph_reset_disable(RCU_GPIOBRST);
+ARM GAS  /tmp/ccrICber.s 			page 3
+
+
+  67:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****         break;
+  68:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     case GPIOC:
+  69:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****         /* reset GPIOC */
+  70:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****         rcu_periph_reset_enable(RCU_GPIOCRST);
+  71:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****         rcu_periph_reset_disable(RCU_GPIOCRST);
+  72:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****         break;
+  73:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     case GPIOD:
+  74:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****         /* reset GPIOD */
+  75:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****         rcu_periph_reset_enable(RCU_GPIODRST);
+  76:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****         rcu_periph_reset_disable(RCU_GPIODRST);
+  77:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****         break;
+  78:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     case GPIOE:
+  79:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****         /* reset GPIOE */
+  80:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****         rcu_periph_reset_enable(RCU_GPIOERST);
+  50              		.loc 1 80 9 view .LVU3
+  51 0018 40F20630 		movw	r0, #774
+  52              	.LVL1:
+  53              		.loc 1 80 9 is_stmt 0 view .LVU4
+  54 001c FFF7FEFF 		bl	rcu_periph_reset_enable
+  55              	.LVL2:
+  81:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****         rcu_periph_reset_disable(RCU_GPIOERST);
+  56              		.loc 1 81 9 is_stmt 1 view .LVU5
+  57 0020 40F20630 		movw	r0, #774
+  58 0024 FFF7FEFF 		bl	rcu_periph_reset_disable
+  59              	.LVL3:
+  82:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****         break;
+  60              		.loc 1 82 9 view .LVU6
+  83:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     default:
+  84:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****         break;
+  85:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     }
+  86:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** }
+  61              		.loc 1 86 1 is_stmt 0 view .LVU7
+  62 0028 18E0     		b	.L1
+  63              	.LVL4:
+  64              	.L10:
+  57:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     case GPIOA:
+  65              		.loc 1 57 5 view .LVU8
+  66 002a A3F50063 		sub	r3, r3, #2048
+  67 002e 9842     		cmp	r0, r3
+  68 0030 0CD0     		beq	.L4
+  69 0032 03F58063 		add	r3, r3, #1024
+  70 0036 9842     		cmp	r0, r3
+  71 0038 10D1     		bne	.L1
+  65:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****         rcu_periph_reset_disable(RCU_GPIOBRST);
+  72              		.loc 1 65 9 is_stmt 1 view .LVU9
+  73 003a 40F20330 		movw	r0, #771
+  74              	.LVL5:
+  65:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****         rcu_periph_reset_disable(RCU_GPIOBRST);
+  75              		.loc 1 65 9 is_stmt 0 view .LVU10
+  76 003e FFF7FEFF 		bl	rcu_periph_reset_enable
+  77              	.LVL6:
+  66:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****         break;
+  78              		.loc 1 66 9 is_stmt 1 view .LVU11
+  79 0042 40F20330 		movw	r0, #771
+  80 0046 FFF7FEFF 		bl	rcu_periph_reset_disable
+  81              	.LVL7:
+  67:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     case GPIOC:
+ARM GAS  /tmp/ccrICber.s 			page 4
+
+
+  82              		.loc 1 67 9 view .LVU12
+  83 004a 07E0     		b	.L1
+  84              	.LVL8:
+  85              	.L4:
+  60:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****         rcu_periph_reset_disable(RCU_GPIOARST);
+  86              		.loc 1 60 9 view .LVU13
+  87 004c 40F20230 		movw	r0, #770
+  88              	.LVL9:
+  60:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****         rcu_periph_reset_disable(RCU_GPIOARST);
+  89              		.loc 1 60 9 is_stmt 0 view .LVU14
+  90 0050 FFF7FEFF 		bl	rcu_periph_reset_enable
+  91              	.LVL10:
+  61:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****         break;
+  92              		.loc 1 61 9 is_stmt 1 view .LVU15
+  93 0054 40F20230 		movw	r0, #770
+  94 0058 FFF7FEFF 		bl	rcu_periph_reset_disable
+  95              	.LVL11:
+  62:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     case GPIOB:
+  96              		.loc 1 62 9 view .LVU16
+  97              	.L1:
+  98              		.loc 1 86 1 is_stmt 0 view .LVU17
+  99 005c 08BD     		pop	{r3, pc}
+ 100              	.LVL12:
+ 101              	.L2:
+  70:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****         rcu_periph_reset_disable(RCU_GPIOCRST);
+ 102              		.loc 1 70 9 is_stmt 1 view .LVU18
+ 103 005e 4FF44170 		mov	r0, #772
+ 104              	.LVL13:
+  70:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****         rcu_periph_reset_disable(RCU_GPIOCRST);
+ 105              		.loc 1 70 9 is_stmt 0 view .LVU19
+ 106 0062 FFF7FEFF 		bl	rcu_periph_reset_enable
+ 107              	.LVL14:
+  71:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****         break;
+ 108              		.loc 1 71 9 is_stmt 1 view .LVU20
+ 109 0066 4FF44170 		mov	r0, #772
+ 110 006a FFF7FEFF 		bl	rcu_periph_reset_disable
+ 111              	.LVL15:
+  72:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     case GPIOD:
+ 112              		.loc 1 72 9 view .LVU21
+ 113 006e F5E7     		b	.L1
+ 114              	.LVL16:
+ 115              	.L7:
+  75:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****         rcu_periph_reset_disable(RCU_GPIODRST);
+ 116              		.loc 1 75 9 view .LVU22
+ 117 0070 40F20530 		movw	r0, #773
+ 118              	.LVL17:
+  75:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****         rcu_periph_reset_disable(RCU_GPIODRST);
+ 119              		.loc 1 75 9 is_stmt 0 view .LVU23
+ 120 0074 FFF7FEFF 		bl	rcu_periph_reset_enable
+ 121              	.LVL18:
+  76:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****         break;
+ 122              		.loc 1 76 9 is_stmt 1 view .LVU24
+ 123 0078 40F20530 		movw	r0, #773
+ 124 007c FFF7FEFF 		bl	rcu_periph_reset_disable
+ 125              	.LVL19:
+  77:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     case GPIOE:
+ 126              		.loc 1 77 9 view .LVU25
+ARM GAS  /tmp/ccrICber.s 			page 5
+
+
+ 127 0080 ECE7     		b	.L1
+ 128              	.L12:
+ 129 0082 00BF     		.align	2
+ 130              	.L11:
+ 131 0084 00100140 		.word	1073811456
+ 132 0088 00140140 		.word	1073812480
+ 133              		.cfi_endproc
+ 134              	.LFE116:
+ 136              		.section	.text.gpio_afio_deinit,"ax",%progbits
+ 137              		.align	1
+ 138              		.global	gpio_afio_deinit
+ 139              		.syntax unified
+ 140              		.thumb
+ 141              		.thumb_func
+ 142              		.fpu fpv4-sp-d16
+ 144              	gpio_afio_deinit:
+ 145              	.LFB117:
+  87:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** 
+  88:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** /*!
+  89:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     \brief      reset alternate function I/O(AFIO)
+  90:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     \param[in]  none
+  91:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     \param[out] none
+  92:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     \retval     none
+  93:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** */
+  94:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** void gpio_afio_deinit(void)
+  95:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** {
+ 146              		.loc 1 95 1 view -0
+ 147              		.cfi_startproc
+ 148              		@ args = 0, pretend = 0, frame = 0
+ 149              		@ frame_needed = 0, uses_anonymous_args = 0
+ 150 0000 08B5     		push	{r3, lr}
+ 151              		.cfi_def_cfa_offset 8
+ 152              		.cfi_offset 3, -8
+ 153              		.cfi_offset 14, -4
+  96:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     rcu_periph_reset_enable(RCU_AFRST);
+ 154              		.loc 1 96 5 view .LVU27
+ 155 0002 4FF44070 		mov	r0, #768
+ 156 0006 FFF7FEFF 		bl	rcu_periph_reset_enable
+ 157              	.LVL20:
+  97:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     rcu_periph_reset_disable(RCU_AFRST);
+ 158              		.loc 1 97 5 view .LVU28
+ 159 000a 4FF44070 		mov	r0, #768
+ 160 000e FFF7FEFF 		bl	rcu_periph_reset_disable
+ 161              	.LVL21:
+  98:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** }
+ 162              		.loc 1 98 1 is_stmt 0 view .LVU29
+ 163 0012 08BD     		pop	{r3, pc}
+ 164              		.cfi_endproc
+ 165              	.LFE117:
+ 167              		.section	.text.gpio_init,"ax",%progbits
+ 168              		.align	1
+ 169              		.global	gpio_init
+ 170              		.syntax unified
+ 171              		.thumb
+ 172              		.thumb_func
+ 173              		.fpu fpv4-sp-d16
+ 175              	gpio_init:
+ARM GAS  /tmp/ccrICber.s 			page 6
+
+
+ 176              	.LVL22:
+ 177              	.LFB118:
+  99:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** 
+ 100:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** /*!
+ 101:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     \brief      GPIO parameter initialization
+ 102:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     \param[in]  gpio_periph: GPIOx(x = A,B,C,D,E) 
+ 103:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     \param[in]  mode: gpio pin mode
+ 104:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****                 only one parameter can be selected which is shown as below:
+ 105:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****       \arg        GPIO_MODE_AIN: analog input mode
+ 106:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****       \arg        GPIO_MODE_IN_FLOATING: floating input mode
+ 107:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****       \arg        GPIO_MODE_IPD: pull-down input mode
+ 108:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****       \arg        GPIO_MODE_IPU: pull-up input mode
+ 109:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****       \arg        GPIO_MODE_OUT_OD: GPIO output with open-drain
+ 110:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****       \arg        GPIO_MODE_OUT_PP: GPIO output with push-pull
+ 111:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****       \arg        GPIO_MODE_AF_OD: AFIO output with open-drain
+ 112:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****       \arg        GPIO_MODE_AF_PP: AFIO output with push-pull
+ 113:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     \param[in]  speed: gpio output max speed value
+ 114:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****                 only one parameter can be selected which is shown as below:
+ 115:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****       \arg        GPIO_OSPEED_10MHZ: output max speed 10MHz
+ 116:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****       \arg        GPIO_OSPEED_2MHZ: output max speed 2MHz
+ 117:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****       \arg        GPIO_OSPEED_50MHZ: output max speed 50MHz
+ 118:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****       \arg        GPIO_OSPEED_MAX: output max speed more than 50MHz
+ 119:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     \param[in]  pin: GPIO pin
+ 120:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****                 one or more parameters can be selected which are shown as below:
+ 121:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****       \arg        GPIO_PIN_x(x=0..15), GPIO_PIN_ALL
+ 122:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     \param[out] none
+ 123:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     \retval     none
+ 124:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** */
+ 125:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** void gpio_init(uint32_t gpio_periph, uint32_t mode, uint32_t speed, uint32_t pin)
+ 126:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** {
+ 178              		.loc 1 126 1 is_stmt 1 view -0
+ 179              		.cfi_startproc
+ 180              		@ args = 0, pretend = 0, frame = 0
+ 181              		@ frame_needed = 0, uses_anonymous_args = 0
+ 182              		.loc 1 126 1 is_stmt 0 view .LVU31
+ 183 0000 2DE9F041 		push	{r4, r5, r6, r7, r8, lr}
+ 184              		.cfi_def_cfa_offset 24
+ 185              		.cfi_offset 4, -24
+ 186              		.cfi_offset 5, -20
+ 187              		.cfi_offset 6, -16
+ 188              		.cfi_offset 7, -12
+ 189              		.cfi_offset 8, -8
+ 190              		.cfi_offset 14, -4
+ 127:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     uint16_t i;
+ 191              		.loc 1 127 5 is_stmt 1 view .LVU32
+ 128:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     uint32_t temp_mode = 0U;
+ 192              		.loc 1 128 5 view .LVU33
+ 193              	.LVL23:
+ 129:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     uint32_t reg = 0U;
+ 194              		.loc 1 129 5 view .LVU34
+ 130:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** 
+ 131:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     /* GPIO mode configuration */
+ 132:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     temp_mode = (uint32_t)(mode & ((uint32_t)0x0FU));
+ 195              		.loc 1 132 5 view .LVU35
+ 196              		.loc 1 132 15 is_stmt 0 view .LVU36
+ 197 0004 01F00F0E 		and	lr, r1, #15
+ 198              	.LVL24:
+ARM GAS  /tmp/ccrICber.s 			page 7
+
+
+ 133:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     
+ 134:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     /* GPIO speed configuration */
+ 135:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     if(((uint32_t)0x00U) != ((uint32_t)mode & ((uint32_t)0x10U))){
+ 199              		.loc 1 135 5 is_stmt 1 view .LVU37
+ 200              		.loc 1 135 7 is_stmt 0 view .LVU38
+ 201 0008 11F0100F 		tst	r1, #16
+ 202 000c 03D0     		beq	.L16
+ 136:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****         /* output mode max speed */
+ 137:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****         if(GPIO_OSPEED_MAX == (uint32_t)speed){
+ 203              		.loc 1 137 9 is_stmt 1 view .LVU39
+ 204              		.loc 1 137 11 is_stmt 0 view .LVU40
+ 205 000e 042A     		cmp	r2, #4
+ 206 0010 05D0     		beq	.L29
+ 138:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****             temp_mode |= (uint32_t)0x03U;
+ 139:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****             /* set the corresponding SPD bit */
+ 140:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****             GPIOx_SPD(gpio_periph) |= (uint32_t)pin ;
+ 141:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****         }else{
+ 142:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****             /* output mode max speed:10MHz,2MHz,50MHz */
+ 143:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****             temp_mode |= (uint32_t)speed;
+ 207              		.loc 1 143 13 is_stmt 1 view .LVU41
+ 208              		.loc 1 143 23 is_stmt 0 view .LVU42
+ 209 0012 4EEA020E 		orr	lr, lr, r2
+ 210              	.LVL25:
+ 211              	.L16:
+ 144:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****         }
+ 145:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     }
+ 146:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** 
+ 147:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     /* configure the eight low port pins with GPIO_CTL0 */
+ 148:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     for(i = 0U;i < 8U;i++){
+ 212              		.loc 1 148 5 is_stmt 1 view .LVU43
+ 213              		.loc 1 148 16 view .LVU44
+ 126:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     uint16_t i;
+ 214              		.loc 1 126 1 is_stmt 0 view .LVU45
+ 215 0016 0022     		movs	r2, #0
+ 149:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****         if((1U << i) & pin){
+ 216              		.loc 1 149 16 view .LVU46
+ 217 0018 0126     		movs	r6, #1
+ 150:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****             reg = GPIO_CTL0(gpio_periph);
+ 151:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****             
+ 152:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****             /* clear the specified pin mode bits */
+ 153:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****             reg &= ~GPIO_MODE_MASK(i);
+ 218              		.loc 1 153 21 view .LVU47
+ 219 001a 0F27     		movs	r7, #15
+ 220 001c 0AE0     		b	.L21
+ 221              	.LVL26:
+ 222              	.L29:
+ 138:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****             /* set the corresponding SPD bit */
+ 223              		.loc 1 138 13 is_stmt 1 view .LVU48
+ 138:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****             /* set the corresponding SPD bit */
+ 224              		.loc 1 138 23 is_stmt 0 view .LVU49
+ 225 001e 4EF0030E 		orr	lr, lr, #3
+ 226              	.LVL27:
+ 140:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****         }else{
+ 227              		.loc 1 140 13 is_stmt 1 view .LVU50
+ 140:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****         }else{
+ 228              		.loc 1 140 36 is_stmt 0 view .LVU51
+ 229 0022 C26B     		ldr	r2, [r0, #60]
+ARM GAS  /tmp/ccrICber.s 			page 8
+
+
+ 230              	.LVL28:
+ 140:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****         }else{
+ 231              		.loc 1 140 36 view .LVU52
+ 232 0024 1A43     		orrs	r2, r2, r3
+ 233 0026 C263     		str	r2, [r0, #60]
+ 234 0028 F5E7     		b	.L16
+ 235              	.LVL29:
+ 236              	.L31:
+ 154:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****             /* set the specified pin mode bits */
+ 155:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****             reg |= GPIO_MODE_SET(i, temp_mode);
+ 156:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****             
+ 157:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****             /* set IPD or IPU */
+ 158:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****             if(GPIO_MODE_IPD == mode){
+ 159:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****                 /* reset the corresponding OCTL bit */
+ 160:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****                 GPIO_BC(gpio_periph) = (uint32_t)((1U << i) & pin);
+ 237              		.loc 1 160 17 is_stmt 1 view .LVU53
+ 238              		.loc 1 160 38 is_stmt 0 view .LVU54
+ 239 002a 4461     		str	r4, [r0, #20]
+ 240              	.L20:
+ 161:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****             }else{
+ 162:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****                 /* set the corresponding OCTL bit */
+ 163:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****                 if(GPIO_MODE_IPU == mode){
+ 164:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****                     GPIO_BOP(gpio_periph) = (uint32_t)((1U << i) & pin);
+ 165:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****                 }
+ 166:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****             }
+ 167:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****             /* set GPIO_CTL0 register */
+ 168:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****             GPIO_CTL0(gpio_periph) = reg;
+ 241              		.loc 1 168 13 is_stmt 1 view .LVU55
+ 242              		.loc 1 168 36 is_stmt 0 view .LVU56
+ 243 002c 0560     		str	r5, [r0]
+ 244              	.LVL30:
+ 245              	.L18:
+ 148:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****         if((1U << i) & pin){
+ 246              		.loc 1 148 23 is_stmt 1 discriminator 2 view .LVU57
+ 148:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****         if((1U << i) & pin){
+ 247              		.loc 1 148 16 discriminator 2 view .LVU58
+ 148:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****         if((1U << i) & pin){
+ 248              		.loc 1 148 5 is_stmt 0 discriminator 2 view .LVU59
+ 249 002e 0132     		adds	r2, r2, #1
+ 250              	.LVL31:
+ 148:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****         if((1U << i) & pin){
+ 251              		.loc 1 148 5 discriminator 2 view .LVU60
+ 252 0030 082A     		cmp	r2, #8
+ 253 0032 14D0     		beq	.L30
+ 254              	.L21:
+ 255              	.LVL32:
+ 149:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****             reg = GPIO_CTL0(gpio_periph);
+ 256              		.loc 1 149 9 is_stmt 1 view .LVU61
+ 149:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****             reg = GPIO_CTL0(gpio_periph);
+ 257              		.loc 1 149 16 is_stmt 0 view .LVU62
+ 258 0034 06FA02F4 		lsl	r4, r6, r2
+ 149:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****             reg = GPIO_CTL0(gpio_periph);
+ 259              		.loc 1 149 11 view .LVU63
+ 260 0038 1C40     		ands	r4, r4, r3
+ 261 003a F8D0     		beq	.L18
+ 150:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****             
+ 262              		.loc 1 150 13 is_stmt 1 view .LVU64
+ARM GAS  /tmp/ccrICber.s 			page 9
+
+
+ 150:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****             
+ 263              		.loc 1 150 17 is_stmt 0 view .LVU65
+ 264 003c 0568     		ldr	r5, [r0]
+ 265              	.LVL33:
+ 153:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****             /* set the specified pin mode bits */
+ 266              		.loc 1 153 13 is_stmt 1 view .LVU66
+ 267 003e 4FEA820C 		lsl	ip, r2, #2
+ 153:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****             /* set the specified pin mode bits */
+ 268              		.loc 1 153 21 is_stmt 0 view .LVU67
+ 269 0042 07FA0CF8 		lsl	r8, r7, ip
+ 153:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****             /* set the specified pin mode bits */
+ 270              		.loc 1 153 17 view .LVU68
+ 271 0046 25EA0805 		bic	r5, r5, r8
+ 272              	.LVL34:
+ 155:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****             
+ 273              		.loc 1 155 13 is_stmt 1 view .LVU69
+ 155:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****             
+ 274              		.loc 1 155 20 is_stmt 0 view .LVU70
+ 275 004a 0EFA0CFC 		lsl	ip, lr, ip
+ 155:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****             
+ 276              		.loc 1 155 17 view .LVU71
+ 277 004e 4CEA0505 		orr	r5, ip, r5
+ 278              	.LVL35:
+ 158:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****                 /* reset the corresponding OCTL bit */
+ 279              		.loc 1 158 13 is_stmt 1 view .LVU72
+ 158:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****                 /* reset the corresponding OCTL bit */
+ 280              		.loc 1 158 15 is_stmt 0 view .LVU73
+ 281 0052 2829     		cmp	r1, #40
+ 282 0054 E9D0     		beq	.L31
+ 163:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****                     GPIO_BOP(gpio_periph) = (uint32_t)((1U << i) & pin);
+ 283              		.loc 1 163 17 is_stmt 1 view .LVU74
+ 163:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****                     GPIO_BOP(gpio_periph) = (uint32_t)((1U << i) & pin);
+ 284              		.loc 1 163 19 is_stmt 0 view .LVU75
+ 285 0056 4829     		cmp	r1, #72
+ 164:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****                 }
+ 286              		.loc 1 164 21 is_stmt 1 view .LVU76
+ 164:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****                 }
+ 287              		.loc 1 164 43 is_stmt 0 view .LVU77
+ 288 0058 08BF     		it	eq
+ 289 005a 0461     		streq	r4, [r0, #16]
+ 290 005c E6E7     		b	.L20
+ 291              	.LVL36:
+ 292              	.L30:
+ 164:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****                 }
+ 293              		.loc 1 164 43 view .LVU78
+ 294 005e 0025     		movs	r5, #0
+ 169:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****         }
+ 170:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     }
+ 171:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     /* configure the eight high port pins with GPIO_CTL1 */
+ 172:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     for(i = 8U;i < 16U;i++){
+ 173:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****         if((1U << i) & pin){
+ 295              		.loc 1 173 16 view .LVU79
+ 296 0060 0127     		movs	r7, #1
+ 174:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****             reg = GPIO_CTL1(gpio_periph);
+ 175:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****             
+ 176:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****             /* clear the specified pin mode bits */
+ 177:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****             reg &= ~GPIO_MODE_MASK(i - 8U);
+ARM GAS  /tmp/ccrICber.s 			page 10
+
+
+ 297              		.loc 1 177 21 view .LVU80
+ 298 0062 4FF00F08 		mov	r8, #15
+ 299 0066 05E0     		b	.L25
+ 300              	.LVL37:
+ 301              	.L33:
+ 178:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****             /* set the specified pin mode bits */
+ 179:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****             reg |= GPIO_MODE_SET(i - 8U, temp_mode);
+ 180:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****             
+ 181:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****             /* set IPD or IPU */
+ 182:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****             if(GPIO_MODE_IPD == mode){
+ 183:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****                 /* reset the corresponding OCTL bit */
+ 184:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****                 GPIO_BC(gpio_periph) = (uint32_t)((1U << i) & pin);
+ 302              		.loc 1 184 17 is_stmt 1 view .LVU81
+ 303              		.loc 1 184 38 is_stmt 0 view .LVU82
+ 304 0068 4461     		str	r4, [r0, #20]
+ 305              	.L24:
+ 185:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****             }else{
+ 186:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****                 /* set the corresponding OCTL bit */
+ 187:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****                 if(GPIO_MODE_IPU == mode){
+ 188:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****                     GPIO_BOP(gpio_periph) = (uint32_t)((1U << i) & pin);
+ 189:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****                 }
+ 190:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****             }
+ 191:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****             /* set GPIO_CTL1 register */
+ 192:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****             GPIO_CTL1(gpio_periph) = reg;
+ 306              		.loc 1 192 13 is_stmt 1 view .LVU83
+ 307              		.loc 1 192 36 is_stmt 0 view .LVU84
+ 308 006a 4660     		str	r6, [r0, #4]
+ 309              	.LVL38:
+ 310              	.L22:
+ 172:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****         if((1U << i) & pin){
+ 311              		.loc 1 172 24 is_stmt 1 discriminator 2 view .LVU85
+ 172:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****         if((1U << i) & pin){
+ 312              		.loc 1 172 16 discriminator 2 view .LVU86
+ 172:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****         if((1U << i) & pin){
+ 313              		.loc 1 172 5 is_stmt 0 discriminator 2 view .LVU87
+ 314 006c 0132     		adds	r2, r2, #1
+ 315              	.LVL39:
+ 172:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****         if((1U << i) & pin){
+ 316              		.loc 1 172 5 discriminator 2 view .LVU88
+ 317 006e 0435     		adds	r5, r5, #4
+ 318 0070 102A     		cmp	r2, #16
+ 319 0072 13D0     		beq	.L32
+ 320              	.L25:
+ 321              	.LVL40:
+ 173:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****             reg = GPIO_CTL1(gpio_periph);
+ 322              		.loc 1 173 9 is_stmt 1 view .LVU89
+ 173:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****             reg = GPIO_CTL1(gpio_periph);
+ 323              		.loc 1 173 16 is_stmt 0 view .LVU90
+ 324 0074 07FA02FC 		lsl	ip, r7, r2
+ 173:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****             reg = GPIO_CTL1(gpio_periph);
+ 325              		.loc 1 173 11 view .LVU91
+ 326 0078 1CEA0304 		ands	r4, ip, r3
+ 327 007c F6D0     		beq	.L22
+ 174:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****             
+ 328              		.loc 1 174 13 is_stmt 1 view .LVU92
+ 174:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****             
+ 329              		.loc 1 174 17 is_stmt 0 view .LVU93
+ARM GAS  /tmp/ccrICber.s 			page 11
+
+
+ 330 007e 4668     		ldr	r6, [r0, #4]
+ 331              	.LVL41:
+ 177:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****             /* set the specified pin mode bits */
+ 332              		.loc 1 177 13 is_stmt 1 view .LVU94
+ 177:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****             /* set the specified pin mode bits */
+ 333              		.loc 1 177 21 is_stmt 0 view .LVU95
+ 334 0080 08FA05FC 		lsl	ip, r8, r5
+ 177:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****             /* set the specified pin mode bits */
+ 335              		.loc 1 177 17 view .LVU96
+ 336 0084 26EA0C0C 		bic	ip, r6, ip
+ 337              	.LVL42:
+ 179:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****             
+ 338              		.loc 1 179 13 is_stmt 1 view .LVU97
+ 179:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****             
+ 339              		.loc 1 179 20 is_stmt 0 view .LVU98
+ 340 0088 0EFA05F6 		lsl	r6, lr, r5
+ 179:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****             
+ 341              		.loc 1 179 17 view .LVU99
+ 342 008c 46EA0C06 		orr	r6, r6, ip
+ 343              	.LVL43:
+ 182:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****                 /* reset the corresponding OCTL bit */
+ 344              		.loc 1 182 13 is_stmt 1 view .LVU100
+ 182:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****                 /* reset the corresponding OCTL bit */
+ 345              		.loc 1 182 15 is_stmt 0 view .LVU101
+ 346 0090 2829     		cmp	r1, #40
+ 347 0092 E9D0     		beq	.L33
+ 187:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****                     GPIO_BOP(gpio_periph) = (uint32_t)((1U << i) & pin);
+ 348              		.loc 1 187 17 is_stmt 1 view .LVU102
+ 187:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****                     GPIO_BOP(gpio_periph) = (uint32_t)((1U << i) & pin);
+ 349              		.loc 1 187 19 is_stmt 0 view .LVU103
+ 350 0094 4829     		cmp	r1, #72
+ 188:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****                 }
+ 351              		.loc 1 188 21 is_stmt 1 view .LVU104
+ 188:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****                 }
+ 352              		.loc 1 188 43 is_stmt 0 view .LVU105
+ 353 0096 08BF     		it	eq
+ 354 0098 0461     		streq	r4, [r0, #16]
+ 355 009a E6E7     		b	.L24
+ 356              	.LVL44:
+ 357              	.L32:
+ 193:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****         }
+ 194:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     }
+ 195:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** }
+ 358              		.loc 1 195 1 view .LVU106
+ 359 009c BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
+ 360              		.cfi_endproc
+ 361              	.LFE118:
+ 363              		.section	.text.gpio_bit_set,"ax",%progbits
+ 364              		.align	1
+ 365              		.global	gpio_bit_set
+ 366              		.syntax unified
+ 367              		.thumb
+ 368              		.thumb_func
+ 369              		.fpu fpv4-sp-d16
+ 371              	gpio_bit_set:
+ 372              	.LVL45:
+ 373              	.LFB119:
+ARM GAS  /tmp/ccrICber.s 			page 12
+
+
+ 196:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** 
+ 197:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** /*!
+ 198:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     \brief      set GPIO pin
+ 199:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     \param[in]  gpio_periph: GPIOx(x = A,B,C,D,E) 
+ 200:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     \param[in]  pin: GPIO pin
+ 201:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****                 one or more parameters can be selected which are shown as below:
+ 202:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****       \arg        GPIO_PIN_x(x=0..15), GPIO_PIN_ALL
+ 203:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     \param[out] none
+ 204:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     \retval     none
+ 205:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** */
+ 206:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** void gpio_bit_set(uint32_t gpio_periph, uint32_t pin)
+ 207:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** {
+ 374              		.loc 1 207 1 is_stmt 1 view -0
+ 375              		.cfi_startproc
+ 376              		@ args = 0, pretend = 0, frame = 0
+ 377              		@ frame_needed = 0, uses_anonymous_args = 0
+ 378              		@ link register save eliminated.
+ 208:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     GPIO_BOP(gpio_periph) = (uint32_t)pin;
+ 379              		.loc 1 208 5 view .LVU108
+ 380              		.loc 1 208 27 is_stmt 0 view .LVU109
+ 381 0000 0161     		str	r1, [r0, #16]
+ 209:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** }
+ 382              		.loc 1 209 1 view .LVU110
+ 383 0002 7047     		bx	lr
+ 384              		.cfi_endproc
+ 385              	.LFE119:
+ 387              		.section	.text.gpio_bit_reset,"ax",%progbits
+ 388              		.align	1
+ 389              		.global	gpio_bit_reset
+ 390              		.syntax unified
+ 391              		.thumb
+ 392              		.thumb_func
+ 393              		.fpu fpv4-sp-d16
+ 395              	gpio_bit_reset:
+ 396              	.LVL46:
+ 397              	.LFB120:
+ 210:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** 
+ 211:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** /*!
+ 212:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     \brief      reset GPIO pin
+ 213:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     \param[in]  gpio_periph: GPIOx(x = A,B,C,D,E) 
+ 214:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     \param[in]  pin: GPIO pin
+ 215:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****                 one or more parameters can be selected which are shown as below:
+ 216:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****       \arg        GPIO_PIN_x(x=0..15), GPIO_PIN_ALL
+ 217:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     \param[out] none
+ 218:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     \retval     none
+ 219:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** */
+ 220:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** void gpio_bit_reset(uint32_t gpio_periph, uint32_t pin)
+ 221:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** {
+ 398              		.loc 1 221 1 is_stmt 1 view -0
+ 399              		.cfi_startproc
+ 400              		@ args = 0, pretend = 0, frame = 0
+ 401              		@ frame_needed = 0, uses_anonymous_args = 0
+ 402              		@ link register save eliminated.
+ 222:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     GPIO_BC(gpio_periph) = (uint32_t)pin;
+ 403              		.loc 1 222 5 view .LVU112
+ 404              		.loc 1 222 26 is_stmt 0 view .LVU113
+ 405 0000 4161     		str	r1, [r0, #20]
+ARM GAS  /tmp/ccrICber.s 			page 13
+
+
+ 223:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** }
+ 406              		.loc 1 223 1 view .LVU114
+ 407 0002 7047     		bx	lr
+ 408              		.cfi_endproc
+ 409              	.LFE120:
+ 411              		.section	.text.gpio_bit_write,"ax",%progbits
+ 412              		.align	1
+ 413              		.global	gpio_bit_write
+ 414              		.syntax unified
+ 415              		.thumb
+ 416              		.thumb_func
+ 417              		.fpu fpv4-sp-d16
+ 419              	gpio_bit_write:
+ 420              	.LVL47:
+ 421              	.LFB121:
+ 224:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** 
+ 225:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** /*!
+ 226:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     \brief      write data to the specified GPIO pin
+ 227:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     \param[in]  gpio_periph: GPIOx(x = A,B,C,D,E) 
+ 228:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     \param[in]  pin: GPIO pin
+ 229:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****                 one or more parameters can be selected which are shown as below:
+ 230:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****       \arg        GPIO_PIN_x(x=0..15), GPIO_PIN_ALL
+ 231:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     \param[in]  bit_value: SET or RESET
+ 232:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****       \arg        RESET: clear the port pin
+ 233:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****       \arg        SET: set the port pin
+ 234:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     \param[out] none
+ 235:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     \retval     none
+ 236:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** */
+ 237:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** void gpio_bit_write(uint32_t gpio_periph, uint32_t pin, bit_status bit_value)
+ 238:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** {
+ 422              		.loc 1 238 1 is_stmt 1 view -0
+ 423              		.cfi_startproc
+ 424              		@ args = 0, pretend = 0, frame = 0
+ 425              		@ frame_needed = 0, uses_anonymous_args = 0
+ 426              		@ link register save eliminated.
+ 239:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     if(RESET != bit_value){
+ 427              		.loc 1 239 5 view .LVU116
+ 428              		.loc 1 239 7 is_stmt 0 view .LVU117
+ 429 0000 0AB1     		cbz	r2, .L37
+ 240:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****         GPIO_BOP(gpio_periph) = (uint32_t)pin;
+ 430              		.loc 1 240 9 is_stmt 1 view .LVU118
+ 431              		.loc 1 240 31 is_stmt 0 view .LVU119
+ 432 0002 0161     		str	r1, [r0, #16]
+ 433 0004 7047     		bx	lr
+ 434              	.L37:
+ 241:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     }else{
+ 242:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****         GPIO_BC(gpio_periph) = (uint32_t)pin;
+ 435              		.loc 1 242 9 is_stmt 1 view .LVU120
+ 436              		.loc 1 242 30 is_stmt 0 view .LVU121
+ 437 0006 4161     		str	r1, [r0, #20]
+ 243:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     }
+ 244:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** }
+ 438              		.loc 1 244 1 view .LVU122
+ 439 0008 7047     		bx	lr
+ 440              		.cfi_endproc
+ 441              	.LFE121:
+ 443              		.section	.text.gpio_port_write,"ax",%progbits
+ARM GAS  /tmp/ccrICber.s 			page 14
+
+
+ 444              		.align	1
+ 445              		.global	gpio_port_write
+ 446              		.syntax unified
+ 447              		.thumb
+ 448              		.thumb_func
+ 449              		.fpu fpv4-sp-d16
+ 451              	gpio_port_write:
+ 452              	.LVL48:
+ 453              	.LFB122:
+ 245:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** 
+ 246:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** /*!
+ 247:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     \brief      write data to the specified GPIO port
+ 248:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     \param[in]  gpio_periph: GPIOx(x = A,B,C,D,E) 
+ 249:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     \param[in]  data: specify the value to be written to the port output data register
+ 250:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     \param[out] none
+ 251:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     \retval     none
+ 252:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** */
+ 253:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** void gpio_port_write(uint32_t gpio_periph,uint16_t data)
+ 254:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** {
+ 454              		.loc 1 254 1 is_stmt 1 view -0
+ 455              		.cfi_startproc
+ 456              		@ args = 0, pretend = 0, frame = 0
+ 457              		@ frame_needed = 0, uses_anonymous_args = 0
+ 458              		@ link register save eliminated.
+ 255:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     GPIO_OCTL(gpio_periph) = (uint32_t)data;
+ 459              		.loc 1 255 5 view .LVU124
+ 460              		.loc 1 255 28 is_stmt 0 view .LVU125
+ 461 0000 C160     		str	r1, [r0, #12]
+ 256:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** }
+ 462              		.loc 1 256 1 view .LVU126
+ 463 0002 7047     		bx	lr
+ 464              		.cfi_endproc
+ 465              	.LFE122:
+ 467              		.section	.text.gpio_input_bit_get,"ax",%progbits
+ 468              		.align	1
+ 469              		.global	gpio_input_bit_get
+ 470              		.syntax unified
+ 471              		.thumb
+ 472              		.thumb_func
+ 473              		.fpu fpv4-sp-d16
+ 475              	gpio_input_bit_get:
+ 476              	.LVL49:
+ 477              	.LFB123:
+ 257:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** 
+ 258:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** /*!
+ 259:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     \brief      get GPIO pin input status
+ 260:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     \param[in]  gpio_periph: GPIOx(x = A,B,C,D,E) 
+ 261:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     \param[in]  pin: GPIO pin
+ 262:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****                 only one parameter can be selected which are shown as below:
+ 263:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****       \arg        GPIO_PIN_x(x=0..15), GPIO_PIN_ALL
+ 264:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     \param[out] none
+ 265:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     \retval     input status of gpio pin: SET or RESET
+ 266:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** */
+ 267:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** FlagStatus gpio_input_bit_get(uint32_t gpio_periph,uint32_t pin)
+ 268:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** {
+ 478              		.loc 1 268 1 is_stmt 1 view -0
+ 479              		.cfi_startproc
+ARM GAS  /tmp/ccrICber.s 			page 15
+
+
+ 480              		@ args = 0, pretend = 0, frame = 0
+ 481              		@ frame_needed = 0, uses_anonymous_args = 0
+ 482              		@ link register save eliminated.
+ 269:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     if((uint32_t)RESET != (GPIO_ISTAT(gpio_periph)&(pin))){
+ 483              		.loc 1 269 5 view .LVU128
+ 484              		.loc 1 269 28 is_stmt 0 view .LVU129
+ 485 0000 8368     		ldr	r3, [r0, #8]
+ 486              		.loc 1 269 7 view .LVU130
+ 487 0002 0B42     		tst	r3, r1
+ 270:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****         return SET; 
+ 271:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     }else{
+ 272:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****         return RESET;
+ 273:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     }
+ 274:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** }
+ 488              		.loc 1 274 1 view .LVU131
+ 489 0004 14BF     		ite	ne
+ 490 0006 0120     		movne	r0, #1
+ 491              	.LVL50:
+ 492              		.loc 1 274 1 view .LVU132
+ 493 0008 0020     		moveq	r0, #0
+ 494 000a 7047     		bx	lr
+ 495              		.cfi_endproc
+ 496              	.LFE123:
+ 498              		.section	.text.gpio_input_port_get,"ax",%progbits
+ 499              		.align	1
+ 500              		.global	gpio_input_port_get
+ 501              		.syntax unified
+ 502              		.thumb
+ 503              		.thumb_func
+ 504              		.fpu fpv4-sp-d16
+ 506              	gpio_input_port_get:
+ 507              	.LVL51:
+ 508              	.LFB124:
+ 275:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** 
+ 276:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** /*!
+ 277:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     \brief      get GPIO port input status
+ 278:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     \param[in]  gpio_periph: GPIOx(x = A,B,C,D,E) 
+ 279:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     \param[out] none
+ 280:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     \retval     input status of gpio all pins
+ 281:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** */
+ 282:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** uint16_t gpio_input_port_get(uint32_t gpio_periph)
+ 283:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** {
+ 509              		.loc 1 283 1 is_stmt 1 view -0
+ 510              		.cfi_startproc
+ 511              		@ args = 0, pretend = 0, frame = 0
+ 512              		@ frame_needed = 0, uses_anonymous_args = 0
+ 513              		@ link register save eliminated.
+ 284:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     return (uint16_t)(GPIO_ISTAT(gpio_periph));
+ 514              		.loc 1 284 5 view .LVU134
+ 515              		.loc 1 284 23 is_stmt 0 view .LVU135
+ 516 0000 8068     		ldr	r0, [r0, #8]
+ 517              	.LVL52:
+ 285:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** }
+ 518              		.loc 1 285 1 view .LVU136
+ 519 0002 80B2     		uxth	r0, r0
+ 520 0004 7047     		bx	lr
+ 521              		.cfi_endproc
+ARM GAS  /tmp/ccrICber.s 			page 16
+
+
+ 522              	.LFE124:
+ 524              		.section	.text.gpio_output_bit_get,"ax",%progbits
+ 525              		.align	1
+ 526              		.global	gpio_output_bit_get
+ 527              		.syntax unified
+ 528              		.thumb
+ 529              		.thumb_func
+ 530              		.fpu fpv4-sp-d16
+ 532              	gpio_output_bit_get:
+ 533              	.LVL53:
+ 534              	.LFB125:
+ 286:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** 
+ 287:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** /*!
+ 288:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     \brief      get GPIO pin output status
+ 289:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     \param[in]  gpio_periph: GPIOx(x = A,B,C,D,E) 
+ 290:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     \param[in]  pin: GPIO pin
+ 291:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****                 only one parameter can be selected which are shown as below:
+ 292:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****       \arg        GPIO_PIN_x(x=0..15), GPIO_PIN_ALL
+ 293:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     \param[out] none
+ 294:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     \retval     output status of gpio pin: SET or RESET
+ 295:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** */
+ 296:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** FlagStatus gpio_output_bit_get(uint32_t gpio_periph, uint32_t pin)
+ 297:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** {
+ 535              		.loc 1 297 1 is_stmt 1 view -0
+ 536              		.cfi_startproc
+ 537              		@ args = 0, pretend = 0, frame = 0
+ 538              		@ frame_needed = 0, uses_anonymous_args = 0
+ 539              		@ link register save eliminated.
+ 298:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     if((uint32_t)RESET !=(GPIO_OCTL(gpio_periph)&(pin))){
+ 540              		.loc 1 298 5 view .LVU138
+ 541              		.loc 1 298 27 is_stmt 0 view .LVU139
+ 542 0000 C368     		ldr	r3, [r0, #12]
+ 543              		.loc 1 298 7 view .LVU140
+ 544 0002 0B42     		tst	r3, r1
+ 299:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****         return SET;
+ 300:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     }else{
+ 301:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****         return RESET;
+ 302:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     }
+ 303:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** }
+ 545              		.loc 1 303 1 view .LVU141
+ 546 0004 14BF     		ite	ne
+ 547 0006 0120     		movne	r0, #1
+ 548              	.LVL54:
+ 549              		.loc 1 303 1 view .LVU142
+ 550 0008 0020     		moveq	r0, #0
+ 551 000a 7047     		bx	lr
+ 552              		.cfi_endproc
+ 553              	.LFE125:
+ 555              		.section	.text.gpio_output_port_get,"ax",%progbits
+ 556              		.align	1
+ 557              		.global	gpio_output_port_get
+ 558              		.syntax unified
+ 559              		.thumb
+ 560              		.thumb_func
+ 561              		.fpu fpv4-sp-d16
+ 563              	gpio_output_port_get:
+ 564              	.LVL55:
+ARM GAS  /tmp/ccrICber.s 			page 17
+
+
+ 565              	.LFB126:
+ 304:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** 
+ 305:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** /*!
+ 306:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     \brief      get GPIO port output status
+ 307:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     \param[in]  gpio_periph: GPIOx(x = A,B,C,D,E) 
+ 308:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     \param[out] none
+ 309:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     \retval     output status of gpio all pins
+ 310:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** */
+ 311:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** uint16_t gpio_output_port_get(uint32_t gpio_periph)
+ 312:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** {
+ 566              		.loc 1 312 1 is_stmt 1 view -0
+ 567              		.cfi_startproc
+ 568              		@ args = 0, pretend = 0, frame = 0
+ 569              		@ frame_needed = 0, uses_anonymous_args = 0
+ 570              		@ link register save eliminated.
+ 313:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     return ((uint16_t)GPIO_OCTL(gpio_periph));
+ 571              		.loc 1 313 5 view .LVU144
+ 572              		.loc 1 313 23 is_stmt 0 view .LVU145
+ 573 0000 C068     		ldr	r0, [r0, #12]
+ 574              	.LVL56:
+ 314:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** }
+ 575              		.loc 1 314 1 view .LVU146
+ 576 0002 80B2     		uxth	r0, r0
+ 577 0004 7047     		bx	lr
+ 578              		.cfi_endproc
+ 579              	.LFE126:
+ 581              		.section	.text.gpio_pin_remap_config,"ax",%progbits
+ 582              		.align	1
+ 583              		.global	gpio_pin_remap_config
+ 584              		.syntax unified
+ 585              		.thumb
+ 586              		.thumb_func
+ 587              		.fpu fpv4-sp-d16
+ 589              	gpio_pin_remap_config:
+ 590              	.LVL57:
+ 591              	.LFB127:
+ 315:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** 
+ 316:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** /*!
+ 317:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     \brief      configure GPIO pin remap
+ 318:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     \param[in]  gpio_remap: select the pin to remap
+ 319:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****                 only one parameter can be selected which are shown as below:
+ 320:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****       \arg        GPIO_SPI0_REMAP: SPI0 remapping
+ 321:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****       \arg        GPIO_I2C0_REMAP: I2C0 remapping
+ 322:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****       \arg        GPIO_USART0_REMAP: USART0 remapping
+ 323:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****       \arg        GPIO_USART1_REMAP: USART1 remapping
+ 324:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****       \arg        GPIO_USART2_PARTIAL_REMAP: USART2 partial remapping
+ 325:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****       \arg        GPIO_USART2_FULL_REMAP: USART2 full remapping
+ 326:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****       \arg        GPIO_TIMER0_PARTIAL_REMAP: TIMER0 partial remapping 
+ 327:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****       \arg        GPIO_TIMER0_FULL_REMAP: TIMER0 full remapping
+ 328:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****       \arg        GPIO_TIMER1_PARTIAL_REMAP0: TIMER1 partial remapping
+ 329:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****       \arg        GPIO_TIMER1_PARTIAL_REMAP1: TIMER1 partial remapping
+ 330:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****       \arg        GPIO_TIMER1_FULL_REMAP: TIMER1 full remapping
+ 331:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****       \arg        GPIO_TIMER2_PARTIAL_REMAP: TIMER2 partial remapping
+ 332:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****       \arg        GPIO_TIMER2_FULL_REMAP: TIMER2 full remapping
+ 333:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****       \arg        GPIO_TIMER3_REMAP: TIMER3 remapping
+ 334:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****       \arg        GPIO_CAN0_PARTIAL_REMAP: CAN0 partial remapping
+ 335:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****       \arg        GPIO_CAN0_FULL_REMAP: CAN0 full remapping
+ARM GAS  /tmp/ccrICber.s 			page 18
+
+
+ 336:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****       \arg        GPIO_PD01_REMAP: PD01 remapping
+ 337:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****       \arg        GPIO_TIMER4CH3_IREMAP: TIMER4 channel3 internal remapping
+ 338:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****       \arg        GPIO_ADC0_ETRGINS_REMAP: ADC0 external trigger inserted conversion remapping
+ 339:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****       \arg        GPIO_ADC0_ETRGREG_REMAP: ADC0 external trigger regular conversion remapping
+ 340:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****       \arg        GPIO_ADC1_ETRGINS_REMAP: ADC1 external trigger inserted conversion remapping
+ 341:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****       \arg        GPIO_ADC1_ETRGREG_REMAP: ADC1 external trigger regular conversion remapping
+ 342:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****       \arg        GPIO_CAN1_REMAP: CAN1 remapping
+ 343:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****       \arg        GPIO_SWJ_NONJTRST_REMAP: full SWJ(JTAG-DP + SW-DP),but without NJTRST
+ 344:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****       \arg        GPIO_SWJ_SWDPENABLE_REMAP: JTAG-DP disabled and SW-DP enabled
+ 345:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****       \arg        GPIO_SWJ_DISABLE_REMAP: JTAG-DP disabled and SW-DP disabled
+ 346:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****       \arg        GPIO_SPI2_REMAP: SPI2 remapping 
+ 347:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****       \arg        GPIO_TIMER1ITR0_REMAP: TIMER1 internal trigger 0 remapping
+ 348:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****       \arg        GPIO_TIMER8_REMAP: TIMER8 remapping
+ 349:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****       \arg        GPIO_EXMC_NADV_REMAP: EXMC_NADV connect/disconnect
+ 350:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****       \arg        GPIO_CTC_REMAP0: CTC remapping(PD15)
+ 351:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     \param[in]  newvalue: ENABLE or DISABLE
+ 352:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     \param[out] none
+ 353:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     \retval     none
+ 354:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** */
+ 355:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** void gpio_pin_remap_config(uint32_t remap, ControlStatus newvalue)
+ 356:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** {
+ 592              		.loc 1 356 1 is_stmt 1 view -0
+ 593              		.cfi_startproc
+ 594              		@ args = 0, pretend = 0, frame = 0
+ 595              		@ frame_needed = 0, uses_anonymous_args = 0
+ 596              		.loc 1 356 1 is_stmt 0 view .LVU148
+ 597 0000 10B5     		push	{r4, lr}
+ 598              		.cfi_def_cfa_offset 8
+ 599              		.cfi_offset 4, -8
+ 600              		.cfi_offset 14, -4
+ 357:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     uint32_t remap1 = 0U, remap2 = 0U, temp_reg = 0U, temp_mask = 0U;
+ 601              		.loc 1 357 5 is_stmt 1 view .LVU149
+ 602              	.LVL58:
+ 358:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** 
+ 359:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     if(((uint32_t)0x80000000U) == (remap & 0x80000000U)){
+ 603              		.loc 1 359 5 view .LVU150
+ 604              		.loc 1 359 7 is_stmt 0 view .LVU151
+ 605 0002 0028     		cmp	r0, #0
+ 360:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****         /* get AFIO_PCF1 regiter value */
+ 361:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****         temp_reg = AFIO_PCF1;
+ 606              		.loc 1 361 9 is_stmt 1 view .LVU152
+ 607              		.loc 1 361 18 is_stmt 0 view .LVU153
+ 608 0004 194B     		ldr	r3, .L55
+ 609 0006 B4BF     		ite	lt
+ 610 0008 DB69     		ldrlt	r3, [r3, #28]
+ 611              	.LVL59:
+ 362:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     }else{
+ 363:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****         /* get AFIO_PCF0 regiter value */
+ 364:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****         temp_reg = AFIO_PCF0;
+ 612              		.loc 1 364 9 is_stmt 1 view .LVU154
+ 613              		.loc 1 364 18 is_stmt 0 view .LVU155
+ 614 000a 5B68     		ldrge	r3, [r3, #4]
+ 615              	.LVL60:
+ 365:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     }
+ 366:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** 
+ 367:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     temp_mask = (remap & PCF_POSITION_MASK) >> 0x10U;
+ 616              		.loc 1 367 5 is_stmt 1 view .LVU156
+ARM GAS  /tmp/ccrICber.s 			page 19
+
+
+ 368:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     remap1 = remap & LSB_16BIT_MASK;
+ 617              		.loc 1 368 5 view .LVU157
+ 618              		.loc 1 368 12 is_stmt 0 view .LVU158
+ 619 000c 1FFA80FE 		uxth	lr, r0
+ 620              	.LVL61:
+ 369:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** 
+ 370:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     /* judge pin remap type */
+ 371:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     if((PCF_LOCATION1_MASK | PCF_LOCATION2_MASK) == (remap & (PCF_LOCATION1_MASK | PCF_LOCATION2_MA
+ 621              		.loc 1 371 5 is_stmt 1 view .LVU159
+ 622              		.loc 1 371 60 is_stmt 0 view .LVU160
+ 623 0010 00F4401C 		and	ip, r0, #3145728
+ 624              		.loc 1 371 7 view .LVU161
+ 625 0014 BCF5401F 		cmp	ip, #3145728
+ 626 0018 0BD0     		beq	.L54
+ 372:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****         temp_reg &= PCF_SWJCFG_MASK;
+ 373:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****         AFIO_PCF0 &= PCF_SWJCFG_MASK;
+ 374:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     }else if(PCF_LOCATION2_MASK == (remap & PCF_LOCATION2_MASK)){
+ 627              		.loc 1 374 11 is_stmt 1 view .LVU162
+ 628              		.loc 1 374 13 is_stmt 0 view .LVU163
+ 629 001a 10F4801F 		tst	r0, #1048576
+ 630 001e 1BD0     		beq	.L49
+ 375:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****         remap2 = ((uint32_t)0x03U) << temp_mask;
+ 631              		.loc 1 375 9 is_stmt 1 view .LVU164
+ 632              	.LVL62:
+ 376:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****         temp_reg &= ~remap2;
+ 633              		.loc 1 376 9 view .LVU165
+ 367:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     remap1 = remap & LSB_16BIT_MASK;
+ 634              		.loc 1 367 15 is_stmt 0 view .LVU166
+ 635 0020 C0F30344 		ubfx	r4, r0, #16, #4
+ 375:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****         remap2 = ((uint32_t)0x03U) << temp_mask;
+ 636              		.loc 1 375 16 view .LVU167
+ 637 0024 0322     		movs	r2, #3
+ 638 0026 A240     		lsls	r2, r2, r4
+ 639              		.loc 1 376 18 view .LVU168
+ 640 0028 23EA0203 		bic	r3, r3, r2
+ 641              	.LVL63:
+ 377:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****         temp_reg |= ~PCF_SWJCFG_MASK;
+ 642              		.loc 1 377 9 is_stmt 1 view .LVU169
+ 643              		.loc 1 377 18 is_stmt 0 view .LVU170
+ 644 002c 43F0E063 		orr	r3, r3, #117440512
+ 645              	.LVL64:
+ 646              		.loc 1 377 18 view .LVU171
+ 647 0030 06E0     		b	.L48
+ 648              	.LVL65:
+ 649              	.L54:
+ 372:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****         AFIO_PCF0 &= PCF_SWJCFG_MASK;
+ 650              		.loc 1 372 9 is_stmt 1 view .LVU172
+ 372:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****         AFIO_PCF0 &= PCF_SWJCFG_MASK;
+ 651              		.loc 1 372 18 is_stmt 0 view .LVU173
+ 652 0032 23F0E063 		bic	r3, r3, #117440512
+ 653              	.LVL66:
+ 373:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     }else if(PCF_LOCATION2_MASK == (remap & PCF_LOCATION2_MASK)){
+ 654              		.loc 1 373 9 is_stmt 1 view .LVU174
+ 373:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     }else if(PCF_LOCATION2_MASK == (remap & PCF_LOCATION2_MASK)){
+ 655              		.loc 1 373 19 is_stmt 0 view .LVU175
+ 656 0036 0D4C     		ldr	r4, .L55
+ 657 0038 6268     		ldr	r2, [r4, #4]
+ARM GAS  /tmp/ccrICber.s 			page 20
+
+
+ 658 003a 22F0E062 		bic	r2, r2, #117440512
+ 659 003e 6260     		str	r2, [r4, #4]
+ 660              	.LVL67:
+ 661              	.L48:
+ 378:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     }else{
+ 379:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****         temp_reg &= ~(remap1 << ((remap >> 0x15U)*0x10U));
+ 380:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****         temp_reg |= ~PCF_SWJCFG_MASK;
+ 381:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     }
+ 382:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     
+ 383:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     /* set pin remap value */
+ 384:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     if(DISABLE != newvalue){
+ 662              		.loc 1 384 5 is_stmt 1 view .LVU176
+ 663              		.loc 1 384 7 is_stmt 0 view .LVU177
+ 664 0040 21B1     		cbz	r1, .L50
+ 385:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****         temp_reg |= (remap1 << ((remap >> 0x15U)*0x10U));
+ 665              		.loc 1 385 9 is_stmt 1 view .LVU178
+ 666              		.loc 1 385 40 is_stmt 0 view .LVU179
+ 667 0042 420D     		lsrs	r2, r0, #21
+ 668              		.loc 1 385 49 view .LVU180
+ 669 0044 1201     		lsls	r2, r2, #4
+ 670              		.loc 1 385 29 view .LVU181
+ 671 0046 0EFA02F2 		lsl	r2, lr, r2
+ 672              		.loc 1 385 18 view .LVU182
+ 673 004a 1343     		orrs	r3, r3, r2
+ 674              	.LVL68:
+ 675              	.L50:
+ 386:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     }
+ 387:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     
+ 388:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     if(AFIO_PCF1_FIELDS == (remap & AFIO_PCF1_FIELDS)){
+ 676              		.loc 1 388 5 is_stmt 1 view .LVU183
+ 677              		.loc 1 388 7 is_stmt 0 view .LVU184
+ 678 004c 0028     		cmp	r0, #0
+ 389:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****         /* set AFIO_PCF1 regiter value */
+ 390:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****         AFIO_PCF1 = temp_reg;
+ 679              		.loc 1 390 9 is_stmt 1 view .LVU185
+ 680              		.loc 1 390 19 is_stmt 0 view .LVU186
+ 681 004e 074A     		ldr	r2, .L55
+ 682 0050 B4BF     		ite	lt
+ 683 0052 D361     		strlt	r3, [r2, #28]
+ 391:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     }else{
+ 392:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****         /* set AFIO_PCF0 regiter value */
+ 393:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****         AFIO_PCF0 = temp_reg;
+ 684              		.loc 1 393 9 is_stmt 1 view .LVU187
+ 685              		.loc 1 393 19 is_stmt 0 view .LVU188
+ 686 0054 5360     		strge	r3, [r2, #4]
+ 394:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     }
+ 395:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** }
+ 687              		.loc 1 395 1 view .LVU189
+ 688 0056 10BD     		pop	{r4, pc}
+ 689              	.LVL69:
+ 690              	.L49:
+ 379:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****         temp_reg |= ~PCF_SWJCFG_MASK;
+ 691              		.loc 1 379 9 is_stmt 1 view .LVU190
+ 379:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****         temp_reg |= ~PCF_SWJCFG_MASK;
+ 692              		.loc 1 379 41 is_stmt 0 view .LVU191
+ 693 0058 420D     		lsrs	r2, r0, #21
+ 379:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****         temp_reg |= ~PCF_SWJCFG_MASK;
+ARM GAS  /tmp/ccrICber.s 			page 21
+
+
+ 694              		.loc 1 379 50 view .LVU192
+ 695 005a 1201     		lsls	r2, r2, #4
+ 379:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****         temp_reg |= ~PCF_SWJCFG_MASK;
+ 696              		.loc 1 379 30 view .LVU193
+ 697 005c 0EFA02F2 		lsl	r2, lr, r2
+ 379:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****         temp_reg |= ~PCF_SWJCFG_MASK;
+ 698              		.loc 1 379 18 view .LVU194
+ 699 0060 23EA0203 		bic	r3, r3, r2
+ 700              	.LVL70:
+ 380:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     }
+ 701              		.loc 1 380 9 is_stmt 1 view .LVU195
+ 380:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     }
+ 702              		.loc 1 380 18 is_stmt 0 view .LVU196
+ 703 0064 43F0E063 		orr	r3, r3, #117440512
+ 704              	.LVL71:
+ 380:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     }
+ 705              		.loc 1 380 18 view .LVU197
+ 706 0068 EAE7     		b	.L48
+ 707              	.L56:
+ 708 006a 00BF     		.align	2
+ 709              	.L55:
+ 710 006c 00000140 		.word	1073807360
+ 711              		.cfi_endproc
+ 712              	.LFE127:
+ 714              		.section	.text.gpio_exti_source_select,"ax",%progbits
+ 715              		.align	1
+ 716              		.global	gpio_exti_source_select
+ 717              		.syntax unified
+ 718              		.thumb
+ 719              		.thumb_func
+ 720              		.fpu fpv4-sp-d16
+ 722              	gpio_exti_source_select:
+ 723              	.LVL72:
+ 724              	.LFB128:
+ 396:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** 
+ 397:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** /*!
+ 398:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     \brief      select GPIO pin exti sources
+ 399:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     \param[in]  output_port: gpio event output port
+ 400:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****                 only one parameter can be selected which are shown as below:
+ 401:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****       \arg        GPIO_PORT_SOURCE_GPIOA: output port source A
+ 402:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****       \arg        GPIO_PORT_SOURCE_GPIOB: output port source B
+ 403:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****       \arg        GPIO_PORT_SOURCE_GPIOC: output port source C
+ 404:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****       \arg        GPIO_PORT_SOURCE_GPIOD: output port source D
+ 405:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****       \arg        GPIO_PORT_SOURCE_GPIOE: output port source E 
+ 406:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     \param[in]  output_pin:
+ 407:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****                 only one parameter can be selected which are shown as below:
+ 408:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****       \arg        GPIO_PIN_SOURCE_x(x=0..15)
+ 409:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     \param[out] none
+ 410:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     \retval     none
+ 411:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** */
+ 412:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** void gpio_exti_source_select(uint8_t output_port, uint8_t output_pin)
+ 413:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** {
+ 725              		.loc 1 413 1 is_stmt 1 view -0
+ 726              		.cfi_startproc
+ 727              		@ args = 0, pretend = 0, frame = 0
+ 728              		@ frame_needed = 0, uses_anonymous_args = 0
+ 729              		@ link register save eliminated.
+ARM GAS  /tmp/ccrICber.s 			page 22
+
+
+ 730              		.loc 1 413 1 is_stmt 0 view .LVU199
+ 731 0000 10B4     		push	{r4}
+ 732              		.cfi_def_cfa_offset 4
+ 733              		.cfi_offset 4, -4
+ 414:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     uint32_t source = 0U;
+ 734              		.loc 1 414 5 is_stmt 1 view .LVU200
+ 735              	.LVL73:
+ 415:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     source = ((uint32_t)0x0FU) << (AFIO_EXTI_SOURCE_FIELDS * (output_pin & AFIO_EXTI_SOURCE_MASK));
+ 736              		.loc 1 415 5 view .LVU201
+ 737              		.loc 1 415 74 is_stmt 0 view .LVU202
+ 738 0002 01F00302 		and	r2, r1, #3
+ 739              		.loc 1 415 60 view .LVU203
+ 740 0006 9300     		lsls	r3, r2, #2
+ 741              		.loc 1 415 12 view .LVU204
+ 742 0008 0F22     		movs	r2, #15
+ 743 000a 9A40     		lsls	r2, r2, r3
+ 744              	.LVL74:
+ 416:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** 
+ 417:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     /* select EXTI sources */
+ 418:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     if(GPIO_PIN_SOURCE_4 > output_pin){
+ 745              		.loc 1 418 5 is_stmt 1 view .LVU205
+ 746              		.loc 1 418 7 is_stmt 0 view .LVU206
+ 747 000c 0329     		cmp	r1, #3
+ 748 000e 0CD8     		bhi	.L58
+ 419:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****         /* select EXTI0/EXTI1/EXTI2/EXTI3 */
+ 420:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****         AFIO_EXTISS0 &= ~source;
+ 749              		.loc 1 420 9 is_stmt 1 view .LVU207
+ 750              		.loc 1 420 22 is_stmt 0 view .LVU208
+ 751 0010 1849     		ldr	r1, .L63
+ 752              	.LVL75:
+ 753              		.loc 1 420 22 view .LVU209
+ 754 0012 8C68     		ldr	r4, [r1, #8]
+ 755 0014 24EA0202 		bic	r2, r4, r2
+ 756              	.LVL76:
+ 757              		.loc 1 420 22 view .LVU210
+ 758 0018 8A60     		str	r2, [r1, #8]
+ 421:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****         AFIO_EXTISS0 |= (((uint32_t)output_port) << (AFIO_EXTI_SOURCE_FIELDS * (output_pin & AFIO_E
+ 759              		.loc 1 421 9 is_stmt 1 view .LVU211
+ 760              		.loc 1 421 22 is_stmt 0 view .LVU212
+ 761 001a 8A68     		ldr	r2, [r1, #8]
+ 762              		.loc 1 421 50 view .LVU213
+ 763 001c 00FA03F3 		lsl	r3, r0, r3
+ 764              	.LVL77:
+ 765              		.loc 1 421 22 view .LVU214
+ 766 0020 1343     		orrs	r3, r3, r2
+ 767 0022 8B60     		str	r3, [r1, #8]
+ 768              	.L57:
+ 422:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     }else if(GPIO_PIN_SOURCE_8 > output_pin){
+ 423:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****         /* select EXTI4/EXTI5/EXTI6/EXTI7 */
+ 424:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****         AFIO_EXTISS1 &= ~source;
+ 425:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****         AFIO_EXTISS1 |= (((uint32_t)output_port) << (AFIO_EXTI_SOURCE_FIELDS * (output_pin & AFIO_E
+ 426:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     }else if(GPIO_PIN_SOURCE_12 > output_pin){
+ 427:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****         /* select EXTI8/EXTI9/EXTI10/EXTI11 */
+ 428:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****         AFIO_EXTISS2 &= ~source;
+ 429:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****         AFIO_EXTISS2 |= (((uint32_t)output_port) << (AFIO_EXTI_SOURCE_FIELDS * (output_pin & AFIO_E
+ 430:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     }else{
+ 431:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****         /* select EXTI12/EXTI13/EXTI14/EXTI15 */
+ARM GAS  /tmp/ccrICber.s 			page 23
+
+
+ 432:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****         AFIO_EXTISS3 &= ~source;
+ 433:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****         AFIO_EXTISS3 |= (((uint32_t)output_port) << (AFIO_EXTI_SOURCE_FIELDS * (output_pin & AFIO_E
+ 434:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     }
+ 435:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** }
+ 769              		.loc 1 435 1 view .LVU215
+ 770 0024 5DF8044B 		ldr	r4, [sp], #4
+ 771              		.cfi_remember_state
+ 772              		.cfi_restore 4
+ 773              		.cfi_def_cfa_offset 0
+ 774 0028 7047     		bx	lr
+ 775              	.LVL78:
+ 776              	.L58:
+ 777              		.cfi_restore_state
+ 422:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     }else if(GPIO_PIN_SOURCE_8 > output_pin){
+ 778              		.loc 1 422 11 is_stmt 1 view .LVU216
+ 422:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     }else if(GPIO_PIN_SOURCE_8 > output_pin){
+ 779              		.loc 1 422 13 is_stmt 0 view .LVU217
+ 780 002a 0729     		cmp	r1, #7
+ 781 002c 0AD8     		bhi	.L60
+ 424:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****         AFIO_EXTISS1 |= (((uint32_t)output_port) << (AFIO_EXTI_SOURCE_FIELDS * (output_pin & AFIO_E
+ 782              		.loc 1 424 9 is_stmt 1 view .LVU218
+ 424:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****         AFIO_EXTISS1 |= (((uint32_t)output_port) << (AFIO_EXTI_SOURCE_FIELDS * (output_pin & AFIO_E
+ 783              		.loc 1 424 22 is_stmt 0 view .LVU219
+ 784 002e 1149     		ldr	r1, .L63
+ 785              	.LVL79:
+ 424:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****         AFIO_EXTISS1 |= (((uint32_t)output_port) << (AFIO_EXTI_SOURCE_FIELDS * (output_pin & AFIO_E
+ 786              		.loc 1 424 22 view .LVU220
+ 787 0030 CC68     		ldr	r4, [r1, #12]
+ 788 0032 24EA0202 		bic	r2, r4, r2
+ 789              	.LVL80:
+ 424:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****         AFIO_EXTISS1 |= (((uint32_t)output_port) << (AFIO_EXTI_SOURCE_FIELDS * (output_pin & AFIO_E
+ 790              		.loc 1 424 22 view .LVU221
+ 791 0036 CA60     		str	r2, [r1, #12]
+ 425:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     }else if(GPIO_PIN_SOURCE_12 > output_pin){
+ 792              		.loc 1 425 9 is_stmt 1 view .LVU222
+ 425:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     }else if(GPIO_PIN_SOURCE_12 > output_pin){
+ 793              		.loc 1 425 22 is_stmt 0 view .LVU223
+ 794 0038 CA68     		ldr	r2, [r1, #12]
+ 425:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     }else if(GPIO_PIN_SOURCE_12 > output_pin){
+ 795              		.loc 1 425 50 view .LVU224
+ 796 003a 00FA03F3 		lsl	r3, r0, r3
+ 797              	.LVL81:
+ 425:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     }else if(GPIO_PIN_SOURCE_12 > output_pin){
+ 798              		.loc 1 425 22 view .LVU225
+ 799 003e 1343     		orrs	r3, r3, r2
+ 800 0040 CB60     		str	r3, [r1, #12]
+ 801 0042 EFE7     		b	.L57
+ 802              	.LVL82:
+ 803              	.L60:
+ 426:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****         /* select EXTI8/EXTI9/EXTI10/EXTI11 */
+ 804              		.loc 1 426 11 is_stmt 1 view .LVU226
+ 426:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****         /* select EXTI8/EXTI9/EXTI10/EXTI11 */
+ 805              		.loc 1 426 13 is_stmt 0 view .LVU227
+ 806 0044 0B29     		cmp	r1, #11
+ 807 0046 0AD8     		bhi	.L61
+ 428:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****         AFIO_EXTISS2 |= (((uint32_t)output_port) << (AFIO_EXTI_SOURCE_FIELDS * (output_pin & AFIO_E
+ 808              		.loc 1 428 9 is_stmt 1 view .LVU228
+ARM GAS  /tmp/ccrICber.s 			page 24
+
+
+ 428:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****         AFIO_EXTISS2 |= (((uint32_t)output_port) << (AFIO_EXTI_SOURCE_FIELDS * (output_pin & AFIO_E
+ 809              		.loc 1 428 22 is_stmt 0 view .LVU229
+ 810 0048 0A49     		ldr	r1, .L63
+ 811              	.LVL83:
+ 428:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****         AFIO_EXTISS2 |= (((uint32_t)output_port) << (AFIO_EXTI_SOURCE_FIELDS * (output_pin & AFIO_E
+ 812              		.loc 1 428 22 view .LVU230
+ 813 004a 0C69     		ldr	r4, [r1, #16]
+ 814 004c 24EA0202 		bic	r2, r4, r2
+ 815              	.LVL84:
+ 428:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****         AFIO_EXTISS2 |= (((uint32_t)output_port) << (AFIO_EXTI_SOURCE_FIELDS * (output_pin & AFIO_E
+ 816              		.loc 1 428 22 view .LVU231
+ 817 0050 0A61     		str	r2, [r1, #16]
+ 429:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     }else{
+ 818              		.loc 1 429 9 is_stmt 1 view .LVU232
+ 429:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     }else{
+ 819              		.loc 1 429 22 is_stmt 0 view .LVU233
+ 820 0052 0A69     		ldr	r2, [r1, #16]
+ 429:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     }else{
+ 821              		.loc 1 429 50 view .LVU234
+ 822 0054 00FA03F3 		lsl	r3, r0, r3
+ 823              	.LVL85:
+ 429:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     }else{
+ 824              		.loc 1 429 22 view .LVU235
+ 825 0058 1343     		orrs	r3, r3, r2
+ 826 005a 0B61     		str	r3, [r1, #16]
+ 827 005c E2E7     		b	.L57
+ 828              	.LVL86:
+ 829              	.L61:
+ 432:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****         AFIO_EXTISS3 |= (((uint32_t)output_port) << (AFIO_EXTI_SOURCE_FIELDS * (output_pin & AFIO_E
+ 830              		.loc 1 432 9 is_stmt 1 view .LVU236
+ 432:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****         AFIO_EXTISS3 |= (((uint32_t)output_port) << (AFIO_EXTI_SOURCE_FIELDS * (output_pin & AFIO_E
+ 831              		.loc 1 432 22 is_stmt 0 view .LVU237
+ 832 005e 0549     		ldr	r1, .L63
+ 833              	.LVL87:
+ 432:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****         AFIO_EXTISS3 |= (((uint32_t)output_port) << (AFIO_EXTI_SOURCE_FIELDS * (output_pin & AFIO_E
+ 834              		.loc 1 432 22 view .LVU238
+ 835 0060 4C69     		ldr	r4, [r1, #20]
+ 836 0062 24EA0202 		bic	r2, r4, r2
+ 837              	.LVL88:
+ 432:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****         AFIO_EXTISS3 |= (((uint32_t)output_port) << (AFIO_EXTI_SOURCE_FIELDS * (output_pin & AFIO_E
+ 838              		.loc 1 432 22 view .LVU239
+ 839 0066 4A61     		str	r2, [r1, #20]
+ 433:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     }
+ 840              		.loc 1 433 9 is_stmt 1 view .LVU240
+ 433:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     }
+ 841              		.loc 1 433 22 is_stmt 0 view .LVU241
+ 842 0068 4A69     		ldr	r2, [r1, #20]
+ 433:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     }
+ 843              		.loc 1 433 50 view .LVU242
+ 844 006a 00FA03F3 		lsl	r3, r0, r3
+ 845              	.LVL89:
+ 433:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     }
+ 846              		.loc 1 433 22 view .LVU243
+ 847 006e 1343     		orrs	r3, r3, r2
+ 848 0070 4B61     		str	r3, [r1, #20]
+ 849              		.loc 1 435 1 view .LVU244
+ 850 0072 D7E7     		b	.L57
+ARM GAS  /tmp/ccrICber.s 			page 25
+
+
+ 851              	.L64:
+ 852              		.align	2
+ 853              	.L63:
+ 854 0074 00000140 		.word	1073807360
+ 855              		.cfi_endproc
+ 856              	.LFE128:
+ 858              		.section	.text.gpio_event_output_config,"ax",%progbits
+ 859              		.align	1
+ 860              		.global	gpio_event_output_config
+ 861              		.syntax unified
+ 862              		.thumb
+ 863              		.thumb_func
+ 864              		.fpu fpv4-sp-d16
+ 866              	gpio_event_output_config:
+ 867              	.LVL90:
+ 868              	.LFB129:
+ 436:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** 
+ 437:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** /*!
+ 438:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     \brief      configure GPIO pin event output
+ 439:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     \param[in]  output_port: gpio event output port
+ 440:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****                 only one parameter can be selected which are shown as below:
+ 441:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****       \arg        GPIO_EVENT_PORT_GPIOA: event output port A
+ 442:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****       \arg        GPIO_EVENT_PORT_GPIOB: event output port B
+ 443:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****       \arg        GPIO_EVENT_PORT_GPIOC: event output port C
+ 444:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****       \arg        GPIO_EVENT_PORT_GPIOD: event output port D
+ 445:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****       \arg        GPIO_EVENT_PORT_GPIOE: event output port E
+ 446:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     \param[in]  output_pin:
+ 447:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****                 only one parameter can be selected which are shown as below:
+ 448:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****       \arg        GPIO_EVENT_PIN_x(x=0..15)
+ 449:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     \param[out] none
+ 450:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     \retval     none
+ 451:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** */
+ 452:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** void gpio_event_output_config(uint8_t output_port, uint8_t output_pin)
+ 453:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** {
+ 869              		.loc 1 453 1 is_stmt 1 view -0
+ 870              		.cfi_startproc
+ 871              		@ args = 0, pretend = 0, frame = 0
+ 872              		@ frame_needed = 0, uses_anonymous_args = 0
+ 873              		@ link register save eliminated.
+ 454:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     uint32_t reg = 0U;
+ 874              		.loc 1 454 5 view .LVU246
+ 455:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     reg = AFIO_EC;
+ 875              		.loc 1 455 5 view .LVU247
+ 876              		.loc 1 455 9 is_stmt 0 view .LVU248
+ 877 0000 044A     		ldr	r2, .L66
+ 878 0002 1368     		ldr	r3, [r2]
+ 879              	.LVL91:
+ 456:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     
+ 457:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     /* clear AFIO_EC_PORT and AFIO_EC_PIN bits */
+ 458:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     reg &= (uint32_t)(~(AFIO_EC_PORT|AFIO_EC_PIN));
+ 880              		.loc 1 458 5 is_stmt 1 view .LVU249
+ 459:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     
+ 460:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     reg |= (uint32_t)((uint32_t)output_port << GPIO_OUTPUT_PORT_OFFSET);
+ 881              		.loc 1 460 5 view .LVU250
+ 461:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     reg |= (uint32_t)output_pin;
+ 882              		.loc 1 461 5 view .LVU251
+ 458:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     
+ARM GAS  /tmp/ccrICber.s 			page 26
+
+
+ 883              		.loc 1 458 9 is_stmt 0 view .LVU252
+ 884 0004 23F07F03 		bic	r3, r3, #127
+ 885              	.LVL92:
+ 458:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     
+ 886              		.loc 1 458 9 view .LVU253
+ 887 0008 0B43     		orrs	r3, r3, r1
+ 888              		.loc 1 461 9 view .LVU254
+ 889 000a 43EA0013 		orr	r3, r3, r0, lsl #4
+ 890              	.LVL93:
+ 462:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     
+ 463:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     AFIO_EC = reg;
+ 891              		.loc 1 463 5 is_stmt 1 view .LVU255
+ 892              		.loc 1 463 13 is_stmt 0 view .LVU256
+ 893 000e 1360     		str	r3, [r2]
+ 464:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** }
+ 894              		.loc 1 464 1 view .LVU257
+ 895 0010 7047     		bx	lr
+ 896              	.L67:
+ 897 0012 00BF     		.align	2
+ 898              	.L66:
+ 899 0014 00000140 		.word	1073807360
+ 900              		.cfi_endproc
+ 901              	.LFE129:
+ 903              		.section	.text.gpio_event_output_enable,"ax",%progbits
+ 904              		.align	1
+ 905              		.global	gpio_event_output_enable
+ 906              		.syntax unified
+ 907              		.thumb
+ 908              		.thumb_func
+ 909              		.fpu fpv4-sp-d16
+ 911              	gpio_event_output_enable:
+ 912              	.LFB130:
+ 465:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** 
+ 466:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** /*!
+ 467:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     \brief      enable GPIO pin event output
+ 468:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     \param[in]  none
+ 469:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     \param[out] none
+ 470:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     \retval     none
+ 471:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** */
+ 472:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** void gpio_event_output_enable(void)
+ 473:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** {
+ 913              		.loc 1 473 1 is_stmt 1 view -0
+ 914              		.cfi_startproc
+ 915              		@ args = 0, pretend = 0, frame = 0
+ 916              		@ frame_needed = 0, uses_anonymous_args = 0
+ 917              		@ link register save eliminated.
+ 474:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     AFIO_EC |= AFIO_EC_EOE;
+ 918              		.loc 1 474 5 view .LVU259
+ 919              		.loc 1 474 13 is_stmt 0 view .LVU260
+ 920 0000 024A     		ldr	r2, .L69
+ 921 0002 1368     		ldr	r3, [r2]
+ 922 0004 43F08003 		orr	r3, r3, #128
+ 923 0008 1360     		str	r3, [r2]
+ 475:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** }
+ 924              		.loc 1 475 1 view .LVU261
+ 925 000a 7047     		bx	lr
+ 926              	.L70:
+ARM GAS  /tmp/ccrICber.s 			page 27
+
+
+ 927              		.align	2
+ 928              	.L69:
+ 929 000c 00000140 		.word	1073807360
+ 930              		.cfi_endproc
+ 931              	.LFE130:
+ 933              		.section	.text.gpio_event_output_disable,"ax",%progbits
+ 934              		.align	1
+ 935              		.global	gpio_event_output_disable
+ 936              		.syntax unified
+ 937              		.thumb
+ 938              		.thumb_func
+ 939              		.fpu fpv4-sp-d16
+ 941              	gpio_event_output_disable:
+ 942              	.LFB131:
+ 476:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** 
+ 477:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** /*!
+ 478:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     \brief      disable GPIO pin event output
+ 479:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     \param[in]  none
+ 480:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     \param[out] none
+ 481:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     \retval     none
+ 482:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** */
+ 483:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** void gpio_event_output_disable(void)
+ 484:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** {
+ 943              		.loc 1 484 1 is_stmt 1 view -0
+ 944              		.cfi_startproc
+ 945              		@ args = 0, pretend = 0, frame = 0
+ 946              		@ frame_needed = 0, uses_anonymous_args = 0
+ 947              		@ link register save eliminated.
+ 485:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     AFIO_EC &= (uint32_t)(~AFIO_EC_EOE);
+ 948              		.loc 1 485 5 view .LVU263
+ 949              		.loc 1 485 13 is_stmt 0 view .LVU264
+ 950 0000 024A     		ldr	r2, .L72
+ 951 0002 1368     		ldr	r3, [r2]
+ 952 0004 23F08003 		bic	r3, r3, #128
+ 953 0008 1360     		str	r3, [r2]
+ 486:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** }
+ 954              		.loc 1 486 1 view .LVU265
+ 955 000a 7047     		bx	lr
+ 956              	.L73:
+ 957              		.align	2
+ 958              	.L72:
+ 959 000c 00000140 		.word	1073807360
+ 960              		.cfi_endproc
+ 961              	.LFE131:
+ 963              		.section	.text.gpio_pin_lock,"ax",%progbits
+ 964              		.align	1
+ 965              		.global	gpio_pin_lock
+ 966              		.syntax unified
+ 967              		.thumb
+ 968              		.thumb_func
+ 969              		.fpu fpv4-sp-d16
+ 971              	gpio_pin_lock:
+ 972              	.LVL94:
+ 973              	.LFB132:
+ 487:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** 
+ 488:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** /*!
+ 489:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     \brief      lock GPIO pin
+ARM GAS  /tmp/ccrICber.s 			page 28
+
+
+ 490:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     \param[in]  gpio_periph: GPIOx(x = A,B,C,D,E) 
+ 491:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     \param[in]  pin: GPIO pin
+ 492:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****                 one or more parameters can be selected which are shown as below:
+ 493:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****       \arg        GPIO_PIN_x(x=0..15), GPIO_PIN_ALL
+ 494:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     \param[out] none
+ 495:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     \retval     none
+ 496:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** */
+ 497:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** void gpio_pin_lock(uint32_t gpio_periph, uint32_t pin)
+ 498:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** {
+ 974              		.loc 1 498 1 is_stmt 1 view -0
+ 975              		.cfi_startproc
+ 976              		@ args = 0, pretend = 0, frame = 0
+ 977              		@ frame_needed = 0, uses_anonymous_args = 0
+ 978              		@ link register save eliminated.
+ 499:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     uint32_t lock = 0x00010000U;
+ 979              		.loc 1 499 5 view .LVU267
+ 500:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     lock |= pin;
+ 980              		.loc 1 500 5 view .LVU268
+ 981              		.loc 1 500 10 is_stmt 0 view .LVU269
+ 982 0000 41F48033 		orr	r3, r1, #65536
+ 983              	.LVL95:
+ 501:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** 
+ 502:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     /* lock key writing sequence: write 1 -> write 0 -> write 1 -> read 0 -> read 1 */
+ 503:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     GPIO_LOCK(gpio_periph) = (uint32_t)lock;
+ 984              		.loc 1 503 5 is_stmt 1 view .LVU270
+ 985              		.loc 1 503 28 is_stmt 0 view .LVU271
+ 986 0004 8361     		str	r3, [r0, #24]
+ 504:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     GPIO_LOCK(gpio_periph) = (uint32_t)pin;
+ 987              		.loc 1 504 5 is_stmt 1 view .LVU272
+ 988              		.loc 1 504 28 is_stmt 0 view .LVU273
+ 989 0006 8161     		str	r1, [r0, #24]
+ 505:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     GPIO_LOCK(gpio_periph) = (uint32_t)lock;
+ 990              		.loc 1 505 5 is_stmt 1 view .LVU274
+ 991              		.loc 1 505 28 is_stmt 0 view .LVU275
+ 992 0008 8361     		str	r3, [r0, #24]
+ 506:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     lock = GPIO_LOCK(gpio_periph);
+ 993              		.loc 1 506 5 is_stmt 1 view .LVU276
+ 994              		.loc 1 506 10 is_stmt 0 view .LVU277
+ 995 000a 8369     		ldr	r3, [r0, #24]
+ 996              	.LVL96:
+ 507:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     lock = GPIO_LOCK(gpio_periph);
+ 997              		.loc 1 507 5 is_stmt 1 view .LVU278
+ 998              		.loc 1 507 10 is_stmt 0 view .LVU279
+ 999 000c 8369     		ldr	r3, [r0, #24]
+ 508:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** }
+ 1000              		.loc 1 508 1 view .LVU280
+ 1001 000e 7047     		bx	lr
+ 1002              		.cfi_endproc
+ 1003              	.LFE132:
+ 1005              		.section	.text.gpio_compensation_config,"ax",%progbits
+ 1006              		.align	1
+ 1007              		.global	gpio_compensation_config
+ 1008              		.syntax unified
+ 1009              		.thumb
+ 1010              		.thumb_func
+ 1011              		.fpu fpv4-sp-d16
+ 1013              	gpio_compensation_config:
+ARM GAS  /tmp/ccrICber.s 			page 29
+
+
+ 1014              	.LVL97:
+ 1015              	.LFB133:
+ 509:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** 
+ 510:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** /*!
+ 511:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     \brief      configure the I/O compensation cell
+ 512:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     \param[in]  compensation: specifies the I/O compensation cell mode
+ 513:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****                 only one parameter can be selected which are shown as below:
+ 514:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****       \arg        GPIO_COMPENSATION_ENABLE: I/O compensation cell is enabled
+ 515:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****       \arg        GPIO_COMPENSATION_DISABLE: I/O compensation cell is disabled
+ 516:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     \param[out] none
+ 517:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     \retval     none
+ 518:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** */
+ 519:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** void gpio_compensation_config(uint32_t compensation)
+ 520:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** {
+ 1016              		.loc 1 520 1 is_stmt 1 view -0
+ 1017              		.cfi_startproc
+ 1018              		@ args = 0, pretend = 0, frame = 0
+ 1019              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1020              		@ link register save eliminated.
+ 521:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     uint32_t reg;
+ 1021              		.loc 1 521 5 view .LVU282
+ 522:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     reg = AFIO_CPSCTL;
+ 1022              		.loc 1 522 5 view .LVU283
+ 1023              		.loc 1 522 9 is_stmt 0 view .LVU284
+ 1024 0000 034A     		ldr	r2, .L76
+ 1025 0002 136A     		ldr	r3, [r2, #32]
+ 1026              	.LVL98:
+ 523:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** 
+ 524:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     /* reset the AFIO_CPSCTL_CPS_EN bit and set according to gpio_compensation */
+ 525:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     reg &= ~AFIO_CPSCTL_CPS_EN;
+ 1027              		.loc 1 525 5 is_stmt 1 view .LVU285
+ 526:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     AFIO_CPSCTL = (reg | compensation);
+ 1028              		.loc 1 526 5 view .LVU286
+ 525:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     AFIO_CPSCTL = (reg | compensation);
+ 1029              		.loc 1 525 9 is_stmt 0 view .LVU287
+ 1030 0004 23F00103 		bic	r3, r3, #1
+ 1031              	.LVL99:
+ 1032              		.loc 1 526 24 view .LVU288
+ 1033 0008 0343     		orrs	r3, r3, r0
+ 1034              	.LVL100:
+ 1035              		.loc 1 526 17 view .LVU289
+ 1036 000a 1362     		str	r3, [r2, #32]
+ 527:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** }
+ 1037              		.loc 1 527 1 view .LVU290
+ 1038 000c 7047     		bx	lr
+ 1039              	.L77:
+ 1040 000e 00BF     		.align	2
+ 1041              	.L76:
+ 1042 0010 00000140 		.word	1073807360
+ 1043              		.cfi_endproc
+ 1044              	.LFE133:
+ 1046              		.section	.text.gpio_compensation_flag_get,"ax",%progbits
+ 1047              		.align	1
+ 1048              		.global	gpio_compensation_flag_get
+ 1049              		.syntax unified
+ 1050              		.thumb
+ 1051              		.thumb_func
+ARM GAS  /tmp/ccrICber.s 			page 30
+
+
+ 1052              		.fpu fpv4-sp-d16
+ 1054              	gpio_compensation_flag_get:
+ 1055              	.LFB134:
+ 528:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** 
+ 529:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** /*!
+ 530:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     \brief      check the I/O compensation cell is ready or not
+ 531:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     \param[in]  none
+ 532:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     \param[out] none
+ 533:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     \retval     FlagStatus: SET or RESET
+ 534:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****   */
+ 535:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** FlagStatus gpio_compensation_flag_get(void)
+ 536:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** {
+ 1056              		.loc 1 536 1 is_stmt 1 view -0
+ 1057              		.cfi_startproc
+ 1058              		@ args = 0, pretend = 0, frame = 0
+ 1059              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1060              		@ link register save eliminated.
+ 537:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     if(((uint32_t)RESET) != (AFIO_CPSCTL & AFIO_CPSCTL_CPS_RDY)){
+ 1061              		.loc 1 537 5 view .LVU292
+ 1062              		.loc 1 537 30 is_stmt 0 view .LVU293
+ 1063 0000 024B     		ldr	r3, .L79
+ 1064 0002 186A     		ldr	r0, [r3, #32]
+ 538:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****         return SET;
+ 539:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     }else{
+ 540:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****         return RESET;
+ 541:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c ****     }
+ 542:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_gpio.c **** }
+ 1065              		.loc 1 542 1 view .LVU294
+ 1066 0004 C0F30020 		ubfx	r0, r0, #8, #1
+ 1067 0008 7047     		bx	lr
+ 1068              	.L80:
+ 1069 000a 00BF     		.align	2
+ 1070              	.L79:
+ 1071 000c 00000140 		.word	1073807360
+ 1072              		.cfi_endproc
+ 1073              	.LFE134:
+ 1075              		.text
+ 1076              	.Letext0:
+ 1077              		.file 2 "/usr/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h"
+ 1078              		.file 3 "../../../../Firmware/CMSIS/GD/GD32E10x/Include/gd32e10x.h"
+ 1079              		.file 4 "../../../../Firmware/GD32E10x_standard_peripheral/Include/gd32e10x_rcu.h"
+ 1080              		.file 5 "../../../../Firmware/GD32E10x_standard_peripheral/Include/gd32e10x_gpio.h"
+ARM GAS  /tmp/ccrICber.s 			page 31
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 gd32e10x_gpio.c
+     /tmp/ccrICber.s:18     .text.gpio_deinit:0000000000000000 $t
+     /tmp/ccrICber.s:26     .text.gpio_deinit:0000000000000000 gpio_deinit
+     /tmp/ccrICber.s:131    .text.gpio_deinit:0000000000000084 $d
+     /tmp/ccrICber.s:137    .text.gpio_afio_deinit:0000000000000000 $t
+     /tmp/ccrICber.s:144    .text.gpio_afio_deinit:0000000000000000 gpio_afio_deinit
+     /tmp/ccrICber.s:168    .text.gpio_init:0000000000000000 $t
+     /tmp/ccrICber.s:175    .text.gpio_init:0000000000000000 gpio_init
+     /tmp/ccrICber.s:364    .text.gpio_bit_set:0000000000000000 $t
+     /tmp/ccrICber.s:371    .text.gpio_bit_set:0000000000000000 gpio_bit_set
+     /tmp/ccrICber.s:388    .text.gpio_bit_reset:0000000000000000 $t
+     /tmp/ccrICber.s:395    .text.gpio_bit_reset:0000000000000000 gpio_bit_reset
+     /tmp/ccrICber.s:412    .text.gpio_bit_write:0000000000000000 $t
+     /tmp/ccrICber.s:419    .text.gpio_bit_write:0000000000000000 gpio_bit_write
+     /tmp/ccrICber.s:444    .text.gpio_port_write:0000000000000000 $t
+     /tmp/ccrICber.s:451    .text.gpio_port_write:0000000000000000 gpio_port_write
+     /tmp/ccrICber.s:468    .text.gpio_input_bit_get:0000000000000000 $t
+     /tmp/ccrICber.s:475    .text.gpio_input_bit_get:0000000000000000 gpio_input_bit_get
+     /tmp/ccrICber.s:499    .text.gpio_input_port_get:0000000000000000 $t
+     /tmp/ccrICber.s:506    .text.gpio_input_port_get:0000000000000000 gpio_input_port_get
+     /tmp/ccrICber.s:525    .text.gpio_output_bit_get:0000000000000000 $t
+     /tmp/ccrICber.s:532    .text.gpio_output_bit_get:0000000000000000 gpio_output_bit_get
+     /tmp/ccrICber.s:556    .text.gpio_output_port_get:0000000000000000 $t
+     /tmp/ccrICber.s:563    .text.gpio_output_port_get:0000000000000000 gpio_output_port_get
+     /tmp/ccrICber.s:582    .text.gpio_pin_remap_config:0000000000000000 $t
+     /tmp/ccrICber.s:589    .text.gpio_pin_remap_config:0000000000000000 gpio_pin_remap_config
+     /tmp/ccrICber.s:710    .text.gpio_pin_remap_config:000000000000006c $d
+     /tmp/ccrICber.s:715    .text.gpio_exti_source_select:0000000000000000 $t
+     /tmp/ccrICber.s:722    .text.gpio_exti_source_select:0000000000000000 gpio_exti_source_select
+     /tmp/ccrICber.s:854    .text.gpio_exti_source_select:0000000000000074 $d
+     /tmp/ccrICber.s:859    .text.gpio_event_output_config:0000000000000000 $t
+     /tmp/ccrICber.s:866    .text.gpio_event_output_config:0000000000000000 gpio_event_output_config
+     /tmp/ccrICber.s:899    .text.gpio_event_output_config:0000000000000014 $d
+     /tmp/ccrICber.s:904    .text.gpio_event_output_enable:0000000000000000 $t
+     /tmp/ccrICber.s:911    .text.gpio_event_output_enable:0000000000000000 gpio_event_output_enable
+     /tmp/ccrICber.s:929    .text.gpio_event_output_enable:000000000000000c $d
+     /tmp/ccrICber.s:934    .text.gpio_event_output_disable:0000000000000000 $t
+     /tmp/ccrICber.s:941    .text.gpio_event_output_disable:0000000000000000 gpio_event_output_disable
+     /tmp/ccrICber.s:959    .text.gpio_event_output_disable:000000000000000c $d
+     /tmp/ccrICber.s:964    .text.gpio_pin_lock:0000000000000000 $t
+     /tmp/ccrICber.s:971    .text.gpio_pin_lock:0000000000000000 gpio_pin_lock
+     /tmp/ccrICber.s:1006   .text.gpio_compensation_config:0000000000000000 $t
+     /tmp/ccrICber.s:1013   .text.gpio_compensation_config:0000000000000000 gpio_compensation_config
+     /tmp/ccrICber.s:1042   .text.gpio_compensation_config:0000000000000010 $d
+     /tmp/ccrICber.s:1047   .text.gpio_compensation_flag_get:0000000000000000 $t
+     /tmp/ccrICber.s:1054   .text.gpio_compensation_flag_get:0000000000000000 gpio_compensation_flag_get
+     /tmp/ccrICber.s:1071   .text.gpio_compensation_flag_get:000000000000000c $d
+
+UNDEFINED SYMBOLS
+rcu_periph_reset_enable
+rcu_periph_reset_disable

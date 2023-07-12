@@ -1,0 +1,592 @@
+ARM GAS  /tmp/cchTts7l.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.eabi_attribute 27, 1
+   3              		.eabi_attribute 28, 1
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.file	"app.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.section	.text.usb_clock_config,"ax",%progbits
+  18              		.align	1
+  19              		.global	usb_clock_config
+  20              		.arch armv7e-m
+  21              		.syntax unified
+  22              		.thumb
+  23              		.thumb_func
+  24              		.fpu fpv4-sp-d16
+  26              	usb_clock_config:
+  27              	.LFB117:
+  28              		.file 1 "app.c"
+   1:app.c         **** /*!
+   2:app.c         ****     \file  app.c
+   3:app.c         ****     \brief USB main routine for HID device(USB keyboard)
+   4:app.c         ****     
+   5:app.c         ****     \version 2017-12-26, V1.0.0, firmware for GD32E10x
+   6:app.c         **** */
+   7:app.c         **** 
+   8:app.c         **** /*
+   9:app.c         ****     Copyright (c) 2017, GigaDevice Semiconductor Inc.
+  10:app.c         **** 
+  11:app.c         ****     All rights reserved.
+  12:app.c         **** 
+  13:app.c         ****     Redistribution and use in source and binary forms, with or without modification, 
+  14:app.c         **** are permitted provided that the following conditions are met:
+  15:app.c         **** 
+  16:app.c         ****     1. Redistributions of source code must retain the above copyright notice, this 
+  17:app.c         ****        list of conditions and the following disclaimer.
+  18:app.c         ****     2. Redistributions in binary form must reproduce the above copyright notice, 
+  19:app.c         ****        this list of conditions and the following disclaimer in the documentation 
+  20:app.c         ****        and/or other materials provided with the distribution.
+  21:app.c         ****     3. Neither the name of the copyright holder nor the names of its contributors 
+  22:app.c         ****        may be used to endorse or promote products derived from this software without 
+  23:app.c         ****        specific prior written permission.
+  24:app.c         **** 
+  25:app.c         ****     THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" 
+  26:app.c         **** AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED 
+  27:app.c         **** WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. 
+  28:app.c         **** IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, 
+  29:app.c         **** INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT 
+  30:app.c         **** NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR 
+ARM GAS  /tmp/cchTts7l.s 			page 2
+
+
+  31:app.c         **** PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, 
+  32:app.c         **** WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) 
+  33:app.c         **** ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY 
+  34:app.c         **** OF SUCH DAMAGE.
+  35:app.c         **** */
+  36:app.c         **** 
+  37:app.c         **** #include  "custom_hid_core.h"
+  38:app.c         **** #include  "delay.h"
+  39:app.c         **** 
+  40:app.c         **** uint8_t timer_prescaler = 0;
+  41:app.c         **** uint32_t usbfs_prescaler = 0;
+  42:app.c         **** 
+  43:app.c         **** usb_core_handle_struct usbhs_core_dev = 
+  44:app.c         **** {
+  45:app.c         ****     .dev = 
+  46:app.c         ****     {
+  47:app.c         ****         .dev_desc = (uint8_t *)&device_descripter,
+  48:app.c         ****         .config_desc = (uint8_t *)&configuration_descriptor,
+  49:app.c         ****         .strings = usbd_strings,
+  50:app.c         ****         .class_init = custom_hid_init,
+  51:app.c         ****         .class_deinit = custom_hid_deinit,
+  52:app.c         ****         .class_req_handler = custom_hid_req_handler,
+  53:app.c         ****         .class_data_handler = custom_hid_data_handler
+  54:app.c         ****     },
+  55:app.c         **** 
+  56:app.c         ****     .udelay = delayMicroseconds,
+  57:app.c         ****     .mdelay = delay
+  58:app.c         **** };
+  59:app.c         **** 
+  60:app.c         **** void usb_clock_config(void);
+  61:app.c         **** void usb_gpio_config(void);
+  62:app.c         **** void usb_interrupt_config(void);
+  63:app.c         **** 
+  64:app.c         **** void led_config(void);
+  65:app.c         **** 
+  66:app.c         **** /*!
+  67:app.c         ****     \brief      main routine will construct a USB keyboard
+  68:app.c         ****     \param[in]  none
+  69:app.c         ****     \param[out] none
+  70:app.c         ****     \retval     none
+  71:app.c         **** */
+  72:app.c         **** int main(void)
+  73:app.c         **** {
+  74:app.c         ****     rcu_periph_clock_enable(RCU_GPIOA);
+  75:app.c         **** 	gpio_init(GPIOA, GPIO_MODE_IPU, GPIO_OSPEED_50MHZ, GPIO_PIN_0);
+  76:app.c         **** 	
+  77:app.c         **** 	/* configure led */
+  78:app.c         **** 	led_config();
+  79:app.c         **** 	gpio_bit_set(GPIOC, GPIO_PIN_13);
+  80:app.c         **** 	
+  81:app.c         **** 	/* configure USB clock */
+  82:app.c         ****     usb_clock_config();
+  83:app.c         ****   
+  84:app.c         ****     /* timer nvic initialization */
+  85:app.c         ****     // timer_nvic_init();
+  86:app.c         **** 
+  87:app.c         ****     /* USB device stack configure */
+ARM GAS  /tmp/cchTts7l.s 			page 3
+
+
+  88:app.c         ****     usbd_init(&usbhs_core_dev, USB_FS_CORE_ID);
+  89:app.c         **** 
+  90:app.c         ****     /* USB interrupt configure */
+  91:app.c         ****     usb_interrupt_config();
+  92:app.c         **** 
+  93:app.c         ****     /* check if USB device is enumerated successfully */
+  94:app.c         ****     while (usbhs_core_dev.dev.status != USB_STATUS_CONFIGURED) {
+  95:app.c         ****     }
+  96:app.c         **** 
+  97:app.c         ****     while (1) {
+  98:app.c         ****     }
+  99:app.c         **** }
+ 100:app.c         **** 
+ 101:app.c         **** /*!
+ 102:app.c         ****     \brief      configure USB clock
+ 103:app.c         ****     \param[in]  none
+ 104:app.c         ****     \param[out] none
+ 105:app.c         ****     \retval     none
+ 106:app.c         **** */
+ 107:app.c         **** void usb_clock_config(void)
+ 108:app.c         **** {
+  29              		.loc 1 108 1 view -0
+  30              		.cfi_startproc
+  31              		@ args = 0, pretend = 0, frame = 0
+  32              		@ frame_needed = 0, uses_anonymous_args = 0
+  33 0000 08B5     		push	{r3, lr}
+  34              		.cfi_def_cfa_offset 8
+  35              		.cfi_offset 3, -8
+  36              		.cfi_offset 14, -4
+ 109:app.c         **** #if 1
+ 110:app.c         ****     uint32_t system_clock = rcu_clock_freq_get(CK_SYS);
+  37              		.loc 1 110 5 view .LVU1
+  38              		.loc 1 110 29 is_stmt 0 view .LVU2
+  39 0002 0020     		movs	r0, #0
+  40 0004 FFF7FEFF 		bl	rcu_clock_freq_get
+  41              	.LVL0:
+ 111:app.c         ****     if (48000000U == system_clock) {
+  42              		.loc 1 111 5 is_stmt 1 view .LVU3
+  43              		.loc 1 111 8 is_stmt 0 view .LVU4
+  44 0008 134B     		ldr	r3, .L10
+  45 000a 9842     		cmp	r0, r3
+  46 000c 0DD0     		beq	.L7
+ 112:app.c         ****         usbfs_prescaler = RCU_CKUSB_CKPLL_DIV1;
+ 113:app.c         ****     } else if (72000000U == system_clock) {
+  47              		.loc 1 113 12 is_stmt 1 view .LVU5
+  48              		.loc 1 113 15 is_stmt 0 view .LVU6
+  49 000e 134B     		ldr	r3, .L10+4
+  50 0010 9842     		cmp	r0, r3
+  51 0012 17D0     		beq	.L8
+ 114:app.c         ****         usbfs_prescaler = RCU_CKUSB_CKPLL_DIV1_5;
+ 115:app.c         ****     } else if (96000000U == system_clock) {
+  52              		.loc 1 115 12 is_stmt 1 view .LVU7
+  53              		.loc 1 115 15 is_stmt 0 view .LVU8
+  54 0014 124B     		ldr	r3, .L10+8
+  55 0016 9842     		cmp	r0, r3
+  56 0018 18D0     		beq	.L9
+ 116:app.c         ****         usbfs_prescaler = RCU_CKUSB_CKPLL_DIV2;
+ARM GAS  /tmp/cchTts7l.s 			page 4
+
+
+ 117:app.c         ****     } else if (120000000U == system_clock) {
+  57              		.loc 1 117 12 is_stmt 1 view .LVU9
+  58              		.loc 1 117 15 is_stmt 0 view .LVU10
+  59 001a 124B     		ldr	r3, .L10+12
+  60 001c 9842     		cmp	r0, r3
+  61 001e 08D1     		bne	.L3
+ 118:app.c         ****         usbfs_prescaler = RCU_CKUSB_CKPLL_DIV2_5;
+  62              		.loc 1 118 9 is_stmt 1 view .LVU11
+  63              		.loc 1 118 25 is_stmt 0 view .LVU12
+  64 0020 114B     		ldr	r3, .L10+16
+  65 0022 4FF40002 		mov	r2, #8388608
+  66 0026 1A60     		str	r2, [r3]
+  67 0028 03E0     		b	.L3
+  68              	.L7:
+ 112:app.c         ****     } else if (72000000U == system_clock) {
+  69              		.loc 1 112 9 is_stmt 1 view .LVU13
+ 112:app.c         ****     } else if (72000000U == system_clock) {
+  70              		.loc 1 112 25 is_stmt 0 view .LVU14
+  71 002a 0F4B     		ldr	r3, .L10+16
+  72 002c 4FF48002 		mov	r2, #4194304
+  73 0030 1A60     		str	r2, [r3]
+  74              	.L3:
+ 119:app.c         ****     }  else {
+ 120:app.c         ****         /*  reserved  */
+ 121:app.c         ****     }
+  75              		.loc 1 121 5 is_stmt 1 view .LVU15
+ 122:app.c         ****     rcu_usb_clock_config(usbfs_prescaler);
+  76              		.loc 1 122 5 view .LVU16
+  77 0032 0D4B     		ldr	r3, .L10+16
+  78 0034 1868     		ldr	r0, [r3]
+  79              	.LVL1:
+  80              		.loc 1 122 5 is_stmt 0 view .LVU17
+  81 0036 FFF7FEFF 		bl	rcu_usb_clock_config
+  82              	.LVL2:
+ 123:app.c         **** #else	
+ 124:app.c         ****     //rcu_usb_clock_config(usbfs_prescaler);
+ 125:app.c         **** 	/* cau hinh su dung dao dong noi USB */
+ 126:app.c         **** 	RCU_ADDCTL |= RCU_ADDCTL_IRC48MEN;
+ 127:app.c         **** 	
+ 128:app.c         **** 	while ((RCU_ADDCTL & RCU_ADDCTL_IRC48MSTB) != RCU_ADDCTL_IRC48MSTB) {
+ 129:app.c         **** 	}
+ 130:app.c         **** 	
+ 131:app.c         **** 	rcu_periph_clock_enable(RCU_CTC);
+ 132:app.c         **** 	ctc_hardware_trim_mode_config(CTC_HARDWARE_TRIM_MODE_ENABLE);
+ 133:app.c         **** 	ctc_counter_enable();
+ 134:app.c         **** 	rcu_ck48m_clock_config(RCU_CK48MSRC_IRC48M);
+ 135:app.c         **** #endif
+ 136:app.c         ****     rcu_periph_clock_enable(RCU_USBFS);
+  83              		.loc 1 136 5 is_stmt 1 view .LVU18
+  84 003a 40F20C50 		movw	r0, #1292
+  85 003e FFF7FEFF 		bl	rcu_periph_clock_enable
+  86              	.LVL3:
+ 137:app.c         **** }
+  87              		.loc 1 137 1 is_stmt 0 view .LVU19
+  88 0042 08BD     		pop	{r3, pc}
+  89              	.LVL4:
+  90              	.L8:
+ARM GAS  /tmp/cchTts7l.s 			page 5
+
+
+ 114:app.c         ****     } else if (96000000U == system_clock) {
+  91              		.loc 1 114 9 is_stmt 1 view .LVU20
+ 114:app.c         ****     } else if (96000000U == system_clock) {
+  92              		.loc 1 114 25 is_stmt 0 view .LVU21
+  93 0044 084B     		ldr	r3, .L10+16
+  94 0046 0022     		movs	r2, #0
+  95 0048 1A60     		str	r2, [r3]
+  96 004a F2E7     		b	.L3
+  97              	.L9:
+ 116:app.c         ****     } else if (120000000U == system_clock) {
+  98              		.loc 1 116 9 is_stmt 1 view .LVU22
+ 116:app.c         ****     } else if (120000000U == system_clock) {
+  99              		.loc 1 116 25 is_stmt 0 view .LVU23
+ 100 004c 064B     		ldr	r3, .L10+16
+ 101 004e 4FF44002 		mov	r2, #12582912
+ 102 0052 1A60     		str	r2, [r3]
+ 103 0054 EDE7     		b	.L3
+ 104              	.L11:
+ 105 0056 00BF     		.align	2
+ 106              	.L10:
+ 107 0058 006CDC02 		.word	48000000
+ 108 005c 00A24A04 		.word	72000000
+ 109 0060 00D8B805 		.word	96000000
+ 110 0064 000E2707 		.word	120000000
+ 111 0068 00000000 		.word	.LANCHOR0
+ 112              		.cfi_endproc
+ 113              	.LFE117:
+ 115              		.section	.text.usb_interrupt_config,"ax",%progbits
+ 116              		.align	1
+ 117              		.global	usb_interrupt_config
+ 118              		.syntax unified
+ 119              		.thumb
+ 120              		.thumb_func
+ 121              		.fpu fpv4-sp-d16
+ 123              	usb_interrupt_config:
+ 124              	.LFB118:
+ 138:app.c         **** 
+ 139:app.c         **** /*!
+ 140:app.c         ****     \brief      configure USB interrupt
+ 141:app.c         ****     \param[in]  none
+ 142:app.c         ****     \param[out] none
+ 143:app.c         ****     \retval     none
+ 144:app.c         **** */
+ 145:app.c         **** void usb_interrupt_config(void)
+ 146:app.c         **** {
+ 125              		.loc 1 146 1 is_stmt 1 view -0
+ 126              		.cfi_startproc
+ 127              		@ args = 0, pretend = 0, frame = 0
+ 128              		@ frame_needed = 0, uses_anonymous_args = 0
+ 129 0000 08B5     		push	{r3, lr}
+ 130              		.cfi_def_cfa_offset 8
+ 131              		.cfi_offset 3, -8
+ 132              		.cfi_offset 14, -4
+ 147:app.c         ****     nvic_priority_group_set(NVIC_PRIGROUP_PRE2_SUB2);
+ 133              		.loc 1 147 5 view .LVU25
+ 134 0002 4FF4A060 		mov	r0, #1280
+ 135 0006 FFF7FEFF 		bl	nvic_priority_group_set
+ARM GAS  /tmp/cchTts7l.s 			page 6
+
+
+ 136              	.LVL5:
+ 148:app.c         **** 
+ 149:app.c         ****     nvic_irq_enable((uint8_t)USBFS_IRQn, 2U, 0U);
+ 137              		.loc 1 149 5 view .LVU26
+ 138 000a 0022     		movs	r2, #0
+ 139 000c 0221     		movs	r1, #2
+ 140 000e 4320     		movs	r0, #67
+ 141 0010 FFF7FEFF 		bl	nvic_irq_enable
+ 142              	.LVL6:
+ 150:app.c         **** 
+ 151:app.c         **** #ifdef USBFS_LOW_PWR_MGMT_SUPPORT
+ 152:app.c         **** 
+ 153:app.c         ****     /* enable the power module clock */
+ 154:app.c         ****     rcu_periph_clock_enable(RCU_PMU);
+ 155:app.c         **** 
+ 156:app.c         ****     /* USB wakeup EXTI line configuration */
+ 157:app.c         ****     exti_interrupt_flag_clear(EXTI_18);
+ 158:app.c         ****     exti_init(EXTI_18, EXTI_INTERRUPT, EXTI_TRIG_RISING);
+ 159:app.c         ****     exti_interrupt_enable(EXTI_18);
+ 160:app.c         **** 
+ 161:app.c         ****     nvic_irq_enable((uint8_t)USBFS_WKUP_IRQn, 1U, 0U);
+ 162:app.c         **** 
+ 163:app.c         **** #elif defined(USBHS_LOW_PWR_MGMT_SUPPORT)
+ 164:app.c         **** 
+ 165:app.c         ****     /* enable the power module clock */
+ 166:app.c         ****     rcu_periph_clock_enable(RCU_PMU);
+ 167:app.c         **** 
+ 168:app.c         ****     /* USB wakeup EXTI line configuration */
+ 169:app.c         ****     exti_interrupt_flag_clear(EXTI_20);
+ 170:app.c         ****     exti_init(EXTI_20, EXTI_INTERRUPT, EXTI_TRIG_RISING);
+ 171:app.c         ****     exti_interrupt_enable(EXTI_20);
+ 172:app.c         **** 
+ 173:app.c         ****     nvic_irq_enable((uint8_t)USBHS_WKUP_IRQn, 1U, 0U);
+ 174:app.c         **** 
+ 175:app.c         **** #endif /* USBHS_LOW_PWR_MGMT_SUPPORT */
+ 176:app.c         **** }
+ 143              		.loc 1 176 1 is_stmt 0 view .LVU27
+ 144 0014 08BD     		pop	{r3, pc}
+ 145              		.cfi_endproc
+ 146              	.LFE118:
+ 148              		.section	.text.led_config,"ax",%progbits
+ 149              		.align	1
+ 150              		.global	led_config
+ 151              		.syntax unified
+ 152              		.thumb
+ 153              		.thumb_func
+ 154              		.fpu fpv4-sp-d16
+ 156              	led_config:
+ 157              	.LFB119:
+ 177:app.c         **** 
+ 178:app.c         **** /*!
+ 179:app.c         ****     \brief      configure key
+ 180:app.c         ****     \param[in]  none
+ 181:app.c         ****     \param[out] none
+ 182:app.c         ****     \retval     none
+ 183:app.c         **** */
+ 184:app.c         **** 
+ARM GAS  /tmp/cchTts7l.s 			page 7
+
+
+ 185:app.c         **** /*!
+ 186:app.c         ****     \brief      configure the leds
+ 187:app.c         ****     \param[in]  none
+ 188:app.c         ****     \param[out] none
+ 189:app.c         ****     \retval     none
+ 190:app.c         **** */
+ 191:app.c         **** void led_config(void)
+ 192:app.c         **** {
+ 158              		.loc 1 192 1 is_stmt 1 view -0
+ 159              		.cfi_startproc
+ 160              		@ args = 0, pretend = 0, frame = 0
+ 161              		@ frame_needed = 0, uses_anonymous_args = 0
+ 162 0000 10B5     		push	{r4, lr}
+ 163              		.cfi_def_cfa_offset 8
+ 164              		.cfi_offset 4, -8
+ 165              		.cfi_offset 14, -4
+ 193:app.c         ****     rcu_periph_clock_enable(RCU_GPIOC);
+ 166              		.loc 1 193 5 view .LVU29
+ 167 0002 40F20460 		movw	r0, #1540
+ 168 0006 FFF7FEFF 		bl	rcu_periph_clock_enable
+ 169              	.LVL7:
+ 194:app.c         **** 	gpio_init(GPIOC, GPIO_MODE_OUT_PP, GPIO_OSPEED_50MHZ, GPIO_PIN_13);
+ 170              		.loc 1 194 2 view .LVU30
+ 171 000a 074C     		ldr	r4, .L16
+ 172 000c 4FF40053 		mov	r3, #8192
+ 173 0010 0322     		movs	r2, #3
+ 174 0012 1021     		movs	r1, #16
+ 175 0014 2046     		mov	r0, r4
+ 176 0016 FFF7FEFF 		bl	gpio_init
+ 177              	.LVL8:
+ 195:app.c         **** 	gpio_bit_set(GPIOC, GPIO_PIN_13);
+ 178              		.loc 1 195 2 view .LVU31
+ 179 001a 4FF40051 		mov	r1, #8192
+ 180 001e 2046     		mov	r0, r4
+ 181 0020 FFF7FEFF 		bl	gpio_bit_set
+ 182              	.LVL9:
+ 196:app.c         **** }
+ 183              		.loc 1 196 1 is_stmt 0 view .LVU32
+ 184 0024 10BD     		pop	{r4, pc}
+ 185              	.L17:
+ 186 0026 00BF     		.align	2
+ 187              	.L16:
+ 188 0028 00100140 		.word	1073811456
+ 189              		.cfi_endproc
+ 190              	.LFE119:
+ 192              		.section	.text.main,"ax",%progbits
+ 193              		.align	1
+ 194              		.global	main
+ 195              		.syntax unified
+ 196              		.thumb
+ 197              		.thumb_func
+ 198              		.fpu fpv4-sp-d16
+ 200              	main:
+ 201              	.LFB116:
+  73:app.c         ****     rcu_periph_clock_enable(RCU_GPIOA);
+ 202              		.loc 1 73 1 is_stmt 1 view -0
+ 203              		.cfi_startproc
+ARM GAS  /tmp/cchTts7l.s 			page 8
+
+
+ 204              		@ Volatile: function does not return.
+ 205              		@ args = 0, pretend = 0, frame = 0
+ 206              		@ frame_needed = 0, uses_anonymous_args = 0
+ 207 0000 08B5     		push	{r3, lr}
+ 208              		.cfi_def_cfa_offset 8
+ 209              		.cfi_offset 3, -8
+ 210              		.cfi_offset 14, -4
+  74:app.c         **** 	gpio_init(GPIOA, GPIO_MODE_IPU, GPIO_OSPEED_50MHZ, GPIO_PIN_0);
+ 211              		.loc 1 74 5 view .LVU34
+ 212 0002 40F20260 		movw	r0, #1538
+ 213 0006 FFF7FEFF 		bl	rcu_periph_clock_enable
+ 214              	.LVL10:
+  75:app.c         **** 	
+ 215              		.loc 1 75 2 view .LVU35
+ 216 000a 0123     		movs	r3, #1
+ 217 000c 0322     		movs	r2, #3
+ 218 000e 4821     		movs	r1, #72
+ 219 0010 0B48     		ldr	r0, .L23
+ 220 0012 FFF7FEFF 		bl	gpio_init
+ 221              	.LVL11:
+  78:app.c         **** 	gpio_bit_set(GPIOC, GPIO_PIN_13);
+ 222              		.loc 1 78 2 view .LVU36
+ 223 0016 FFF7FEFF 		bl	led_config
+ 224              	.LVL12:
+  79:app.c         **** 	
+ 225              		.loc 1 79 2 view .LVU37
+ 226 001a 4FF40051 		mov	r1, #8192
+ 227 001e 0948     		ldr	r0, .L23+4
+ 228 0020 FFF7FEFF 		bl	gpio_bit_set
+ 229              	.LVL13:
+  82:app.c         ****   
+ 230              		.loc 1 82 5 view .LVU38
+ 231 0024 FFF7FEFF 		bl	usb_clock_config
+ 232              	.LVL14:
+  88:app.c         **** 
+ 233              		.loc 1 88 5 view .LVU39
+ 234 0028 0121     		movs	r1, #1
+ 235 002a 0748     		ldr	r0, .L23+8
+ 236 002c FFF7FEFF 		bl	usbd_init
+ 237              	.LVL15:
+  91:app.c         **** 
+ 238              		.loc 1 91 5 view .LVU40
+ 239 0030 FFF7FEFF 		bl	usb_interrupt_config
+ 240              	.LVL16:
+  94:app.c         ****     }
+ 241              		.loc 1 94 5 view .LVU41
+  94:app.c         ****     }
+ 242              		.loc 1 94 30 is_stmt 0 view .LVU42
+ 243 0034 044A     		ldr	r2, .L23+8
+ 244              	.L19:
+  95:app.c         **** 
+ 245              		.loc 1 95 5 is_stmt 1 discriminator 1 view .LVU43
+  94:app.c         ****     }
+ 246              		.loc 1 94 11 discriminator 1 view .LVU44
+  94:app.c         ****     }
+ 247              		.loc 1 94 30 is_stmt 0 discriminator 1 view .LVU45
+ 248 0036 537B     		ldrb	r3, [r2, #13]	@ zero_extendqisi2
+ARM GAS  /tmp/cchTts7l.s 			page 9
+
+
+ 249 0038 DBB2     		uxtb	r3, r3
+  94:app.c         ****     }
+ 250              		.loc 1 94 11 discriminator 1 view .LVU46
+ 251 003a 032B     		cmp	r3, #3
+ 252 003c FBD1     		bne	.L19
+ 253              	.L20:
+  97:app.c         ****     }
+ 254              		.loc 1 97 5 is_stmt 1 discriminator 1 view .LVU47
+  98:app.c         **** }
+ 255              		.loc 1 98 5 discriminator 1 view .LVU48
+  97:app.c         ****     }
+ 256              		.loc 1 97 11 discriminator 1 view .LVU49
+ 257 003e FEE7     		b	.L20
+ 258              	.L24:
+ 259              		.align	2
+ 260              	.L23:
+ 261 0040 00080140 		.word	1073809408
+ 262 0044 00100140 		.word	1073811456
+ 263 0048 00000000 		.word	.LANCHOR1
+ 264              		.cfi_endproc
+ 265              	.LFE116:
+ 267              		.global	usbhs_core_dev
+ 268              		.global	usbfs_prescaler
+ 269              		.global	timer_prescaler
+ 270              		.section	.bss.timer_prescaler,"aw",%nobits
+ 273              	timer_prescaler:
+ 274 0000 00       		.space	1
+ 275              		.section	.bss.usbfs_prescaler,"aw",%nobits
+ 276              		.align	2
+ 277              		.set	.LANCHOR0,. + 0
+ 280              	usbfs_prescaler:
+ 281 0000 00000000 		.space	4
+ 282              		.section	.data.usbhs_core_dev,"aw"
+ 283              		.align	2
+ 284              		.set	.LANCHOR1,. + 0
+ 287              	usbhs_core_dev:
+ 288 0000 00000000 		.space	12
+ 288      00000000 
+ 288      00000000 
+ 289 000c 00000000 		.space	208
+ 289      00000000 
+ 289      00000000 
+ 289      00000000 
+ 289      00000000 
+ 290 00dc 00000000 		.word	device_descripter
+ 291 00e0 00000000 		.word	configuration_descriptor
+ 292 00e4 00000000 		.word	usbd_strings
+ 293 00e8 00000000 		.word	custom_hid_init
+ 294 00ec 00000000 		.word	custom_hid_deinit
+ 295 00f0 00000000 		.word	custom_hid_req_handler
+ 296 00f4 00000000 		.word	custom_hid_data_handler
+ 297 00f8 00000000 		.word	delayMicroseconds
+ 298 00fc 00000000 		.word	delay
+ 299              		.text
+ 300              	.Letext0:
+ 301              		.file 2 "/usr/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h"
+ 302              		.file 3 "../../../../Firmware/GD32E10x_standard_peripheral/Include/gd32e10x_rcu.h"
+ARM GAS  /tmp/cchTts7l.s 			page 10
+
+
+ 303              		.file 4 "../../../../Firmware/GD32E10x_usbfs_driver/Include/usb_std.h"
+ 304              		.file 5 "../../../../Firmware/GD32E10x_usbfs_driver/Include/usb_defines.h"
+ 305              		.file 6 "../../../../Firmware/GD32E10x_usbfs_driver/Include/usb_core.h"
+ 306              		.file 7 "custom_hid_core.h"
+ 307              		.file 8 "../../../../Firmware/GD32E10x_standard_peripheral/Include/gd32e10x_gpio.h"
+ 308              		.file 9 "../../../../Firmware/GD32E10x_standard_peripheral/Include/gd32e10x_misc.h"
+ 309              		.file 10 "../../../../Firmware/GD32E10x_usbfs_driver/Include/usbd_core.h"
+ 310              		.file 11 "../../../../Firmware/CMSIS/GD/GD32E10x/Include/gd32e10x.h"
+ARM GAS  /tmp/cchTts7l.s 			page 11
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 app.c
+     /tmp/cchTts7l.s:18     .text.usb_clock_config:0000000000000000 $t
+     /tmp/cchTts7l.s:26     .text.usb_clock_config:0000000000000000 usb_clock_config
+     /tmp/cchTts7l.s:107    .text.usb_clock_config:0000000000000058 $d
+     /tmp/cchTts7l.s:116    .text.usb_interrupt_config:0000000000000000 $t
+     /tmp/cchTts7l.s:123    .text.usb_interrupt_config:0000000000000000 usb_interrupt_config
+     /tmp/cchTts7l.s:149    .text.led_config:0000000000000000 $t
+     /tmp/cchTts7l.s:156    .text.led_config:0000000000000000 led_config
+     /tmp/cchTts7l.s:188    .text.led_config:0000000000000028 $d
+     /tmp/cchTts7l.s:193    .text.main:0000000000000000 $t
+     /tmp/cchTts7l.s:200    .text.main:0000000000000000 main
+     /tmp/cchTts7l.s:261    .text.main:0000000000000040 $d
+     /tmp/cchTts7l.s:287    .data.usbhs_core_dev:0000000000000000 usbhs_core_dev
+     /tmp/cchTts7l.s:280    .bss.usbfs_prescaler:0000000000000000 usbfs_prescaler
+     /tmp/cchTts7l.s:273    .bss.timer_prescaler:0000000000000000 timer_prescaler
+     /tmp/cchTts7l.s:274    .bss.timer_prescaler:0000000000000000 $d
+     /tmp/cchTts7l.s:276    .bss.usbfs_prescaler:0000000000000000 $d
+     /tmp/cchTts7l.s:283    .data.usbhs_core_dev:0000000000000000 $d
+
+UNDEFINED SYMBOLS
+rcu_clock_freq_get
+rcu_usb_clock_config
+rcu_periph_clock_enable
+nvic_priority_group_set
+nvic_irq_enable
+gpio_init
+gpio_bit_set
+usbd_init
+device_descripter
+configuration_descriptor
+usbd_strings
+custom_hid_init
+custom_hid_deinit
+custom_hid_req_handler
+custom_hid_data_handler
+delayMicroseconds
+delay

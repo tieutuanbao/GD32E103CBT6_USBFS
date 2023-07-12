@@ -1,0 +1,434 @@
+ARM GAS  /tmp/ccPkmzE5.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.eabi_attribute 27, 1
+   3              		.eabi_attribute 28, 1
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.file	"gd32e10x_crc.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.section	.text.crc_deinit,"ax",%progbits
+  18              		.align	1
+  19              		.global	crc_deinit
+  20              		.arch armv7e-m
+  21              		.syntax unified
+  22              		.thumb
+  23              		.thumb_func
+  24              		.fpu fpv4-sp-d16
+  26              	crc_deinit:
+  27              	.LFB116:
+  28              		.file 1 "../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_crc.c"
+   1:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_crc.c **** /*!
+   2:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_crc.c ****     \file  gd32e10x_crc.c
+   3:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_crc.c ****     \brief CRC driver
+   4:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_crc.c ****     
+   5:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_crc.c ****     \version 2017-12-26, V1.0.0, firmware for GD32E10x
+   6:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_crc.c **** */
+   7:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_crc.c **** 
+   8:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_crc.c **** /*
+   9:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_crc.c ****     Copyright (c) 2017, GigaDevice Semiconductor Inc.
+  10:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_crc.c **** 
+  11:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_crc.c ****     All rights reserved.
+  12:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_crc.c **** 
+  13:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_crc.c ****     Redistribution and use in source and binary forms, with or without modification, 
+  14:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_crc.c **** are permitted provided that the following conditions are met:
+  15:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_crc.c **** 
+  16:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_crc.c ****     1. Redistributions of source code must retain the above copyright notice, this 
+  17:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_crc.c ****        list of conditions and the following disclaimer.
+  18:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_crc.c ****     2. Redistributions in binary form must reproduce the above copyright notice, 
+  19:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_crc.c ****        this list of conditions and the following disclaimer in the documentation 
+  20:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_crc.c ****        and/or other materials provided with the distribution.
+  21:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_crc.c ****     3. Neither the name of the copyright holder nor the names of its contributors 
+  22:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_crc.c ****        may be used to endorse or promote products derived from this software without 
+  23:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_crc.c ****        specific prior written permission.
+  24:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_crc.c **** 
+  25:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_crc.c ****     THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" 
+  26:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_crc.c **** AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED 
+  27:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_crc.c **** WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. 
+  28:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_crc.c **** IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, 
+  29:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_crc.c **** INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT 
+  30:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_crc.c **** NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR 
+ARM GAS  /tmp/ccPkmzE5.s 			page 2
+
+
+  31:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_crc.c **** PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, 
+  32:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_crc.c **** WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) 
+  33:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_crc.c **** ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY 
+  34:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_crc.c **** OF SUCH DAMAGE.
+  35:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_crc.c **** */
+  36:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_crc.c **** 
+  37:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_crc.c **** #include "gd32e10x_crc.h"
+  38:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_crc.c **** 
+  39:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_crc.c **** #define CRC_DATA_RESET_VALUE      ((uint32_t)0xFFFFFFFFU)
+  40:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_crc.c **** #define CRC_FDATA_RESET_VALUE     ((uint32_t)0x00000000U)
+  41:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_crc.c **** 
+  42:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_crc.c **** /*!
+  43:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_crc.c ****     \brief      deinit CRC calculation unit
+  44:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_crc.c ****     \param[in]  none
+  45:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_crc.c ****     \param[out] none
+  46:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_crc.c ****     \retval     none
+  47:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_crc.c **** */
+  48:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_crc.c **** void crc_deinit(void)
+  49:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_crc.c **** {
+  29              		.loc 1 49 1 view -0
+  30              		.cfi_startproc
+  31              		@ args = 0, pretend = 0, frame = 0
+  32              		@ frame_needed = 0, uses_anonymous_args = 0
+  33              		@ link register save eliminated.
+  50:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_crc.c ****     CRC_DATA  = CRC_DATA_RESET_VALUE;
+  34              		.loc 1 50 5 view .LVU1
+  35              		.loc 1 50 15 is_stmt 0 view .LVU2
+  36 0000 044B     		ldr	r3, .L2
+  37 0002 4FF0FF32 		mov	r2, #-1
+  38 0006 1A60     		str	r2, [r3]
+  51:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_crc.c ****     CRC_FDATA = CRC_FDATA_RESET_VALUE;
+  39              		.loc 1 51 5 is_stmt 1 view .LVU3
+  40              		.loc 1 51 15 is_stmt 0 view .LVU4
+  41 0008 0022     		movs	r2, #0
+  42 000a 5A60     		str	r2, [r3, #4]
+  52:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_crc.c ****     CRC_CTL   = (uint32_t)CRC_CTL_RST;
+  43              		.loc 1 52 5 is_stmt 1 view .LVU5
+  44              		.loc 1 52 15 is_stmt 0 view .LVU6
+  45 000c 0122     		movs	r2, #1
+  46 000e 9A60     		str	r2, [r3, #8]
+  53:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_crc.c **** }
+  47              		.loc 1 53 1 view .LVU7
+  48 0010 7047     		bx	lr
+  49              	.L3:
+  50 0012 00BF     		.align	2
+  51              	.L2:
+  52 0014 00300240 		.word	1073885184
+  53              		.cfi_endproc
+  54              	.LFE116:
+  56              		.section	.text.crc_data_register_reset,"ax",%progbits
+  57              		.align	1
+  58              		.global	crc_data_register_reset
+  59              		.syntax unified
+  60              		.thumb
+  61              		.thumb_func
+  62              		.fpu fpv4-sp-d16
+  64              	crc_data_register_reset:
+ARM GAS  /tmp/ccPkmzE5.s 			page 3
+
+
+  65              	.LFB117:
+  54:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_crc.c **** 
+  55:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_crc.c **** /*!
+  56:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_crc.c ****     \brief      reset data register(CRC_DATA) to the value of 0xFFFFFFFF
+  57:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_crc.c ****     \param[in]  none
+  58:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_crc.c ****     \param[out] none
+  59:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_crc.c ****     \retval     none
+  60:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_crc.c **** */
+  61:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_crc.c **** void crc_data_register_reset(void)
+  62:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_crc.c **** {
+  66              		.loc 1 62 1 is_stmt 1 view -0
+  67              		.cfi_startproc
+  68              		@ args = 0, pretend = 0, frame = 0
+  69              		@ frame_needed = 0, uses_anonymous_args = 0
+  70              		@ link register save eliminated.
+  63:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_crc.c ****     CRC_CTL |= (uint32_t)CRC_CTL_RST;
+  71              		.loc 1 63 5 view .LVU9
+  72              		.loc 1 63 13 is_stmt 0 view .LVU10
+  73 0000 024A     		ldr	r2, .L5
+  74 0002 9368     		ldr	r3, [r2, #8]
+  75 0004 43F00103 		orr	r3, r3, #1
+  76 0008 9360     		str	r3, [r2, #8]
+  64:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_crc.c **** }
+  77              		.loc 1 64 1 view .LVU11
+  78 000a 7047     		bx	lr
+  79              	.L6:
+  80              		.align	2
+  81              	.L5:
+  82 000c 00300240 		.word	1073885184
+  83              		.cfi_endproc
+  84              	.LFE117:
+  86              		.section	.text.crc_data_register_read,"ax",%progbits
+  87              		.align	1
+  88              		.global	crc_data_register_read
+  89              		.syntax unified
+  90              		.thumb
+  91              		.thumb_func
+  92              		.fpu fpv4-sp-d16
+  94              	crc_data_register_read:
+  95              	.LFB118:
+  65:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_crc.c **** 
+  66:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_crc.c **** /*!
+  67:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_crc.c ****     \brief      read the value of the data register 
+  68:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_crc.c ****     \param[in]  none
+  69:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_crc.c ****     \param[out] none
+  70:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_crc.c ****     \retval     32-bit value of the data register
+  71:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_crc.c **** */
+  72:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_crc.c **** uint32_t crc_data_register_read(void)
+  73:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_crc.c **** {
+  96              		.loc 1 73 1 is_stmt 1 view -0
+  97              		.cfi_startproc
+  98              		@ args = 0, pretend = 0, frame = 0
+  99              		@ frame_needed = 0, uses_anonymous_args = 0
+ 100              		@ link register save eliminated.
+  74:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_crc.c ****     uint32_t data;
+ 101              		.loc 1 74 5 view .LVU13
+  75:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_crc.c ****     data = CRC_DATA;
+ARM GAS  /tmp/ccPkmzE5.s 			page 4
+
+
+ 102              		.loc 1 75 5 view .LVU14
+ 103              		.loc 1 75 10 is_stmt 0 view .LVU15
+ 104 0000 014B     		ldr	r3, .L8
+ 105 0002 1868     		ldr	r0, [r3]
+ 106              	.LVL0:
+  76:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_crc.c ****     return (data);
+ 107              		.loc 1 76 5 is_stmt 1 view .LVU16
+  77:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_crc.c **** }
+ 108              		.loc 1 77 1 is_stmt 0 view .LVU17
+ 109 0004 7047     		bx	lr
+ 110              	.L9:
+ 111 0006 00BF     		.align	2
+ 112              	.L8:
+ 113 0008 00300240 		.word	1073885184
+ 114              		.cfi_endproc
+ 115              	.LFE118:
+ 117              		.section	.text.crc_free_data_register_read,"ax",%progbits
+ 118              		.align	1
+ 119              		.global	crc_free_data_register_read
+ 120              		.syntax unified
+ 121              		.thumb
+ 122              		.thumb_func
+ 123              		.fpu fpv4-sp-d16
+ 125              	crc_free_data_register_read:
+ 126              	.LFB119:
+  78:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_crc.c **** 
+  79:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_crc.c **** /*!
+  80:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_crc.c ****     \brief      read the value of the free data register
+  81:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_crc.c ****     \param[in]  none
+  82:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_crc.c ****     \param[out] none
+  83:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_crc.c ****     \retval     8-bit value of the free data register
+  84:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_crc.c **** */
+  85:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_crc.c **** uint8_t crc_free_data_register_read(void)
+  86:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_crc.c **** {
+ 127              		.loc 1 86 1 is_stmt 1 view -0
+ 128              		.cfi_startproc
+ 129              		@ args = 0, pretend = 0, frame = 0
+ 130              		@ frame_needed = 0, uses_anonymous_args = 0
+ 131              		@ link register save eliminated.
+  87:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_crc.c ****     uint8_t fdata;
+ 132              		.loc 1 87 5 view .LVU19
+  88:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_crc.c ****     fdata = (uint8_t)CRC_FDATA;
+ 133              		.loc 1 88 5 view .LVU20
+ 134              		.loc 1 88 22 is_stmt 0 view .LVU21
+ 135 0000 014B     		ldr	r3, .L11
+ 136 0002 5868     		ldr	r0, [r3, #4]
+ 137              	.LVL1:
+  89:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_crc.c ****     return (fdata);
+ 138              		.loc 1 89 5 is_stmt 1 view .LVU22
+  90:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_crc.c **** }
+ 139              		.loc 1 90 1 is_stmt 0 view .LVU23
+ 140 0004 C0B2     		uxtb	r0, r0
+ 141              		.loc 1 90 1 view .LVU24
+ 142 0006 7047     		bx	lr
+ 143              	.L12:
+ 144              		.align	2
+ 145              	.L11:
+ARM GAS  /tmp/ccPkmzE5.s 			page 5
+
+
+ 146 0008 00300240 		.word	1073885184
+ 147              		.cfi_endproc
+ 148              	.LFE119:
+ 150              		.section	.text.crc_free_data_register_write,"ax",%progbits
+ 151              		.align	1
+ 152              		.global	crc_free_data_register_write
+ 153              		.syntax unified
+ 154              		.thumb
+ 155              		.thumb_func
+ 156              		.fpu fpv4-sp-d16
+ 158              	crc_free_data_register_write:
+ 159              	.LVL2:
+ 160              	.LFB120:
+  91:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_crc.c **** 
+  92:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_crc.c **** /*!
+  93:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_crc.c ****     \brief      write data to the free data register
+  94:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_crc.c ****     \param[in]  free_data: specified 8-bit data
+  95:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_crc.c ****     \param[out] none
+  96:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_crc.c ****     \retval     none
+  97:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_crc.c **** */
+  98:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_crc.c **** void crc_free_data_register_write(uint8_t free_data)
+  99:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_crc.c **** {
+ 161              		.loc 1 99 1 is_stmt 1 view -0
+ 162              		.cfi_startproc
+ 163              		@ args = 0, pretend = 0, frame = 0
+ 164              		@ frame_needed = 0, uses_anonymous_args = 0
+ 165              		@ link register save eliminated.
+ 100:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_crc.c ****     CRC_FDATA = (uint32_t)free_data;
+ 166              		.loc 1 100 5 view .LVU26
+ 167              		.loc 1 100 15 is_stmt 0 view .LVU27
+ 168 0000 014B     		ldr	r3, .L14
+ 169 0002 5860     		str	r0, [r3, #4]
+ 101:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_crc.c **** }
+ 170              		.loc 1 101 1 view .LVU28
+ 171 0004 7047     		bx	lr
+ 172              	.L15:
+ 173 0006 00BF     		.align	2
+ 174              	.L14:
+ 175 0008 00300240 		.word	1073885184
+ 176              		.cfi_endproc
+ 177              	.LFE120:
+ 179              		.section	.text.crc_single_data_calculate,"ax",%progbits
+ 180              		.align	1
+ 181              		.global	crc_single_data_calculate
+ 182              		.syntax unified
+ 183              		.thumb
+ 184              		.thumb_func
+ 185              		.fpu fpv4-sp-d16
+ 187              	crc_single_data_calculate:
+ 188              	.LVL3:
+ 189              	.LFB121:
+ 102:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_crc.c **** 
+ 103:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_crc.c **** /*!
+ 104:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_crc.c ****     \brief      calculate the CRC value of a 32-bit data
+ 105:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_crc.c ****     \param[in]  sdata: specified 32-bit data
+ 106:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_crc.c ****     \param[out] none
+ 107:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_crc.c ****     \retval     32-bit value calculated by CRC
+ARM GAS  /tmp/ccPkmzE5.s 			page 6
+
+
+ 108:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_crc.c **** */
+ 109:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_crc.c **** uint32_t crc_single_data_calculate(uint32_t sdata)
+ 110:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_crc.c **** {
+ 190              		.loc 1 110 1 is_stmt 1 view -0
+ 191              		.cfi_startproc
+ 192              		@ args = 0, pretend = 0, frame = 0
+ 193              		@ frame_needed = 0, uses_anonymous_args = 0
+ 194              		@ link register save eliminated.
+ 111:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_crc.c ****     CRC_DATA = sdata;
+ 195              		.loc 1 111 5 view .LVU30
+ 196              		.loc 1 111 14 is_stmt 0 view .LVU31
+ 197 0000 014B     		ldr	r3, .L17
+ 198 0002 1860     		str	r0, [r3]
+ 112:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_crc.c ****     return (CRC_DATA);
+ 199              		.loc 1 112 5 is_stmt 1 view .LVU32
+ 200              		.loc 1 112 13 is_stmt 0 view .LVU33
+ 201 0004 1868     		ldr	r0, [r3]
+ 202              	.LVL4:
+ 113:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_crc.c **** }
+ 203              		.loc 1 113 1 view .LVU34
+ 204 0006 7047     		bx	lr
+ 205              	.L18:
+ 206              		.align	2
+ 207              	.L17:
+ 208 0008 00300240 		.word	1073885184
+ 209              		.cfi_endproc
+ 210              	.LFE121:
+ 212              		.section	.text.crc_block_data_calculate,"ax",%progbits
+ 213              		.align	1
+ 214              		.global	crc_block_data_calculate
+ 215              		.syntax unified
+ 216              		.thumb
+ 217              		.thumb_func
+ 218              		.fpu fpv4-sp-d16
+ 220              	crc_block_data_calculate:
+ 221              	.LVL5:
+ 222              	.LFB122:
+ 114:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_crc.c **** 
+ 115:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_crc.c **** /*!
+ 116:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_crc.c ****     \brief      calculate the CRC value of an array of 32-bit values
+ 117:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_crc.c ****     \param[in]  array: pointer to an array of 32-bit values
+ 118:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_crc.c ****     \param[in]  size: size of the array
+ 119:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_crc.c ****     \param[out] none
+ 120:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_crc.c ****     \retval     32-bit value calculated by CRC
+ 121:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_crc.c **** */
+ 122:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_crc.c **** uint32_t crc_block_data_calculate(const uint32_t *array, uint32_t size)
+ 123:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_crc.c **** {
+ 223              		.loc 1 123 1 is_stmt 1 view -0
+ 224              		.cfi_startproc
+ 225              		@ args = 0, pretend = 0, frame = 0
+ 226              		@ frame_needed = 0, uses_anonymous_args = 0
+ 227              		@ link register save eliminated.
+ 124:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_crc.c ****     uint32_t index;
+ 228              		.loc 1 124 5 view .LVU36
+ 125:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_crc.c ****     for(index = 0U; index < size; index++){
+ 229              		.loc 1 125 5 view .LVU37
+ 230              		.loc 1 125 21 view .LVU38
+ARM GAS  /tmp/ccPkmzE5.s 			page 7
+
+
+ 231              		.loc 1 125 5 is_stmt 0 view .LVU39
+ 232 0000 41B1     		cbz	r1, .L20
+ 233 0002 0438     		subs	r0, r0, #4
+ 234              	.LVL6:
+ 235              		.loc 1 125 5 view .LVU40
+ 236 0004 00EB8102 		add	r2, r0, r1, lsl #2
+ 126:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_crc.c ****         CRC_DATA = *(array+index);
+ 237              		.loc 1 126 18 view .LVU41
+ 238 0008 0449     		ldr	r1, .L23
+ 239              	.LVL7:
+ 240              	.L21:
+ 241              		.loc 1 126 9 is_stmt 1 discriminator 3 view .LVU42
+ 242              		.loc 1 126 20 is_stmt 0 discriminator 3 view .LVU43
+ 243 000a 50F8043F 		ldr	r3, [r0, #4]!
+ 244              		.loc 1 126 18 discriminator 3 view .LVU44
+ 245 000e 0B60     		str	r3, [r1]
+ 125:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_crc.c ****     for(index = 0U; index < size; index++){
+ 246              		.loc 1 125 35 is_stmt 1 discriminator 3 view .LVU45
+ 125:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_crc.c ****     for(index = 0U; index < size; index++){
+ 247              		.loc 1 125 21 discriminator 3 view .LVU46
+ 125:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_crc.c ****     for(index = 0U; index < size; index++){
+ 248              		.loc 1 125 5 is_stmt 0 discriminator 3 view .LVU47
+ 249 0010 9042     		cmp	r0, r2
+ 250 0012 FAD1     		bne	.L21
+ 251              	.L20:
+ 127:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_crc.c ****     }
+ 128:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_crc.c ****     return (CRC_DATA);
+ 252              		.loc 1 128 5 is_stmt 1 view .LVU48
+ 253              		.loc 1 128 13 is_stmt 0 view .LVU49
+ 254 0014 014B     		ldr	r3, .L23
+ 255 0016 1868     		ldr	r0, [r3]
+ 129:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_crc.c **** }
+ 256              		.loc 1 129 1 view .LVU50
+ 257 0018 7047     		bx	lr
+ 258              	.L24:
+ 259 001a 00BF     		.align	2
+ 260              	.L23:
+ 261 001c 00300240 		.word	1073885184
+ 262              		.cfi_endproc
+ 263              	.LFE122:
+ 265              		.text
+ 266              	.Letext0:
+ 267              		.file 2 "/usr/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h"
+ARM GAS  /tmp/ccPkmzE5.s 			page 8
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 gd32e10x_crc.c
+     /tmp/ccPkmzE5.s:18     .text.crc_deinit:0000000000000000 $t
+     /tmp/ccPkmzE5.s:26     .text.crc_deinit:0000000000000000 crc_deinit
+     /tmp/ccPkmzE5.s:52     .text.crc_deinit:0000000000000014 $d
+     /tmp/ccPkmzE5.s:57     .text.crc_data_register_reset:0000000000000000 $t
+     /tmp/ccPkmzE5.s:64     .text.crc_data_register_reset:0000000000000000 crc_data_register_reset
+     /tmp/ccPkmzE5.s:82     .text.crc_data_register_reset:000000000000000c $d
+     /tmp/ccPkmzE5.s:87     .text.crc_data_register_read:0000000000000000 $t
+     /tmp/ccPkmzE5.s:94     .text.crc_data_register_read:0000000000000000 crc_data_register_read
+     /tmp/ccPkmzE5.s:113    .text.crc_data_register_read:0000000000000008 $d
+     /tmp/ccPkmzE5.s:118    .text.crc_free_data_register_read:0000000000000000 $t
+     /tmp/ccPkmzE5.s:125    .text.crc_free_data_register_read:0000000000000000 crc_free_data_register_read
+     /tmp/ccPkmzE5.s:146    .text.crc_free_data_register_read:0000000000000008 $d
+     /tmp/ccPkmzE5.s:151    .text.crc_free_data_register_write:0000000000000000 $t
+     /tmp/ccPkmzE5.s:158    .text.crc_free_data_register_write:0000000000000000 crc_free_data_register_write
+     /tmp/ccPkmzE5.s:175    .text.crc_free_data_register_write:0000000000000008 $d
+     /tmp/ccPkmzE5.s:180    .text.crc_single_data_calculate:0000000000000000 $t
+     /tmp/ccPkmzE5.s:187    .text.crc_single_data_calculate:0000000000000000 crc_single_data_calculate
+     /tmp/ccPkmzE5.s:208    .text.crc_single_data_calculate:0000000000000008 $d
+     /tmp/ccPkmzE5.s:213    .text.crc_block_data_calculate:0000000000000000 $t
+     /tmp/ccPkmzE5.s:220    .text.crc_block_data_calculate:0000000000000000 crc_block_data_calculate
+     /tmp/ccPkmzE5.s:261    .text.crc_block_data_calculate:000000000000001c $d
+
+NO UNDEFINED SYMBOLS

@@ -1,0 +1,1495 @@
+ARM GAS  /tmp/ccTRedY2.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.eabi_attribute 27, 1
+   3              		.eabi_attribute 28, 1
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.file	"system_gd32e10x.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.section	.text.SystemInit,"ax",%progbits
+  18              		.align	1
+  19              		.global	SystemInit
+  20              		.arch armv7e-m
+  21              		.syntax unified
+  22              		.thumb
+  23              		.thumb_func
+  24              		.fpu fpv4-sp-d16
+  26              	SystemInit:
+  27              	.LFB116:
+  28              		.file 1 "system_gd32e10x.c"
+   1:system_gd32e10x.c **** /*!
+   2:system_gd32e10x.c ****     \file  system_gd32e10x.c
+   3:system_gd32e10x.c ****     \brief CMSIS Cortex-M4 Device Peripheral Access Layer Source File for
+   4:system_gd32e10x.c ****            GD32E10x Device Series
+   5:system_gd32e10x.c **** */
+   6:system_gd32e10x.c **** 
+   7:system_gd32e10x.c **** /*
+   8:system_gd32e10x.c ****     Copyright (c) 2012 ARM LIMITED
+   9:system_gd32e10x.c **** 
+  10:system_gd32e10x.c ****     All rights reserved.
+  11:system_gd32e10x.c **** 
+  12:system_gd32e10x.c ****     Redistribution and use in source and binary forms, with or without modification, 
+  13:system_gd32e10x.c **** are permitted provided that the following conditions are met:
+  14:system_gd32e10x.c **** 
+  15:system_gd32e10x.c ****     1. Redistributions of source code must retain the above copyright notice, this 
+  16:system_gd32e10x.c ****        list of conditions and the following disclaimer.
+  17:system_gd32e10x.c ****     2. Redistributions in binary form must reproduce the above copyright notice, 
+  18:system_gd32e10x.c ****        this list of conditions and the following disclaimer in the documentation 
+  19:system_gd32e10x.c ****        and/or other materials provided with the distribution.
+  20:system_gd32e10x.c ****     3. Neither the name of the copyright holder nor the names of its contributors 
+  21:system_gd32e10x.c ****        may be used to endorse or promote products derived from this software without 
+  22:system_gd32e10x.c ****        specific prior written permission.
+  23:system_gd32e10x.c **** 
+  24:system_gd32e10x.c ****     THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" 
+  25:system_gd32e10x.c **** AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED 
+  26:system_gd32e10x.c **** WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. 
+  27:system_gd32e10x.c **** IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, 
+  28:system_gd32e10x.c **** INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT 
+  29:system_gd32e10x.c **** NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR 
+  30:system_gd32e10x.c **** PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, 
+ARM GAS  /tmp/ccTRedY2.s 			page 2
+
+
+  31:system_gd32e10x.c **** WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) 
+  32:system_gd32e10x.c **** ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY 
+  33:system_gd32e10x.c **** OF SUCH DAMAGE.
+  34:system_gd32e10x.c **** */
+  35:system_gd32e10x.c **** 
+  36:system_gd32e10x.c **** /* This file refers the CMSIS standard, some adjustments are made according to GigaDevice chips */
+  37:system_gd32e10x.c **** 
+  38:system_gd32e10x.c **** #include "gd32e10x.h"
+  39:system_gd32e10x.c **** 
+  40:system_gd32e10x.c **** /* system frequency define */
+  41:system_gd32e10x.c **** #define __IRC8M           (IRC8M_VALUE)            /* internal 8 MHz RC oscillator frequency */
+  42:system_gd32e10x.c **** #define __HXTAL           (HXTAL_VALUE)            /* high speed crystal oscillator frequency */
+  43:system_gd32e10x.c **** #define __SYS_OSC_CLK     (__IRC8M)                /* main oscillator frequency */
+  44:system_gd32e10x.c **** 
+  45:system_gd32e10x.c **** /* Vector Table base offset */
+  46:system_gd32e10x.c **** #define VECT_TAB_OFFSET  0x0000                      /* This value must be a multiple of 0x200. */
+  47:system_gd32e10x.c **** 
+  48:system_gd32e10x.c **** /* select a system clock by uncommenting the following line */
+  49:system_gd32e10x.c **** /* use IRC8M */
+  50:system_gd32e10x.c **** //#define __SYSTEM_CLOCK_IRC8M                    (uint32_t)(__IRC8M)
+  51:system_gd32e10x.c **** //#define __SYSTEM_CLOCK_48M_PLL_IRC8M            (uint32_t)(48000000)
+  52:system_gd32e10x.c **** //#define __SYSTEM_CLOCK_72M_PLL_IRC8M            (uint32_t)(72000000)
+  53:system_gd32e10x.c **** //#define __SYSTEM_CLOCK_108M_PLL_IRC8M           (uint32_t)(108000000)
+  54:system_gd32e10x.c **** #define __SYSTEM_CLOCK_120M_PLL_IRC8M           (uint32_t)(120000000)
+  55:system_gd32e10x.c **** 
+  56:system_gd32e10x.c **** /* use HXTAL(CK_HXTAL = 8M) */
+  57:system_gd32e10x.c **** //#define __SYSTEM_CLOCK_HXTAL                    (uint32_t)(__HXTAL)
+  58:system_gd32e10x.c **** //#define __SYSTEM_CLOCK_48M_PLL_HXTAL            (uint32_t)(48000000)
+  59:system_gd32e10x.c **** //#define __SYSTEM_CLOCK_72M_PLL_HXTAL            (uint32_t)(72000000)
+  60:system_gd32e10x.c **** //#define __SYSTEM_CLOCK_108M_PLL_HXTAL           (uint32_t)(108000000)
+  61:system_gd32e10x.c **** //#define __SYSTEM_CLOCK_120M_PLL_HXTAL           (uint32_t)(120000000)
+  62:system_gd32e10x.c **** 
+  63:system_gd32e10x.c **** #define SEL_IRC8M       0x00U
+  64:system_gd32e10x.c **** #define SEL_HXTAL       0x01U
+  65:system_gd32e10x.c **** #define SEL_PLL         0x02U
+  66:system_gd32e10x.c **** 
+  67:system_gd32e10x.c **** /* set the system clock frequency and declare the system clock configuration function */
+  68:system_gd32e10x.c **** #ifdef __SYSTEM_CLOCK_IRC8M
+  69:system_gd32e10x.c **** uint32_t SystemCoreClock = __SYSTEM_CLOCK_IRC8M;
+  70:system_gd32e10x.c **** static void system_clock_8m_irc8m(void);
+  71:system_gd32e10x.c **** #elif defined (__SYSTEM_CLOCK_48M_PLL_IRC8M)
+  72:system_gd32e10x.c **** uint32_t SystemCoreClock = __SYSTEM_CLOCK_48M_PLL_IRC8M;
+  73:system_gd32e10x.c **** static void system_clock_48m_irc8m(void);
+  74:system_gd32e10x.c **** #elif defined (__SYSTEM_CLOCK_72M_PLL_IRC8M)
+  75:system_gd32e10x.c **** uint32_t SystemCoreClock = __SYSTEM_CLOCK_72M_PLL_IRC8M;
+  76:system_gd32e10x.c **** static void system_clock_72m_irc8m(void);
+  77:system_gd32e10x.c **** #elif defined (__SYSTEM_CLOCK_108M_PLL_IRC8M)
+  78:system_gd32e10x.c **** uint32_t SystemCoreClock = __SYSTEM_CLOCK_108M_PLL_IRC8M;
+  79:system_gd32e10x.c **** static void system_clock_108m_irc8m(void);
+  80:system_gd32e10x.c **** #elif defined (__SYSTEM_CLOCK_120M_PLL_IRC8M)
+  81:system_gd32e10x.c **** uint32_t SystemCoreClock = __SYSTEM_CLOCK_120M_PLL_IRC8M;
+  82:system_gd32e10x.c **** static void system_clock_120m_irc8m(void);
+  83:system_gd32e10x.c **** 
+  84:system_gd32e10x.c **** #elif defined (__SYSTEM_CLOCK_HXTAL)
+  85:system_gd32e10x.c **** uint32_t SystemCoreClock = __SYSTEM_CLOCK_HXTAL;
+  86:system_gd32e10x.c **** static void system_clock_hxtal(void);
+  87:system_gd32e10x.c **** #elif defined (__SYSTEM_CLOCK_48M_PLL_HXTAL)
+ARM GAS  /tmp/ccTRedY2.s 			page 3
+
+
+  88:system_gd32e10x.c **** uint32_t SystemCoreClock = __SYSTEM_CLOCK_48M_PLL_HXTAL;
+  89:system_gd32e10x.c **** static void system_clock_48m_hxtal(void);
+  90:system_gd32e10x.c **** #elif defined (__SYSTEM_CLOCK_72M_PLL_HXTAL)
+  91:system_gd32e10x.c **** uint32_t SystemCoreClock = __SYSTEM_CLOCK_72M_PLL_HXTAL;
+  92:system_gd32e10x.c **** static void system_clock_72m_hxtal(void);
+  93:system_gd32e10x.c **** #elif defined (__SYSTEM_CLOCK_108M_PLL_HXTAL)
+  94:system_gd32e10x.c **** uint32_t SystemCoreClock = __SYSTEM_CLOCK_108M_PLL_HXTAL;
+  95:system_gd32e10x.c **** static void system_clock_108m_hxtal(void);
+  96:system_gd32e10x.c **** #elif defined (__SYSTEM_CLOCK_120M_PLL_HXTAL)
+  97:system_gd32e10x.c **** uint32_t SystemCoreClock = __SYSTEM_CLOCK_120M_PLL_HXTAL;
+  98:system_gd32e10x.c **** static void system_clock_120m_hxtal(void);
+  99:system_gd32e10x.c **** #endif /* __SYSTEM_CLOCK_IRC8M */
+ 100:system_gd32e10x.c **** 
+ 101:system_gd32e10x.c **** /* configure the system clock */
+ 102:system_gd32e10x.c **** static void system_clock_config(void);
+ 103:system_gd32e10x.c **** 
+ 104:system_gd32e10x.c **** /*!
+ 105:system_gd32e10x.c ****     \brief      setup the microcontroller system, initialize the system
+ 106:system_gd32e10x.c ****     \param[in]  none
+ 107:system_gd32e10x.c ****     \param[out] none
+ 108:system_gd32e10x.c ****     \retval     none
+ 109:system_gd32e10x.c **** */
+ 110:system_gd32e10x.c **** void SystemInit (void)
+ 111:system_gd32e10x.c **** {
+  29              		.loc 1 111 1 view -0
+  30              		.cfi_startproc
+  31              		@ args = 0, pretend = 0, frame = 0
+  32              		@ frame_needed = 0, uses_anonymous_args = 0
+  33 0000 08B5     		push	{r3, lr}
+  34              		.cfi_def_cfa_offset 8
+  35              		.cfi_offset 3, -8
+  36              		.cfi_offset 14, -4
+ 112:system_gd32e10x.c ****   /* FPU settings */
+ 113:system_gd32e10x.c **** #if (__FPU_PRESENT == 1) && (__FPU_USED == 1)
+ 114:system_gd32e10x.c ****     SCB->CPACR |= ((3UL << 10*2)|(3UL << 11*2));  /* set CP10 and CP11 Full Access */
+  37              		.loc 1 114 5 view .LVU1
+  38              		.loc 1 114 16 is_stmt 0 view .LVU2
+  39 0002 344A     		ldr	r2, .L12
+  40 0004 D2F88830 		ldr	r3, [r2, #136]
+  41 0008 43F47003 		orr	r3, r3, #15728640
+  42 000c C2F88830 		str	r3, [r2, #136]
+ 115:system_gd32e10x.c **** #endif
+ 116:system_gd32e10x.c ****     /* reset the RCU clock configuration to the default reset state */
+ 117:system_gd32e10x.c ****     /* Set IRC8MEN bit */
+ 118:system_gd32e10x.c ****     RCU_CTL |= RCU_CTL_IRC8MEN;
+  43              		.loc 1 118 5 is_stmt 1 view .LVU3
+  44              		.loc 1 118 13 is_stmt 0 view .LVU4
+  45 0010 314B     		ldr	r3, .L12+4
+  46 0012 1A68     		ldr	r2, [r3]
+  47 0014 42F00102 		orr	r2, r2, #1
+  48 0018 1A60     		str	r2, [r3]
+ 119:system_gd32e10x.c **** 
+ 120:system_gd32e10x.c ****     /* Reset CFG0 and CFG1 registers */
+ 121:system_gd32e10x.c ****     RCU_CFG0 = 0x00000000U;
+  49              		.loc 1 121 5 is_stmt 1 view .LVU5
+  50              		.loc 1 121 14 is_stmt 0 view .LVU6
+  51 001a 0022     		movs	r2, #0
+ARM GAS  /tmp/ccTRedY2.s 			page 4
+
+
+  52 001c 5A60     		str	r2, [r3, #4]
+ 122:system_gd32e10x.c ****     RCU_CFG1 = 0x00000000U;
+  53              		.loc 1 122 5 is_stmt 1 view .LVU7
+  54              		.loc 1 122 14 is_stmt 0 view .LVU8
+  55 001e DA62     		str	r2, [r3, #44]
+ 123:system_gd32e10x.c **** 
+ 124:system_gd32e10x.c ****     /* Reset HXTALEN, CKMEN, PLLEN, PLL1EN and PLL2EN bits */
+ 125:system_gd32e10x.c ****     RCU_CTL &= ~(RCU_CTL_PLLEN |RCU_CTL_PLL1EN | RCU_CTL_PLL2EN | RCU_CTL_CKMEN | RCU_CTL_HXTALEN);
+  56              		.loc 1 125 5 is_stmt 1 view .LVU9
+  57              		.loc 1 125 13 is_stmt 0 view .LVU10
+  58 0020 1A68     		ldr	r2, [r3]
+  59 0022 22F0A852 		bic	r2, r2, #352321536
+  60 0026 22F41022 		bic	r2, r2, #589824
+  61 002a 1A60     		str	r2, [r3]
+ 126:system_gd32e10x.c ****     /* disable all interrupts */
+ 127:system_gd32e10x.c ****     RCU_INT = 0x00ff0000U;
+  62              		.loc 1 127 5 is_stmt 1 view .LVU11
+  63              		.loc 1 127 13 is_stmt 0 view .LVU12
+  64 002c 4FF47F02 		mov	r2, #16711680
+  65 0030 9A60     		str	r2, [r3, #8]
+ 128:system_gd32e10x.c **** 
+ 129:system_gd32e10x.c ****     /* reset HXTALBPS bit */
+ 130:system_gd32e10x.c ****     RCU_CTL &= ~(RCU_CTL_HXTALBPS);
+  66              		.loc 1 130 5 is_stmt 1 view .LVU13
+  67              		.loc 1 130 13 is_stmt 0 view .LVU14
+  68 0032 1A68     		ldr	r2, [r3]
+  69 0034 22F48022 		bic	r2, r2, #262144
+  70 0038 1A60     		str	r2, [r3]
+ 131:system_gd32e10x.c **** 
+ 132:system_gd32e10x.c ****     /* configure the system clock source, PLL Multiplier, AHB/APBx prescalers and Flash settings */
+ 133:system_gd32e10x.c ****     system_clock_config();
+  71              		.loc 1 133 5 is_stmt 1 view .LVU15
+  72              	.LBB6:
+  73              	.LBI6:
+ 134:system_gd32e10x.c ****     
+ 135:system_gd32e10x.c **** #ifdef VECT_TAB_SRAM
+ 136:system_gd32e10x.c ****   nvic_vector_table_set(NVIC_VECTTAB_RAM,VECT_TAB_OFFSET);
+ 137:system_gd32e10x.c **** #else
+ 138:system_gd32e10x.c ****   nvic_vector_table_set(NVIC_VECTTAB_FLASH,VECT_TAB_OFFSET);
+ 139:system_gd32e10x.c **** #endif
+ 140:system_gd32e10x.c **** 
+ 141:system_gd32e10x.c **** }
+ 142:system_gd32e10x.c **** 
+ 143:system_gd32e10x.c **** /*!
+ 144:system_gd32e10x.c ****     \brief      configure the system clock
+ 145:system_gd32e10x.c ****     \param[in]  none
+ 146:system_gd32e10x.c ****     \param[out] none
+ 147:system_gd32e10x.c ****     \retval     none
+ 148:system_gd32e10x.c **** */
+ 149:system_gd32e10x.c **** static void system_clock_config(void)
+  74              		.loc 1 149 13 view .LVU16
+  75              	.LBE6:
+ 150:system_gd32e10x.c **** {
+ 151:system_gd32e10x.c **** #ifdef __SYSTEM_CLOCK_IRC8M
+ 152:system_gd32e10x.c ****     system_clock_8m_irc8m();
+ 153:system_gd32e10x.c **** #elif defined (__SYSTEM_CLOCK_48M_PLL_IRC8M)
+ 154:system_gd32e10x.c ****     system_clock_48m_irc8m();
+ARM GAS  /tmp/ccTRedY2.s 			page 5
+
+
+ 155:system_gd32e10x.c **** #elif defined (__SYSTEM_CLOCK_72M_PLL_IRC8M)
+ 156:system_gd32e10x.c ****     system_clock_72m_irc8m();
+ 157:system_gd32e10x.c **** #elif defined (__SYSTEM_CLOCK_108M_PLL_IRC8M)
+ 158:system_gd32e10x.c ****     system_clock_108m_irc8m();
+ 159:system_gd32e10x.c **** #elif defined (__SYSTEM_CLOCK_120M_PLL_IRC8M)
+ 160:system_gd32e10x.c ****     system_clock_120m_irc8m();
+  76              		.loc 1 160 5 view .LVU17
+  77              	.LBB9:
+  78              	.LBB7:
+  79              	.LBI7:
+ 161:system_gd32e10x.c **** 
+ 162:system_gd32e10x.c **** #elif defined (__SYSTEM_CLOCK_HXTAL)
+ 163:system_gd32e10x.c ****     system_clock_hxtal();
+ 164:system_gd32e10x.c **** #elif defined (__SYSTEM_CLOCK_48M_PLL_HXTAL)
+ 165:system_gd32e10x.c ****     system_clock_48m_hxtal();
+ 166:system_gd32e10x.c **** #elif defined (__SYSTEM_CLOCK_72M_PLL_HXTAL)
+ 167:system_gd32e10x.c ****     system_clock_72m_hxtal();
+ 168:system_gd32e10x.c **** #elif defined (__SYSTEM_CLOCK_108M_PLL_HXTAL)
+ 169:system_gd32e10x.c ****     system_clock_108m_hxtal();
+ 170:system_gd32e10x.c **** #elif defined (__SYSTEM_CLOCK_120M_PLL_HXTAL)
+ 171:system_gd32e10x.c ****     system_clock_120m_hxtal();
+ 172:system_gd32e10x.c **** #endif /* __SYSTEM_CLOCK_IRC8M */
+ 173:system_gd32e10x.c **** }
+ 174:system_gd32e10x.c **** 
+ 175:system_gd32e10x.c **** #ifdef __SYSTEM_CLOCK_IRC8M
+ 176:system_gd32e10x.c **** /*!
+ 177:system_gd32e10x.c ****     \brief      configure the system clock to 8M by IRC8M
+ 178:system_gd32e10x.c ****     \param[in]  none
+ 179:system_gd32e10x.c ****     \param[out] none
+ 180:system_gd32e10x.c ****     \retval     none
+ 181:system_gd32e10x.c **** */
+ 182:system_gd32e10x.c **** static void system_clock_8m_irc8m(void)
+ 183:system_gd32e10x.c **** {
+ 184:system_gd32e10x.c ****     uint32_t timeout = 0U;
+ 185:system_gd32e10x.c ****     uint32_t stab_flag = 0U;
+ 186:system_gd32e10x.c ****     
+ 187:system_gd32e10x.c ****     /* enable IRC8M */
+ 188:system_gd32e10x.c ****     RCU_CTL |= RCU_CTL_IRC8MEN;
+ 189:system_gd32e10x.c ****     
+ 190:system_gd32e10x.c ****     /* wait until IRC8M is stable or the startup time is longer than IRC8M_STARTUP_TIMEOUT */
+ 191:system_gd32e10x.c ****     do{
+ 192:system_gd32e10x.c ****         timeout++;
+ 193:system_gd32e10x.c ****         stab_flag = (RCU_CTL & RCU_CTL_IRC8MSTB);
+ 194:system_gd32e10x.c ****     }
+ 195:system_gd32e10x.c ****     while((0U == stab_flag) && (IRC8M_STARTUP_TIMEOUT != timeout));
+ 196:system_gd32e10x.c ****     
+ 197:system_gd32e10x.c ****     /* if fail */
+ 198:system_gd32e10x.c ****     if(0U == (RCU_CTL & RCU_CTL_IRC8MSTB)){
+ 199:system_gd32e10x.c ****         while(1){
+ 200:system_gd32e10x.c ****         }
+ 201:system_gd32e10x.c ****     }
+ 202:system_gd32e10x.c ****     
+ 203:system_gd32e10x.c ****     /* AHB = SYSCLK */
+ 204:system_gd32e10x.c ****     RCU_CFG0 |= RCU_AHB_CKSYS_DIV1;
+ 205:system_gd32e10x.c ****     /* APB2 = AHB/1 */
+ 206:system_gd32e10x.c ****     RCU_CFG0 |= RCU_APB2_CKAHB_DIV1;
+ 207:system_gd32e10x.c ****     /* APB1 = AHB/2 */
+ARM GAS  /tmp/ccTRedY2.s 			page 6
+
+
+ 208:system_gd32e10x.c ****     RCU_CFG0 |= RCU_APB1_CKAHB_DIV2;
+ 209:system_gd32e10x.c ****     
+ 210:system_gd32e10x.c ****     /* select IRC8M as system clock */
+ 211:system_gd32e10x.c ****     RCU_CFG0 &= ~RCU_CFG0_SCS;
+ 212:system_gd32e10x.c ****     RCU_CFG0 |= RCU_CKSYSSRC_IRC8M;
+ 213:system_gd32e10x.c ****     
+ 214:system_gd32e10x.c ****     /* wait until IRC8M is selected as system clock */
+ 215:system_gd32e10x.c ****     while(0U != (RCU_CFG0 & RCU_SCSS_IRC8M)){
+ 216:system_gd32e10x.c ****     }
+ 217:system_gd32e10x.c **** }
+ 218:system_gd32e10x.c **** 
+ 219:system_gd32e10x.c **** #elif defined (__SYSTEM_CLOCK_48M_PLL_IRC8M)
+ 220:system_gd32e10x.c **** /*!
+ 221:system_gd32e10x.c ****     \brief      configure the system clock to 48M by PLL which selects IRC8M as its clock source
+ 222:system_gd32e10x.c ****     \param[in]  none
+ 223:system_gd32e10x.c ****     \param[out] none
+ 224:system_gd32e10x.c ****     \retval     none
+ 225:system_gd32e10x.c **** */
+ 226:system_gd32e10x.c **** static void system_clock_48m_irc8m(void)
+ 227:system_gd32e10x.c **** {
+ 228:system_gd32e10x.c ****     uint32_t timeout = 0U;
+ 229:system_gd32e10x.c ****     uint32_t stab_flag = 0U;
+ 230:system_gd32e10x.c ****     
+ 231:system_gd32e10x.c ****     /* enable IRC8M */
+ 232:system_gd32e10x.c ****     RCU_CTL |= RCU_CTL_IRC8MEN;
+ 233:system_gd32e10x.c **** 
+ 234:system_gd32e10x.c ****     /* wait until IRC8M is stable or the startup time is longer than IRC8M_STARTUP_TIMEOUT */
+ 235:system_gd32e10x.c ****     do{
+ 236:system_gd32e10x.c ****         timeout++;
+ 237:system_gd32e10x.c ****         stab_flag = (RCU_CTL & RCU_CTL_IRC8MSTB);
+ 238:system_gd32e10x.c ****     }
+ 239:system_gd32e10x.c ****     while((0U == stab_flag) && (IRC8M_STARTUP_TIMEOUT != timeout));
+ 240:system_gd32e10x.c **** 
+ 241:system_gd32e10x.c ****     /* if fail */
+ 242:system_gd32e10x.c ****     if(0U == (RCU_CTL & RCU_CTL_IRC8MSTB)){
+ 243:system_gd32e10x.c ****       while(1){
+ 244:system_gd32e10x.c ****       }
+ 245:system_gd32e10x.c ****     }
+ 246:system_gd32e10x.c **** 
+ 247:system_gd32e10x.c ****     FMC_WS = (FMC_WS & (~FMC_WS_WSCNT)) | FMC_WAIT_STATE_1;
+ 248:system_gd32e10x.c **** 
+ 249:system_gd32e10x.c ****     /* IRC8M is stable */
+ 250:system_gd32e10x.c ****     /* AHB = SYSCLK */
+ 251:system_gd32e10x.c ****     RCU_CFG0 |= RCU_AHB_CKSYS_DIV1;
+ 252:system_gd32e10x.c ****     /* APB2 = AHB/1 */
+ 253:system_gd32e10x.c ****     RCU_CFG0 |= RCU_APB2_CKAHB_DIV1;
+ 254:system_gd32e10x.c ****     /* APB1 = AHB/2 */
+ 255:system_gd32e10x.c ****     RCU_CFG0 |= RCU_APB1_CKAHB_DIV2;
+ 256:system_gd32e10x.c **** 
+ 257:system_gd32e10x.c ****     /* CK_PLL = (CK_IRC8M/2) * 12 = 48 MHz */
+ 258:system_gd32e10x.c ****     RCU_CFG0 &= ~(RCU_CFG0_PLLMF | RCU_CFG0_PLLMF_4);
+ 259:system_gd32e10x.c ****     RCU_CFG0 |= RCU_PLL_MUL12;
+ 260:system_gd32e10x.c **** 
+ 261:system_gd32e10x.c ****     /* enable PLL */
+ 262:system_gd32e10x.c ****     RCU_CTL |= RCU_CTL_PLLEN;
+ 263:system_gd32e10x.c **** 
+ 264:system_gd32e10x.c ****     /* wait until PLL is stable */
+ARM GAS  /tmp/ccTRedY2.s 			page 7
+
+
+ 265:system_gd32e10x.c ****     while(0U == (RCU_CTL & RCU_CTL_PLLSTB)){
+ 266:system_gd32e10x.c ****     }
+ 267:system_gd32e10x.c **** 
+ 268:system_gd32e10x.c ****     /* select PLL as system clock */
+ 269:system_gd32e10x.c ****     RCU_CFG0 &= ~RCU_CFG0_SCS;
+ 270:system_gd32e10x.c ****     RCU_CFG0 |= RCU_CKSYSSRC_PLL;
+ 271:system_gd32e10x.c **** 
+ 272:system_gd32e10x.c ****     /* wait until PLL is selected as system clock */
+ 273:system_gd32e10x.c ****     while(0U == (RCU_CFG0 & RCU_SCSS_PLL)){
+ 274:system_gd32e10x.c ****     }
+ 275:system_gd32e10x.c **** }
+ 276:system_gd32e10x.c **** 
+ 277:system_gd32e10x.c **** #elif defined (__SYSTEM_CLOCK_72M_PLL_IRC8M)
+ 278:system_gd32e10x.c **** /*!
+ 279:system_gd32e10x.c ****     \brief      configure the system clock to 72M by PLL which selects IRC8M as its clock source
+ 280:system_gd32e10x.c ****     \param[in]  none
+ 281:system_gd32e10x.c ****     \param[out] none
+ 282:system_gd32e10x.c ****     \retval     none
+ 283:system_gd32e10x.c **** */
+ 284:system_gd32e10x.c **** static void system_clock_72m_irc8m(void)
+ 285:system_gd32e10x.c **** {
+ 286:system_gd32e10x.c ****     uint32_t timeout = 0U;
+ 287:system_gd32e10x.c ****     uint32_t stab_flag = 0U;
+ 288:system_gd32e10x.c ****     
+ 289:system_gd32e10x.c ****     /* enable IRC8M */
+ 290:system_gd32e10x.c ****     RCU_CTL |= RCU_CTL_IRC8MEN;
+ 291:system_gd32e10x.c **** 
+ 292:system_gd32e10x.c ****     /* wait until IRC8M is stable or the startup time is longer than IRC8M_STARTUP_TIMEOUT */
+ 293:system_gd32e10x.c ****     do{
+ 294:system_gd32e10x.c ****         timeout++;
+ 295:system_gd32e10x.c ****         stab_flag = (RCU_CTL & RCU_CTL_IRC8MSTB);
+ 296:system_gd32e10x.c ****     }while((0U == stab_flag) && (IRC8M_STARTUP_TIMEOUT != timeout));
+ 297:system_gd32e10x.c **** 
+ 298:system_gd32e10x.c ****     /* if fail */
+ 299:system_gd32e10x.c ****     if(0U == (RCU_CTL & RCU_CTL_IRC8MSTB)){
+ 300:system_gd32e10x.c ****         while(1){
+ 301:system_gd32e10x.c ****         }
+ 302:system_gd32e10x.c ****     }
+ 303:system_gd32e10x.c ****     
+ 304:system_gd32e10x.c ****     FMC_WS = (FMC_WS & (~FMC_WS_WSCNT)) | FMC_WAIT_STATE_2;
+ 305:system_gd32e10x.c ****     
+ 306:system_gd32e10x.c ****     /* IRC8M is stable */
+ 307:system_gd32e10x.c ****     /* AHB = SYSCLK */
+ 308:system_gd32e10x.c ****     RCU_CFG0 |= RCU_AHB_CKSYS_DIV1;
+ 309:system_gd32e10x.c ****     /* APB2 = AHB/1 */
+ 310:system_gd32e10x.c ****     RCU_CFG0 |= RCU_APB2_CKAHB_DIV1;
+ 311:system_gd32e10x.c ****     /* APB1 = AHB/2 */
+ 312:system_gd32e10x.c ****     RCU_CFG0 |= RCU_APB1_CKAHB_DIV2;
+ 313:system_gd32e10x.c **** 
+ 314:system_gd32e10x.c ****     /* CK_PLL = (CK_IRC8M/2) * 18 = 72 MHz */
+ 315:system_gd32e10x.c ****     RCU_CFG0 &= ~(RCU_CFG0_PLLMF | RCU_CFG0_PLLMF_4);
+ 316:system_gd32e10x.c ****     RCU_CFG0 |= RCU_PLL_MUL18;
+ 317:system_gd32e10x.c **** 
+ 318:system_gd32e10x.c ****     /* enable PLL */
+ 319:system_gd32e10x.c ****     RCU_CTL |= RCU_CTL_PLLEN;
+ 320:system_gd32e10x.c **** 
+ 321:system_gd32e10x.c ****     /* wait until PLL is stable */
+ARM GAS  /tmp/ccTRedY2.s 			page 8
+
+
+ 322:system_gd32e10x.c ****     while(0U == (RCU_CTL & RCU_CTL_PLLSTB)){
+ 323:system_gd32e10x.c ****     }
+ 324:system_gd32e10x.c **** 
+ 325:system_gd32e10x.c ****     /* select PLL as system clock */
+ 326:system_gd32e10x.c ****     RCU_CFG0 &= ~RCU_CFG0_SCS;
+ 327:system_gd32e10x.c ****     RCU_CFG0 |= RCU_CKSYSSRC_PLL;
+ 328:system_gd32e10x.c **** 
+ 329:system_gd32e10x.c ****     /* wait until PLL is selected as system clock */
+ 330:system_gd32e10x.c ****     while(0U == (RCU_CFG0 & RCU_SCSS_PLL)){
+ 331:system_gd32e10x.c ****     }
+ 332:system_gd32e10x.c **** }
+ 333:system_gd32e10x.c **** 
+ 334:system_gd32e10x.c **** #elif defined (__SYSTEM_CLOCK_108M_PLL_IRC8M)
+ 335:system_gd32e10x.c **** /*!
+ 336:system_gd32e10x.c ****     \brief      configure the system clock to 108M by PLL which selects IRC8M as its clock source
+ 337:system_gd32e10x.c ****     \param[in]  none
+ 338:system_gd32e10x.c ****     \param[out] none
+ 339:system_gd32e10x.c ****     \retval     none
+ 340:system_gd32e10x.c **** */
+ 341:system_gd32e10x.c **** static void system_clock_108m_irc8m(void)
+ 342:system_gd32e10x.c **** {
+ 343:system_gd32e10x.c ****     uint32_t timeout = 0U;
+ 344:system_gd32e10x.c ****     uint32_t stab_flag = 0U;
+ 345:system_gd32e10x.c ****     
+ 346:system_gd32e10x.c ****     /* enable IRC8M */
+ 347:system_gd32e10x.c ****     RCU_CTL |= RCU_CTL_IRC8MEN;
+ 348:system_gd32e10x.c **** 
+ 349:system_gd32e10x.c ****     /* wait until IRC8M is stable or the startup time is longer than IRC8M_STARTUP_TIMEOUT */
+ 350:system_gd32e10x.c ****     do{
+ 351:system_gd32e10x.c ****         timeout++;
+ 352:system_gd32e10x.c ****         stab_flag = (RCU_CTL & RCU_CTL_IRC8MSTB);
+ 353:system_gd32e10x.c ****     }while((0U == stab_flag) && (IRC8M_STARTUP_TIMEOUT != timeout));
+ 354:system_gd32e10x.c **** 
+ 355:system_gd32e10x.c ****     /* if fail */
+ 356:system_gd32e10x.c ****     if(0U == (RCU_CTL & RCU_CTL_IRC8MSTB)){
+ 357:system_gd32e10x.c ****         while(1){
+ 358:system_gd32e10x.c ****         }
+ 359:system_gd32e10x.c ****     }
+ 360:system_gd32e10x.c **** 
+ 361:system_gd32e10x.c ****     FMC_WS = (FMC_WS & (~FMC_WS_WSCNT)) | FMC_WAIT_STATE_3;
+ 362:system_gd32e10x.c ****     
+ 363:system_gd32e10x.c ****     /* IRC8M is stable */
+ 364:system_gd32e10x.c ****     /* AHB = SYSCLK */
+ 365:system_gd32e10x.c ****     RCU_CFG0 |= RCU_AHB_CKSYS_DIV1;
+ 366:system_gd32e10x.c ****     /* APB2 = AHB/1 */
+ 367:system_gd32e10x.c ****     RCU_CFG0 |= RCU_APB2_CKAHB_DIV1;
+ 368:system_gd32e10x.c ****     /* APB1 = AHB/2 */
+ 369:system_gd32e10x.c ****     RCU_CFG0 |= RCU_APB1_CKAHB_DIV2;
+ 370:system_gd32e10x.c **** 
+ 371:system_gd32e10x.c ****     /* CK_PLL = (CK_IRC8M/2) * 27 = 108 MHz */
+ 372:system_gd32e10x.c ****     RCU_CFG0 &= ~(RCU_CFG0_PLLMF | RCU_CFG0_PLLMF_4);
+ 373:system_gd32e10x.c ****     RCU_CFG0 |= RCU_PLL_MUL27;
+ 374:system_gd32e10x.c **** 
+ 375:system_gd32e10x.c ****     /* enable PLL */
+ 376:system_gd32e10x.c ****     RCU_CTL |= RCU_CTL_PLLEN;
+ 377:system_gd32e10x.c **** 
+ 378:system_gd32e10x.c ****     /* wait until PLL is stable */
+ARM GAS  /tmp/ccTRedY2.s 			page 9
+
+
+ 379:system_gd32e10x.c ****     while(0U == (RCU_CTL & RCU_CTL_PLLSTB)){
+ 380:system_gd32e10x.c ****     }
+ 381:system_gd32e10x.c **** 
+ 382:system_gd32e10x.c ****     /* select PLL as system clock */
+ 383:system_gd32e10x.c ****     RCU_CFG0 &= ~RCU_CFG0_SCS;
+ 384:system_gd32e10x.c ****     RCU_CFG0 |= RCU_CKSYSSRC_PLL;
+ 385:system_gd32e10x.c **** 
+ 386:system_gd32e10x.c ****     /* wait until PLL is selected as system clock */
+ 387:system_gd32e10x.c ****     while(0U == (RCU_CFG0 & RCU_SCSS_PLL)){
+ 388:system_gd32e10x.c ****     }
+ 389:system_gd32e10x.c **** }
+ 390:system_gd32e10x.c **** 
+ 391:system_gd32e10x.c **** #elif defined (__SYSTEM_CLOCK_120M_PLL_IRC8M)
+ 392:system_gd32e10x.c **** /*!
+ 393:system_gd32e10x.c ****     \brief      configure the system clock to 120M by PLL which selects IRC8M as its clock source
+ 394:system_gd32e10x.c ****     \param[in]  none
+ 395:system_gd32e10x.c ****     \param[out] none
+ 396:system_gd32e10x.c ****     \retval     none
+ 397:system_gd32e10x.c **** */
+ 398:system_gd32e10x.c **** static void system_clock_120m_irc8m(void)
+  80              		.loc 1 398 13 view .LVU18
+  81              	.LBB8:
+ 399:system_gd32e10x.c **** {
+ 400:system_gd32e10x.c ****     uint32_t timeout = 0U;
+  82              		.loc 1 400 5 view .LVU19
+  83              	.LVL0:
+ 401:system_gd32e10x.c ****     uint32_t stab_flag = 0U;
+  84              		.loc 1 401 5 view .LVU20
+ 402:system_gd32e10x.c ****     
+ 403:system_gd32e10x.c ****     /* enable IRC8M */
+ 404:system_gd32e10x.c ****     RCU_CTL |= RCU_CTL_IRC8MEN;
+  85              		.loc 1 404 5 view .LVU21
+  86              		.loc 1 404 13 is_stmt 0 view .LVU22
+  87 003a 1A68     		ldr	r2, [r3]
+  88 003c 42F00102 		orr	r2, r2, #1
+  89 0040 1A60     		str	r2, [r3]
+  90 0042 4FF4A063 		mov	r3, #1280
+ 405:system_gd32e10x.c **** 
+ 406:system_gd32e10x.c ****     /* wait until IRC8M is stable or the startup time is longer than IRC8M_STARTUP_TIMEOUT */
+ 407:system_gd32e10x.c ****     do{
+ 408:system_gd32e10x.c ****         timeout++;
+ 409:system_gd32e10x.c ****         stab_flag = (RCU_CTL & RCU_CTL_IRC8MSTB);
+  91              		.loc 1 409 22 view .LVU23
+  92 0046 2449     		ldr	r1, .L12+4
+  93              	.LVL1:
+  94              	.L3:
+ 407:system_gd32e10x.c ****         timeout++;
+  95              		.loc 1 407 5 is_stmt 1 view .LVU24
+ 408:system_gd32e10x.c ****         stab_flag = (RCU_CTL & RCU_CTL_IRC8MSTB);
+  96              		.loc 1 408 9 view .LVU25
+  97              		.loc 1 409 9 view .LVU26
+  98              		.loc 1 409 22 is_stmt 0 view .LVU27
+  99 0048 0A68     		ldr	r2, [r1]
+ 100              	.LVL2:
+ 410:system_gd32e10x.c ****     }while((0U == stab_flag) && (IRC8M_STARTUP_TIMEOUT != timeout));
+ 101              		.loc 1 410 11 is_stmt 1 view .LVU28
+ 102              		.loc 1 410 5 is_stmt 0 view .LVU29
+ARM GAS  /tmp/ccTRedY2.s 			page 10
+
+
+ 103 004a 12F0020F 		tst	r2, #2
+ 104 004e 01D1     		bne	.L2
+ 105              		.loc 1 410 30 view .LVU30
+ 106 0050 013B     		subs	r3, r3, #1
+ 107              	.LVL3:
+ 108              		.loc 1 410 30 view .LVU31
+ 109 0052 F9D1     		bne	.L3
+ 110              	.LVL4:
+ 111              	.L2:
+ 411:system_gd32e10x.c **** 
+ 412:system_gd32e10x.c ****     /* if fail */
+ 413:system_gd32e10x.c ****     if(0U == (RCU_CTL & RCU_CTL_IRC8MSTB)){
+ 112              		.loc 1 413 5 is_stmt 1 view .LVU32
+ 113              		.loc 1 413 15 is_stmt 0 view .LVU33
+ 114 0054 204B     		ldr	r3, .L12+4
+ 115 0056 1B68     		ldr	r3, [r3]
+ 116              		.loc 1 413 7 view .LVU34
+ 117 0058 13F0020F 		tst	r3, #2
+ 118 005c 00D1     		bne	.L4
+ 119              	.L5:
+ 414:system_gd32e10x.c ****         while(1){
+ 120              		.loc 1 414 9 is_stmt 1 view .LVU35
+ 415:system_gd32e10x.c ****         }
+ 121              		.loc 1 415 9 view .LVU36
+ 414:system_gd32e10x.c ****         while(1){
+ 122              		.loc 1 414 14 view .LVU37
+ 123 005e FEE7     		b	.L5
+ 124              	.L4:
+ 416:system_gd32e10x.c ****     }
+ 417:system_gd32e10x.c ****     
+ 418:system_gd32e10x.c ****     FMC_WS = (FMC_WS & (~FMC_WS_WSCNT)) | FMC_WAIT_STATE_3;
+ 125              		.loc 1 418 5 view .LVU38
+ 126              		.loc 1 418 15 is_stmt 0 view .LVU39
+ 127 0060 1E4A     		ldr	r2, .L12+8
+ 128              	.LVL5:
+ 129              		.loc 1 418 15 view .LVU40
+ 130 0062 1368     		ldr	r3, [r2]
+ 131              		.loc 1 418 22 view .LVU41
+ 132 0064 23F00703 		bic	r3, r3, #7
+ 133              		.loc 1 418 41 view .LVU42
+ 134 0068 43F00303 		orr	r3, r3, #3
+ 135              		.loc 1 418 12 view .LVU43
+ 136 006c 1360     		str	r3, [r2]
+ 419:system_gd32e10x.c ****     
+ 420:system_gd32e10x.c ****     /* IRC8M is stable */
+ 421:system_gd32e10x.c ****     /* AHB = SYSCLK */
+ 422:system_gd32e10x.c ****     RCU_CFG0 |= RCU_AHB_CKSYS_DIV1;
+ 137              		.loc 1 422 5 is_stmt 1 view .LVU44
+ 138              		.loc 1 422 14 is_stmt 0 view .LVU45
+ 139 006e 1A4B     		ldr	r3, .L12+4
+ 140 0070 5A68     		ldr	r2, [r3, #4]
+ 141 0072 5A60     		str	r2, [r3, #4]
+ 423:system_gd32e10x.c ****     /* APB2 = AHB/1 */
+ 424:system_gd32e10x.c ****     RCU_CFG0 |= RCU_APB2_CKAHB_DIV1;
+ 142              		.loc 1 424 5 is_stmt 1 view .LVU46
+ 143              		.loc 1 424 14 is_stmt 0 view .LVU47
+ 144 0074 5A68     		ldr	r2, [r3, #4]
+ARM GAS  /tmp/ccTRedY2.s 			page 11
+
+
+ 145 0076 5A60     		str	r2, [r3, #4]
+ 425:system_gd32e10x.c ****     /* APB1 = AHB/2 */
+ 426:system_gd32e10x.c ****     RCU_CFG0 |= RCU_APB1_CKAHB_DIV2;
+ 146              		.loc 1 426 5 is_stmt 1 view .LVU48
+ 147              		.loc 1 426 14 is_stmt 0 view .LVU49
+ 148 0078 5A68     		ldr	r2, [r3, #4]
+ 149 007a 42F48062 		orr	r2, r2, #1024
+ 150 007e 5A60     		str	r2, [r3, #4]
+ 427:system_gd32e10x.c **** 
+ 428:system_gd32e10x.c ****     /* CK_PLL = (CK_IRC8M/2) * 30 = 120 MHz */
+ 429:system_gd32e10x.c ****     RCU_CFG0 &= ~(RCU_CFG0_PLLMF | RCU_CFG0_PLLMF_4);
+ 151              		.loc 1 429 5 is_stmt 1 view .LVU50
+ 152              		.loc 1 429 14 is_stmt 0 view .LVU51
+ 153 0080 5A68     		ldr	r2, [r3, #4]
+ 154 0082 22F00052 		bic	r2, r2, #536870912
+ 155 0086 22F47012 		bic	r2, r2, #3932160
+ 156 008a 5A60     		str	r2, [r3, #4]
+ 430:system_gd32e10x.c ****     RCU_CFG0 |= RCU_PLL_MUL30;
+ 157              		.loc 1 430 5 is_stmt 1 view .LVU52
+ 158              		.loc 1 430 14 is_stmt 0 view .LVU53
+ 159 008c 5A68     		ldr	r2, [r3, #4]
+ 160 008e 42F00052 		orr	r2, r2, #536870912
+ 161 0092 42F45012 		orr	r2, r2, #3407872
+ 162 0096 5A60     		str	r2, [r3, #4]
+ 431:system_gd32e10x.c **** 
+ 432:system_gd32e10x.c ****     /* enable PLL */
+ 433:system_gd32e10x.c ****     RCU_CTL |= RCU_CTL_PLLEN;
+ 163              		.loc 1 433 5 is_stmt 1 view .LVU54
+ 164              		.loc 1 433 13 is_stmt 0 view .LVU55
+ 165 0098 1A68     		ldr	r2, [r3]
+ 166 009a 42F08072 		orr	r2, r2, #16777216
+ 167 009e 1A60     		str	r2, [r3]
+ 434:system_gd32e10x.c **** 
+ 435:system_gd32e10x.c ****     /* wait until PLL is stable */
+ 436:system_gd32e10x.c ****     while(0U == (RCU_CTL & RCU_CTL_PLLSTB)){
+ 168              		.loc 1 436 5 is_stmt 1 view .LVU56
+ 169              		.loc 1 436 18 is_stmt 0 view .LVU57
+ 170 00a0 1A46     		mov	r2, r3
+ 171              	.L6:
+ 437:system_gd32e10x.c ****     }
+ 172              		.loc 1 437 5 is_stmt 1 view .LVU58
+ 436:system_gd32e10x.c ****     }
+ 173              		.loc 1 436 10 view .LVU59
+ 436:system_gd32e10x.c ****     }
+ 174              		.loc 1 436 18 is_stmt 0 view .LVU60
+ 175 00a2 1368     		ldr	r3, [r2]
+ 436:system_gd32e10x.c ****     }
+ 176              		.loc 1 436 10 view .LVU61
+ 177 00a4 13F0007F 		tst	r3, #33554432
+ 178 00a8 FBD0     		beq	.L6
+ 438:system_gd32e10x.c **** 
+ 439:system_gd32e10x.c ****     /* select PLL as system clock */
+ 440:system_gd32e10x.c ****     RCU_CFG0 &= ~RCU_CFG0_SCS;
+ 179              		.loc 1 440 5 is_stmt 1 view .LVU62
+ 180              		.loc 1 440 14 is_stmt 0 view .LVU63
+ 181 00aa 0B4B     		ldr	r3, .L12+4
+ 182 00ac 5A68     		ldr	r2, [r3, #4]
+ARM GAS  /tmp/ccTRedY2.s 			page 12
+
+
+ 183 00ae 22F00302 		bic	r2, r2, #3
+ 184 00b2 5A60     		str	r2, [r3, #4]
+ 441:system_gd32e10x.c ****     RCU_CFG0 |= RCU_CKSYSSRC_PLL;
+ 185              		.loc 1 441 5 is_stmt 1 view .LVU64
+ 186              		.loc 1 441 14 is_stmt 0 view .LVU65
+ 187 00b4 5A68     		ldr	r2, [r3, #4]
+ 188 00b6 42F00202 		orr	r2, r2, #2
+ 189 00ba 5A60     		str	r2, [r3, #4]
+ 442:system_gd32e10x.c **** 
+ 443:system_gd32e10x.c ****     /* wait until PLL is selected as system clock */
+ 444:system_gd32e10x.c ****     while(0U == (RCU_CFG0 & RCU_SCSS_PLL)){
+ 190              		.loc 1 444 5 is_stmt 1 view .LVU66
+ 191              		.loc 1 444 18 is_stmt 0 view .LVU67
+ 192 00bc 1A46     		mov	r2, r3
+ 193              	.L7:
+ 445:system_gd32e10x.c ****     }
+ 194              		.loc 1 445 5 is_stmt 1 view .LVU68
+ 444:system_gd32e10x.c ****     }
+ 195              		.loc 1 444 10 view .LVU69
+ 444:system_gd32e10x.c ****     }
+ 196              		.loc 1 444 18 is_stmt 0 view .LVU70
+ 197 00be 5368     		ldr	r3, [r2, #4]
+ 444:system_gd32e10x.c ****     }
+ 198              		.loc 1 444 10 view .LVU71
+ 199 00c0 13F0080F 		tst	r3, #8
+ 200 00c4 FBD0     		beq	.L7
+ 444:system_gd32e10x.c ****     }
+ 201              		.loc 1 444 10 view .LVU72
+ 202              	.LBE8:
+ 203              	.LBE7:
+ 204              	.LBE9:
+ 138:system_gd32e10x.c **** #endif
+ 205              		.loc 1 138 3 is_stmt 1 view .LVU73
+ 206 00c6 0021     		movs	r1, #0
+ 207 00c8 4FF00060 		mov	r0, #134217728
+ 208 00cc FFF7FEFF 		bl	nvic_vector_table_set
+ 209              	.LVL6:
+ 141:system_gd32e10x.c **** 
+ 210              		.loc 1 141 1 is_stmt 0 view .LVU74
+ 211 00d0 08BD     		pop	{r3, pc}
+ 212              	.L13:
+ 213 00d2 00BF     		.align	2
+ 214              	.L12:
+ 215 00d4 00ED00E0 		.word	-536810240
+ 216 00d8 00100240 		.word	1073876992
+ 217 00dc 00200240 		.word	1073881088
+ 218              		.cfi_endproc
+ 219              	.LFE116:
+ 221              		.section	.text.SystemCoreClockUpdate,"ax",%progbits
+ 222              		.align	1
+ 223              		.global	SystemCoreClockUpdate
+ 224              		.syntax unified
+ 225              		.thumb
+ 226              		.thumb_func
+ 227              		.fpu fpv4-sp-d16
+ 229              	SystemCoreClockUpdate:
+ 230              	.LFB119:
+ARM GAS  /tmp/ccTRedY2.s 			page 13
+
+
+ 446:system_gd32e10x.c **** }
+ 447:system_gd32e10x.c **** 
+ 448:system_gd32e10x.c **** #elif defined (__SYSTEM_CLOCK_HXTAL)
+ 449:system_gd32e10x.c **** /*!
+ 450:system_gd32e10x.c ****     \brief      configure the system clock to HXTAL
+ 451:system_gd32e10x.c ****     \param[in]  none
+ 452:system_gd32e10x.c ****     \param[out] none
+ 453:system_gd32e10x.c ****     \retval     none
+ 454:system_gd32e10x.c **** */
+ 455:system_gd32e10x.c **** static void system_clock_hxtal(void)
+ 456:system_gd32e10x.c **** {
+ 457:system_gd32e10x.c ****     uint32_t timeout = 0U;
+ 458:system_gd32e10x.c ****     uint32_t stab_flag = 0U;
+ 459:system_gd32e10x.c ****     
+ 460:system_gd32e10x.c ****     /* enable HXTAL */
+ 461:system_gd32e10x.c ****     RCU_CTL |= RCU_CTL_HXTALEN;
+ 462:system_gd32e10x.c ****     
+ 463:system_gd32e10x.c ****     /* wait until HXTAL is stable or the startup time is longer than HXTAL_STARTUP_TIMEOUT */
+ 464:system_gd32e10x.c ****     do{
+ 465:system_gd32e10x.c ****         timeout++;
+ 466:system_gd32e10x.c ****         stab_flag = (RCU_CTL & RCU_CTL_HXTALSTB);
+ 467:system_gd32e10x.c ****     }while((0U == stab_flag) && (HXTAL_STARTUP_TIMEOUT != timeout));
+ 468:system_gd32e10x.c ****     
+ 469:system_gd32e10x.c ****     /* if fail */
+ 470:system_gd32e10x.c ****     if(0U == (RCU_CTL & RCU_CTL_HXTALSTB)){
+ 471:system_gd32e10x.c ****         while(1){
+ 472:system_gd32e10x.c ****         }
+ 473:system_gd32e10x.c ****     }
+ 474:system_gd32e10x.c ****     
+ 475:system_gd32e10x.c ****     /* AHB = SYSCLK */
+ 476:system_gd32e10x.c ****     RCU_CFG0 |= RCU_AHB_CKSYS_DIV1;
+ 477:system_gd32e10x.c ****     /* APB2 = AHB/1 */
+ 478:system_gd32e10x.c ****     RCU_CFG0 |= RCU_APB2_CKAHB_DIV1;
+ 479:system_gd32e10x.c ****     /* APB1 = AHB/2 */
+ 480:system_gd32e10x.c ****     RCU_CFG0 |= RCU_APB1_CKAHB_DIV2;
+ 481:system_gd32e10x.c ****     
+ 482:system_gd32e10x.c ****     /* select HXTAL as system clock */
+ 483:system_gd32e10x.c ****     RCU_CFG0 &= ~RCU_CFG0_SCS;
+ 484:system_gd32e10x.c ****     RCU_CFG0 |= RCU_CKSYSSRC_HXTAL;
+ 485:system_gd32e10x.c ****     
+ 486:system_gd32e10x.c ****     /* wait until HXTAL is selected as system clock */
+ 487:system_gd32e10x.c ****     while(0 == (RCU_CFG0 & RCU_SCSS_HXTAL)){
+ 488:system_gd32e10x.c ****     }
+ 489:system_gd32e10x.c **** }
+ 490:system_gd32e10x.c **** 
+ 491:system_gd32e10x.c **** #elif defined (__SYSTEM_CLOCK_48M_PLL_HXTAL)
+ 492:system_gd32e10x.c **** /*!
+ 493:system_gd32e10x.c ****     \brief      configure the system clock to 48M by PLL which selects HXTAL(8M) as its clock sourc
+ 494:system_gd32e10x.c ****     \param[in]  none
+ 495:system_gd32e10x.c ****     \param[out] none
+ 496:system_gd32e10x.c ****     \retval     none
+ 497:system_gd32e10x.c **** */
+ 498:system_gd32e10x.c **** static void system_clock_48m_hxtal(void)
+ 499:system_gd32e10x.c **** {
+ 500:system_gd32e10x.c ****     uint32_t timeout = 0U;
+ 501:system_gd32e10x.c ****     uint32_t stab_flag = 0U;
+ 502:system_gd32e10x.c **** 
+ARM GAS  /tmp/ccTRedY2.s 			page 14
+
+
+ 503:system_gd32e10x.c ****     /* enable HXTAL */
+ 504:system_gd32e10x.c ****     RCU_CTL |= RCU_CTL_HXTALEN;
+ 505:system_gd32e10x.c **** 
+ 506:system_gd32e10x.c ****     /* wait until HXTAL is stable or the startup time is longer than HXTAL_STARTUP_TIMEOUT */
+ 507:system_gd32e10x.c ****     do{
+ 508:system_gd32e10x.c ****         timeout++;
+ 509:system_gd32e10x.c ****         stab_flag = (RCU_CTL & RCU_CTL_HXTALSTB);
+ 510:system_gd32e10x.c ****     }while((0U == stab_flag) && (HXTAL_STARTUP_TIMEOUT != timeout));
+ 511:system_gd32e10x.c **** 
+ 512:system_gd32e10x.c ****     /* if fail */
+ 513:system_gd32e10x.c ****     if(0U == (RCU_CTL & RCU_CTL_HXTALSTB)){
+ 514:system_gd32e10x.c ****         while(1){
+ 515:system_gd32e10x.c ****         }
+ 516:system_gd32e10x.c ****     }
+ 517:system_gd32e10x.c **** 
+ 518:system_gd32e10x.c ****     FMC_WS = (FMC_WS & (~FMC_WS_WSCNT)) | FMC_WAIT_STATE_1;
+ 519:system_gd32e10x.c ****     
+ 520:system_gd32e10x.c ****     /* HXTAL is stable */
+ 521:system_gd32e10x.c ****     /* AHB = SYSCLK */
+ 522:system_gd32e10x.c ****     RCU_CFG0 |= RCU_AHB_CKSYS_DIV1;
+ 523:system_gd32e10x.c ****     /* APB2 = AHB/1 */
+ 524:system_gd32e10x.c ****     RCU_CFG0 |= RCU_APB2_CKAHB_DIV1;
+ 525:system_gd32e10x.c ****     /* APB1 = AHB/2 */
+ 526:system_gd32e10x.c ****     RCU_CFG0 |= RCU_APB1_CKAHB_DIV2;
+ 527:system_gd32e10x.c **** 
+ 528:system_gd32e10x.c ****     /* CK_PLL = (CK_PREDIV0) * 12 = 48 MHz */ 
+ 529:system_gd32e10x.c ****     RCU_CFG0 &= ~(RCU_CFG0_PLLMF | RCU_CFG0_PLLMF_4);
+ 530:system_gd32e10x.c ****     RCU_CFG0 |= (RCU_PLLSRC_HXTAL_IRC48M | RCU_PLL_MUL12);
+ 531:system_gd32e10x.c **** 
+ 532:system_gd32e10x.c ****     RCU_CFG1 &= ~(RCU_CFG1_PLLPRESEL | RCU_CFG1_PREDV0SEL | RCU_CFG1_PLL1MF | RCU_CFG1_PREDV1 | RCU
+ 533:system_gd32e10x.c **** #ifdef HXTAL_VALUE_8M
+ 534:system_gd32e10x.c ****     /* CK_PREDIV0 = (CK_HXTAL)/2 *10 /10 = 4 MHz */ 
+ 535:system_gd32e10x.c ****     RCU_CFG1 |= (RCU_PLLPRESRC_HXTAL | RCU_PREDV0SRC_CKPLL1 | RCU_PLL1_MUL10 | RCU_PREDV1_DIV2 | RC
+ 536:system_gd32e10x.c **** #elif defined (HXTAL_VALUE_25M)
+ 537:system_gd32e10x.c ****     /* CK_PREDIV0 = (CK_HXTAL)/5 *8 /10 = 4 MHz */ 
+ 538:system_gd32e10x.c ****     RCU_CFG1 |= (RCU_PLLPRESRC_HXTAL | RCU_PREDV0SRC_CKPLL1 | RCU_PLL1_MUL8 | RCU_PREDV1_DIV5 | RCU
+ 539:system_gd32e10x.c **** #endif
+ 540:system_gd32e10x.c **** 
+ 541:system_gd32e10x.c ****     /* enable PLL1 */
+ 542:system_gd32e10x.c ****     RCU_CTL |= RCU_CTL_PLL1EN;
+ 543:system_gd32e10x.c ****     /* wait till PLL1 is ready */
+ 544:system_gd32e10x.c ****     while((RCU_CTL & RCU_CTL_PLL1STB) == 0){
+ 545:system_gd32e10x.c ****     }
+ 546:system_gd32e10x.c **** 
+ 547:system_gd32e10x.c ****     /* enable PLL */
+ 548:system_gd32e10x.c ****     RCU_CTL |= RCU_CTL_PLLEN;
+ 549:system_gd32e10x.c **** 
+ 550:system_gd32e10x.c ****     /* wait until PLL is stable */
+ 551:system_gd32e10x.c ****     while(0U == (RCU_CTL & RCU_CTL_PLLSTB)){
+ 552:system_gd32e10x.c ****     }
+ 553:system_gd32e10x.c **** 
+ 554:system_gd32e10x.c ****     /* select PLL as system clock */
+ 555:system_gd32e10x.c ****     RCU_CFG0 &= ~RCU_CFG0_SCS;
+ 556:system_gd32e10x.c ****     RCU_CFG0 |= RCU_CKSYSSRC_PLL;
+ 557:system_gd32e10x.c **** 
+ 558:system_gd32e10x.c ****     /* wait until PLL is selected as system clock */
+ 559:system_gd32e10x.c ****     while(0U == (RCU_CFG0 & RCU_SCSS_PLL)){
+ARM GAS  /tmp/ccTRedY2.s 			page 15
+
+
+ 560:system_gd32e10x.c ****     }
+ 561:system_gd32e10x.c **** }
+ 562:system_gd32e10x.c **** #elif defined (__SYSTEM_CLOCK_72M_PLL_HXTAL)
+ 563:system_gd32e10x.c **** /*!
+ 564:system_gd32e10x.c ****     \brief      configure the system clock to 72M by PLL which selects HXTAL(8M) as its clock sourc
+ 565:system_gd32e10x.c ****     \param[in]  none
+ 566:system_gd32e10x.c ****     \param[out] none
+ 567:system_gd32e10x.c ****     \retval     none
+ 568:system_gd32e10x.c **** */
+ 569:system_gd32e10x.c **** static void system_clock_72m_hxtal(void)
+ 570:system_gd32e10x.c **** {
+ 571:system_gd32e10x.c ****     uint32_t timeout = 0U;
+ 572:system_gd32e10x.c ****     uint32_t stab_flag = 0U;
+ 573:system_gd32e10x.c **** 
+ 574:system_gd32e10x.c ****     /* enable HXTAL */
+ 575:system_gd32e10x.c ****     RCU_CTL |= RCU_CTL_HXTALEN;
+ 576:system_gd32e10x.c **** 
+ 577:system_gd32e10x.c ****     /* wait until HXTAL is stable or the startup time is longer than HXTAL_STARTUP_TIMEOUT */
+ 578:system_gd32e10x.c ****     do{
+ 579:system_gd32e10x.c ****         timeout++;
+ 580:system_gd32e10x.c ****         stab_flag = (RCU_CTL & RCU_CTL_HXTALSTB);
+ 581:system_gd32e10x.c ****     }while((0U == stab_flag) && (HXTAL_STARTUP_TIMEOUT != timeout));
+ 582:system_gd32e10x.c **** 
+ 583:system_gd32e10x.c ****     /* if fail */
+ 584:system_gd32e10x.c ****     if(0U == (RCU_CTL & RCU_CTL_HXTALSTB)){
+ 585:system_gd32e10x.c ****         while(1){
+ 586:system_gd32e10x.c ****         }
+ 587:system_gd32e10x.c ****     }
+ 588:system_gd32e10x.c **** 
+ 589:system_gd32e10x.c ****     FMC_WS = (FMC_WS & (~FMC_WS_WSCNT)) | FMC_WAIT_STATE_2;
+ 590:system_gd32e10x.c ****     
+ 591:system_gd32e10x.c ****     /* HXTAL is stable */
+ 592:system_gd32e10x.c ****     /* AHB = SYSCLK */
+ 593:system_gd32e10x.c ****     RCU_CFG0 |= RCU_AHB_CKSYS_DIV1;
+ 594:system_gd32e10x.c ****     /* APB2 = AHB/1 */
+ 595:system_gd32e10x.c ****     RCU_CFG0 |= RCU_APB2_CKAHB_DIV1;
+ 596:system_gd32e10x.c ****     /* APB1 = AHB/2 */
+ 597:system_gd32e10x.c ****     RCU_CFG0 |= RCU_APB1_CKAHB_DIV2;
+ 598:system_gd32e10x.c **** 
+ 599:system_gd32e10x.c ****     /* CK_PLL = (CK_PREDIV0) * 18 = 72 MHz */ 
+ 600:system_gd32e10x.c ****     RCU_CFG0 &= ~(RCU_CFG0_PLLMF | RCU_CFG0_PLLMF_4);
+ 601:system_gd32e10x.c ****     RCU_CFG0 |= (RCU_PLLSRC_HXTAL_IRC48M | RCU_PLL_MUL18);
+ 602:system_gd32e10x.c **** 
+ 603:system_gd32e10x.c ****     RCU_CFG1 &= ~(RCU_CFG1_PLLPRESEL | RCU_CFG1_PREDV0SEL | RCU_CFG1_PLL1MF | RCU_CFG1_PREDV1 | RCU
+ 604:system_gd32e10x.c **** #ifdef HXTAL_VALUE_8M
+ 605:system_gd32e10x.c ****     /* CK_PREDIV0 = (CK_HXTAL)/2 *10 /10 = 4 MHz */ 
+ 606:system_gd32e10x.c ****     RCU_CFG1 |= (RCU_PLLPRESRC_HXTAL | RCU_PREDV0SRC_CKPLL1 | RCU_PLL1_MUL10 | RCU_PREDV1_DIV2 | RC
+ 607:system_gd32e10x.c **** #elif defined (HXTAL_VALUE_25M)
+ 608:system_gd32e10x.c ****     /* CK_PREDIV0 = (CK_HXTAL)/5 *8 /10 = 4 MHz */ 
+ 609:system_gd32e10x.c ****     RCU_CFG1 |= (RCU_PLLPRESRC_HXTAL | RCU_PREDV0SRC_CKPLL1 | RCU_PLL1_MUL8 | RCU_PREDV1_DIV5 | RCU
+ 610:system_gd32e10x.c **** #endif
+ 611:system_gd32e10x.c **** 
+ 612:system_gd32e10x.c ****     /* enable PLL1 */
+ 613:system_gd32e10x.c ****     RCU_CTL |= RCU_CTL_PLL1EN;
+ 614:system_gd32e10x.c ****     /* wait till PLL1 is ready */
+ 615:system_gd32e10x.c ****     while((RCU_CTL & RCU_CTL_PLL1STB) == 0){
+ 616:system_gd32e10x.c ****     }
+ARM GAS  /tmp/ccTRedY2.s 			page 16
+
+
+ 617:system_gd32e10x.c **** 
+ 618:system_gd32e10x.c ****     /* enable PLL */
+ 619:system_gd32e10x.c ****     RCU_CTL |= RCU_CTL_PLLEN;
+ 620:system_gd32e10x.c **** 
+ 621:system_gd32e10x.c ****     /* wait until PLL is stable */
+ 622:system_gd32e10x.c ****     while(0U == (RCU_CTL & RCU_CTL_PLLSTB)){
+ 623:system_gd32e10x.c ****     }
+ 624:system_gd32e10x.c **** 
+ 625:system_gd32e10x.c ****     /* select PLL as system clock */
+ 626:system_gd32e10x.c ****     RCU_CFG0 &= ~RCU_CFG0_SCS;
+ 627:system_gd32e10x.c ****     RCU_CFG0 |= RCU_CKSYSSRC_PLL;
+ 628:system_gd32e10x.c **** 
+ 629:system_gd32e10x.c ****     /* wait until PLL is selected as system clock */
+ 630:system_gd32e10x.c ****     while(0U == (RCU_CFG0 & RCU_SCSS_PLL)){
+ 631:system_gd32e10x.c ****     }
+ 632:system_gd32e10x.c **** }
+ 633:system_gd32e10x.c **** 
+ 634:system_gd32e10x.c **** #elif defined (__SYSTEM_CLOCK_108M_PLL_HXTAL)
+ 635:system_gd32e10x.c **** /*!
+ 636:system_gd32e10x.c ****     \brief      configure the system clock to 108M by PLL which selects HXTAL(8M) as its clock sour
+ 637:system_gd32e10x.c ****     \param[in]  none
+ 638:system_gd32e10x.c ****     \param[out] none
+ 639:system_gd32e10x.c ****     \retval     none
+ 640:system_gd32e10x.c **** */
+ 641:system_gd32e10x.c **** static void system_clock_108m_hxtal(void)
+ 642:system_gd32e10x.c **** {
+ 643:system_gd32e10x.c ****     uint32_t timeout = 0U;
+ 644:system_gd32e10x.c ****     uint32_t stab_flag = 0U;
+ 645:system_gd32e10x.c **** 
+ 646:system_gd32e10x.c ****     /* enable HXTAL */
+ 647:system_gd32e10x.c ****     RCU_CTL |= RCU_CTL_HXTALEN;
+ 648:system_gd32e10x.c **** 
+ 649:system_gd32e10x.c ****     /* wait until HXTAL is stable or the startup time is longer than HXTAL_STARTUP_TIMEOUT */
+ 650:system_gd32e10x.c ****     do{
+ 651:system_gd32e10x.c ****         timeout++;
+ 652:system_gd32e10x.c ****         stab_flag = (RCU_CTL & RCU_CTL_HXTALSTB);
+ 653:system_gd32e10x.c ****     }while((0U == stab_flag) && (HXTAL_STARTUP_TIMEOUT != timeout));
+ 654:system_gd32e10x.c **** 
+ 655:system_gd32e10x.c ****     /* if fail */
+ 656:system_gd32e10x.c ****     if(0U == (RCU_CTL & RCU_CTL_HXTALSTB)){
+ 657:system_gd32e10x.c ****         while(1){
+ 658:system_gd32e10x.c ****         }
+ 659:system_gd32e10x.c ****     }
+ 660:system_gd32e10x.c **** 
+ 661:system_gd32e10x.c ****     FMC_WS = (FMC_WS & (~FMC_WS_WSCNT)) | FMC_WAIT_STATE_3;
+ 662:system_gd32e10x.c ****     
+ 663:system_gd32e10x.c ****     /* HXTAL is stable */
+ 664:system_gd32e10x.c ****     /* AHB = SYSCLK */
+ 665:system_gd32e10x.c ****     RCU_CFG0 |= RCU_AHB_CKSYS_DIV1;
+ 666:system_gd32e10x.c ****     /* APB2 = AHB/1 */
+ 667:system_gd32e10x.c ****     RCU_CFG0 |= RCU_APB2_CKAHB_DIV1;
+ 668:system_gd32e10x.c ****     /* APB1 = AHB/2 */
+ 669:system_gd32e10x.c ****     RCU_CFG0 |= RCU_APB1_CKAHB_DIV2;
+ 670:system_gd32e10x.c **** 
+ 671:system_gd32e10x.c ****     /* CK_PLL = (CK_PREDIV0) * 27 = 108 MHz */ 
+ 672:system_gd32e10x.c ****     RCU_CFG0 &= ~(RCU_CFG0_PLLMF | RCU_CFG0_PLLMF_4);
+ 673:system_gd32e10x.c ****     RCU_CFG0 |= (RCU_PLLSRC_HXTAL_IRC48M | RCU_PLL_MUL27);
+ARM GAS  /tmp/ccTRedY2.s 			page 17
+
+
+ 674:system_gd32e10x.c **** 
+ 675:system_gd32e10x.c ****     RCU_CFG1 &= ~(RCU_CFG1_PLLPRESEL | RCU_CFG1_PREDV0SEL | RCU_CFG1_PLL1MF | RCU_CFG1_PREDV1 | RCU
+ 676:system_gd32e10x.c **** #ifdef HXTAL_VALUE_8M
+ 677:system_gd32e10x.c ****     /* CK_PREDIV0 = (CK_HXTAL)/2 *10 /10 = 4 MHz */ 
+ 678:system_gd32e10x.c ****     RCU_CFG1 |= (RCU_PLLPRESRC_HXTAL | RCU_PREDV0SRC_CKPLL1 | RCU_PLL1_MUL10 | RCU_PREDV1_DIV2 | RC
+ 679:system_gd32e10x.c **** #elif defined (HXTAL_VALUE_25M)
+ 680:system_gd32e10x.c ****     /* CK_PREDIV0 = (CK_HXTAL)/5 *8 /10 = 4 MHz */ 
+ 681:system_gd32e10x.c ****     RCU_CFG1 |= (RCU_PLLPRESRC_HXTAL | RCU_PREDV0SRC_CKPLL1 | RCU_PLL1_MUL8 | RCU_PREDV1_DIV5 | RCU
+ 682:system_gd32e10x.c **** #endif
+ 683:system_gd32e10x.c ****     /* enable PLL1 */
+ 684:system_gd32e10x.c ****     RCU_CTL |= RCU_CTL_PLL1EN;
+ 685:system_gd32e10x.c ****     /* wait till PLL1 is ready */
+ 686:system_gd32e10x.c ****     while((RCU_CTL & RCU_CTL_PLL1STB) == 0){
+ 687:system_gd32e10x.c ****     }
+ 688:system_gd32e10x.c **** 
+ 689:system_gd32e10x.c ****     /* enable PLL */
+ 690:system_gd32e10x.c ****     RCU_CTL |= RCU_CTL_PLLEN;
+ 691:system_gd32e10x.c **** 
+ 692:system_gd32e10x.c ****     /* wait until PLL is stable */
+ 693:system_gd32e10x.c ****     while(0U == (RCU_CTL & RCU_CTL_PLLSTB)){
+ 694:system_gd32e10x.c ****     }
+ 695:system_gd32e10x.c **** 
+ 696:system_gd32e10x.c ****     /* select PLL as system clock */
+ 697:system_gd32e10x.c ****     RCU_CFG0 &= ~RCU_CFG0_SCS;
+ 698:system_gd32e10x.c ****     RCU_CFG0 |= RCU_CKSYSSRC_PLL;
+ 699:system_gd32e10x.c **** 
+ 700:system_gd32e10x.c ****     /* wait until PLL is selected as system clock */
+ 701:system_gd32e10x.c ****     while(0U == (RCU_CFG0 & RCU_SCSS_PLL)){
+ 702:system_gd32e10x.c ****     }
+ 703:system_gd32e10x.c **** }
+ 704:system_gd32e10x.c **** 
+ 705:system_gd32e10x.c **** #elif defined (__SYSTEM_CLOCK_120M_PLL_HXTAL)
+ 706:system_gd32e10x.c **** /*!
+ 707:system_gd32e10x.c ****     \brief      configure the system clock to 120M by PLL which selects HXTAL(8M) as its clock sour
+ 708:system_gd32e10x.c ****     \param[in]  none
+ 709:system_gd32e10x.c ****     \param[out] none
+ 710:system_gd32e10x.c ****     \retval     none
+ 711:system_gd32e10x.c **** */
+ 712:system_gd32e10x.c **** static void system_clock_120m_hxtal(void)
+ 713:system_gd32e10x.c **** {
+ 714:system_gd32e10x.c ****     uint32_t timeout = 0U;
+ 715:system_gd32e10x.c ****     uint32_t stab_flag = 0U;
+ 716:system_gd32e10x.c **** 
+ 717:system_gd32e10x.c ****     /* enable HXTAL */
+ 718:system_gd32e10x.c ****     RCU_CTL |= RCU_CTL_HXTALEN;
+ 719:system_gd32e10x.c **** 
+ 720:system_gd32e10x.c ****     /* wait until HXTAL is stable or the startup time is longer than HXTAL_STARTUP_TIMEOUT */
+ 721:system_gd32e10x.c ****     do{
+ 722:system_gd32e10x.c ****         timeout++;
+ 723:system_gd32e10x.c ****         stab_flag = (RCU_CTL & RCU_CTL_HXTALSTB);
+ 724:system_gd32e10x.c ****     }while((0U == stab_flag) && (HXTAL_STARTUP_TIMEOUT != timeout));
+ 725:system_gd32e10x.c **** 
+ 726:system_gd32e10x.c ****     /* if fail */
+ 727:system_gd32e10x.c ****     if(0U == (RCU_CTL & RCU_CTL_HXTALSTB)){
+ 728:system_gd32e10x.c ****         while(1){
+ 729:system_gd32e10x.c ****         }
+ 730:system_gd32e10x.c ****     }
+ARM GAS  /tmp/ccTRedY2.s 			page 18
+
+
+ 731:system_gd32e10x.c **** 
+ 732:system_gd32e10x.c ****     FMC_WS = (FMC_WS & (~FMC_WS_WSCNT)) | FMC_WAIT_STATE_3;
+ 733:system_gd32e10x.c ****     
+ 734:system_gd32e10x.c ****     /* HXTAL is stable */
+ 735:system_gd32e10x.c ****     /* AHB = SYSCLK */
+ 736:system_gd32e10x.c ****     RCU_CFG0 |= RCU_AHB_CKSYS_DIV1;
+ 737:system_gd32e10x.c ****     /* APB2 = AHB/1 */
+ 738:system_gd32e10x.c ****     RCU_CFG0 |= RCU_APB2_CKAHB_DIV1;
+ 739:system_gd32e10x.c ****     /* APB1 = AHB/2 */
+ 740:system_gd32e10x.c ****     RCU_CFG0 |= RCU_APB1_CKAHB_DIV2;
+ 741:system_gd32e10x.c **** 
+ 742:system_gd32e10x.c ****     /* CK_PLL = (CK_PREDIV0) * 30 = 120 MHz */ 
+ 743:system_gd32e10x.c ****     RCU_CFG0 &= ~(RCU_CFG0_PLLMF | RCU_CFG0_PLLMF_4);
+ 744:system_gd32e10x.c ****     RCU_CFG0 |= (RCU_PLLSRC_HXTAL_IRC48M | RCU_PLL_MUL30);
+ 745:system_gd32e10x.c **** 
+ 746:system_gd32e10x.c ****     RCU_CFG1 &= ~(RCU_CFG1_PLLPRESEL | RCU_CFG1_PREDV0SEL | RCU_CFG1_PLL1MF | RCU_CFG1_PREDV1 | RCU
+ 747:system_gd32e10x.c **** #ifdef HXTAL_VALUE_8M
+ 748:system_gd32e10x.c ****     /* CK_PREDIV0 = (CK_HXTAL)/2 *10 /10 = 4 MHz */ 
+ 749:system_gd32e10x.c ****     RCU_CFG1 |= (RCU_PLLPRESRC_HXTAL | RCU_PREDV0SRC_CKPLL1 | RCU_PLL1_MUL10 | RCU_PREDV1_DIV2 | RC
+ 750:system_gd32e10x.c **** #elif defined (HXTAL_VALUE_25M)
+ 751:system_gd32e10x.c ****     /* CK_PREDIV0 = (CK_HXTAL)/5 *8/10 = 4 MHz */ 
+ 752:system_gd32e10x.c ****     RCU_CFG1 |= (RCU_PLLPRESRC_HXTAL | RCU_PREDV0SRC_CKPLL1 | RCU_PLL1_MUL8 | RCU_PREDV1_DIV5 | RCU
+ 753:system_gd32e10x.c **** #endif
+ 754:system_gd32e10x.c ****     
+ 755:system_gd32e10x.c ****     /* enable PLL1 */
+ 756:system_gd32e10x.c ****     RCU_CTL |= RCU_CTL_PLL1EN;
+ 757:system_gd32e10x.c ****     /* wait till PLL1 is ready */
+ 758:system_gd32e10x.c ****     while((RCU_CTL & RCU_CTL_PLL1STB) == 0U){
+ 759:system_gd32e10x.c ****     }
+ 760:system_gd32e10x.c **** 
+ 761:system_gd32e10x.c ****     /* enable PLL */
+ 762:system_gd32e10x.c ****     RCU_CTL |= RCU_CTL_PLLEN;
+ 763:system_gd32e10x.c **** 
+ 764:system_gd32e10x.c ****     /* wait until PLL is stable */
+ 765:system_gd32e10x.c ****     while(0U == (RCU_CTL & RCU_CTL_PLLSTB)){
+ 766:system_gd32e10x.c ****     }
+ 767:system_gd32e10x.c **** 
+ 768:system_gd32e10x.c ****     /* select PLL as system clock */
+ 769:system_gd32e10x.c ****     RCU_CFG0 &= ~RCU_CFG0_SCS;
+ 770:system_gd32e10x.c ****     RCU_CFG0 |= RCU_CKSYSSRC_PLL;
+ 771:system_gd32e10x.c **** 
+ 772:system_gd32e10x.c ****     /* wait until PLL is selected as system clock */
+ 773:system_gd32e10x.c ****     while(0U == (RCU_CFG0 & RCU_SCSS_PLL)){
+ 774:system_gd32e10x.c ****     }
+ 775:system_gd32e10x.c **** }
+ 776:system_gd32e10x.c **** #endif /* __SYSTEM_CLOCK_IRC8M */
+ 777:system_gd32e10x.c **** 
+ 778:system_gd32e10x.c **** /*!
+ 779:system_gd32e10x.c ****     \brief      update the SystemCoreClock with current core clock retrieved from cpu registers
+ 780:system_gd32e10x.c ****     \param[in]  none
+ 781:system_gd32e10x.c ****     \param[out] none
+ 782:system_gd32e10x.c ****     \retval     none
+ 783:system_gd32e10x.c **** */
+ 784:system_gd32e10x.c **** void SystemCoreClockUpdate (void)
+ 785:system_gd32e10x.c **** {
+ 231              		.loc 1 785 1 is_stmt 1 view -0
+ 232              		.cfi_startproc
+ARM GAS  /tmp/ccTRedY2.s 			page 19
+
+
+ 233              		@ args = 0, pretend = 0, frame = 0
+ 234              		@ frame_needed = 0, uses_anonymous_args = 0
+ 235              		@ link register save eliminated.
+ 786:system_gd32e10x.c ****     uint32_t sws;
+ 236              		.loc 1 786 5 view .LVU76
+ 787:system_gd32e10x.c ****     uint32_t pllsel, pllpresel, predv0sel, pllmf,ck_src;
+ 237              		.loc 1 787 5 view .LVU77
+ 788:system_gd32e10x.c ****     uint32_t predv0, predv1, pll1mf;
+ 238              		.loc 1 788 5 view .LVU78
+ 789:system_gd32e10x.c **** 
+ 790:system_gd32e10x.c ****     sws = GET_BITS(RCU_CFG0, 2, 3);
+ 239              		.loc 1 790 5 view .LVU79
+ 240              		.loc 1 790 11 is_stmt 0 view .LVU80
+ 241 0000 304B     		ldr	r3, .L30
+ 242 0002 5B68     		ldr	r3, [r3, #4]
+ 243              		.loc 1 790 9 view .LVU81
+ 244 0004 C3F38103 		ubfx	r3, r3, #2, #2
+ 245              	.LVL7:
+ 791:system_gd32e10x.c ****     switch(sws){
+ 246              		.loc 1 791 5 is_stmt 1 view .LVU82
+ 247 0008 012B     		cmp	r3, #1
+ 248 000a 0AD0     		beq	.L15
+ 249 000c 022B     		cmp	r3, #2
+ 250 000e 0CD0     		beq	.L16
+ 251 0010 1BB1     		cbz	r3, .L28
+ 792:system_gd32e10x.c ****     /* IRC8M is selected as CK_SYS */
+ 793:system_gd32e10x.c ****     case SEL_IRC8M:
+ 794:system_gd32e10x.c ****         SystemCoreClock = IRC8M_VALUE;
+ 795:system_gd32e10x.c ****         break;
+ 796:system_gd32e10x.c ****     /* HXTAL is selected as CK_SYS */
+ 797:system_gd32e10x.c ****     case SEL_HXTAL:
+ 798:system_gd32e10x.c ****         SystemCoreClock = HXTAL_VALUE;
+ 799:system_gd32e10x.c ****         break;
+ 800:system_gd32e10x.c ****     /* PLL is selected as CK_SYS */
+ 801:system_gd32e10x.c ****     case SEL_PLL:
+ 802:system_gd32e10x.c ****         /* PLL clock source selection, HXTAL, IRC48M or IRC8M/2 */
+ 803:system_gd32e10x.c ****         pllsel = (RCU_CFG0 & RCU_CFG0_PLLSEL);
+ 804:system_gd32e10x.c **** 
+ 805:system_gd32e10x.c ****         if(RCU_PLLSRC_HXTAL_IRC48M == pllsel){
+ 806:system_gd32e10x.c ****             /* PLL clock source is HXTAL or IRC48M */
+ 807:system_gd32e10x.c ****             pllpresel = (RCU_CFG1 & RCU_CFG1_PLLPRESEL);
+ 808:system_gd32e10x.c ****             
+ 809:system_gd32e10x.c ****             if(RCU_PLLPRESRC_HXTAL == pllpresel){
+ 810:system_gd32e10x.c ****                 /* PLL clock source is HXTAL */
+ 811:system_gd32e10x.c ****                 ck_src = HXTAL_VALUE;
+ 812:system_gd32e10x.c ****             }else{
+ 813:system_gd32e10x.c ****                 /* PLL clock source is IRC48 */
+ 814:system_gd32e10x.c ****                 ck_src = IRC48M_VALUE;
+ 815:system_gd32e10x.c ****             }
+ 816:system_gd32e10x.c **** 
+ 817:system_gd32e10x.c ****             predv0sel = (RCU_CFG1 & RCU_CFG1_PREDV0SEL);
+ 818:system_gd32e10x.c ****             /* source clock use PLL1 */
+ 819:system_gd32e10x.c ****             if(RCU_PREDV0SRC_CKPLL1 == predv0sel){
+ 820:system_gd32e10x.c ****                 predv1 = ((RCU_CFG1 & RCU_CFG1_PREDV1) >> 4) + 1U;
+ 821:system_gd32e10x.c ****                 pll1mf = ((RCU_CFG1 & RCU_CFG1_PLL1MF) >> 8) + 2U;
+ 822:system_gd32e10x.c ****                 if(17U == pll1mf){
+ 823:system_gd32e10x.c ****                     pll1mf = 20U;
+ARM GAS  /tmp/ccTRedY2.s 			page 20
+
+
+ 824:system_gd32e10x.c ****                 }
+ 825:system_gd32e10x.c ****                 ck_src = (ck_src/predv1)*pll1mf;
+ 826:system_gd32e10x.c ****             }
+ 827:system_gd32e10x.c ****             predv0 = (RCU_CFG1 & RCU_CFG1_PREDV0) + 1U;
+ 828:system_gd32e10x.c ****             ck_src /= predv0;
+ 829:system_gd32e10x.c ****         }else{
+ 830:system_gd32e10x.c ****             /* PLL clock source is IRC8M/2 */
+ 831:system_gd32e10x.c ****             ck_src = IRC8M_VALUE/2U;
+ 832:system_gd32e10x.c ****         }
+ 833:system_gd32e10x.c **** 
+ 834:system_gd32e10x.c ****         /* PLL multiplication factor */
+ 835:system_gd32e10x.c ****         pllmf = GET_BITS(RCU_CFG0, 18, 21);
+ 836:system_gd32e10x.c ****         if((RCU_CFG0 & RCU_CFG0_PLLMF_4)){
+ 837:system_gd32e10x.c ****             pllmf |= 0x10U;
+ 838:system_gd32e10x.c ****         }
+ 839:system_gd32e10x.c ****         if(pllmf < 15U){
+ 840:system_gd32e10x.c ****             pllmf += 2U;
+ 841:system_gd32e10x.c ****         }else{
+ 842:system_gd32e10x.c ****             pllmf += 1U;
+ 843:system_gd32e10x.c ****         }
+ 844:system_gd32e10x.c ****         SystemCoreClock = ck_src*pllmf;
+ 845:system_gd32e10x.c ****         if(15U == pllmf){
+ 846:system_gd32e10x.c ****             SystemCoreClock = ck_src*6U + ck_src/2U;
+ 847:system_gd32e10x.c ****         }
+ 848:system_gd32e10x.c **** 
+ 849:system_gd32e10x.c ****         break;
+ 850:system_gd32e10x.c ****     /* IRC8M is selected as CK_SYS */
+ 851:system_gd32e10x.c ****     default:
+ 852:system_gd32e10x.c ****         SystemCoreClock = IRC8M_VALUE;
+ 252              		.loc 1 852 9 view .LVU83
+ 253              		.loc 1 852 25 is_stmt 0 view .LVU84
+ 254 0012 2D4B     		ldr	r3, .L30+4
+ 255              	.LVL8:
+ 256              		.loc 1 852 25 view .LVU85
+ 257 0014 2D4A     		ldr	r2, .L30+8
+ 258 0016 1A60     		str	r2, [r3]
+ 853:system_gd32e10x.c ****         break;
+ 259              		.loc 1 853 9 is_stmt 1 view .LVU86
+ 854:system_gd32e10x.c ****     }
+ 855:system_gd32e10x.c **** 
+ 856:system_gd32e10x.c **** }
+ 260              		.loc 1 856 1 is_stmt 0 view .LVU87
+ 261 0018 7047     		bx	lr
+ 262              	.LVL9:
+ 263              	.L28:
+ 794:system_gd32e10x.c ****         break;
+ 264              		.loc 1 794 9 is_stmt 1 view .LVU88
+ 794:system_gd32e10x.c ****         break;
+ 265              		.loc 1 794 25 is_stmt 0 view .LVU89
+ 266 001a 2B4B     		ldr	r3, .L30+4
+ 267              	.LVL10:
+ 794:system_gd32e10x.c ****         break;
+ 268              		.loc 1 794 25 view .LVU90
+ 269 001c 2B4A     		ldr	r2, .L30+8
+ 270 001e 1A60     		str	r2, [r3]
+ 795:system_gd32e10x.c ****     /* HXTAL is selected as CK_SYS */
+ 271              		.loc 1 795 9 is_stmt 1 view .LVU91
+ARM GAS  /tmp/ccTRedY2.s 			page 21
+
+
+ 272 0020 7047     		bx	lr
+ 273              	.LVL11:
+ 274              	.L15:
+ 798:system_gd32e10x.c ****         break;
+ 275              		.loc 1 798 9 view .LVU92
+ 798:system_gd32e10x.c ****         break;
+ 276              		.loc 1 798 25 is_stmt 0 view .LVU93
+ 277 0022 294B     		ldr	r3, .L30+4
+ 278              	.LVL12:
+ 798:system_gd32e10x.c ****         break;
+ 279              		.loc 1 798 25 view .LVU94
+ 280 0024 294A     		ldr	r2, .L30+8
+ 281 0026 1A60     		str	r2, [r3]
+ 799:system_gd32e10x.c ****     /* PLL is selected as CK_SYS */
+ 282              		.loc 1 799 9 is_stmt 1 view .LVU95
+ 283 0028 7047     		bx	lr
+ 284              	.LVL13:
+ 285              	.L16:
+ 803:system_gd32e10x.c **** 
+ 286              		.loc 1 803 9 view .LVU96
+ 803:system_gd32e10x.c **** 
+ 287              		.loc 1 803 19 is_stmt 0 view .LVU97
+ 288 002a 264B     		ldr	r3, .L30
+ 289              	.LVL14:
+ 803:system_gd32e10x.c **** 
+ 290              		.loc 1 803 19 view .LVU98
+ 291 002c 5B68     		ldr	r3, [r3, #4]
+ 292              	.LVL15:
+ 805:system_gd32e10x.c ****             /* PLL clock source is HXTAL or IRC48M */
+ 293              		.loc 1 805 9 is_stmt 1 view .LVU99
+ 805:system_gd32e10x.c ****             /* PLL clock source is HXTAL or IRC48M */
+ 294              		.loc 1 805 11 is_stmt 0 view .LVU100
+ 295 002e 13F4803F 		tst	r3, #65536
+ 296 0032 32D0     		beq	.L26
+ 807:system_gd32e10x.c ****             
+ 297              		.loc 1 807 13 is_stmt 1 view .LVU101
+ 807:system_gd32e10x.c ****             
+ 298              		.loc 1 807 26 is_stmt 0 view .LVU102
+ 299 0034 234B     		ldr	r3, .L30
+ 300              	.LVL16:
+ 807:system_gd32e10x.c ****             
+ 301              		.loc 1 807 26 view .LVU103
+ 302 0036 DB6A     		ldr	r3, [r3, #44]
+ 303              	.LVL17:
+ 809:system_gd32e10x.c ****                 /* PLL clock source is HXTAL */
+ 304              		.loc 1 809 13 is_stmt 1 view .LVU104
+ 814:system_gd32e10x.c ****             }
+ 305              		.loc 1 814 24 is_stmt 0 view .LVU105
+ 306 0038 13F0804F 		tst	r3, #1073741824
+ 307 003c 234B     		ldr	r3, .L30+8
+ 308              	.LVL18:
+ 814:system_gd32e10x.c ****             }
+ 309              		.loc 1 814 24 view .LVU106
+ 310 003e 244A     		ldr	r2, .L30+12
+ 311 0040 18BF     		it	ne
+ 312 0042 1346     		movne	r3, r2
+ 313              	.LVL19:
+ARM GAS  /tmp/ccTRedY2.s 			page 22
+
+
+ 817:system_gd32e10x.c ****             /* source clock use PLL1 */
+ 314              		.loc 1 817 13 is_stmt 1 view .LVU107
+ 817:system_gd32e10x.c ****             /* source clock use PLL1 */
+ 315              		.loc 1 817 26 is_stmt 0 view .LVU108
+ 316 0044 1F4A     		ldr	r2, .L30
+ 317 0046 D26A     		ldr	r2, [r2, #44]
+ 318              	.LVL20:
+ 819:system_gd32e10x.c ****                 predv1 = ((RCU_CFG1 & RCU_CFG1_PREDV1) >> 4) + 1U;
+ 319              		.loc 1 819 13 is_stmt 1 view .LVU109
+ 819:system_gd32e10x.c ****                 predv1 = ((RCU_CFG1 & RCU_CFG1_PREDV1) >> 4) + 1U;
+ 320              		.loc 1 819 15 is_stmt 0 view .LVU110
+ 321 0048 12F4803F 		tst	r2, #65536
+ 322 004c 0FD0     		beq	.L21
+ 820:system_gd32e10x.c ****                 pll1mf = ((RCU_CFG1 & RCU_CFG1_PLL1MF) >> 8) + 2U;
+ 323              		.loc 1 820 17 is_stmt 1 view .LVU111
+ 820:system_gd32e10x.c ****                 pll1mf = ((RCU_CFG1 & RCU_CFG1_PLL1MF) >> 8) + 2U;
+ 324              		.loc 1 820 28 is_stmt 0 view .LVU112
+ 325 004e 1D49     		ldr	r1, .L30
+ 326 0050 CA6A     		ldr	r2, [r1, #44]
+ 327              	.LVL21:
+ 820:system_gd32e10x.c ****                 pll1mf = ((RCU_CFG1 & RCU_CFG1_PLL1MF) >> 8) + 2U;
+ 328              		.loc 1 820 56 view .LVU113
+ 329 0052 C2F30312 		ubfx	r2, r2, #4, #4
+ 820:system_gd32e10x.c ****                 pll1mf = ((RCU_CFG1 & RCU_CFG1_PLL1MF) >> 8) + 2U;
+ 330              		.loc 1 820 24 view .LVU114
+ 331 0056 0132     		adds	r2, r2, #1
+ 332              	.LVL22:
+ 821:system_gd32e10x.c ****                 if(17U == pll1mf){
+ 333              		.loc 1 821 17 is_stmt 1 view .LVU115
+ 821:system_gd32e10x.c ****                 if(17U == pll1mf){
+ 334              		.loc 1 821 28 is_stmt 0 view .LVU116
+ 335 0058 C96A     		ldr	r1, [r1, #44]
+ 821:system_gd32e10x.c ****                 if(17U == pll1mf){
+ 336              		.loc 1 821 56 view .LVU117
+ 337 005a C1F30321 		ubfx	r1, r1, #8, #4
+ 821:system_gd32e10x.c ****                 if(17U == pll1mf){
+ 338              		.loc 1 821 24 view .LVU118
+ 339 005e 881C     		adds	r0, r1, #2
+ 340              	.LVL23:
+ 822:system_gd32e10x.c ****                     pll1mf = 20U;
+ 341              		.loc 1 822 17 is_stmt 1 view .LVU119
+ 823:system_gd32e10x.c ****                 }
+ 342              		.loc 1 823 28 is_stmt 0 view .LVU120
+ 343 0060 0F29     		cmp	r1, #15
+ 344 0062 08BF     		it	eq
+ 345 0064 1420     		moveq	r0, #20
+ 346              	.LVL24:
+ 825:system_gd32e10x.c ****             }
+ 347              		.loc 1 825 17 is_stmt 1 view .LVU121
+ 825:system_gd32e10x.c ****             }
+ 348              		.loc 1 825 33 is_stmt 0 view .LVU122
+ 349 0066 B3FBF2F3 		udiv	r3, r3, r2
+ 350              	.LVL25:
+ 825:system_gd32e10x.c ****             }
+ 351              		.loc 1 825 24 view .LVU123
+ 352 006a 00FB03F3 		mul	r3, r0, r3
+ 353              	.LVL26:
+ARM GAS  /tmp/ccTRedY2.s 			page 23
+
+
+ 354              	.L21:
+ 827:system_gd32e10x.c ****             ck_src /= predv0;
+ 355              		.loc 1 827 13 is_stmt 1 view .LVU124
+ 827:system_gd32e10x.c ****             ck_src /= predv0;
+ 356              		.loc 1 827 23 is_stmt 0 view .LVU125
+ 357 006e 154A     		ldr	r2, .L30
+ 358 0070 D26A     		ldr	r2, [r2, #44]
+ 359              	.LVL27:
+ 828:system_gd32e10x.c ****         }else{
+ 360              		.loc 1 828 13 is_stmt 1 view .LVU126
+ 827:system_gd32e10x.c ****             ck_src /= predv0;
+ 361              		.loc 1 827 32 is_stmt 0 view .LVU127
+ 362 0072 02F00F02 		and	r2, r2, #15
+ 363              	.LVL28:
+ 827:system_gd32e10x.c ****             ck_src /= predv0;
+ 364              		.loc 1 827 20 view .LVU128
+ 365 0076 0132     		adds	r2, r2, #1
+ 366              	.LVL29:
+ 828:system_gd32e10x.c ****         }else{
+ 367              		.loc 1 828 20 view .LVU129
+ 368 0078 B3FBF2F3 		udiv	r3, r3, r2
+ 369              	.LVL30:
+ 370              	.L19:
+ 835:system_gd32e10x.c ****         if((RCU_CFG0 & RCU_CFG0_PLLMF_4)){
+ 371              		.loc 1 835 9 is_stmt 1 view .LVU130
+ 835:system_gd32e10x.c ****         if((RCU_CFG0 & RCU_CFG0_PLLMF_4)){
+ 372              		.loc 1 835 17 is_stmt 0 view .LVU131
+ 373 007c 1149     		ldr	r1, .L30
+ 374 007e 4A68     		ldr	r2, [r1, #4]
+ 835:system_gd32e10x.c ****         if((RCU_CFG0 & RCU_CFG0_PLLMF_4)){
+ 375              		.loc 1 835 15 view .LVU132
+ 376 0080 C2F38342 		ubfx	r2, r2, #18, #4
+ 377              	.LVL31:
+ 836:system_gd32e10x.c ****             pllmf |= 0x10U;
+ 378              		.loc 1 836 9 is_stmt 1 view .LVU133
+ 836:system_gd32e10x.c ****             pllmf |= 0x10U;
+ 379              		.loc 1 836 13 is_stmt 0 view .LVU134
+ 380 0084 4968     		ldr	r1, [r1, #4]
+ 836:system_gd32e10x.c ****             pllmf |= 0x10U;
+ 381              		.loc 1 836 11 view .LVU135
+ 382 0086 11F0005F 		tst	r1, #536870912
+ 383 008a 08D0     		beq	.L23
+ 837:system_gd32e10x.c ****         }
+ 384              		.loc 1 837 13 is_stmt 1 view .LVU136
+ 837:system_gd32e10x.c ****         }
+ 385              		.loc 1 837 19 is_stmt 0 view .LVU137
+ 386 008c 42F01002 		orr	r2, r2, #16
+ 387              	.LVL32:
+ 839:system_gd32e10x.c ****             pllmf += 2U;
+ 388              		.loc 1 839 9 is_stmt 1 view .LVU138
+ 389              	.L24:
+ 842:system_gd32e10x.c ****         }
+ 390              		.loc 1 842 13 view .LVU139
+ 844:system_gd32e10x.c ****         if(15U == pllmf){
+ 391              		.loc 1 844 9 view .LVU140
+ 844:system_gd32e10x.c ****         if(15U == pllmf){
+ 392              		.loc 1 844 33 is_stmt 0 view .LVU141
+ARM GAS  /tmp/ccTRedY2.s 			page 24
+
+
+ 393 0090 02FB0333 		mla	r3, r2, r3, r3
+ 394              	.LVL33:
+ 844:system_gd32e10x.c ****         if(15U == pllmf){
+ 395              		.loc 1 844 25 view .LVU142
+ 396 0094 0C4A     		ldr	r2, .L30+4
+ 397              	.LVL34:
+ 844:system_gd32e10x.c ****         if(15U == pllmf){
+ 398              		.loc 1 844 25 view .LVU143
+ 399 0096 1360     		str	r3, [r2]
+ 845:system_gd32e10x.c ****             SystemCoreClock = ck_src*6U + ck_src/2U;
+ 400              		.loc 1 845 9 is_stmt 1 view .LVU144
+ 401 0098 7047     		bx	lr
+ 402              	.LVL35:
+ 403              	.L26:
+ 831:system_gd32e10x.c ****         }
+ 404              		.loc 1 831 20 is_stmt 0 view .LVU145
+ 405 009a 0E4B     		ldr	r3, .L30+16
+ 406              	.LVL36:
+ 831:system_gd32e10x.c ****         }
+ 407              		.loc 1 831 20 view .LVU146
+ 408 009c EEE7     		b	.L19
+ 409              	.LVL37:
+ 410              	.L23:
+ 839:system_gd32e10x.c ****             pllmf += 2U;
+ 411              		.loc 1 839 9 is_stmt 1 view .LVU147
+ 839:system_gd32e10x.c ****             pllmf += 2U;
+ 412              		.loc 1 839 11 is_stmt 0 view .LVU148
+ 413 009e 0E2A     		cmp	r2, #14
+ 414 00a0 F6D8     		bhi	.L24
+ 840:system_gd32e10x.c ****         }else{
+ 415              		.loc 1 840 13 is_stmt 1 view .LVU149
+ 840:system_gd32e10x.c ****         }else{
+ 416              		.loc 1 840 19 is_stmt 0 view .LVU150
+ 417 00a2 911C     		adds	r1, r2, #2
+ 418              	.LVL38:
+ 844:system_gd32e10x.c ****         if(15U == pllmf){
+ 419              		.loc 1 844 9 is_stmt 1 view .LVU151
+ 845:system_gd32e10x.c ****             SystemCoreClock = ck_src*6U + ck_src/2U;
+ 420              		.loc 1 845 9 view .LVU152
+ 845:system_gd32e10x.c ****             SystemCoreClock = ck_src*6U + ck_src/2U;
+ 421              		.loc 1 845 11 is_stmt 0 view .LVU153
+ 422 00a4 0D2A     		cmp	r2, #13
+ 423 00a6 07D1     		bne	.L29
+ 846:system_gd32e10x.c ****         }
+ 424              		.loc 1 846 13 is_stmt 1 view .LVU154
+ 846:system_gd32e10x.c ****         }
+ 425              		.loc 1 846 37 is_stmt 0 view .LVU155
+ 426 00a8 03EB4302 		add	r2, r3, r3, lsl #1
+ 846:system_gd32e10x.c ****         }
+ 427              		.loc 1 846 49 view .LVU156
+ 428 00ac 5B08     		lsrs	r3, r3, #1
+ 429              	.LVL39:
+ 846:system_gd32e10x.c ****         }
+ 430              		.loc 1 846 41 view .LVU157
+ 431 00ae 03EB4203 		add	r3, r3, r2, lsl #1
+ 846:system_gd32e10x.c ****         }
+ 432              		.loc 1 846 29 view .LVU158
+ARM GAS  /tmp/ccTRedY2.s 			page 25
+
+
+ 433 00b2 054A     		ldr	r2, .L30+4
+ 434 00b4 1360     		str	r3, [r2]
+ 435 00b6 7047     		bx	lr
+ 436              	.LVL40:
+ 437              	.L29:
+ 844:system_gd32e10x.c ****         if(15U == pllmf){
+ 438              		.loc 1 844 33 view .LVU159
+ 439 00b8 01FB03F3 		mul	r3, r1, r3
+ 440              	.LVL41:
+ 844:system_gd32e10x.c ****         if(15U == pllmf){
+ 441              		.loc 1 844 25 view .LVU160
+ 442 00bc 024A     		ldr	r2, .L30+4
+ 443 00be 1360     		str	r3, [r2]
+ 444 00c0 7047     		bx	lr
+ 445              	.L31:
+ 446 00c2 00BF     		.align	2
+ 447              	.L30:
+ 448 00c4 00100240 		.word	1073876992
+ 449 00c8 00000000 		.word	.LANCHOR0
+ 450 00cc 00127A00 		.word	8000000
+ 451 00d0 006CDC02 		.word	48000000
+ 452 00d4 00093D00 		.word	4000000
+ 453              		.cfi_endproc
+ 454              	.LFE119:
+ 456              		.global	SystemCoreClock
+ 457              		.section	.data.SystemCoreClock,"aw"
+ 458              		.align	2
+ 459              		.set	.LANCHOR0,. + 0
+ 462              	SystemCoreClock:
+ 463 0000 000E2707 		.word	120000000
+ 464              		.text
+ 465              	.Letext0:
+ 466              		.file 2 "/usr/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h"
+ 467              		.file 3 "../../../../Firmware/CMSIS/core_cm4.h"
+ 468              		.file 4 "../../../../Firmware/CMSIS/GD/GD32E10x/Include/system_gd32e10x.h"
+ 469              		.file 5 "../../../../Firmware/GD32E10x_standard_peripheral/Include/gd32e10x_misc.h"
+ARM GAS  /tmp/ccTRedY2.s 			page 26
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 system_gd32e10x.c
+     /tmp/ccTRedY2.s:18     .text.SystemInit:0000000000000000 $t
+     /tmp/ccTRedY2.s:26     .text.SystemInit:0000000000000000 SystemInit
+     /tmp/ccTRedY2.s:215    .text.SystemInit:00000000000000d4 $d
+     /tmp/ccTRedY2.s:222    .text.SystemCoreClockUpdate:0000000000000000 $t
+     /tmp/ccTRedY2.s:229    .text.SystemCoreClockUpdate:0000000000000000 SystemCoreClockUpdate
+     /tmp/ccTRedY2.s:448    .text.SystemCoreClockUpdate:00000000000000c4 $d
+     /tmp/ccTRedY2.s:462    .data.SystemCoreClock:0000000000000000 SystemCoreClock
+     /tmp/ccTRedY2.s:458    .data.SystemCoreClock:0000000000000000 $d
+
+UNDEFINED SYMBOLS
+nvic_vector_table_set

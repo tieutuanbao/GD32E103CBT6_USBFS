@@ -1,0 +1,425 @@
+ARM GAS  /tmp/cc5J3vae.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.eabi_attribute 27, 1
+   3              		.eabi_attribute 28, 1
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.file	"delay.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.section	.text.delayMicroseconds,"ax",%progbits
+  18              		.align	1
+  19              		.global	delayMicroseconds
+  20              		.arch armv7e-m
+  21              		.syntax unified
+  22              		.thumb
+  23              		.thumb_func
+  24              		.fpu fpv4-sp-d16
+  26              	delayMicroseconds:
+  27              	.LVL0:
+  28              	.LFB0:
+  29              		.file 1 "delay.c"
+   1:delay.c       **** #include "delay.h"
+   2:delay.c       **** 
+   3:delay.c       **** void delayMicroseconds(uint32_t us) {
+  30              		.loc 1 3 37 view -0
+  31              		.cfi_startproc
+  32              		@ args = 0, pretend = 0, frame = 0
+  33              		@ frame_needed = 0, uses_anonymous_args = 0
+  34              		@ link register save eliminated.
+   4:delay.c       ****     while(us--) {
+  35              		.loc 1 4 5 view .LVU1
+  36              		.loc 1 4 10 view .LVU2
+  37              		.loc 1 4 13 is_stmt 0 view .LVU3
+  38 0000 431E     		subs	r3, r0, #1
+  39              	.LVL1:
+  40              		.loc 1 4 10 view .LVU4
+  41 0002 0028     		cmp	r0, #0
+  42 0004 42D0     		beq	.L1
+  43              	.L3:
+   5:delay.c       ****         asm("nop");asm("nop");asm("nop");asm("nop");asm("nop");asm("nop");asm("nop");asm("nop");asm
+  44              		.loc 1 5 9 is_stmt 1 view .LVU5
+  45              		.syntax unified
+  46              	@ 5 "delay.c" 1
+  47 0006 00BF     		nop
+  48              	@ 0 "" 2
+  49              		.loc 1 5 20 view .LVU6
+  50              	@ 5 "delay.c" 1
+  51 0008 00BF     		nop
+  52              	@ 0 "" 2
+  53              		.loc 1 5 31 view .LVU7
+ARM GAS  /tmp/cc5J3vae.s 			page 2
+
+
+  54              	@ 5 "delay.c" 1
+  55 000a 00BF     		nop
+  56              	@ 0 "" 2
+  57              		.loc 1 5 42 view .LVU8
+  58              	@ 5 "delay.c" 1
+  59 000c 00BF     		nop
+  60              	@ 0 "" 2
+  61              		.loc 1 5 53 view .LVU9
+  62              	@ 5 "delay.c" 1
+  63 000e 00BF     		nop
+  64              	@ 0 "" 2
+  65              		.loc 1 5 64 view .LVU10
+  66              	@ 5 "delay.c" 1
+  67 0010 00BF     		nop
+  68              	@ 0 "" 2
+  69              		.loc 1 5 75 view .LVU11
+  70              	@ 5 "delay.c" 1
+  71 0012 00BF     		nop
+  72              	@ 0 "" 2
+  73              		.loc 1 5 86 view .LVU12
+  74              	@ 5 "delay.c" 1
+  75 0014 00BF     		nop
+  76              	@ 0 "" 2
+  77              		.loc 1 5 97 view .LVU13
+  78              	@ 5 "delay.c" 1
+  79 0016 00BF     		nop
+  80              	@ 0 "" 2
+   6:delay.c       ****         asm("nop");asm("nop");asm("nop");asm("nop");asm("nop");asm("nop");asm("nop");asm("nop");asm
+  81              		.loc 1 6 9 view .LVU14
+  82              	@ 6 "delay.c" 1
+  83 0018 00BF     		nop
+  84              	@ 0 "" 2
+  85              		.loc 1 6 20 view .LVU15
+  86              	@ 6 "delay.c" 1
+  87 001a 00BF     		nop
+  88              	@ 0 "" 2
+  89              		.loc 1 6 31 view .LVU16
+  90              	@ 6 "delay.c" 1
+  91 001c 00BF     		nop
+  92              	@ 0 "" 2
+  93              		.loc 1 6 42 view .LVU17
+  94              	@ 6 "delay.c" 1
+  95 001e 00BF     		nop
+  96              	@ 0 "" 2
+  97              		.loc 1 6 53 view .LVU18
+  98              	@ 6 "delay.c" 1
+  99 0020 00BF     		nop
+ 100              	@ 0 "" 2
+ 101              		.loc 1 6 64 view .LVU19
+ 102              	@ 6 "delay.c" 1
+ 103 0022 00BF     		nop
+ 104              	@ 0 "" 2
+ 105              		.loc 1 6 75 view .LVU20
+ 106              	@ 6 "delay.c" 1
+ 107 0024 00BF     		nop
+ 108              	@ 0 "" 2
+ 109              		.loc 1 6 86 view .LVU21
+ARM GAS  /tmp/cc5J3vae.s 			page 3
+
+
+ 110              	@ 6 "delay.c" 1
+ 111 0026 00BF     		nop
+ 112              	@ 0 "" 2
+ 113              		.loc 1 6 97 view .LVU22
+ 114              	@ 6 "delay.c" 1
+ 115 0028 00BF     		nop
+ 116              	@ 0 "" 2
+   7:delay.c       ****         asm("nop");asm("nop");asm("nop");asm("nop");asm("nop");asm("nop");asm("nop");asm("nop");asm
+ 117              		.loc 1 7 9 view .LVU23
+ 118              	@ 7 "delay.c" 1
+ 119 002a 00BF     		nop
+ 120              	@ 0 "" 2
+ 121              		.loc 1 7 20 view .LVU24
+ 122              	@ 7 "delay.c" 1
+ 123 002c 00BF     		nop
+ 124              	@ 0 "" 2
+ 125              		.loc 1 7 31 view .LVU25
+ 126              	@ 7 "delay.c" 1
+ 127 002e 00BF     		nop
+ 128              	@ 0 "" 2
+ 129              		.loc 1 7 42 view .LVU26
+ 130              	@ 7 "delay.c" 1
+ 131 0030 00BF     		nop
+ 132              	@ 0 "" 2
+ 133              		.loc 1 7 53 view .LVU27
+ 134              	@ 7 "delay.c" 1
+ 135 0032 00BF     		nop
+ 136              	@ 0 "" 2
+ 137              		.loc 1 7 64 view .LVU28
+ 138              	@ 7 "delay.c" 1
+ 139 0034 00BF     		nop
+ 140              	@ 0 "" 2
+ 141              		.loc 1 7 75 view .LVU29
+ 142              	@ 7 "delay.c" 1
+ 143 0036 00BF     		nop
+ 144              	@ 0 "" 2
+ 145              		.loc 1 7 86 view .LVU30
+ 146              	@ 7 "delay.c" 1
+ 147 0038 00BF     		nop
+ 148              	@ 0 "" 2
+ 149              		.loc 1 7 97 view .LVU31
+ 150              	@ 7 "delay.c" 1
+ 151 003a 00BF     		nop
+ 152              	@ 0 "" 2
+   8:delay.c       ****         asm("nop");asm("nop");asm("nop");asm("nop");asm("nop");asm("nop");asm("nop");asm("nop");asm
+ 153              		.loc 1 8 9 view .LVU32
+ 154              	@ 8 "delay.c" 1
+ 155 003c 00BF     		nop
+ 156              	@ 0 "" 2
+ 157              		.loc 1 8 20 view .LVU33
+ 158              	@ 8 "delay.c" 1
+ 159 003e 00BF     		nop
+ 160              	@ 0 "" 2
+ 161              		.loc 1 8 31 view .LVU34
+ 162              	@ 8 "delay.c" 1
+ 163 0040 00BF     		nop
+ 164              	@ 0 "" 2
+ARM GAS  /tmp/cc5J3vae.s 			page 4
+
+
+ 165              		.loc 1 8 42 view .LVU35
+ 166              	@ 8 "delay.c" 1
+ 167 0042 00BF     		nop
+ 168              	@ 0 "" 2
+ 169              		.loc 1 8 53 view .LVU36
+ 170              	@ 8 "delay.c" 1
+ 171 0044 00BF     		nop
+ 172              	@ 0 "" 2
+ 173              		.loc 1 8 64 view .LVU37
+ 174              	@ 8 "delay.c" 1
+ 175 0046 00BF     		nop
+ 176              	@ 0 "" 2
+ 177              		.loc 1 8 75 view .LVU38
+ 178              	@ 8 "delay.c" 1
+ 179 0048 00BF     		nop
+ 180              	@ 0 "" 2
+ 181              		.loc 1 8 86 view .LVU39
+ 182              	@ 8 "delay.c" 1
+ 183 004a 00BF     		nop
+ 184              	@ 0 "" 2
+ 185              		.loc 1 8 97 view .LVU40
+ 186              	@ 8 "delay.c" 1
+ 187 004c 00BF     		nop
+ 188              	@ 0 "" 2
+   9:delay.c       ****         asm("nop");asm("nop");asm("nop");asm("nop");asm("nop");asm("nop");asm("nop");asm("nop");asm
+ 189              		.loc 1 9 9 view .LVU41
+ 190              	@ 9 "delay.c" 1
+ 191 004e 00BF     		nop
+ 192              	@ 0 "" 2
+ 193              		.loc 1 9 20 view .LVU42
+ 194              	@ 9 "delay.c" 1
+ 195 0050 00BF     		nop
+ 196              	@ 0 "" 2
+ 197              		.loc 1 9 31 view .LVU43
+ 198              	@ 9 "delay.c" 1
+ 199 0052 00BF     		nop
+ 200              	@ 0 "" 2
+ 201              		.loc 1 9 42 view .LVU44
+ 202              	@ 9 "delay.c" 1
+ 203 0054 00BF     		nop
+ 204              	@ 0 "" 2
+ 205              		.loc 1 9 53 view .LVU45
+ 206              	@ 9 "delay.c" 1
+ 207 0056 00BF     		nop
+ 208              	@ 0 "" 2
+ 209              		.loc 1 9 64 view .LVU46
+ 210              	@ 9 "delay.c" 1
+ 211 0058 00BF     		nop
+ 212              	@ 0 "" 2
+ 213              		.loc 1 9 75 view .LVU47
+ 214              	@ 9 "delay.c" 1
+ 215 005a 00BF     		nop
+ 216              	@ 0 "" 2
+ 217              		.loc 1 9 86 view .LVU48
+ 218              	@ 9 "delay.c" 1
+ 219 005c 00BF     		nop
+ 220              	@ 0 "" 2
+ARM GAS  /tmp/cc5J3vae.s 			page 5
+
+
+ 221              		.loc 1 9 97 view .LVU49
+ 222              	@ 9 "delay.c" 1
+ 223 005e 00BF     		nop
+ 224              	@ 0 "" 2
+  10:delay.c       ****         asm("nop");asm("nop");asm("nop");asm("nop");asm("nop");asm("nop");asm("nop");asm("nop");asm
+ 225              		.loc 1 10 9 view .LVU50
+ 226              	@ 10 "delay.c" 1
+ 227 0060 00BF     		nop
+ 228              	@ 0 "" 2
+ 229              		.loc 1 10 20 view .LVU51
+ 230              	@ 10 "delay.c" 1
+ 231 0062 00BF     		nop
+ 232              	@ 0 "" 2
+ 233              		.loc 1 10 31 view .LVU52
+ 234              	@ 10 "delay.c" 1
+ 235 0064 00BF     		nop
+ 236              	@ 0 "" 2
+ 237              		.loc 1 10 42 view .LVU53
+ 238              	@ 10 "delay.c" 1
+ 239 0066 00BF     		nop
+ 240              	@ 0 "" 2
+ 241              		.loc 1 10 53 view .LVU54
+ 242              	@ 10 "delay.c" 1
+ 243 0068 00BF     		nop
+ 244              	@ 0 "" 2
+ 245              		.loc 1 10 64 view .LVU55
+ 246              	@ 10 "delay.c" 1
+ 247 006a 00BF     		nop
+ 248              	@ 0 "" 2
+ 249              		.loc 1 10 75 view .LVU56
+ 250              	@ 10 "delay.c" 1
+ 251 006c 00BF     		nop
+ 252              	@ 0 "" 2
+ 253              		.loc 1 10 86 view .LVU57
+ 254              	@ 10 "delay.c" 1
+ 255 006e 00BF     		nop
+ 256              	@ 0 "" 2
+ 257              		.loc 1 10 97 view .LVU58
+ 258              	@ 10 "delay.c" 1
+ 259 0070 00BF     		nop
+ 260              	@ 0 "" 2
+  11:delay.c       ****         asm("nop");asm("nop");asm("nop");asm("nop");asm("nop");asm("nop");asm("nop");asm("nop");asm
+ 261              		.loc 1 11 9 view .LVU59
+ 262              	@ 11 "delay.c" 1
+ 263 0072 00BF     		nop
+ 264              	@ 0 "" 2
+ 265              		.loc 1 11 20 view .LVU60
+ 266              	@ 11 "delay.c" 1
+ 267 0074 00BF     		nop
+ 268              	@ 0 "" 2
+ 269              		.loc 1 11 31 view .LVU61
+ 270              	@ 11 "delay.c" 1
+ 271 0076 00BF     		nop
+ 272              	@ 0 "" 2
+ 273              		.loc 1 11 42 view .LVU62
+ 274              	@ 11 "delay.c" 1
+ 275 0078 00BF     		nop
+ARM GAS  /tmp/cc5J3vae.s 			page 6
+
+
+ 276              	@ 0 "" 2
+ 277              		.loc 1 11 53 view .LVU63
+ 278              	@ 11 "delay.c" 1
+ 279 007a 00BF     		nop
+ 280              	@ 0 "" 2
+ 281              		.loc 1 11 64 view .LVU64
+ 282              	@ 11 "delay.c" 1
+ 283 007c 00BF     		nop
+ 284              	@ 0 "" 2
+ 285              		.loc 1 11 75 view .LVU65
+ 286              	@ 11 "delay.c" 1
+ 287 007e 00BF     		nop
+ 288              	@ 0 "" 2
+ 289              		.loc 1 11 86 view .LVU66
+ 290              	@ 11 "delay.c" 1
+ 291 0080 00BF     		nop
+ 292              	@ 0 "" 2
+ 293              		.loc 1 11 97 view .LVU67
+ 294              	@ 11 "delay.c" 1
+ 295 0082 00BF     		nop
+ 296              	@ 0 "" 2
+   4:delay.c       ****         asm("nop");asm("nop");asm("nop");asm("nop");asm("nop");asm("nop");asm("nop");asm("nop");asm
+ 297              		.loc 1 4 10 view .LVU68
+   4:delay.c       ****         asm("nop");asm("nop");asm("nop");asm("nop");asm("nop");asm("nop");asm("nop");asm("nop");asm
+ 298              		.loc 1 4 13 is_stmt 0 view .LVU69
+ 299              		.thumb
+ 300              		.syntax unified
+ 301 0084 013B     		subs	r3, r3, #1
+ 302              	.LVL2:
+   4:delay.c       ****         asm("nop");asm("nop");asm("nop");asm("nop");asm("nop");asm("nop");asm("nop");asm("nop");asm
+ 303              		.loc 1 4 10 view .LVU70
+ 304 0086 B3F1FF3F 		cmp	r3, #-1
+ 305 008a BCD1     		bne	.L3
+ 306              	.L1:
+  12:delay.c       ****     }
+  13:delay.c       **** }
+ 307              		.loc 1 13 1 view .LVU71
+ 308 008c 7047     		bx	lr
+ 309              		.cfi_endproc
+ 310              	.LFE0:
+ 312              		.section	.text.delay,"ax",%progbits
+ 313              		.align	1
+ 314              		.global	delay
+ 315              		.syntax unified
+ 316              		.thumb
+ 317              		.thumb_func
+ 318              		.fpu fpv4-sp-d16
+ 320              	delay:
+ 321              	.LVL3:
+ 322              	.LFB1:
+  14:delay.c       **** 
+  15:delay.c       **** void delay(uint32_t ms) {
+ 323              		.loc 1 15 25 is_stmt 1 view -0
+ 324              		.cfi_startproc
+ 325              		@ args = 0, pretend = 0, frame = 0
+ 326              		@ frame_needed = 0, uses_anonymous_args = 0
+  16:delay.c       ****     while(ms--) {
+ARM GAS  /tmp/cc5J3vae.s 			page 7
+
+
+ 327              		.loc 1 16 5 view .LVU73
+ 328              		.loc 1 16 10 view .LVU74
+ 329              		.loc 1 16 10 is_stmt 0 view .LVU75
+ 330 0000 58B1     		cbz	r0, .L10
+  15:delay.c       ****     while(ms--) {
+ 331              		.loc 1 15 25 view .LVU76
+ 332 0002 38B5     		push	{r3, r4, r5, lr}
+ 333              		.cfi_def_cfa_offset 16
+ 334              		.cfi_offset 3, -16
+ 335              		.cfi_offset 4, -12
+ 336              		.cfi_offset 5, -8
+ 337              		.cfi_offset 14, -4
+ 338 0004 441E     		subs	r4, r0, #1
+ 339              	.LVL4:
+  17:delay.c       ****         delayMicroseconds(1000);
+ 340              		.loc 1 17 9 view .LVU77
+ 341 0006 4FF47A75 		mov	r5, #1000
+ 342              	.LVL5:
+ 343              	.L7:
+ 344              		.loc 1 17 9 is_stmt 1 view .LVU78
+ 345 000a 2846     		mov	r0, r5
+ 346 000c FFF7FEFF 		bl	delayMicroseconds
+ 347              	.LVL6:
+  16:delay.c       ****     while(ms--) {
+ 348              		.loc 1 16 10 view .LVU79
+  16:delay.c       ****     while(ms--) {
+ 349              		.loc 1 16 13 is_stmt 0 view .LVU80
+ 350 0010 013C     		subs	r4, r4, #1
+ 351              	.LVL7:
+  16:delay.c       ****     while(ms--) {
+ 352              		.loc 1 16 10 view .LVU81
+ 353 0012 B4F1FF3F 		cmp	r4, #-1
+ 354 0016 F8D1     		bne	.L7
+  18:delay.c       ****     }
+  19:delay.c       **** }
+ 355              		.loc 1 19 1 view .LVU82
+ 356 0018 38BD     		pop	{r3, r4, r5, pc}
+ 357              	.LVL8:
+ 358              	.L10:
+ 359              		.cfi_def_cfa_offset 0
+ 360              		.cfi_restore 3
+ 361              		.cfi_restore 4
+ 362              		.cfi_restore 5
+ 363              		.cfi_restore 14
+ 364              		.loc 1 19 1 view .LVU83
+ 365 001a 7047     		bx	lr
+ 366              		.cfi_endproc
+ 367              	.LFE1:
+ 369              		.text
+ 370              	.Letext0:
+ 371              		.file 2 "/usr/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h"
+ARM GAS  /tmp/cc5J3vae.s 			page 8
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 delay.c
+     /tmp/cc5J3vae.s:18     .text.delayMicroseconds:0000000000000000 $t
+     /tmp/cc5J3vae.s:26     .text.delayMicroseconds:0000000000000000 delayMicroseconds
+     /tmp/cc5J3vae.s:313    .text.delay:0000000000000000 $t
+     /tmp/cc5J3vae.s:320    .text.delay:0000000000000000 delay
+
+NO UNDEFINED SYMBOLS

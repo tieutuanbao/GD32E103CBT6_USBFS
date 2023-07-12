@@ -1,0 +1,1878 @@
+ARM GAS  /tmp/ccyVL9Qf.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.eabi_attribute 27, 1
+   3              		.eabi_attribute 28, 1
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.file	"gd32e10x_dac.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.section	.text.dac_deinit,"ax",%progbits
+  18              		.align	1
+  19              		.global	dac_deinit
+  20              		.arch armv7e-m
+  21              		.syntax unified
+  22              		.thumb
+  23              		.thumb_func
+  24              		.fpu fpv4-sp-d16
+  26              	dac_deinit:
+  27              	.LFB116:
+  28              		.file 1 "../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c"
+   1:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** /*!
+   2:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     \file  gd32e10x_dac.c
+   3:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     \brief DAC driver
+   4:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     
+   5:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     \version 2017-12-26, V1.0.0, firmware for GD32E10x
+   6:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** */
+   7:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** 
+   8:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** /*
+   9:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     Copyright (c) 2017, GigaDevice Semiconductor Inc.
+  10:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** 
+  11:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     All rights reserved.
+  12:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** 
+  13:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     Redistribution and use in source and binary forms, with or without modification, 
+  14:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** are permitted provided that the following conditions are met:
+  15:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** 
+  16:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     1. Redistributions of source code must retain the above copyright notice, this 
+  17:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****        list of conditions and the following disclaimer.
+  18:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     2. Redistributions in binary form must reproduce the above copyright notice, 
+  19:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****        this list of conditions and the following disclaimer in the documentation 
+  20:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****        and/or other materials provided with the distribution.
+  21:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     3. Neither the name of the copyright holder nor the names of its contributors 
+  22:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****        may be used to endorse or promote products derived from this software without 
+  23:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****        specific prior written permission.
+  24:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** 
+  25:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" 
+  26:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED 
+  27:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. 
+  28:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, 
+  29:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT 
+  30:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR 
+ARM GAS  /tmp/ccyVL9Qf.s 			page 2
+
+
+  31:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, 
+  32:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) 
+  33:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY 
+  34:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** OF SUCH DAMAGE.
+  35:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** */
+  36:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** 
+  37:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** #include "gd32e10x_dac.h"
+  38:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** 
+  39:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** /* DAC register bit offset */
+  40:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** #define DAC1_REG_OFFSET           ((uint32_t)16U)
+  41:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** #define DH_12BIT_OFFSET           ((uint32_t)16U)
+  42:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** #define DH_8BIT_OFFSET            ((uint32_t)8U)
+  43:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** 
+  44:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** /*!
+  45:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     \brief      deinitialize DAC
+  46:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     \param[in]  none
+  47:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     \param[out] none
+  48:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     \retval     none
+  49:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** */
+  50:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** void dac_deinit(void)
+  51:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** {
+  29              		.loc 1 51 1 view -0
+  30              		.cfi_startproc
+  31              		@ args = 0, pretend = 0, frame = 0
+  32              		@ frame_needed = 0, uses_anonymous_args = 0
+  33 0000 08B5     		push	{r3, lr}
+  34              		.cfi_def_cfa_offset 8
+  35              		.cfi_offset 3, -8
+  36              		.cfi_offset 14, -4
+  52:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     rcu_periph_reset_enable(RCU_DACRST);
+  37              		.loc 1 52 5 view .LVU1
+  38 0002 40F21D40 		movw	r0, #1053
+  39 0006 FFF7FEFF 		bl	rcu_periph_reset_enable
+  40              	.LVL0:
+  53:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     rcu_periph_reset_disable(RCU_DACRST);
+  41              		.loc 1 53 5 view .LVU2
+  42 000a 40F21D40 		movw	r0, #1053
+  43 000e FFF7FEFF 		bl	rcu_periph_reset_disable
+  44              	.LVL1:
+  54:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** }
+  45              		.loc 1 54 1 is_stmt 0 view .LVU3
+  46 0012 08BD     		pop	{r3, pc}
+  47              		.cfi_endproc
+  48              	.LFE116:
+  50              		.section	.text.dac_enable,"ax",%progbits
+  51              		.align	1
+  52              		.global	dac_enable
+  53              		.syntax unified
+  54              		.thumb
+  55              		.thumb_func
+  56              		.fpu fpv4-sp-d16
+  58              	dac_enable:
+  59              	.LVL2:
+  60              	.LFB117:
+  55:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** 
+  56:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** /*!
+  57:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     \brief      enable DAC
+ARM GAS  /tmp/ccyVL9Qf.s 			page 3
+
+
+  58:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     \param[in]  dac_periph
+  59:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****       \arg        DACx(x=0,1)
+  60:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     \param[out] none
+  61:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     \retval     none
+  62:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** */
+  63:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** void dac_enable(uint32_t dac_periph)
+  64:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** {
+  61              		.loc 1 64 1 is_stmt 1 view -0
+  62              		.cfi_startproc
+  63              		@ args = 0, pretend = 0, frame = 0
+  64              		@ frame_needed = 0, uses_anonymous_args = 0
+  65              		@ link register save eliminated.
+  65:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     if(DAC0 == dac_periph){
+  66              		.loc 1 65 5 view .LVU5
+  67              		.loc 1 65 7 is_stmt 0 view .LVU6
+  68 0000 38B9     		cbnz	r0, .L4
+  66:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****         DAC_CTL |= DAC_CTL_DEN0;
+  69              		.loc 1 66 9 is_stmt 1 view .LVU7
+  70              		.loc 1 66 17 is_stmt 0 view .LVU8
+  71 0002 084A     		ldr	r2, .L6
+  72 0004 D2F80034 		ldr	r3, [r2, #1024]
+  73 0008 43F00103 		orr	r3, r3, #1
+  74 000c C2F80034 		str	r3, [r2, #1024]
+  75 0010 7047     		bx	lr
+  76              	.L4:
+  67:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     }else{
+  68:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****         DAC_CTL |= DAC_CTL_DEN1;
+  77              		.loc 1 68 9 is_stmt 1 view .LVU9
+  78              		.loc 1 68 17 is_stmt 0 view .LVU10
+  79 0012 044A     		ldr	r2, .L6
+  80 0014 D2F80034 		ldr	r3, [r2, #1024]
+  81 0018 43F48033 		orr	r3, r3, #65536
+  82 001c C2F80034 		str	r3, [r2, #1024]
+  69:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     }
+  70:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** } 
+  83              		.loc 1 70 1 view .LVU11
+  84 0020 7047     		bx	lr
+  85              	.L7:
+  86 0022 00BF     		.align	2
+  87              	.L6:
+  88 0024 00700040 		.word	1073770496
+  89              		.cfi_endproc
+  90              	.LFE117:
+  92              		.section	.text.dac_disable,"ax",%progbits
+  93              		.align	1
+  94              		.global	dac_disable
+  95              		.syntax unified
+  96              		.thumb
+  97              		.thumb_func
+  98              		.fpu fpv4-sp-d16
+ 100              	dac_disable:
+ 101              	.LVL3:
+ 102              	.LFB118:
+  71:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** 
+  72:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** /*!
+  73:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     \brief      disable DAC
+  74:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     \param[in]  dac_periph
+ARM GAS  /tmp/ccyVL9Qf.s 			page 4
+
+
+  75:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****       \arg        DACx(x=0,1)
+  76:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     \param[out] none
+  77:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     \retval     none
+  78:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** */
+  79:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** void dac_disable(uint32_t dac_periph)
+  80:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** {
+ 103              		.loc 1 80 1 is_stmt 1 view -0
+ 104              		.cfi_startproc
+ 105              		@ args = 0, pretend = 0, frame = 0
+ 106              		@ frame_needed = 0, uses_anonymous_args = 0
+ 107              		@ link register save eliminated.
+  81:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     if(DAC0 == dac_periph){
+ 108              		.loc 1 81 5 view .LVU13
+ 109              		.loc 1 81 7 is_stmt 0 view .LVU14
+ 110 0000 38B9     		cbnz	r0, .L9
+  82:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****         DAC_CTL &= ~DAC_CTL_DEN0;
+ 111              		.loc 1 82 9 is_stmt 1 view .LVU15
+ 112              		.loc 1 82 17 is_stmt 0 view .LVU16
+ 113 0002 084A     		ldr	r2, .L11
+ 114 0004 D2F80034 		ldr	r3, [r2, #1024]
+ 115 0008 23F00103 		bic	r3, r3, #1
+ 116 000c C2F80034 		str	r3, [r2, #1024]
+ 117 0010 7047     		bx	lr
+ 118              	.L9:
+  83:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     }else{
+  84:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****         DAC_CTL &= ~DAC_CTL_DEN1;
+ 119              		.loc 1 84 9 is_stmt 1 view .LVU17
+ 120              		.loc 1 84 17 is_stmt 0 view .LVU18
+ 121 0012 044A     		ldr	r2, .L11
+ 122 0014 D2F80034 		ldr	r3, [r2, #1024]
+ 123 0018 23F48033 		bic	r3, r3, #65536
+ 124 001c C2F80034 		str	r3, [r2, #1024]
+  85:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     }
+  86:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** }
+ 125              		.loc 1 86 1 view .LVU19
+ 126 0020 7047     		bx	lr
+ 127              	.L12:
+ 128 0022 00BF     		.align	2
+ 129              	.L11:
+ 130 0024 00700040 		.word	1073770496
+ 131              		.cfi_endproc
+ 132              	.LFE118:
+ 134              		.section	.text.dac_dma_enable,"ax",%progbits
+ 135              		.align	1
+ 136              		.global	dac_dma_enable
+ 137              		.syntax unified
+ 138              		.thumb
+ 139              		.thumb_func
+ 140              		.fpu fpv4-sp-d16
+ 142              	dac_dma_enable:
+ 143              	.LVL4:
+ 144              	.LFB119:
+  87:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** 
+  88:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** /*!
+  89:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     \brief      enable DAC DMA function
+  90:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     \param[in]  dac_periph
+  91:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****       \arg        DACx(x=0,1)
+ARM GAS  /tmp/ccyVL9Qf.s 			page 5
+
+
+  92:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     \param[out] none
+  93:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     \retval     none
+  94:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** */
+  95:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** void dac_dma_enable(uint32_t dac_periph)
+  96:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** {
+ 145              		.loc 1 96 1 is_stmt 1 view -0
+ 146              		.cfi_startproc
+ 147              		@ args = 0, pretend = 0, frame = 0
+ 148              		@ frame_needed = 0, uses_anonymous_args = 0
+ 149              		@ link register save eliminated.
+  97:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     if(DAC0 == dac_periph){
+ 150              		.loc 1 97 5 view .LVU21
+ 151              		.loc 1 97 7 is_stmt 0 view .LVU22
+ 152 0000 38B9     		cbnz	r0, .L14
+  98:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****         DAC_CTL |= DAC_CTL_DDMAEN0;
+ 153              		.loc 1 98 9 is_stmt 1 view .LVU23
+ 154              		.loc 1 98 17 is_stmt 0 view .LVU24
+ 155 0002 084A     		ldr	r2, .L16
+ 156 0004 D2F80034 		ldr	r3, [r2, #1024]
+ 157 0008 43F48053 		orr	r3, r3, #4096
+ 158 000c C2F80034 		str	r3, [r2, #1024]
+ 159 0010 7047     		bx	lr
+ 160              	.L14:
+  99:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     }else{
+ 100:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****         DAC_CTL |= DAC_CTL_DDMAEN1;
+ 161              		.loc 1 100 9 is_stmt 1 view .LVU25
+ 162              		.loc 1 100 17 is_stmt 0 view .LVU26
+ 163 0012 044A     		ldr	r2, .L16
+ 164 0014 D2F80034 		ldr	r3, [r2, #1024]
+ 165 0018 43F08053 		orr	r3, r3, #268435456
+ 166 001c C2F80034 		str	r3, [r2, #1024]
+ 101:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     }
+ 102:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** }
+ 167              		.loc 1 102 1 view .LVU27
+ 168 0020 7047     		bx	lr
+ 169              	.L17:
+ 170 0022 00BF     		.align	2
+ 171              	.L16:
+ 172 0024 00700040 		.word	1073770496
+ 173              		.cfi_endproc
+ 174              	.LFE119:
+ 176              		.section	.text.dac_dma_disable,"ax",%progbits
+ 177              		.align	1
+ 178              		.global	dac_dma_disable
+ 179              		.syntax unified
+ 180              		.thumb
+ 181              		.thumb_func
+ 182              		.fpu fpv4-sp-d16
+ 184              	dac_dma_disable:
+ 185              	.LVL5:
+ 186              	.LFB120:
+ 103:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** 
+ 104:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** /*!
+ 105:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     \brief      disable DAC DMA function
+ 106:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     \param[in]  dac_periph
+ 107:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****       \arg        DACx(x=0,1)
+ 108:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     \param[out] none
+ARM GAS  /tmp/ccyVL9Qf.s 			page 6
+
+
+ 109:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     \retval     none
+ 110:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** */
+ 111:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** void dac_dma_disable(uint32_t dac_periph)
+ 112:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** {
+ 187              		.loc 1 112 1 is_stmt 1 view -0
+ 188              		.cfi_startproc
+ 189              		@ args = 0, pretend = 0, frame = 0
+ 190              		@ frame_needed = 0, uses_anonymous_args = 0
+ 191              		@ link register save eliminated.
+ 113:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     if(DAC0 == dac_periph){
+ 192              		.loc 1 113 5 view .LVU29
+ 193              		.loc 1 113 7 is_stmt 0 view .LVU30
+ 194 0000 38B9     		cbnz	r0, .L19
+ 114:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****         DAC_CTL &= ~DAC_CTL_DDMAEN0;
+ 195              		.loc 1 114 9 is_stmt 1 view .LVU31
+ 196              		.loc 1 114 17 is_stmt 0 view .LVU32
+ 197 0002 084A     		ldr	r2, .L21
+ 198 0004 D2F80034 		ldr	r3, [r2, #1024]
+ 199 0008 23F48053 		bic	r3, r3, #4096
+ 200 000c C2F80034 		str	r3, [r2, #1024]
+ 201 0010 7047     		bx	lr
+ 202              	.L19:
+ 115:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     }else{
+ 116:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****         DAC_CTL &= ~DAC_CTL_DDMAEN1;
+ 203              		.loc 1 116 9 is_stmt 1 view .LVU33
+ 204              		.loc 1 116 17 is_stmt 0 view .LVU34
+ 205 0012 044A     		ldr	r2, .L21
+ 206 0014 D2F80034 		ldr	r3, [r2, #1024]
+ 207 0018 23F08053 		bic	r3, r3, #268435456
+ 208 001c C2F80034 		str	r3, [r2, #1024]
+ 117:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     }
+ 118:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** }
+ 209              		.loc 1 118 1 view .LVU35
+ 210 0020 7047     		bx	lr
+ 211              	.L22:
+ 212 0022 00BF     		.align	2
+ 213              	.L21:
+ 214 0024 00700040 		.word	1073770496
+ 215              		.cfi_endproc
+ 216              	.LFE120:
+ 218              		.section	.text.dac_output_buffer_enable,"ax",%progbits
+ 219              		.align	1
+ 220              		.global	dac_output_buffer_enable
+ 221              		.syntax unified
+ 222              		.thumb
+ 223              		.thumb_func
+ 224              		.fpu fpv4-sp-d16
+ 226              	dac_output_buffer_enable:
+ 227              	.LVL6:
+ 228              	.LFB121:
+ 119:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** 
+ 120:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** /*!
+ 121:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     \brief      enable DAC output buffer
+ 122:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     \param[in]  dac_periph
+ 123:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****       \arg        DACx(x=0,1)
+ 124:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     \param[out] none
+ 125:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     \retval     none
+ARM GAS  /tmp/ccyVL9Qf.s 			page 7
+
+
+ 126:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** */
+ 127:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** void dac_output_buffer_enable(uint32_t dac_periph)
+ 128:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** {
+ 229              		.loc 1 128 1 is_stmt 1 view -0
+ 230              		.cfi_startproc
+ 231              		@ args = 0, pretend = 0, frame = 0
+ 232              		@ frame_needed = 0, uses_anonymous_args = 0
+ 233              		@ link register save eliminated.
+ 129:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     if(DAC0 == dac_periph){
+ 234              		.loc 1 129 5 view .LVU37
+ 235              		.loc 1 129 7 is_stmt 0 view .LVU38
+ 236 0000 38B9     		cbnz	r0, .L24
+ 130:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****         DAC_CTL &= ~DAC_CTL_DBOFF0;
+ 237              		.loc 1 130 9 is_stmt 1 view .LVU39
+ 238              		.loc 1 130 17 is_stmt 0 view .LVU40
+ 239 0002 084A     		ldr	r2, .L26
+ 240 0004 D2F80034 		ldr	r3, [r2, #1024]
+ 241 0008 23F00203 		bic	r3, r3, #2
+ 242 000c C2F80034 		str	r3, [r2, #1024]
+ 243 0010 7047     		bx	lr
+ 244              	.L24:
+ 131:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     }else{
+ 132:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****         DAC_CTL &= ~DAC_CTL_DBOFF1;
+ 245              		.loc 1 132 9 is_stmt 1 view .LVU41
+ 246              		.loc 1 132 17 is_stmt 0 view .LVU42
+ 247 0012 044A     		ldr	r2, .L26
+ 248 0014 D2F80034 		ldr	r3, [r2, #1024]
+ 249 0018 23F40033 		bic	r3, r3, #131072
+ 250 001c C2F80034 		str	r3, [r2, #1024]
+ 133:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     }
+ 134:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** }
+ 251              		.loc 1 134 1 view .LVU43
+ 252 0020 7047     		bx	lr
+ 253              	.L27:
+ 254 0022 00BF     		.align	2
+ 255              	.L26:
+ 256 0024 00700040 		.word	1073770496
+ 257              		.cfi_endproc
+ 258              	.LFE121:
+ 260              		.section	.text.dac_output_buffer_disable,"ax",%progbits
+ 261              		.align	1
+ 262              		.global	dac_output_buffer_disable
+ 263              		.syntax unified
+ 264              		.thumb
+ 265              		.thumb_func
+ 266              		.fpu fpv4-sp-d16
+ 268              	dac_output_buffer_disable:
+ 269              	.LVL7:
+ 270              	.LFB122:
+ 135:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** 
+ 136:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** /*!
+ 137:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     \brief      disable DAC output buffer
+ 138:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     \param[in]  dac_periph
+ 139:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****       \arg        DACx(x=0,1)
+ 140:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     \param[out] none
+ 141:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     \retval     none
+ 142:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** */
+ARM GAS  /tmp/ccyVL9Qf.s 			page 8
+
+
+ 143:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** void dac_output_buffer_disable(uint32_t dac_periph)
+ 144:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** {
+ 271              		.loc 1 144 1 is_stmt 1 view -0
+ 272              		.cfi_startproc
+ 273              		@ args = 0, pretend = 0, frame = 0
+ 274              		@ frame_needed = 0, uses_anonymous_args = 0
+ 275              		@ link register save eliminated.
+ 145:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     if(DAC0 == dac_periph){
+ 276              		.loc 1 145 5 view .LVU45
+ 277              		.loc 1 145 7 is_stmt 0 view .LVU46
+ 278 0000 38B9     		cbnz	r0, .L29
+ 146:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****         DAC_CTL |= DAC_CTL_DBOFF0;
+ 279              		.loc 1 146 9 is_stmt 1 view .LVU47
+ 280              		.loc 1 146 17 is_stmt 0 view .LVU48
+ 281 0002 084A     		ldr	r2, .L31
+ 282 0004 D2F80034 		ldr	r3, [r2, #1024]
+ 283 0008 43F00203 		orr	r3, r3, #2
+ 284 000c C2F80034 		str	r3, [r2, #1024]
+ 285 0010 7047     		bx	lr
+ 286              	.L29:
+ 147:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     }else{
+ 148:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****         DAC_CTL |= DAC_CTL_DBOFF1;
+ 287              		.loc 1 148 9 is_stmt 1 view .LVU49
+ 288              		.loc 1 148 17 is_stmt 0 view .LVU50
+ 289 0012 044A     		ldr	r2, .L31
+ 290 0014 D2F80034 		ldr	r3, [r2, #1024]
+ 291 0018 43F40033 		orr	r3, r3, #131072
+ 292 001c C2F80034 		str	r3, [r2, #1024]
+ 149:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     }
+ 150:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** }
+ 293              		.loc 1 150 1 view .LVU51
+ 294 0020 7047     		bx	lr
+ 295              	.L32:
+ 296 0022 00BF     		.align	2
+ 297              	.L31:
+ 298 0024 00700040 		.word	1073770496
+ 299              		.cfi_endproc
+ 300              	.LFE122:
+ 302              		.section	.text.dac_output_value_get,"ax",%progbits
+ 303              		.align	1
+ 304              		.global	dac_output_value_get
+ 305              		.syntax unified
+ 306              		.thumb
+ 307              		.thumb_func
+ 308              		.fpu fpv4-sp-d16
+ 310              	dac_output_value_get:
+ 311              	.LVL8:
+ 312              	.LFB123:
+ 151:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** 
+ 152:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** /*!
+ 153:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     \brief      get DAC output value
+ 154:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     \param[in]  dac_periph
+ 155:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****       \arg        DACx(x=0,1)
+ 156:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     \param[out] none
+ 157:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     \retval     DAC output data
+ 158:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** */
+ 159:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** uint16_t dac_output_value_get(uint32_t dac_periph)
+ARM GAS  /tmp/ccyVL9Qf.s 			page 9
+
+
+ 160:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** {
+ 313              		.loc 1 160 1 is_stmt 1 view -0
+ 314              		.cfi_startproc
+ 315              		@ args = 0, pretend = 0, frame = 0
+ 316              		@ frame_needed = 0, uses_anonymous_args = 0
+ 317              		@ link register save eliminated.
+ 161:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     uint16_t data = 0U;
+ 318              		.loc 1 161 5 view .LVU53
+ 162:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     if(DAC0 == dac_periph){
+ 319              		.loc 1 162 5 view .LVU54
+ 320              		.loc 1 162 7 is_stmt 0 view .LVU55
+ 321 0000 20B9     		cbnz	r0, .L34
+ 163:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****         /* store the DAC0 output value */
+ 164:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****         data = (uint16_t)DAC0_DO;
+ 322              		.loc 1 164 9 is_stmt 1 view .LVU56
+ 323              		.loc 1 164 26 is_stmt 0 view .LVU57
+ 324 0002 054B     		ldr	r3, .L36
+ 325 0004 D3F82C04 		ldr	r0, [r3, #1068]
+ 326              	.LVL9:
+ 327              		.loc 1 164 14 view .LVU58
+ 328 0008 80B2     		uxth	r0, r0
+ 329              	.LVL10:
+ 330              		.loc 1 164 14 view .LVU59
+ 331 000a 7047     		bx	lr
+ 332              	.LVL11:
+ 333              	.L34:
+ 165:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     }else{
+ 166:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****         /* store the DAC1 output value */
+ 167:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****         data = (uint16_t)DAC1_DO;
+ 334              		.loc 1 167 9 is_stmt 1 view .LVU60
+ 335              		.loc 1 167 26 is_stmt 0 view .LVU61
+ 336 000c 024B     		ldr	r3, .L36
+ 337 000e D3F83004 		ldr	r0, [r3, #1072]
+ 338              	.LVL12:
+ 339              		.loc 1 167 14 view .LVU62
+ 340 0012 80B2     		uxth	r0, r0
+ 341              	.LVL13:
+ 168:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     }
+ 169:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     return data;
+ 342              		.loc 1 169 5 is_stmt 1 view .LVU63
+ 170:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** }
+ 343              		.loc 1 170 1 is_stmt 0 view .LVU64
+ 344 0014 7047     		bx	lr
+ 345              	.L37:
+ 346 0016 00BF     		.align	2
+ 347              	.L36:
+ 348 0018 00700040 		.word	1073770496
+ 349              		.cfi_endproc
+ 350              	.LFE123:
+ 352              		.section	.text.dac_data_set,"ax",%progbits
+ 353              		.align	1
+ 354              		.global	dac_data_set
+ 355              		.syntax unified
+ 356              		.thumb
+ 357              		.thumb_func
+ 358              		.fpu fpv4-sp-d16
+ 360              	dac_data_set:
+ARM GAS  /tmp/ccyVL9Qf.s 			page 10
+
+
+ 361              	.LVL14:
+ 362              	.LFB124:
+ 171:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** 
+ 172:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** /*!
+ 173:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     \brief      set the DAC specified data holding register value
+ 174:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     \param[in]  dac_periph
+ 175:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****       \arg        DACx(x=0,1)
+ 176:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     \param[in]  dac_align
+ 177:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****                 only one parameter can be selected which is shown as below:
+ 178:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****       \arg        DAC_ALIGN_8B_R: data right 8b alignment
+ 179:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****       \arg        DAC_ALIGN_12B_R: data right 12b alignment
+ 180:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****       \arg        DAC_ALIGN_12B_L: data left 12b alignment
+ 181:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     \param[in]  data: data to be loaded
+ 182:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     \param[out] none
+ 183:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     \retval     none
+ 184:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** */
+ 185:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** void dac_data_set(uint32_t dac_periph, uint32_t dac_align, uint16_t data)
+ 186:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** {
+ 363              		.loc 1 186 1 is_stmt 1 view -0
+ 364              		.cfi_startproc
+ 365              		@ args = 0, pretend = 0, frame = 0
+ 366              		@ frame_needed = 0, uses_anonymous_args = 0
+ 367              		@ link register save eliminated.
+ 187:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     if(DAC0 == dac_periph){
+ 368              		.loc 1 187 5 view .LVU66
+ 369              		.loc 1 187 7 is_stmt 0 view .LVU67
+ 370 0000 88B9     		cbnz	r0, .L39
+ 188:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****         switch(dac_align){
+ 371              		.loc 1 188 9 is_stmt 1 view .LVU68
+ 372 0002 0129     		cmp	r1, #1
+ 373 0004 07D0     		beq	.L40
+ 374 0006 0229     		cmp	r1, #2
+ 375 0008 09D0     		beq	.L41
+ 376 000a 01B1     		cbz	r1, .L45
+ 377              	.L38:
+ 189:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****         /* data right 12b alignment */
+ 190:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****         case DAC_ALIGN_12B_R:
+ 191:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****             DAC0_R12DH = data;
+ 192:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****             break;
+ 193:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****         /* data left 12b alignment */
+ 194:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****         case DAC_ALIGN_12B_L:
+ 195:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****             DAC0_L12DH = data;
+ 196:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****             break;
+ 197:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****         /* data right 8b alignment */
+ 198:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****         case DAC_ALIGN_8B_R:
+ 199:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****             DAC0_R8DH = data;
+ 200:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****             break;
+ 201:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****         default:
+ 202:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****             break;
+ 203:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****         }
+ 204:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     }else{
+ 205:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****         switch(dac_align){
+ 206:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****         /* data right 12b alignment */
+ 207:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****         case DAC_ALIGN_12B_R:
+ 208:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****             DAC1_R12DH = data;
+ 209:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****             break;
+ 210:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****         /* data left 12b alignment */
+ARM GAS  /tmp/ccyVL9Qf.s 			page 11
+
+
+ 211:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****         case DAC_ALIGN_12B_L:
+ 212:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****             DAC1_L12DH = data;
+ 213:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****             break;
+ 214:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****         /* data right 8b alignment */
+ 215:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****         case DAC_ALIGN_8B_R:
+ 216:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****             DAC1_R8DH = data;
+ 217:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****             break;
+ 218:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****         default:
+ 219:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****             break;
+ 220:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****         }
+ 221:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     }
+ 222:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** }
+ 378              		.loc 1 222 1 is_stmt 0 view .LVU69
+ 379 000c 7047     		bx	lr
+ 380              	.L45:
+ 191:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****             break;
+ 381              		.loc 1 191 13 is_stmt 1 view .LVU70
+ 191:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****             break;
+ 382              		.loc 1 191 24 is_stmt 0 view .LVU71
+ 383 000e 0F4B     		ldr	r3, .L46
+ 384 0010 C3F80824 		str	r2, [r3, #1032]
+ 192:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****         /* data left 12b alignment */
+ 385              		.loc 1 192 13 is_stmt 1 view .LVU72
+ 386 0014 7047     		bx	lr
+ 387              	.L40:
+ 195:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****             break;
+ 388              		.loc 1 195 13 view .LVU73
+ 195:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****             break;
+ 389              		.loc 1 195 24 is_stmt 0 view .LVU74
+ 390 0016 0D4B     		ldr	r3, .L46
+ 391 0018 C3F80C24 		str	r2, [r3, #1036]
+ 196:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****         /* data right 8b alignment */
+ 392              		.loc 1 196 13 is_stmt 1 view .LVU75
+ 393 001c 7047     		bx	lr
+ 394              	.L41:
+ 199:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****             break;
+ 395              		.loc 1 199 13 view .LVU76
+ 199:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****             break;
+ 396              		.loc 1 199 23 is_stmt 0 view .LVU77
+ 397 001e 0B4B     		ldr	r3, .L46
+ 398 0020 C3F81024 		str	r2, [r3, #1040]
+ 200:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****         default:
+ 399              		.loc 1 200 13 is_stmt 1 view .LVU78
+ 400 0024 7047     		bx	lr
+ 401              	.L39:
+ 205:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****         /* data right 12b alignment */
+ 402              		.loc 1 205 9 view .LVU79
+ 403 0026 0129     		cmp	r1, #1
+ 404 0028 07D0     		beq	.L43
+ 405 002a 0229     		cmp	r1, #2
+ 406 002c 09D0     		beq	.L44
+ 407 002e 0029     		cmp	r1, #0
+ 408 0030 ECD1     		bne	.L38
+ 208:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****             break;
+ 409              		.loc 1 208 13 view .LVU80
+ 208:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****             break;
+ 410              		.loc 1 208 24 is_stmt 0 view .LVU81
+ARM GAS  /tmp/ccyVL9Qf.s 			page 12
+
+
+ 411 0032 064B     		ldr	r3, .L46
+ 412 0034 C3F81424 		str	r2, [r3, #1044]
+ 209:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****         /* data left 12b alignment */
+ 413              		.loc 1 209 13 is_stmt 1 view .LVU82
+ 414 0038 7047     		bx	lr
+ 415              	.L43:
+ 212:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****             break;
+ 416              		.loc 1 212 13 view .LVU83
+ 212:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****             break;
+ 417              		.loc 1 212 24 is_stmt 0 view .LVU84
+ 418 003a 044B     		ldr	r3, .L46
+ 419 003c C3F81824 		str	r2, [r3, #1048]
+ 213:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****         /* data right 8b alignment */
+ 420              		.loc 1 213 13 is_stmt 1 view .LVU85
+ 421 0040 7047     		bx	lr
+ 422              	.L44:
+ 216:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****             break;
+ 423              		.loc 1 216 13 view .LVU86
+ 216:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****             break;
+ 424              		.loc 1 216 23 is_stmt 0 view .LVU87
+ 425 0042 024B     		ldr	r3, .L46
+ 426 0044 C3F81C24 		str	r2, [r3, #1052]
+ 217:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****         default:
+ 427              		.loc 1 217 13 is_stmt 1 view .LVU88
+ 428              		.loc 1 222 1 is_stmt 0 view .LVU89
+ 429 0048 E0E7     		b	.L38
+ 430              	.L47:
+ 431 004a 00BF     		.align	2
+ 432              	.L46:
+ 433 004c 00700040 		.word	1073770496
+ 434              		.cfi_endproc
+ 435              	.LFE124:
+ 437              		.section	.text.dac_trigger_enable,"ax",%progbits
+ 438              		.align	1
+ 439              		.global	dac_trigger_enable
+ 440              		.syntax unified
+ 441              		.thumb
+ 442              		.thumb_func
+ 443              		.fpu fpv4-sp-d16
+ 445              	dac_trigger_enable:
+ 446              	.LVL15:
+ 447              	.LFB125:
+ 223:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** 
+ 224:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** /*!
+ 225:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     \brief      enable DAC trigger
+ 226:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     \param[in]  dac_periph
+ 227:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****       \arg        DACx(x=0,1)
+ 228:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     \param[out] none
+ 229:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     \retval     none
+ 230:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** */
+ 231:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** void dac_trigger_enable(uint32_t dac_periph)
+ 232:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** {
+ 448              		.loc 1 232 1 is_stmt 1 view -0
+ 449              		.cfi_startproc
+ 450              		@ args = 0, pretend = 0, frame = 0
+ 451              		@ frame_needed = 0, uses_anonymous_args = 0
+ 452              		@ link register save eliminated.
+ARM GAS  /tmp/ccyVL9Qf.s 			page 13
+
+
+ 233:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     if(DAC0 == dac_periph){
+ 453              		.loc 1 233 5 view .LVU91
+ 454              		.loc 1 233 7 is_stmt 0 view .LVU92
+ 455 0000 38B9     		cbnz	r0, .L49
+ 234:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****         DAC_CTL |= DAC_CTL_DTEN0;
+ 456              		.loc 1 234 9 is_stmt 1 view .LVU93
+ 457              		.loc 1 234 17 is_stmt 0 view .LVU94
+ 458 0002 084A     		ldr	r2, .L51
+ 459 0004 D2F80034 		ldr	r3, [r2, #1024]
+ 460 0008 43F00403 		orr	r3, r3, #4
+ 461 000c C2F80034 		str	r3, [r2, #1024]
+ 462 0010 7047     		bx	lr
+ 463              	.L49:
+ 235:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     }else{
+ 236:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****         DAC_CTL |= DAC_CTL_DTEN1;
+ 464              		.loc 1 236 9 is_stmt 1 view .LVU95
+ 465              		.loc 1 236 17 is_stmt 0 view .LVU96
+ 466 0012 044A     		ldr	r2, .L51
+ 467 0014 D2F80034 		ldr	r3, [r2, #1024]
+ 468 0018 43F48023 		orr	r3, r3, #262144
+ 469 001c C2F80034 		str	r3, [r2, #1024]
+ 237:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     }
+ 238:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** }
+ 470              		.loc 1 238 1 view .LVU97
+ 471 0020 7047     		bx	lr
+ 472              	.L52:
+ 473 0022 00BF     		.align	2
+ 474              	.L51:
+ 475 0024 00700040 		.word	1073770496
+ 476              		.cfi_endproc
+ 477              	.LFE125:
+ 479              		.section	.text.dac_trigger_disable,"ax",%progbits
+ 480              		.align	1
+ 481              		.global	dac_trigger_disable
+ 482              		.syntax unified
+ 483              		.thumb
+ 484              		.thumb_func
+ 485              		.fpu fpv4-sp-d16
+ 487              	dac_trigger_disable:
+ 488              	.LVL16:
+ 489              	.LFB126:
+ 239:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** 
+ 240:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** /*!
+ 241:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     \brief      disable DAC trigger
+ 242:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     \param[in]  dac_periph
+ 243:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****       \arg        DACx(x=0,1)
+ 244:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     \param[out] none
+ 245:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     \retval     none
+ 246:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** */
+ 247:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** void dac_trigger_disable(uint32_t dac_periph)
+ 248:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** {
+ 490              		.loc 1 248 1 is_stmt 1 view -0
+ 491              		.cfi_startproc
+ 492              		@ args = 0, pretend = 0, frame = 0
+ 493              		@ frame_needed = 0, uses_anonymous_args = 0
+ 494              		@ link register save eliminated.
+ 249:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     if(DAC0 == dac_periph){
+ARM GAS  /tmp/ccyVL9Qf.s 			page 14
+
+
+ 495              		.loc 1 249 5 view .LVU99
+ 496              		.loc 1 249 7 is_stmt 0 view .LVU100
+ 497 0000 38B9     		cbnz	r0, .L54
+ 250:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****         DAC_CTL &= ~DAC_CTL_DTEN0;
+ 498              		.loc 1 250 9 is_stmt 1 view .LVU101
+ 499              		.loc 1 250 17 is_stmt 0 view .LVU102
+ 500 0002 084A     		ldr	r2, .L56
+ 501 0004 D2F80034 		ldr	r3, [r2, #1024]
+ 502 0008 23F00403 		bic	r3, r3, #4
+ 503 000c C2F80034 		str	r3, [r2, #1024]
+ 504 0010 7047     		bx	lr
+ 505              	.L54:
+ 251:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     }else{
+ 252:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****         DAC_CTL &= ~DAC_CTL_DTEN1;
+ 506              		.loc 1 252 9 is_stmt 1 view .LVU103
+ 507              		.loc 1 252 17 is_stmt 0 view .LVU104
+ 508 0012 044A     		ldr	r2, .L56
+ 509 0014 D2F80034 		ldr	r3, [r2, #1024]
+ 510 0018 23F48023 		bic	r3, r3, #262144
+ 511 001c C2F80034 		str	r3, [r2, #1024]
+ 253:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     }
+ 254:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** }
+ 512              		.loc 1 254 1 view .LVU105
+ 513 0020 7047     		bx	lr
+ 514              	.L57:
+ 515 0022 00BF     		.align	2
+ 516              	.L56:
+ 517 0024 00700040 		.word	1073770496
+ 518              		.cfi_endproc
+ 519              	.LFE126:
+ 521              		.section	.text.dac_trigger_source_config,"ax",%progbits
+ 522              		.align	1
+ 523              		.global	dac_trigger_source_config
+ 524              		.syntax unified
+ 525              		.thumb
+ 526              		.thumb_func
+ 527              		.fpu fpv4-sp-d16
+ 529              	dac_trigger_source_config:
+ 530              	.LVL17:
+ 531              	.LFB127:
+ 255:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** 
+ 256:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** /*!
+ 257:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     \brief      set DAC trigger source
+ 258:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     \param[in]  dac_periph
+ 259:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****       \arg        DACx(x=0,1)
+ 260:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     \param[in]  triggersource: external triggers of DAC
+ 261:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****                 only one parameter can be selected which is shown as below:
+ 262:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****       \arg        DAC_TRIGGER_T1_TRGO: TIMER1 TRGO
+ 263:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****       \arg        DAC_TRIGGER_T2_TRGO: TIMER2 TRGO
+ 264:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****       \arg        DAC_TRIGGER_T3_TRGO: TIMER3 TRGO
+ 265:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****       \arg        DAC_TRIGGER_T4_TRGO: TIMER4 TRGO
+ 266:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****       \arg        DAC_TRIGGER_T5_TRGO: TIMER5 TRGO
+ 267:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****       \arg        DAC_TRIGGER_T6_TRGO: TIMER6 TRGO
+ 268:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****       \arg        DAC_TRIGGER_EXTI_9: EXTI interrupt line9 event
+ 269:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****       \arg        DAC_TRIGGER_SOFTWARE: software trigger
+ 270:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     \param[out] none
+ 271:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     \retval     none
+ARM GAS  /tmp/ccyVL9Qf.s 			page 15
+
+
+ 272:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** */
+ 273:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** void dac_trigger_source_config(uint32_t dac_periph,uint32_t triggersource)
+ 274:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** {
+ 532              		.loc 1 274 1 is_stmt 1 view -0
+ 533              		.cfi_startproc
+ 534              		@ args = 0, pretend = 0, frame = 0
+ 535              		@ frame_needed = 0, uses_anonymous_args = 0
+ 536              		@ link register save eliminated.
+ 275:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     if(DAC0 == dac_periph){
+ 537              		.loc 1 275 5 view .LVU107
+ 538              		.loc 1 275 7 is_stmt 0 view .LVU108
+ 539 0000 60B9     		cbnz	r0, .L59
+ 276:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****         /* configure DAC0 trigger source */
+ 277:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****         DAC_CTL &= ~DAC_CTL_DTSEL0;
+ 540              		.loc 1 277 9 is_stmt 1 view .LVU109
+ 541              		.loc 1 277 17 is_stmt 0 view .LVU110
+ 542 0002 0D4B     		ldr	r3, .L61
+ 543 0004 D3F80024 		ldr	r2, [r3, #1024]
+ 544 0008 22F03802 		bic	r2, r2, #56
+ 545 000c C3F80024 		str	r2, [r3, #1024]
+ 278:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****         DAC_CTL |= triggersource;
+ 546              		.loc 1 278 9 is_stmt 1 view .LVU111
+ 547              		.loc 1 278 17 is_stmt 0 view .LVU112
+ 548 0010 D3F80024 		ldr	r2, [r3, #1024]
+ 549 0014 1143     		orrs	r1, r1, r2
+ 550              	.LVL18:
+ 551              		.loc 1 278 17 view .LVU113
+ 552 0016 C3F80014 		str	r1, [r3, #1024]
+ 553 001a 7047     		bx	lr
+ 554              	.LVL19:
+ 555              	.L59:
+ 279:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     }else{
+ 280:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****         /* configure DAC1 trigger source */
+ 281:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****         DAC_CTL &= ~DAC_CTL_DTSEL1;
+ 556              		.loc 1 281 9 is_stmt 1 view .LVU114
+ 557              		.loc 1 281 17 is_stmt 0 view .LVU115
+ 558 001c 064B     		ldr	r3, .L61
+ 559 001e D3F80024 		ldr	r2, [r3, #1024]
+ 560 0022 22F46012 		bic	r2, r2, #3670016
+ 561 0026 C3F80024 		str	r2, [r3, #1024]
+ 282:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****         DAC_CTL |= (triggersource << DAC1_REG_OFFSET);
+ 562              		.loc 1 282 9 is_stmt 1 view .LVU116
+ 563              		.loc 1 282 17 is_stmt 0 view .LVU117
+ 564 002a D3F80024 		ldr	r2, [r3, #1024]
+ 565 002e 42EA0141 		orr	r1, r2, r1, lsl #16
+ 566              	.LVL20:
+ 567              		.loc 1 282 17 view .LVU118
+ 568 0032 C3F80014 		str	r1, [r3, #1024]
+ 283:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     }
+ 284:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** }
+ 569              		.loc 1 284 1 view .LVU119
+ 570 0036 7047     		bx	lr
+ 571              	.L62:
+ 572              		.align	2
+ 573              	.L61:
+ 574 0038 00700040 		.word	1073770496
+ 575              		.cfi_endproc
+ARM GAS  /tmp/ccyVL9Qf.s 			page 16
+
+
+ 576              	.LFE127:
+ 578              		.section	.text.dac_software_trigger_enable,"ax",%progbits
+ 579              		.align	1
+ 580              		.global	dac_software_trigger_enable
+ 581              		.syntax unified
+ 582              		.thumb
+ 583              		.thumb_func
+ 584              		.fpu fpv4-sp-d16
+ 586              	dac_software_trigger_enable:
+ 587              	.LVL21:
+ 588              	.LFB128:
+ 285:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** 
+ 286:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** /*!
+ 287:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     \brief      enable DAC software trigger
+ 288:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     \param[in]  dac_periph
+ 289:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****       \arg        DACx(x=0,1)
+ 290:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     \retval     none
+ 291:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** */
+ 292:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** void dac_software_trigger_enable(uint32_t dac_periph)
+ 293:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** {
+ 589              		.loc 1 293 1 is_stmt 1 view -0
+ 590              		.cfi_startproc
+ 591              		@ args = 0, pretend = 0, frame = 0
+ 592              		@ frame_needed = 0, uses_anonymous_args = 0
+ 593              		@ link register save eliminated.
+ 294:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     if(DAC0 == dac_periph){
+ 594              		.loc 1 294 5 view .LVU121
+ 595              		.loc 1 294 7 is_stmt 0 view .LVU122
+ 596 0000 38B9     		cbnz	r0, .L64
+ 295:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****         DAC_SWT |= DAC_SWT_SWTR0;
+ 597              		.loc 1 295 9 is_stmt 1 view .LVU123
+ 598              		.loc 1 295 17 is_stmt 0 view .LVU124
+ 599 0002 084A     		ldr	r2, .L66
+ 600 0004 D2F80434 		ldr	r3, [r2, #1028]
+ 601 0008 43F00103 		orr	r3, r3, #1
+ 602 000c C2F80434 		str	r3, [r2, #1028]
+ 603 0010 7047     		bx	lr
+ 604              	.L64:
+ 296:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     }else{
+ 297:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****         DAC_SWT |= DAC_SWT_SWTR1;
+ 605              		.loc 1 297 9 is_stmt 1 view .LVU125
+ 606              		.loc 1 297 17 is_stmt 0 view .LVU126
+ 607 0012 044A     		ldr	r2, .L66
+ 608 0014 D2F80434 		ldr	r3, [r2, #1028]
+ 609 0018 43F00203 		orr	r3, r3, #2
+ 610 001c C2F80434 		str	r3, [r2, #1028]
+ 298:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     }
+ 299:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** }
+ 611              		.loc 1 299 1 view .LVU127
+ 612 0020 7047     		bx	lr
+ 613              	.L67:
+ 614 0022 00BF     		.align	2
+ 615              	.L66:
+ 616 0024 00700040 		.word	1073770496
+ 617              		.cfi_endproc
+ 618              	.LFE128:
+ 620              		.section	.text.dac_software_trigger_disable,"ax",%progbits
+ARM GAS  /tmp/ccyVL9Qf.s 			page 17
+
+
+ 621              		.align	1
+ 622              		.global	dac_software_trigger_disable
+ 623              		.syntax unified
+ 624              		.thumb
+ 625              		.thumb_func
+ 626              		.fpu fpv4-sp-d16
+ 628              	dac_software_trigger_disable:
+ 629              	.LVL22:
+ 630              	.LFB129:
+ 300:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** 
+ 301:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** /*!
+ 302:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     \brief      disable DAC software trigger
+ 303:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     \param[in]  dac_periph
+ 304:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****       \arg        DACx(x=0,1)
+ 305:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     \param[out] none
+ 306:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     \retval     none
+ 307:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** */
+ 308:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** void dac_software_trigger_disable(uint32_t dac_periph)
+ 309:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** {
+ 631              		.loc 1 309 1 is_stmt 1 view -0
+ 632              		.cfi_startproc
+ 633              		@ args = 0, pretend = 0, frame = 0
+ 634              		@ frame_needed = 0, uses_anonymous_args = 0
+ 635              		@ link register save eliminated.
+ 310:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     if(DAC0 == dac_periph){
+ 636              		.loc 1 310 5 view .LVU129
+ 637              		.loc 1 310 7 is_stmt 0 view .LVU130
+ 638 0000 38B9     		cbnz	r0, .L69
+ 311:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****         DAC_SWT &= ~DAC_SWT_SWTR0;
+ 639              		.loc 1 311 9 is_stmt 1 view .LVU131
+ 640              		.loc 1 311 17 is_stmt 0 view .LVU132
+ 641 0002 084A     		ldr	r2, .L71
+ 642 0004 D2F80434 		ldr	r3, [r2, #1028]
+ 643 0008 23F00103 		bic	r3, r3, #1
+ 644 000c C2F80434 		str	r3, [r2, #1028]
+ 645 0010 7047     		bx	lr
+ 646              	.L69:
+ 312:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     }else{
+ 313:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****         DAC_SWT &= ~DAC_SWT_SWTR1;
+ 647              		.loc 1 313 9 is_stmt 1 view .LVU133
+ 648              		.loc 1 313 17 is_stmt 0 view .LVU134
+ 649 0012 044A     		ldr	r2, .L71
+ 650 0014 D2F80434 		ldr	r3, [r2, #1028]
+ 651 0018 23F00203 		bic	r3, r3, #2
+ 652 001c C2F80434 		str	r3, [r2, #1028]
+ 314:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     }
+ 315:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** }
+ 653              		.loc 1 315 1 view .LVU135
+ 654 0020 7047     		bx	lr
+ 655              	.L72:
+ 656 0022 00BF     		.align	2
+ 657              	.L71:
+ 658 0024 00700040 		.word	1073770496
+ 659              		.cfi_endproc
+ 660              	.LFE129:
+ 662              		.section	.text.dac_wave_mode_config,"ax",%progbits
+ 663              		.align	1
+ARM GAS  /tmp/ccyVL9Qf.s 			page 18
+
+
+ 664              		.global	dac_wave_mode_config
+ 665              		.syntax unified
+ 666              		.thumb
+ 667              		.thumb_func
+ 668              		.fpu fpv4-sp-d16
+ 670              	dac_wave_mode_config:
+ 671              	.LVL23:
+ 672              	.LFB130:
+ 316:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** 
+ 317:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** /*!
+ 318:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     \brief      configure DAC wave mode
+ 319:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     \param[in]  dac_periph
+ 320:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****       \arg        DACx(x=0,1)
+ 321:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     \param[in]  wave_mode
+ 322:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****                 only one parameter can be selected which is shown as below:
+ 323:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****       \arg        DAC_WAVE_DISABLE: wave disable
+ 324:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****       \arg        DAC_WAVE_MODE_LFSR: LFSR noise mode
+ 325:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****       \arg        DAC_WAVE_MODE_TRIANGLE: triangle noise mode
+ 326:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     \param[out] none
+ 327:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     \retval     none
+ 328:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** */
+ 329:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** void dac_wave_mode_config(uint32_t dac_periph, uint32_t wave_mode)
+ 330:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** {
+ 673              		.loc 1 330 1 is_stmt 1 view -0
+ 674              		.cfi_startproc
+ 675              		@ args = 0, pretend = 0, frame = 0
+ 676              		@ frame_needed = 0, uses_anonymous_args = 0
+ 677              		@ link register save eliminated.
+ 331:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     if(DAC0 == dac_periph){
+ 678              		.loc 1 331 5 view .LVU137
+ 679              		.loc 1 331 7 is_stmt 0 view .LVU138
+ 680 0000 60B9     		cbnz	r0, .L74
+ 332:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****         /* configure DAC0 wave mode */
+ 333:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****         DAC_CTL &= ~DAC_CTL_DWM0;
+ 681              		.loc 1 333 9 is_stmt 1 view .LVU139
+ 682              		.loc 1 333 17 is_stmt 0 view .LVU140
+ 683 0002 0D4B     		ldr	r3, .L76
+ 684 0004 D3F80024 		ldr	r2, [r3, #1024]
+ 685 0008 22F0C002 		bic	r2, r2, #192
+ 686 000c C3F80024 		str	r2, [r3, #1024]
+ 334:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****         DAC_CTL |= wave_mode;
+ 687              		.loc 1 334 9 is_stmt 1 view .LVU141
+ 688              		.loc 1 334 17 is_stmt 0 view .LVU142
+ 689 0010 D3F80024 		ldr	r2, [r3, #1024]
+ 690 0014 1143     		orrs	r1, r1, r2
+ 691              	.LVL24:
+ 692              		.loc 1 334 17 view .LVU143
+ 693 0016 C3F80014 		str	r1, [r3, #1024]
+ 694 001a 7047     		bx	lr
+ 695              	.LVL25:
+ 696              	.L74:
+ 335:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     }else{
+ 336:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****         /* configure DAC1 wave mode */
+ 337:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****         DAC_CTL &= ~DAC_CTL_DWM1;
+ 697              		.loc 1 337 9 is_stmt 1 view .LVU144
+ 698              		.loc 1 337 17 is_stmt 0 view .LVU145
+ 699 001c 064B     		ldr	r3, .L76
+ARM GAS  /tmp/ccyVL9Qf.s 			page 19
+
+
+ 700 001e D3F80024 		ldr	r2, [r3, #1024]
+ 701 0022 22F44002 		bic	r2, r2, #12582912
+ 702 0026 C3F80024 		str	r2, [r3, #1024]
+ 338:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****         DAC_CTL |= (wave_mode << DAC1_REG_OFFSET);
+ 703              		.loc 1 338 9 is_stmt 1 view .LVU146
+ 704              		.loc 1 338 17 is_stmt 0 view .LVU147
+ 705 002a D3F80024 		ldr	r2, [r3, #1024]
+ 706 002e 42EA0141 		orr	r1, r2, r1, lsl #16
+ 707              	.LVL26:
+ 708              		.loc 1 338 17 view .LVU148
+ 709 0032 C3F80014 		str	r1, [r3, #1024]
+ 339:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     }
+ 340:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** }
+ 710              		.loc 1 340 1 view .LVU149
+ 711 0036 7047     		bx	lr
+ 712              	.L77:
+ 713              		.align	2
+ 714              	.L76:
+ 715 0038 00700040 		.word	1073770496
+ 716              		.cfi_endproc
+ 717              	.LFE130:
+ 719              		.section	.text.dac_wave_bit_width_config,"ax",%progbits
+ 720              		.align	1
+ 721              		.global	dac_wave_bit_width_config
+ 722              		.syntax unified
+ 723              		.thumb
+ 724              		.thumb_func
+ 725              		.fpu fpv4-sp-d16
+ 727              	dac_wave_bit_width_config:
+ 728              	.LVL27:
+ 729              	.LFB131:
+ 341:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** 
+ 342:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** /*!
+ 343:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     \brief      configure DAC wave bit width
+ 344:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     \param[in]  dac_periph
+ 345:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****       \arg        DACx(x=0,1)
+ 346:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     \param[in]  bit_width
+ 347:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****                 only one parameter can be selected which is shown as below:
+ 348:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****       \arg        DAC_WAVE_BIT_WIDTH_1: bit width of the wave signal is 1
+ 349:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****       \arg        DAC_WAVE_BIT_WIDTH_2: bit width of the wave signal is 2
+ 350:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****       \arg        DAC_WAVE_BIT_WIDTH_3: bit width of the wave signal is 3
+ 351:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****       \arg        DAC_WAVE_BIT_WIDTH_4: bit width of the wave signal is 4
+ 352:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****       \arg        DAC_WAVE_BIT_WIDTH_5: bit width of the wave signal is 5
+ 353:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****       \arg        DAC_WAVE_BIT_WIDTH_6: bit width of the wave signal is 6
+ 354:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****       \arg        DAC_WAVE_BIT_WIDTH_7: bit width of the wave signal is 7
+ 355:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****       \arg        DAC_WAVE_BIT_WIDTH_8: bit width of the wave signal is 8
+ 356:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****       \arg        DAC_WAVE_BIT_WIDTH_9: bit width of the wave signal is 9
+ 357:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****       \arg        DAC_WAVE_BIT_WIDTH_10: bit width of the wave signal is 10
+ 358:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****       \arg        DAC_WAVE_BIT_WIDTH_11: bit width of the wave signal is 11
+ 359:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****       \arg        DAC_WAVE_BIT_WIDTH_12: bit width of the wave signal is 12
+ 360:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     \param[out] none
+ 361:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     \retval     none
+ 362:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** */
+ 363:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** void dac_wave_bit_width_config(uint32_t dac_periph, uint32_t bit_width)
+ 364:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** {
+ 730              		.loc 1 364 1 is_stmt 1 view -0
+ 731              		.cfi_startproc
+ARM GAS  /tmp/ccyVL9Qf.s 			page 20
+
+
+ 732              		@ args = 0, pretend = 0, frame = 0
+ 733              		@ frame_needed = 0, uses_anonymous_args = 0
+ 734              		@ link register save eliminated.
+ 365:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     if(DAC0 == dac_periph){
+ 735              		.loc 1 365 5 view .LVU151
+ 736              		.loc 1 365 7 is_stmt 0 view .LVU152
+ 737 0000 60B9     		cbnz	r0, .L79
+ 366:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****         /* configure DAC0 wave bit width */
+ 367:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****         DAC_CTL &= ~DAC_CTL_DWBW0;
+ 738              		.loc 1 367 9 is_stmt 1 view .LVU153
+ 739              		.loc 1 367 17 is_stmt 0 view .LVU154
+ 740 0002 0D4B     		ldr	r3, .L81
+ 741 0004 D3F80024 		ldr	r2, [r3, #1024]
+ 742 0008 22F47062 		bic	r2, r2, #3840
+ 743 000c C3F80024 		str	r2, [r3, #1024]
+ 368:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****         DAC_CTL |= bit_width;
+ 744              		.loc 1 368 9 is_stmt 1 view .LVU155
+ 745              		.loc 1 368 17 is_stmt 0 view .LVU156
+ 746 0010 D3F80024 		ldr	r2, [r3, #1024]
+ 747 0014 1143     		orrs	r1, r1, r2
+ 748              	.LVL28:
+ 749              		.loc 1 368 17 view .LVU157
+ 750 0016 C3F80014 		str	r1, [r3, #1024]
+ 751 001a 7047     		bx	lr
+ 752              	.LVL29:
+ 753              	.L79:
+ 369:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     }else{
+ 370:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****         /* configure DAC1 wave bit width */
+ 371:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****         DAC_CTL &= ~DAC_CTL_DWBW1;
+ 754              		.loc 1 371 9 is_stmt 1 view .LVU158
+ 755              		.loc 1 371 17 is_stmt 0 view .LVU159
+ 756 001c 064B     		ldr	r3, .L81
+ 757 001e D3F80024 		ldr	r2, [r3, #1024]
+ 758 0022 22F07062 		bic	r2, r2, #251658240
+ 759 0026 C3F80024 		str	r2, [r3, #1024]
+ 372:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****         DAC_CTL |= (bit_width << DAC1_REG_OFFSET);
+ 760              		.loc 1 372 9 is_stmt 1 view .LVU160
+ 761              		.loc 1 372 17 is_stmt 0 view .LVU161
+ 762 002a D3F80024 		ldr	r2, [r3, #1024]
+ 763 002e 42EA0141 		orr	r1, r2, r1, lsl #16
+ 764              	.LVL30:
+ 765              		.loc 1 372 17 view .LVU162
+ 766 0032 C3F80014 		str	r1, [r3, #1024]
+ 373:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     }
+ 374:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** }
+ 767              		.loc 1 374 1 view .LVU163
+ 768 0036 7047     		bx	lr
+ 769              	.L82:
+ 770              		.align	2
+ 771              	.L81:
+ 772 0038 00700040 		.word	1073770496
+ 773              		.cfi_endproc
+ 774              	.LFE131:
+ 776              		.section	.text.dac_lfsr_noise_config,"ax",%progbits
+ 777              		.align	1
+ 778              		.global	dac_lfsr_noise_config
+ 779              		.syntax unified
+ARM GAS  /tmp/ccyVL9Qf.s 			page 21
+
+
+ 780              		.thumb
+ 781              		.thumb_func
+ 782              		.fpu fpv4-sp-d16
+ 784              	dac_lfsr_noise_config:
+ 785              	.LVL31:
+ 786              	.LFB132:
+ 375:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** 
+ 376:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** /*!
+ 377:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     \brief      configure DAC LFSR noise mode
+ 378:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     \param[in]  dac_periph
+ 379:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****       \arg        DACx(x=0,1)
+ 380:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     \param[in]  unmask_bits
+ 381:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****                 only one parameter can be selected which is shown as below:
+ 382:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****       \arg        DAC_LFSR_BIT0: unmask the LFSR bit0
+ 383:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****       \arg        DAC_LFSR_BITS1_0: unmask the LFSR bits[1:0]
+ 384:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****       \arg        DAC_LFSR_BITS2_0: unmask the LFSR bits[2:0]
+ 385:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****       \arg        DAC_LFSR_BITS3_0: unmask the LFSR bits[3:0]
+ 386:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****       \arg        DAC_LFSR_BITS4_0: unmask the LFSR bits[4:0]
+ 387:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****       \arg        DAC_LFSR_BITS5_0: unmask the LFSR bits[5:0]
+ 388:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****       \arg        DAC_LFSR_BITS6_0: unmask the LFSR bits[6:0]
+ 389:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****       \arg        DAC_LFSR_BITS7_0: unmask the LFSR bits[7:0]
+ 390:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****       \arg        DAC_LFSR_BITS8_0: unmask the LFSR bits[8:0]
+ 391:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****       \arg        DAC_LFSR_BITS9_0: unmask the LFSR bits[9:0]
+ 392:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****       \arg        DAC_LFSR_BITS10_0: unmask the LFSR bits[10:0]
+ 393:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****       \arg        DAC_LFSR_BITS11_0: unmask the LFSR bits[11:0]
+ 394:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     \param[out] none
+ 395:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     \retval     none
+ 396:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** */
+ 397:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** void dac_lfsr_noise_config(uint32_t dac_periph, uint32_t unmask_bits)
+ 398:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** {
+ 787              		.loc 1 398 1 is_stmt 1 view -0
+ 788              		.cfi_startproc
+ 789              		@ args = 0, pretend = 0, frame = 0
+ 790              		@ frame_needed = 0, uses_anonymous_args = 0
+ 791              		@ link register save eliminated.
+ 399:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     if(DAC0 == dac_periph){
+ 792              		.loc 1 399 5 view .LVU165
+ 793              		.loc 1 399 7 is_stmt 0 view .LVU166
+ 794 0000 60B9     		cbnz	r0, .L84
+ 400:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****         /* configure DAC0 LFSR noise mode */
+ 401:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****         DAC_CTL &= ~DAC_CTL_DWBW0;
+ 795              		.loc 1 401 9 is_stmt 1 view .LVU167
+ 796              		.loc 1 401 17 is_stmt 0 view .LVU168
+ 797 0002 0D4B     		ldr	r3, .L86
+ 798 0004 D3F80024 		ldr	r2, [r3, #1024]
+ 799 0008 22F47062 		bic	r2, r2, #3840
+ 800 000c C3F80024 		str	r2, [r3, #1024]
+ 402:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****         DAC_CTL |= unmask_bits;
+ 801              		.loc 1 402 9 is_stmt 1 view .LVU169
+ 802              		.loc 1 402 17 is_stmt 0 view .LVU170
+ 803 0010 D3F80024 		ldr	r2, [r3, #1024]
+ 804 0014 1143     		orrs	r1, r1, r2
+ 805              	.LVL32:
+ 806              		.loc 1 402 17 view .LVU171
+ 807 0016 C3F80014 		str	r1, [r3, #1024]
+ 808 001a 7047     		bx	lr
+ 809              	.LVL33:
+ARM GAS  /tmp/ccyVL9Qf.s 			page 22
+
+
+ 810              	.L84:
+ 403:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     }else{
+ 404:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****         /* configure DAC1 LFSR noise mode */
+ 405:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****         DAC_CTL &= ~DAC_CTL_DWBW1;
+ 811              		.loc 1 405 9 is_stmt 1 view .LVU172
+ 812              		.loc 1 405 17 is_stmt 0 view .LVU173
+ 813 001c 064B     		ldr	r3, .L86
+ 814 001e D3F80024 		ldr	r2, [r3, #1024]
+ 815 0022 22F07062 		bic	r2, r2, #251658240
+ 816 0026 C3F80024 		str	r2, [r3, #1024]
+ 406:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****         DAC_CTL |= (unmask_bits << DAC1_REG_OFFSET);
+ 817              		.loc 1 406 9 is_stmt 1 view .LVU174
+ 818              		.loc 1 406 17 is_stmt 0 view .LVU175
+ 819 002a D3F80024 		ldr	r2, [r3, #1024]
+ 820 002e 42EA0141 		orr	r1, r2, r1, lsl #16
+ 821              	.LVL34:
+ 822              		.loc 1 406 17 view .LVU176
+ 823 0032 C3F80014 		str	r1, [r3, #1024]
+ 407:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     }
+ 408:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** }
+ 824              		.loc 1 408 1 view .LVU177
+ 825 0036 7047     		bx	lr
+ 826              	.L87:
+ 827              		.align	2
+ 828              	.L86:
+ 829 0038 00700040 		.word	1073770496
+ 830              		.cfi_endproc
+ 831              	.LFE132:
+ 833              		.section	.text.dac_triangle_noise_config,"ax",%progbits
+ 834              		.align	1
+ 835              		.global	dac_triangle_noise_config
+ 836              		.syntax unified
+ 837              		.thumb
+ 838              		.thumb_func
+ 839              		.fpu fpv4-sp-d16
+ 841              	dac_triangle_noise_config:
+ 842              	.LVL35:
+ 843              	.LFB133:
+ 409:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** 
+ 410:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** /*!
+ 411:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     \brief      configure DAC triangle noise mode
+ 412:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     \param[in]  dac_periph
+ 413:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****       \arg        DACx(x=0,1)
+ 414:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     \param[in]  amplitude
+ 415:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****                 only one parameter can be selected which is shown as below:
+ 416:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****       \arg        DAC_TRIANGLE_AMPLITUDE_1: triangle amplitude is 1
+ 417:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****       \arg        DAC_TRIANGLE_AMPLITUDE_3: triangle amplitude is 3
+ 418:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****       \arg        DAC_TRIANGLE_AMPLITUDE_7: triangle amplitude is 7
+ 419:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****       \arg        DAC_TRIANGLE_AMPLITUDE_15: triangle amplitude is 15
+ 420:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****       \arg        DAC_TRIANGLE_AMPLITUDE_31: triangle amplitude is 31
+ 421:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****       \arg        DAC_TRIANGLE_AMPLITUDE_63: triangle amplitude is 63
+ 422:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****       \arg        DAC_TRIANGLE_AMPLITUDE_127: triangle amplitude is 127
+ 423:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****       \arg        DAC_TRIANGLE_AMPLITUDE_255: triangle amplitude is 255
+ 424:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****       \arg        DAC_TRIANGLE_AMPLITUDE_511: triangle amplitude is 511
+ 425:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****       \arg        DAC_TRIANGLE_AMPLITUDE_1023: triangle amplitude is 1023
+ 426:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****       \arg        DAC_TRIANGLE_AMPLITUDE_2047: triangle amplitude is 2047
+ 427:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****       \arg        DAC_TRIANGLE_AMPLITUDE_4095: triangle amplitude is 4095
+ARM GAS  /tmp/ccyVL9Qf.s 			page 23
+
+
+ 428:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     \param[out] none
+ 429:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     \retval     none
+ 430:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** */
+ 431:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** void dac_triangle_noise_config(uint32_t dac_periph, uint32_t amplitude)
+ 432:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** {
+ 844              		.loc 1 432 1 is_stmt 1 view -0
+ 845              		.cfi_startproc
+ 846              		@ args = 0, pretend = 0, frame = 0
+ 847              		@ frame_needed = 0, uses_anonymous_args = 0
+ 848              		@ link register save eliminated.
+ 433:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     if(DAC0 == dac_periph){
+ 849              		.loc 1 433 5 view .LVU179
+ 850              		.loc 1 433 7 is_stmt 0 view .LVU180
+ 851 0000 60B9     		cbnz	r0, .L89
+ 434:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****         /* configure DAC0 triangle noise mode */
+ 435:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****         DAC_CTL &= ~DAC_CTL_DWBW0;
+ 852              		.loc 1 435 9 is_stmt 1 view .LVU181
+ 853              		.loc 1 435 17 is_stmt 0 view .LVU182
+ 854 0002 0D4B     		ldr	r3, .L91
+ 855 0004 D3F80024 		ldr	r2, [r3, #1024]
+ 856 0008 22F47062 		bic	r2, r2, #3840
+ 857 000c C3F80024 		str	r2, [r3, #1024]
+ 436:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****         DAC_CTL |= amplitude;
+ 858              		.loc 1 436 9 is_stmt 1 view .LVU183
+ 859              		.loc 1 436 17 is_stmt 0 view .LVU184
+ 860 0010 D3F80024 		ldr	r2, [r3, #1024]
+ 861 0014 1143     		orrs	r1, r1, r2
+ 862              	.LVL36:
+ 863              		.loc 1 436 17 view .LVU185
+ 864 0016 C3F80014 		str	r1, [r3, #1024]
+ 865 001a 7047     		bx	lr
+ 866              	.LVL37:
+ 867              	.L89:
+ 437:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     }else{
+ 438:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****         /* configure DAC1 triangle noise mode */
+ 439:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****         DAC_CTL &= ~DAC_CTL_DWBW1;
+ 868              		.loc 1 439 9 is_stmt 1 view .LVU186
+ 869              		.loc 1 439 17 is_stmt 0 view .LVU187
+ 870 001c 064B     		ldr	r3, .L91
+ 871 001e D3F80024 		ldr	r2, [r3, #1024]
+ 872 0022 22F07062 		bic	r2, r2, #251658240
+ 873 0026 C3F80024 		str	r2, [r3, #1024]
+ 440:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****         DAC_CTL |= (amplitude << DAC1_REG_OFFSET);
+ 874              		.loc 1 440 9 is_stmt 1 view .LVU188
+ 875              		.loc 1 440 17 is_stmt 0 view .LVU189
+ 876 002a D3F80024 		ldr	r2, [r3, #1024]
+ 877 002e 42EA0141 		orr	r1, r2, r1, lsl #16
+ 878              	.LVL38:
+ 879              		.loc 1 440 17 view .LVU190
+ 880 0032 C3F80014 		str	r1, [r3, #1024]
+ 441:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     }
+ 442:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** }
+ 881              		.loc 1 442 1 view .LVU191
+ 882 0036 7047     		bx	lr
+ 883              	.L92:
+ 884              		.align	2
+ 885              	.L91:
+ARM GAS  /tmp/ccyVL9Qf.s 			page 24
+
+
+ 886 0038 00700040 		.word	1073770496
+ 887              		.cfi_endproc
+ 888              	.LFE133:
+ 890              		.section	.text.dac_concurrent_enable,"ax",%progbits
+ 891              		.align	1
+ 892              		.global	dac_concurrent_enable
+ 893              		.syntax unified
+ 894              		.thumb
+ 895              		.thumb_func
+ 896              		.fpu fpv4-sp-d16
+ 898              	dac_concurrent_enable:
+ 899              	.LFB134:
+ 443:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** 
+ 444:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** /*!
+ 445:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     \brief      enable DAC concurrent mode
+ 446:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     \param[in]  none
+ 447:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     \param[out] none
+ 448:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     \retval     none
+ 449:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** */
+ 450:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** void dac_concurrent_enable(void)
+ 451:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** {
+ 900              		.loc 1 451 1 is_stmt 1 view -0
+ 901              		.cfi_startproc
+ 902              		@ args = 0, pretend = 0, frame = 0
+ 903              		@ frame_needed = 0, uses_anonymous_args = 0
+ 904              		@ link register save eliminated.
+ 452:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     uint32_t ctl = 0U;
+ 905              		.loc 1 452 5 view .LVU193
+ 906              	.LVL39:
+ 453:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     ctl = DAC_CTL_DEN0 | DAC_CTL_DEN1;
+ 907              		.loc 1 453 5 view .LVU194
+ 454:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     DAC_CTL |= (ctl);
+ 908              		.loc 1 454 5 view .LVU195
+ 909              		.loc 1 454 13 is_stmt 0 view .LVU196
+ 910 0000 034A     		ldr	r2, .L94
+ 911 0002 D2F80034 		ldr	r3, [r2, #1024]
+ 912 0006 43F00113 		orr	r3, r3, #65537
+ 913 000a C2F80034 		str	r3, [r2, #1024]
+ 455:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** }
+ 914              		.loc 1 455 1 view .LVU197
+ 915 000e 7047     		bx	lr
+ 916              	.L95:
+ 917              		.align	2
+ 918              	.L94:
+ 919 0010 00700040 		.word	1073770496
+ 920              		.cfi_endproc
+ 921              	.LFE134:
+ 923              		.section	.text.dac_concurrent_disable,"ax",%progbits
+ 924              		.align	1
+ 925              		.global	dac_concurrent_disable
+ 926              		.syntax unified
+ 927              		.thumb
+ 928              		.thumb_func
+ 929              		.fpu fpv4-sp-d16
+ 931              	dac_concurrent_disable:
+ 932              	.LFB135:
+ 456:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** 
+ARM GAS  /tmp/ccyVL9Qf.s 			page 25
+
+
+ 457:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** /*!
+ 458:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     \brief      disable DAC concurrent mode
+ 459:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     \param[in]  none
+ 460:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     \param[out] none
+ 461:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     \retval     none
+ 462:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** */
+ 463:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** void dac_concurrent_disable(void)
+ 464:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** {
+ 933              		.loc 1 464 1 is_stmt 1 view -0
+ 934              		.cfi_startproc
+ 935              		@ args = 0, pretend = 0, frame = 0
+ 936              		@ frame_needed = 0, uses_anonymous_args = 0
+ 937              		@ link register save eliminated.
+ 465:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     uint32_t ctl = 0U;
+ 938              		.loc 1 465 5 view .LVU199
+ 939              	.LVL40:
+ 466:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     ctl = DAC_CTL_DEN0 | DAC_CTL_DEN1;
+ 940              		.loc 1 466 5 view .LVU200
+ 467:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     DAC_CTL &= (~ctl);
+ 941              		.loc 1 467 5 view .LVU201
+ 942              		.loc 1 467 13 is_stmt 0 view .LVU202
+ 943 0000 034A     		ldr	r2, .L97
+ 944 0002 D2F80034 		ldr	r3, [r2, #1024]
+ 945 0006 23F00113 		bic	r3, r3, #65537
+ 946 000a C2F80034 		str	r3, [r2, #1024]
+ 468:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** }
+ 947              		.loc 1 468 1 view .LVU203
+ 948 000e 7047     		bx	lr
+ 949              	.L98:
+ 950              		.align	2
+ 951              	.L97:
+ 952 0010 00700040 		.word	1073770496
+ 953              		.cfi_endproc
+ 954              	.LFE135:
+ 956              		.section	.text.dac_concurrent_software_trigger_enable,"ax",%progbits
+ 957              		.align	1
+ 958              		.global	dac_concurrent_software_trigger_enable
+ 959              		.syntax unified
+ 960              		.thumb
+ 961              		.thumb_func
+ 962              		.fpu fpv4-sp-d16
+ 964              	dac_concurrent_software_trigger_enable:
+ 965              	.LFB136:
+ 469:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** 
+ 470:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** /*!
+ 471:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     \brief      enable DAC concurrent software trigger function
+ 472:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     \param[in]  none
+ 473:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     \param[out] none
+ 474:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     \retval     none
+ 475:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** */
+ 476:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** void dac_concurrent_software_trigger_enable(void)
+ 477:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** {
+ 966              		.loc 1 477 1 is_stmt 1 view -0
+ 967              		.cfi_startproc
+ 968              		@ args = 0, pretend = 0, frame = 0
+ 969              		@ frame_needed = 0, uses_anonymous_args = 0
+ 970              		@ link register save eliminated.
+ARM GAS  /tmp/ccyVL9Qf.s 			page 26
+
+
+ 478:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     uint32_t swt = 0U;
+ 971              		.loc 1 478 5 view .LVU205
+ 972              	.LVL41:
+ 479:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     swt = DAC_SWT_SWTR0 | DAC_SWT_SWTR1;
+ 973              		.loc 1 479 5 view .LVU206
+ 480:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     DAC_SWT |= (swt); 
+ 974              		.loc 1 480 5 view .LVU207
+ 975              		.loc 1 480 13 is_stmt 0 view .LVU208
+ 976 0000 034A     		ldr	r2, .L100
+ 977 0002 D2F80434 		ldr	r3, [r2, #1028]
+ 978 0006 43F00303 		orr	r3, r3, #3
+ 979 000a C2F80434 		str	r3, [r2, #1028]
+ 481:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** }
+ 980              		.loc 1 481 1 view .LVU209
+ 981 000e 7047     		bx	lr
+ 982              	.L101:
+ 983              		.align	2
+ 984              	.L100:
+ 985 0010 00700040 		.word	1073770496
+ 986              		.cfi_endproc
+ 987              	.LFE136:
+ 989              		.section	.text.dac_concurrent_software_trigger_disable,"ax",%progbits
+ 990              		.align	1
+ 991              		.global	dac_concurrent_software_trigger_disable
+ 992              		.syntax unified
+ 993              		.thumb
+ 994              		.thumb_func
+ 995              		.fpu fpv4-sp-d16
+ 997              	dac_concurrent_software_trigger_disable:
+ 998              	.LFB137:
+ 482:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** 
+ 483:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** /*!
+ 484:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     \brief      disable DAC concurrent software trigger function
+ 485:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     \param[in]  none
+ 486:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     \param[out] none
+ 487:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     \retval     none
+ 488:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** */
+ 489:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** void dac_concurrent_software_trigger_disable(void)
+ 490:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** {
+ 999              		.loc 1 490 1 is_stmt 1 view -0
+ 1000              		.cfi_startproc
+ 1001              		@ args = 0, pretend = 0, frame = 0
+ 1002              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1003              		@ link register save eliminated.
+ 491:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     uint32_t swt = 0U;
+ 1004              		.loc 1 491 5 view .LVU211
+ 1005              	.LVL42:
+ 492:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     swt = DAC_SWT_SWTR0 | DAC_SWT_SWTR1;
+ 1006              		.loc 1 492 5 view .LVU212
+ 493:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     DAC_SWT &= (~swt);
+ 1007              		.loc 1 493 5 view .LVU213
+ 1008              		.loc 1 493 13 is_stmt 0 view .LVU214
+ 1009 0000 034A     		ldr	r2, .L103
+ 1010 0002 D2F80434 		ldr	r3, [r2, #1028]
+ 1011 0006 23F00303 		bic	r3, r3, #3
+ 1012 000a C2F80434 		str	r3, [r2, #1028]
+ 494:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** }
+ARM GAS  /tmp/ccyVL9Qf.s 			page 27
+
+
+ 1013              		.loc 1 494 1 view .LVU215
+ 1014 000e 7047     		bx	lr
+ 1015              	.L104:
+ 1016              		.align	2
+ 1017              	.L103:
+ 1018 0010 00700040 		.word	1073770496
+ 1019              		.cfi_endproc
+ 1020              	.LFE137:
+ 1022              		.section	.text.dac_concurrent_output_buffer_enable,"ax",%progbits
+ 1023              		.align	1
+ 1024              		.global	dac_concurrent_output_buffer_enable
+ 1025              		.syntax unified
+ 1026              		.thumb
+ 1027              		.thumb_func
+ 1028              		.fpu fpv4-sp-d16
+ 1030              	dac_concurrent_output_buffer_enable:
+ 1031              	.LFB138:
+ 495:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** 
+ 496:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** /*!
+ 497:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     \brief      enable DAC concurrent buffer function
+ 498:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     \param[in]  none
+ 499:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     \param[out] none
+ 500:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     \retval     none
+ 501:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** */
+ 502:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** void dac_concurrent_output_buffer_enable(void)
+ 503:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** {
+ 1032              		.loc 1 503 1 is_stmt 1 view -0
+ 1033              		.cfi_startproc
+ 1034              		@ args = 0, pretend = 0, frame = 0
+ 1035              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1036              		@ link register save eliminated.
+ 504:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     uint32_t ctl = 0U;
+ 1037              		.loc 1 504 5 view .LVU217
+ 1038              	.LVL43:
+ 505:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     ctl = DAC_CTL_DBOFF0 | DAC_CTL_DBOFF1;
+ 1039              		.loc 1 505 5 view .LVU218
+ 506:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     DAC_CTL &= (~ctl);
+ 1040              		.loc 1 506 5 view .LVU219
+ 1041              		.loc 1 506 13 is_stmt 0 view .LVU220
+ 1042 0000 034A     		ldr	r2, .L106
+ 1043 0002 D2F80034 		ldr	r3, [r2, #1024]
+ 1044 0006 23F00213 		bic	r3, r3, #131074
+ 1045 000a C2F80034 		str	r3, [r2, #1024]
+ 507:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** }
+ 1046              		.loc 1 507 1 view .LVU221
+ 1047 000e 7047     		bx	lr
+ 1048              	.L107:
+ 1049              		.align	2
+ 1050              	.L106:
+ 1051 0010 00700040 		.word	1073770496
+ 1052              		.cfi_endproc
+ 1053              	.LFE138:
+ 1055              		.section	.text.dac_concurrent_output_buffer_disable,"ax",%progbits
+ 1056              		.align	1
+ 1057              		.global	dac_concurrent_output_buffer_disable
+ 1058              		.syntax unified
+ 1059              		.thumb
+ARM GAS  /tmp/ccyVL9Qf.s 			page 28
+
+
+ 1060              		.thumb_func
+ 1061              		.fpu fpv4-sp-d16
+ 1063              	dac_concurrent_output_buffer_disable:
+ 1064              	.LFB139:
+ 508:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** 
+ 509:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** /*!
+ 510:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     \brief      disable DAC concurrent buffer function
+ 511:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     \param[in]  none
+ 512:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     \param[out] none
+ 513:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     \retval     none
+ 514:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** */
+ 515:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** void dac_concurrent_output_buffer_disable(void)
+ 516:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** {
+ 1065              		.loc 1 516 1 is_stmt 1 view -0
+ 1066              		.cfi_startproc
+ 1067              		@ args = 0, pretend = 0, frame = 0
+ 1068              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1069              		@ link register save eliminated.
+ 517:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     uint32_t ctl = 0U;
+ 1070              		.loc 1 517 5 view .LVU223
+ 1071              	.LVL44:
+ 518:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     ctl = DAC_CTL_DBOFF0 | DAC_CTL_DBOFF1;
+ 1072              		.loc 1 518 5 view .LVU224
+ 519:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     DAC_CTL |= (ctl);
+ 1073              		.loc 1 519 5 view .LVU225
+ 1074              		.loc 1 519 13 is_stmt 0 view .LVU226
+ 1075 0000 034A     		ldr	r2, .L109
+ 1076 0002 D2F80034 		ldr	r3, [r2, #1024]
+ 1077 0006 43F00213 		orr	r3, r3, #131074
+ 1078 000a C2F80034 		str	r3, [r2, #1024]
+ 520:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** }
+ 1079              		.loc 1 520 1 view .LVU227
+ 1080 000e 7047     		bx	lr
+ 1081              	.L110:
+ 1082              		.align	2
+ 1083              	.L109:
+ 1084 0010 00700040 		.word	1073770496
+ 1085              		.cfi_endproc
+ 1086              	.LFE139:
+ 1088              		.section	.text.dac_concurrent_data_set,"ax",%progbits
+ 1089              		.align	1
+ 1090              		.global	dac_concurrent_data_set
+ 1091              		.syntax unified
+ 1092              		.thumb
+ 1093              		.thumb_func
+ 1094              		.fpu fpv4-sp-d16
+ 1096              	dac_concurrent_data_set:
+ 1097              	.LVL45:
+ 1098              	.LFB140:
+ 521:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** 
+ 522:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** /*!
+ 523:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     \brief      set DAC concurrent mode data holding register value
+ 524:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     \param[in]  dac_align
+ 525:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****                 only one parameter can be selected which is shown as below:
+ 526:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****       \arg        DAC_ALIGN_8B_R: data right 8b alignment
+ 527:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****       \arg        DAC_ALIGN_12B_R: data right 12b alignment
+ 528:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****       \arg        DAC_ALIGN_12B_L: data left 12b alignment
+ARM GAS  /tmp/ccyVL9Qf.s 			page 29
+
+
+ 529:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     \param[in]  data0: data to be loaded
+ 530:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     \param[in]  data1: data to be loaded
+ 531:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     \param[out] none
+ 532:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     \retval     none
+ 533:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** */
+ 534:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** void dac_concurrent_data_set(uint32_t dac_align, uint16_t data0, uint16_t data1)
+ 535:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** {
+ 1099              		.loc 1 535 1 is_stmt 1 view -0
+ 1100              		.cfi_startproc
+ 1101              		@ args = 0, pretend = 0, frame = 0
+ 1102              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1103              		@ link register save eliminated.
+ 536:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     uint32_t data = 0U;
+ 1104              		.loc 1 536 5 view .LVU229
+ 537:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     switch(dac_align){
+ 1105              		.loc 1 537 5 view .LVU230
+ 1106 0000 0128     		cmp	r0, #1
+ 1107 0002 09D0     		beq	.L112
+ 1108 0004 0228     		cmp	r0, #2
+ 1109 0006 0DD0     		beq	.L113
+ 1110 0008 00B1     		cbz	r0, .L115
+ 1111              	.LVL46:
+ 1112              	.L111:
+ 538:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     /* data right 12b alignment */
+ 539:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     case DAC_ALIGN_12B_R:
+ 540:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****         data = ((uint32_t)data1 << DH_12BIT_OFFSET) | data0;
+ 541:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****         DACC_R12DH = data;
+ 542:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****         break;
+ 543:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     /* data left 12b alignment */
+ 544:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     case DAC_ALIGN_12B_L:
+ 545:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****         data = ((uint32_t)data1 << DH_12BIT_OFFSET) | data0;
+ 546:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****         DACC_L12DH = data;
+ 547:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****         break;
+ 548:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     /* data right 8b alignment */
+ 549:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     case DAC_ALIGN_8B_R:
+ 550:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****         data = ((uint32_t)data1 << DH_8BIT_OFFSET) | data0;
+ 551:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****         DACC_R8DH = data;
+ 552:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****         break;
+ 553:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     default:
+ 554:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****         break;
+ 555:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     }
+ 556:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c **** }
+ 1113              		.loc 1 556 1 is_stmt 0 view .LVU231
+ 1114 000a 7047     		bx	lr
+ 1115              	.LVL47:
+ 1116              	.L115:
+ 540:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****         DACC_R12DH = data;
+ 1117              		.loc 1 540 9 is_stmt 1 view .LVU232
+ 540:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****         DACC_R12DH = data;
+ 1118              		.loc 1 540 14 is_stmt 0 view .LVU233
+ 1119 000c 41EA0241 		orr	r1, r1, r2, lsl #16
+ 1120              	.LVL48:
+ 541:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****         break;
+ 1121              		.loc 1 541 9 is_stmt 1 view .LVU234
+ 541:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****         break;
+ 1122              		.loc 1 541 20 is_stmt 0 view .LVU235
+ 1123 0010 074B     		ldr	r3, .L116
+ARM GAS  /tmp/ccyVL9Qf.s 			page 30
+
+
+ 1124 0012 C3F82014 		str	r1, [r3, #1056]
+ 542:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     /* data left 12b alignment */
+ 1125              		.loc 1 542 9 is_stmt 1 view .LVU236
+ 1126 0016 7047     		bx	lr
+ 1127              	.LVL49:
+ 1128              	.L112:
+ 545:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****         DACC_L12DH = data;
+ 1129              		.loc 1 545 9 view .LVU237
+ 545:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****         DACC_L12DH = data;
+ 1130              		.loc 1 545 14 is_stmt 0 view .LVU238
+ 1131 0018 41EA0241 		orr	r1, r1, r2, lsl #16
+ 1132              	.LVL50:
+ 546:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****         break;
+ 1133              		.loc 1 546 9 is_stmt 1 view .LVU239
+ 546:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****         break;
+ 1134              		.loc 1 546 20 is_stmt 0 view .LVU240
+ 1135 001c 044B     		ldr	r3, .L116
+ 1136 001e C3F82414 		str	r1, [r3, #1060]
+ 547:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     /* data right 8b alignment */
+ 1137              		.loc 1 547 9 is_stmt 1 view .LVU241
+ 1138 0022 7047     		bx	lr
+ 1139              	.LVL51:
+ 1140              	.L113:
+ 550:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****         DACC_R8DH = data;
+ 1141              		.loc 1 550 9 view .LVU242
+ 550:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****         DACC_R8DH = data;
+ 1142              		.loc 1 550 14 is_stmt 0 view .LVU243
+ 1143 0024 41EA0221 		orr	r1, r1, r2, lsl #8
+ 1144              	.LVL52:
+ 551:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****         break;
+ 1145              		.loc 1 551 9 is_stmt 1 view .LVU244
+ 551:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****         break;
+ 1146              		.loc 1 551 19 is_stmt 0 view .LVU245
+ 1147 0028 014B     		ldr	r3, .L116
+ 1148 002a C3F82814 		str	r1, [r3, #1064]
+ 552:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_dac.c ****     default:
+ 1149              		.loc 1 552 9 is_stmt 1 view .LVU246
+ 1150              		.loc 1 556 1 is_stmt 0 view .LVU247
+ 1151 002e ECE7     		b	.L111
+ 1152              	.L117:
+ 1153              		.align	2
+ 1154              	.L116:
+ 1155 0030 00700040 		.word	1073770496
+ 1156              		.cfi_endproc
+ 1157              	.LFE140:
+ 1159              		.text
+ 1160              	.Letext0:
+ 1161              		.file 2 "/usr/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h"
+ 1162              		.file 3 "../../../../Firmware/GD32E10x_standard_peripheral/Include/gd32e10x_rcu.h"
+ARM GAS  /tmp/ccyVL9Qf.s 			page 31
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 gd32e10x_dac.c
+     /tmp/ccyVL9Qf.s:18     .text.dac_deinit:0000000000000000 $t
+     /tmp/ccyVL9Qf.s:26     .text.dac_deinit:0000000000000000 dac_deinit
+     /tmp/ccyVL9Qf.s:51     .text.dac_enable:0000000000000000 $t
+     /tmp/ccyVL9Qf.s:58     .text.dac_enable:0000000000000000 dac_enable
+     /tmp/ccyVL9Qf.s:88     .text.dac_enable:0000000000000024 $d
+     /tmp/ccyVL9Qf.s:93     .text.dac_disable:0000000000000000 $t
+     /tmp/ccyVL9Qf.s:100    .text.dac_disable:0000000000000000 dac_disable
+     /tmp/ccyVL9Qf.s:130    .text.dac_disable:0000000000000024 $d
+     /tmp/ccyVL9Qf.s:135    .text.dac_dma_enable:0000000000000000 $t
+     /tmp/ccyVL9Qf.s:142    .text.dac_dma_enable:0000000000000000 dac_dma_enable
+     /tmp/ccyVL9Qf.s:172    .text.dac_dma_enable:0000000000000024 $d
+     /tmp/ccyVL9Qf.s:177    .text.dac_dma_disable:0000000000000000 $t
+     /tmp/ccyVL9Qf.s:184    .text.dac_dma_disable:0000000000000000 dac_dma_disable
+     /tmp/ccyVL9Qf.s:214    .text.dac_dma_disable:0000000000000024 $d
+     /tmp/ccyVL9Qf.s:219    .text.dac_output_buffer_enable:0000000000000000 $t
+     /tmp/ccyVL9Qf.s:226    .text.dac_output_buffer_enable:0000000000000000 dac_output_buffer_enable
+     /tmp/ccyVL9Qf.s:256    .text.dac_output_buffer_enable:0000000000000024 $d
+     /tmp/ccyVL9Qf.s:261    .text.dac_output_buffer_disable:0000000000000000 $t
+     /tmp/ccyVL9Qf.s:268    .text.dac_output_buffer_disable:0000000000000000 dac_output_buffer_disable
+     /tmp/ccyVL9Qf.s:298    .text.dac_output_buffer_disable:0000000000000024 $d
+     /tmp/ccyVL9Qf.s:303    .text.dac_output_value_get:0000000000000000 $t
+     /tmp/ccyVL9Qf.s:310    .text.dac_output_value_get:0000000000000000 dac_output_value_get
+     /tmp/ccyVL9Qf.s:348    .text.dac_output_value_get:0000000000000018 $d
+     /tmp/ccyVL9Qf.s:353    .text.dac_data_set:0000000000000000 $t
+     /tmp/ccyVL9Qf.s:360    .text.dac_data_set:0000000000000000 dac_data_set
+     /tmp/ccyVL9Qf.s:433    .text.dac_data_set:000000000000004c $d
+     /tmp/ccyVL9Qf.s:438    .text.dac_trigger_enable:0000000000000000 $t
+     /tmp/ccyVL9Qf.s:445    .text.dac_trigger_enable:0000000000000000 dac_trigger_enable
+     /tmp/ccyVL9Qf.s:475    .text.dac_trigger_enable:0000000000000024 $d
+     /tmp/ccyVL9Qf.s:480    .text.dac_trigger_disable:0000000000000000 $t
+     /tmp/ccyVL9Qf.s:487    .text.dac_trigger_disable:0000000000000000 dac_trigger_disable
+     /tmp/ccyVL9Qf.s:517    .text.dac_trigger_disable:0000000000000024 $d
+     /tmp/ccyVL9Qf.s:522    .text.dac_trigger_source_config:0000000000000000 $t
+     /tmp/ccyVL9Qf.s:529    .text.dac_trigger_source_config:0000000000000000 dac_trigger_source_config
+     /tmp/ccyVL9Qf.s:574    .text.dac_trigger_source_config:0000000000000038 $d
+     /tmp/ccyVL9Qf.s:579    .text.dac_software_trigger_enable:0000000000000000 $t
+     /tmp/ccyVL9Qf.s:586    .text.dac_software_trigger_enable:0000000000000000 dac_software_trigger_enable
+     /tmp/ccyVL9Qf.s:616    .text.dac_software_trigger_enable:0000000000000024 $d
+     /tmp/ccyVL9Qf.s:621    .text.dac_software_trigger_disable:0000000000000000 $t
+     /tmp/ccyVL9Qf.s:628    .text.dac_software_trigger_disable:0000000000000000 dac_software_trigger_disable
+     /tmp/ccyVL9Qf.s:658    .text.dac_software_trigger_disable:0000000000000024 $d
+     /tmp/ccyVL9Qf.s:663    .text.dac_wave_mode_config:0000000000000000 $t
+     /tmp/ccyVL9Qf.s:670    .text.dac_wave_mode_config:0000000000000000 dac_wave_mode_config
+     /tmp/ccyVL9Qf.s:715    .text.dac_wave_mode_config:0000000000000038 $d
+     /tmp/ccyVL9Qf.s:720    .text.dac_wave_bit_width_config:0000000000000000 $t
+     /tmp/ccyVL9Qf.s:727    .text.dac_wave_bit_width_config:0000000000000000 dac_wave_bit_width_config
+     /tmp/ccyVL9Qf.s:772    .text.dac_wave_bit_width_config:0000000000000038 $d
+     /tmp/ccyVL9Qf.s:777    .text.dac_lfsr_noise_config:0000000000000000 $t
+     /tmp/ccyVL9Qf.s:784    .text.dac_lfsr_noise_config:0000000000000000 dac_lfsr_noise_config
+     /tmp/ccyVL9Qf.s:829    .text.dac_lfsr_noise_config:0000000000000038 $d
+     /tmp/ccyVL9Qf.s:834    .text.dac_triangle_noise_config:0000000000000000 $t
+     /tmp/ccyVL9Qf.s:841    .text.dac_triangle_noise_config:0000000000000000 dac_triangle_noise_config
+     /tmp/ccyVL9Qf.s:886    .text.dac_triangle_noise_config:0000000000000038 $d
+     /tmp/ccyVL9Qf.s:891    .text.dac_concurrent_enable:0000000000000000 $t
+     /tmp/ccyVL9Qf.s:898    .text.dac_concurrent_enable:0000000000000000 dac_concurrent_enable
+ARM GAS  /tmp/ccyVL9Qf.s 			page 32
+
+
+     /tmp/ccyVL9Qf.s:919    .text.dac_concurrent_enable:0000000000000010 $d
+     /tmp/ccyVL9Qf.s:924    .text.dac_concurrent_disable:0000000000000000 $t
+     /tmp/ccyVL9Qf.s:931    .text.dac_concurrent_disable:0000000000000000 dac_concurrent_disable
+     /tmp/ccyVL9Qf.s:952    .text.dac_concurrent_disable:0000000000000010 $d
+     /tmp/ccyVL9Qf.s:957    .text.dac_concurrent_software_trigger_enable:0000000000000000 $t
+     /tmp/ccyVL9Qf.s:964    .text.dac_concurrent_software_trigger_enable:0000000000000000 dac_concurrent_software_trigger_enable
+     /tmp/ccyVL9Qf.s:985    .text.dac_concurrent_software_trigger_enable:0000000000000010 $d
+     /tmp/ccyVL9Qf.s:990    .text.dac_concurrent_software_trigger_disable:0000000000000000 $t
+     /tmp/ccyVL9Qf.s:997    .text.dac_concurrent_software_trigger_disable:0000000000000000 dac_concurrent_software_trigger_disable
+     /tmp/ccyVL9Qf.s:1018   .text.dac_concurrent_software_trigger_disable:0000000000000010 $d
+     /tmp/ccyVL9Qf.s:1023   .text.dac_concurrent_output_buffer_enable:0000000000000000 $t
+     /tmp/ccyVL9Qf.s:1030   .text.dac_concurrent_output_buffer_enable:0000000000000000 dac_concurrent_output_buffer_enable
+     /tmp/ccyVL9Qf.s:1051   .text.dac_concurrent_output_buffer_enable:0000000000000010 $d
+     /tmp/ccyVL9Qf.s:1056   .text.dac_concurrent_output_buffer_disable:0000000000000000 $t
+     /tmp/ccyVL9Qf.s:1063   .text.dac_concurrent_output_buffer_disable:0000000000000000 dac_concurrent_output_buffer_disable
+     /tmp/ccyVL9Qf.s:1084   .text.dac_concurrent_output_buffer_disable:0000000000000010 $d
+     /tmp/ccyVL9Qf.s:1089   .text.dac_concurrent_data_set:0000000000000000 $t
+     /tmp/ccyVL9Qf.s:1096   .text.dac_concurrent_data_set:0000000000000000 dac_concurrent_data_set
+     /tmp/ccyVL9Qf.s:1155   .text.dac_concurrent_data_set:0000000000000030 $d
+
+UNDEFINED SYMBOLS
+rcu_periph_reset_enable
+rcu_periph_reset_disable

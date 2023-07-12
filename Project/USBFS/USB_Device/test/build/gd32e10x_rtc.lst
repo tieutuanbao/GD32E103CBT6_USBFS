@@ -1,0 +1,926 @@
+ARM GAS  /tmp/cc4j7RyC.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.eabi_attribute 27, 1
+   3              		.eabi_attribute 28, 1
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.file	"gd32e10x_rtc.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.section	.text.rtc_configuration_mode_enter,"ax",%progbits
+  18              		.align	1
+  19              		.global	rtc_configuration_mode_enter
+  20              		.arch armv7e-m
+  21              		.syntax unified
+  22              		.thumb
+  23              		.thumb_func
+  24              		.fpu fpv4-sp-d16
+  26              	rtc_configuration_mode_enter:
+  27              	.LFB116:
+  28              		.file 1 "../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c"
+   1:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c **** /*!
+   2:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****     \file    gd32e10x_rtc.c
+   3:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****     \brief   RTC driver
+   4:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****     
+   5:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****     \version 2017-12-26, V1.0.0, firmware for GD32E10x
+   6:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c **** */
+   7:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c **** 
+   8:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c **** /*
+   9:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****     Copyright (c) 2017, GigaDevice Semiconductor Inc.
+  10:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c **** 
+  11:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****     All rights reserved.
+  12:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c **** 
+  13:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****     Redistribution and use in source and binary forms, with or without modification, 
+  14:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c **** are permitted provided that the following conditions are met:
+  15:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c **** 
+  16:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****     1. Redistributions of source code must retain the above copyright notice, this 
+  17:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****        list of conditions and the following disclaimer.
+  18:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****     2. Redistributions in binary form must reproduce the above copyright notice, 
+  19:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****        this list of conditions and the following disclaimer in the documentation 
+  20:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****        and/or other materials provided with the distribution.
+  21:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****     3. Neither the name of the copyright holder nor the names of its contributors 
+  22:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****        may be used to endorse or promote products derived from this software without 
+  23:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****        specific prior written permission.
+  24:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c **** 
+  25:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****     THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" 
+  26:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c **** AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED 
+  27:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c **** WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. 
+  28:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c **** IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, 
+  29:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c **** INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT 
+  30:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c **** NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR 
+ARM GAS  /tmp/cc4j7RyC.s 			page 2
+
+
+  31:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c **** PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, 
+  32:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c **** WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) 
+  33:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c **** ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY 
+  34:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c **** OF SUCH DAMAGE.
+  35:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c **** */
+  36:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c **** 
+  37:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c **** #include "gd32e10x_rtc.h"
+  38:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c **** 
+  39:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c **** /* RTC register high / low bits mask */
+  40:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c **** #define RTC_HIGH_BITS_MASK         ((uint32_t)0x000F0000U)  /* RTC high bits mask */
+  41:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c **** #define RTC_LOW_BITS_MASK          ((uint32_t)0x0000FFFFU)  /* RTC low bits mask */
+  42:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c **** 
+  43:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c **** /* RTC register high bits offset */
+  44:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c **** #define RTC_HIGH_BITS_OFFSET       ((uint32_t)16U)
+  45:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c **** 
+  46:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c **** /*!
+  47:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****     \brief      enter RTC configuration mode
+  48:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****     \param[in]  none
+  49:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****     \param[out] none
+  50:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****     \retval     none
+  51:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c **** */
+  52:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c **** void rtc_configuration_mode_enter(void)
+  53:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c **** {
+  29              		.loc 1 53 1 view -0
+  30              		.cfi_startproc
+  31              		@ args = 0, pretend = 0, frame = 0
+  32              		@ frame_needed = 0, uses_anonymous_args = 0
+  33              		@ link register save eliminated.
+  54:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****     RTC_CTL |= RTC_CTL_CMF;
+  34              		.loc 1 54 5 view .LVU1
+  35              		.loc 1 54 13 is_stmt 0 view .LVU2
+  36 0000 034A     		ldr	r2, .L2
+  37 0002 D2F80438 		ldr	r3, [r2, #2052]
+  38 0006 43F01003 		orr	r3, r3, #16
+  39 000a C2F80438 		str	r3, [r2, #2052]
+  55:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c **** }
+  40              		.loc 1 55 1 view .LVU3
+  41 000e 7047     		bx	lr
+  42              	.L3:
+  43              		.align	2
+  44              	.L2:
+  45 0010 00200040 		.word	1073750016
+  46              		.cfi_endproc
+  47              	.LFE116:
+  49              		.section	.text.rtc_configuration_mode_exit,"ax",%progbits
+  50              		.align	1
+  51              		.global	rtc_configuration_mode_exit
+  52              		.syntax unified
+  53              		.thumb
+  54              		.thumb_func
+  55              		.fpu fpv4-sp-d16
+  57              	rtc_configuration_mode_exit:
+  58              	.LFB117:
+  56:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c **** 
+  57:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c **** /*!
+  58:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****     \brief      exit RTC configuration mode 
+  59:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****     \param[in]  none
+ARM GAS  /tmp/cc4j7RyC.s 			page 3
+
+
+  60:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****     \param[out] none
+  61:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****     \retval     none
+  62:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c **** */
+  63:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c **** void rtc_configuration_mode_exit(void)
+  64:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c **** {
+  59              		.loc 1 64 1 is_stmt 1 view -0
+  60              		.cfi_startproc
+  61              		@ args = 0, pretend = 0, frame = 0
+  62              		@ frame_needed = 0, uses_anonymous_args = 0
+  63              		@ link register save eliminated.
+  65:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****     RTC_CTL &= ~RTC_CTL_CMF;
+  64              		.loc 1 65 5 view .LVU5
+  65              		.loc 1 65 13 is_stmt 0 view .LVU6
+  66 0000 034A     		ldr	r2, .L5
+  67 0002 D2F80438 		ldr	r3, [r2, #2052]
+  68 0006 23F01003 		bic	r3, r3, #16
+  69 000a C2F80438 		str	r3, [r2, #2052]
+  66:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c **** }
+  70              		.loc 1 66 1 view .LVU7
+  71 000e 7047     		bx	lr
+  72              	.L6:
+  73              		.align	2
+  74              	.L5:
+  75 0010 00200040 		.word	1073750016
+  76              		.cfi_endproc
+  77              	.LFE117:
+  79              		.section	.text.rtc_counter_set,"ax",%progbits
+  80              		.align	1
+  81              		.global	rtc_counter_set
+  82              		.syntax unified
+  83              		.thumb
+  84              		.thumb_func
+  85              		.fpu fpv4-sp-d16
+  87              	rtc_counter_set:
+  88              	.LVL0:
+  89              	.LFB118:
+  67:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c **** 
+  68:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c **** /*!
+  69:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****     \brief      set RTC counter value
+  70:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****     \param[in]  cnt: RTC counter value
+  71:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****     \param[out] none
+  72:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****     \retval     none
+  73:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c **** */
+  74:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c **** void rtc_counter_set(uint32_t cnt)
+  75:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c **** {
+  90              		.loc 1 75 1 is_stmt 1 view -0
+  91              		.cfi_startproc
+  92              		@ args = 0, pretend = 0, frame = 0
+  93              		@ frame_needed = 0, uses_anonymous_args = 0
+  94              		.loc 1 75 1 is_stmt 0 view .LVU9
+  95 0000 10B5     		push	{r4, lr}
+  96              		.cfi_def_cfa_offset 8
+  97              		.cfi_offset 4, -8
+  98              		.cfi_offset 14, -4
+  99 0002 0446     		mov	r4, r0
+  76:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****     rtc_configuration_mode_enter();
+ 100              		.loc 1 76 5 is_stmt 1 view .LVU10
+ARM GAS  /tmp/cc4j7RyC.s 			page 4
+
+
+ 101 0004 FFF7FEFF 		bl	rtc_configuration_mode_enter
+ 102              	.LVL1:
+  77:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****     /* set the RTC counter high bits */
+  78:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****     RTC_CNTH = (cnt >> RTC_HIGH_BITS_OFFSET);
+ 103              		.loc 1 78 5 view .LVU11
+ 104              		.loc 1 78 21 is_stmt 0 view .LVU12
+ 105 0008 220C     		lsrs	r2, r4, #16
+ 106              		.loc 1 78 14 view .LVU13
+ 107 000a 044B     		ldr	r3, .L9
+ 108 000c C3F81828 		str	r2, [r3, #2072]
+  79:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****     /* set the RTC counter low bits */
+  80:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****     RTC_CNTL = (cnt & RTC_LOW_BITS_MASK);
+ 109              		.loc 1 80 5 is_stmt 1 view .LVU14
+ 110              		.loc 1 80 21 is_stmt 0 view .LVU15
+ 111 0010 A4B2     		uxth	r4, r4
+ 112              	.LVL2:
+ 113              		.loc 1 80 14 view .LVU16
+ 114 0012 C3F81C48 		str	r4, [r3, #2076]
+  81:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****     rtc_configuration_mode_exit();
+ 115              		.loc 1 81 5 is_stmt 1 view .LVU17
+ 116 0016 FFF7FEFF 		bl	rtc_configuration_mode_exit
+ 117              	.LVL3:
+  82:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c **** }
+ 118              		.loc 1 82 1 is_stmt 0 view .LVU18
+ 119 001a 10BD     		pop	{r4, pc}
+ 120              	.L10:
+ 121              		.align	2
+ 122              	.L9:
+ 123 001c 00200040 		.word	1073750016
+ 124              		.cfi_endproc
+ 125              	.LFE118:
+ 127              		.section	.text.rtc_prescaler_set,"ax",%progbits
+ 128              		.align	1
+ 129              		.global	rtc_prescaler_set
+ 130              		.syntax unified
+ 131              		.thumb
+ 132              		.thumb_func
+ 133              		.fpu fpv4-sp-d16
+ 135              	rtc_prescaler_set:
+ 136              	.LVL4:
+ 137              	.LFB119:
+  83:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c **** 
+  84:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c **** /*!
+  85:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****     \brief      set RTC prescaler value
+  86:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****     \param[in]  psc: RTC prescaler value
+  87:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****     \param[out] none
+  88:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****     \retval     none
+  89:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c **** */
+  90:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c **** void rtc_prescaler_set(uint32_t psc)
+  91:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c **** {
+ 138              		.loc 1 91 1 is_stmt 1 view -0
+ 139              		.cfi_startproc
+ 140              		@ args = 0, pretend = 0, frame = 0
+ 141              		@ frame_needed = 0, uses_anonymous_args = 0
+ 142              		.loc 1 91 1 is_stmt 0 view .LVU20
+ 143 0000 10B5     		push	{r4, lr}
+ 144              		.cfi_def_cfa_offset 8
+ARM GAS  /tmp/cc4j7RyC.s 			page 5
+
+
+ 145              		.cfi_offset 4, -8
+ 146              		.cfi_offset 14, -4
+ 147 0002 0446     		mov	r4, r0
+  92:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****     rtc_configuration_mode_enter();
+ 148              		.loc 1 92 5 is_stmt 1 view .LVU21
+ 149 0004 FFF7FEFF 		bl	rtc_configuration_mode_enter
+ 150              	.LVL5:
+  93:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****     /* set the RTC prescaler high bits */
+  94:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****     RTC_PSCH = ((psc & RTC_HIGH_BITS_MASK) >> RTC_HIGH_BITS_OFFSET);
+ 151              		.loc 1 94 5 view .LVU22
+ 152              		.loc 1 94 44 is_stmt 0 view .LVU23
+ 153 0008 C4F30342 		ubfx	r2, r4, #16, #4
+ 154              		.loc 1 94 14 view .LVU24
+ 155 000c 044B     		ldr	r3, .L13
+ 156 000e C3F80828 		str	r2, [r3, #2056]
+  95:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****     /* set the RTC prescaler low bits */
+  96:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****     RTC_PSCL = (psc & RTC_LOW_BITS_MASK);
+ 157              		.loc 1 96 5 is_stmt 1 view .LVU25
+ 158              		.loc 1 96 21 is_stmt 0 view .LVU26
+ 159 0012 A4B2     		uxth	r4, r4
+ 160              	.LVL6:
+ 161              		.loc 1 96 14 view .LVU27
+ 162 0014 C3F80C48 		str	r4, [r3, #2060]
+  97:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****     rtc_configuration_mode_exit();
+ 163              		.loc 1 97 5 is_stmt 1 view .LVU28
+ 164 0018 FFF7FEFF 		bl	rtc_configuration_mode_exit
+ 165              	.LVL7:
+  98:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c **** }
+ 166              		.loc 1 98 1 is_stmt 0 view .LVU29
+ 167 001c 10BD     		pop	{r4, pc}
+ 168              	.L14:
+ 169 001e 00BF     		.align	2
+ 170              	.L13:
+ 171 0020 00200040 		.word	1073750016
+ 172              		.cfi_endproc
+ 173              	.LFE119:
+ 175              		.section	.text.rtc_lwoff_wait,"ax",%progbits
+ 176              		.align	1
+ 177              		.global	rtc_lwoff_wait
+ 178              		.syntax unified
+ 179              		.thumb
+ 180              		.thumb_func
+ 181              		.fpu fpv4-sp-d16
+ 183              	rtc_lwoff_wait:
+ 184              	.LFB120:
+  99:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c **** 
+ 100:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c **** /*!
+ 101:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****     \brief      wait RTC last write operation finished flag set
+ 102:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****     \param[in]  none
+ 103:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****     \param[out] none
+ 104:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****     \retval     none
+ 105:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c **** */
+ 106:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c **** void rtc_lwoff_wait(void)
+ 107:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c **** {
+ 185              		.loc 1 107 1 is_stmt 1 view -0
+ 186              		.cfi_startproc
+ 187              		@ args = 0, pretend = 0, frame = 0
+ARM GAS  /tmp/cc4j7RyC.s 			page 6
+
+
+ 188              		@ frame_needed = 0, uses_anonymous_args = 0
+ 189              		@ link register save eliminated.
+ 108:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****     /* loop until LWOFF flag is set */
+ 109:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****     while(RESET == (RTC_CTL & RTC_CTL_LWOFF)){
+ 190              		.loc 1 109 5 view .LVU31
+ 191              		.loc 1 109 21 is_stmt 0 view .LVU32
+ 192 0000 034A     		ldr	r2, .L18
+ 193              	.L16:
+ 110:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****     }
+ 194              		.loc 1 110 5 is_stmt 1 discriminator 1 view .LVU33
+ 109:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****     }
+ 195              		.loc 1 109 10 discriminator 1 view .LVU34
+ 109:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****     }
+ 196              		.loc 1 109 21 is_stmt 0 discriminator 1 view .LVU35
+ 197 0002 D2F80438 		ldr	r3, [r2, #2052]
+ 109:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****     }
+ 198              		.loc 1 109 10 discriminator 1 view .LVU36
+ 199 0006 13F0200F 		tst	r3, #32
+ 200 000a FAD0     		beq	.L16
+ 111:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c **** }
+ 201              		.loc 1 111 1 view .LVU37
+ 202 000c 7047     		bx	lr
+ 203              	.L19:
+ 204 000e 00BF     		.align	2
+ 205              	.L18:
+ 206 0010 00200040 		.word	1073750016
+ 207              		.cfi_endproc
+ 208              	.LFE120:
+ 210              		.section	.text.rtc_register_sync_wait,"ax",%progbits
+ 211              		.align	1
+ 212              		.global	rtc_register_sync_wait
+ 213              		.syntax unified
+ 214              		.thumb
+ 215              		.thumb_func
+ 216              		.fpu fpv4-sp-d16
+ 218              	rtc_register_sync_wait:
+ 219              	.LFB121:
+ 112:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c **** 
+ 113:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c **** /*!
+ 114:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****     \brief      wait RTC registers synchronized flag set
+ 115:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****     \param[in]  none
+ 116:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****     \param[out] none
+ 117:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****     \retval     none
+ 118:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c **** */
+ 119:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c **** void rtc_register_sync_wait(void)
+ 120:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c **** {
+ 220              		.loc 1 120 1 is_stmt 1 view -0
+ 221              		.cfi_startproc
+ 222              		@ args = 0, pretend = 0, frame = 0
+ 223              		@ frame_needed = 0, uses_anonymous_args = 0
+ 224              		@ link register save eliminated.
+ 121:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****     /* clear RSYNF flag */
+ 122:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****     RTC_CTL &= ~RTC_CTL_RSYNF;
+ 225              		.loc 1 122 5 view .LVU39
+ 226              		.loc 1 122 13 is_stmt 0 view .LVU40
+ 227 0000 064A     		ldr	r2, .L23
+ 228 0002 D2F80438 		ldr	r3, [r2, #2052]
+ARM GAS  /tmp/cc4j7RyC.s 			page 7
+
+
+ 229 0006 23F00803 		bic	r3, r3, #8
+ 230 000a C2F80438 		str	r3, [r2, #2052]
+ 123:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****     /* loop until RSYNF flag is set */
+ 124:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****     while(RESET == (RTC_CTL & RTC_CTL_RSYNF)){
+ 231              		.loc 1 124 5 is_stmt 1 view .LVU41
+ 232              	.L21:
+ 125:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****     }
+ 233              		.loc 1 125 5 discriminator 1 view .LVU42
+ 124:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****     }
+ 234              		.loc 1 124 10 discriminator 1 view .LVU43
+ 124:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****     }
+ 235              		.loc 1 124 21 is_stmt 0 discriminator 1 view .LVU44
+ 236 000e D2F80438 		ldr	r3, [r2, #2052]
+ 124:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****     }
+ 237              		.loc 1 124 10 discriminator 1 view .LVU45
+ 238 0012 13F0080F 		tst	r3, #8
+ 239 0016 FAD0     		beq	.L21
+ 126:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c **** }
+ 240              		.loc 1 126 1 view .LVU46
+ 241 0018 7047     		bx	lr
+ 242              	.L24:
+ 243 001a 00BF     		.align	2
+ 244              	.L23:
+ 245 001c 00200040 		.word	1073750016
+ 246              		.cfi_endproc
+ 247              	.LFE121:
+ 249              		.section	.text.rtc_alarm_config,"ax",%progbits
+ 250              		.align	1
+ 251              		.global	rtc_alarm_config
+ 252              		.syntax unified
+ 253              		.thumb
+ 254              		.thumb_func
+ 255              		.fpu fpv4-sp-d16
+ 257              	rtc_alarm_config:
+ 258              	.LVL8:
+ 259              	.LFB122:
+ 127:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c **** 
+ 128:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c **** /*!
+ 129:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****     \brief      set RTC alarm value
+ 130:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****     \param[in]  alarm: RTC alarm value
+ 131:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****     \param[out] none
+ 132:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****     \retval     none
+ 133:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c **** */
+ 134:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c **** void rtc_alarm_config(uint32_t alarm)
+ 135:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c **** {
+ 260              		.loc 1 135 1 is_stmt 1 view -0
+ 261              		.cfi_startproc
+ 262              		@ args = 0, pretend = 0, frame = 0
+ 263              		@ frame_needed = 0, uses_anonymous_args = 0
+ 264              		.loc 1 135 1 is_stmt 0 view .LVU48
+ 265 0000 10B5     		push	{r4, lr}
+ 266              		.cfi_def_cfa_offset 8
+ 267              		.cfi_offset 4, -8
+ 268              		.cfi_offset 14, -4
+ 269 0002 0446     		mov	r4, r0
+ 136:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****     rtc_configuration_mode_enter();
+ 270              		.loc 1 136 5 is_stmt 1 view .LVU49
+ARM GAS  /tmp/cc4j7RyC.s 			page 8
+
+
+ 271 0004 FFF7FEFF 		bl	rtc_configuration_mode_enter
+ 272              	.LVL9:
+ 137:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****     /* set the alarm high bits */
+ 138:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****     RTC_ALRMH = (alarm >> RTC_HIGH_BITS_OFFSET);
+ 273              		.loc 1 138 5 view .LVU50
+ 274              		.loc 1 138 24 is_stmt 0 view .LVU51
+ 275 0008 220C     		lsrs	r2, r4, #16
+ 276              		.loc 1 138 15 view .LVU52
+ 277 000a 044B     		ldr	r3, .L27
+ 278 000c C3F82028 		str	r2, [r3, #2080]
+ 139:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****     /* set the alarm low bits */
+ 140:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****     RTC_ALRML = (alarm & RTC_LOW_BITS_MASK);
+ 279              		.loc 1 140 5 is_stmt 1 view .LVU53
+ 280              		.loc 1 140 24 is_stmt 0 view .LVU54
+ 281 0010 A4B2     		uxth	r4, r4
+ 282              	.LVL10:
+ 283              		.loc 1 140 15 view .LVU55
+ 284 0012 C3F82448 		str	r4, [r3, #2084]
+ 141:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****     rtc_configuration_mode_exit();
+ 285              		.loc 1 141 5 is_stmt 1 view .LVU56
+ 286 0016 FFF7FEFF 		bl	rtc_configuration_mode_exit
+ 287              	.LVL11:
+ 142:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c **** }
+ 288              		.loc 1 142 1 is_stmt 0 view .LVU57
+ 289 001a 10BD     		pop	{r4, pc}
+ 290              	.L28:
+ 291              		.align	2
+ 292              	.L27:
+ 293 001c 00200040 		.word	1073750016
+ 294              		.cfi_endproc
+ 295              	.LFE122:
+ 297              		.section	.text.rtc_counter_get,"ax",%progbits
+ 298              		.align	1
+ 299              		.global	rtc_counter_get
+ 300              		.syntax unified
+ 301              		.thumb
+ 302              		.thumb_func
+ 303              		.fpu fpv4-sp-d16
+ 305              	rtc_counter_get:
+ 306              	.LFB123:
+ 143:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c **** 
+ 144:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c **** /*!
+ 145:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****     \brief      get RTC counter value
+ 146:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****     \param[in]  none
+ 147:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****     \param[out] none
+ 148:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****     \retval     RTC counter value
+ 149:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c **** */
+ 150:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c **** uint32_t rtc_counter_get(void)
+ 151:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c **** {
+ 307              		.loc 1 151 1 is_stmt 1 view -0
+ 308              		.cfi_startproc
+ 309              		@ args = 0, pretend = 0, frame = 0
+ 310              		@ frame_needed = 0, uses_anonymous_args = 0
+ 311              		@ link register save eliminated.
+ 152:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****     uint32_t temp = 0x0U;
+ 312              		.loc 1 152 5 view .LVU59
+ 313              	.LVL12:
+ARM GAS  /tmp/cc4j7RyC.s 			page 9
+
+
+ 153:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****     
+ 154:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****     temp = RTC_CNTL;
+ 314              		.loc 1 154 5 view .LVU60
+ 315              		.loc 1 154 10 is_stmt 0 view .LVU61
+ 316 0000 034B     		ldr	r3, .L30
+ 317 0002 D3F81C28 		ldr	r2, [r3, #2076]
+ 318              	.LVL13:
+ 155:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****     temp |= (RTC_CNTH << RTC_HIGH_BITS_OFFSET);
+ 319              		.loc 1 155 5 is_stmt 1 view .LVU62
+ 320              		.loc 1 155 14 is_stmt 0 view .LVU63
+ 321 0006 D3F81808 		ldr	r0, [r3, #2072]
+ 322              	.LVL14:
+ 156:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****     return temp;
+ 323              		.loc 1 156 5 is_stmt 1 view .LVU64
+ 157:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c **** }
+ 324              		.loc 1 157 1 is_stmt 0 view .LVU65
+ 325 000a 42EA0040 		orr	r0, r2, r0, lsl #16
+ 326              	.LVL15:
+ 327              		.loc 1 157 1 view .LVU66
+ 328 000e 7047     		bx	lr
+ 329              	.L31:
+ 330              		.align	2
+ 331              	.L30:
+ 332 0010 00200040 		.word	1073750016
+ 333              		.cfi_endproc
+ 334              	.LFE123:
+ 336              		.section	.text.rtc_divider_get,"ax",%progbits
+ 337              		.align	1
+ 338              		.global	rtc_divider_get
+ 339              		.syntax unified
+ 340              		.thumb
+ 341              		.thumb_func
+ 342              		.fpu fpv4-sp-d16
+ 344              	rtc_divider_get:
+ 345              	.LFB124:
+ 158:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c **** 
+ 159:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c **** /*!
+ 160:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****     \brief      get RTC divider value
+ 161:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****     \param[in]  none
+ 162:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****     \param[out] none
+ 163:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****     \retval     RTC divider value
+ 164:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c **** */
+ 165:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c **** uint32_t rtc_divider_get(void)
+ 166:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c **** {
+ 346              		.loc 1 166 1 is_stmt 1 view -0
+ 347              		.cfi_startproc
+ 348              		@ args = 0, pretend = 0, frame = 0
+ 349              		@ frame_needed = 0, uses_anonymous_args = 0
+ 350              		@ link register save eliminated.
+ 167:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****     uint32_t temp = 0x00U;
+ 351              		.loc 1 167 5 view .LVU68
+ 352              	.LVL16:
+ 168:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****     
+ 169:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****     temp = ((RTC_DIVH & RTC_DIVH_DIV) << RTC_HIGH_BITS_OFFSET);
+ 353              		.loc 1 169 5 view .LVU69
+ 354              		.loc 1 169 14 is_stmt 0 view .LVU70
+ 355 0000 044A     		ldr	r2, .L33
+ARM GAS  /tmp/cc4j7RyC.s 			page 10
+
+
+ 356 0002 D2F81038 		ldr	r3, [r2, #2064]
+ 357              		.loc 1 169 39 view .LVU71
+ 358 0006 1B04     		lsls	r3, r3, #16
+ 359              		.loc 1 169 10 view .LVU72
+ 360 0008 03F47023 		and	r3, r3, #983040
+ 361              	.LVL17:
+ 170:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****     temp |= RTC_DIVL;
+ 362              		.loc 1 170 5 is_stmt 1 view .LVU73
+ 363              		.loc 1 170 13 is_stmt 0 view .LVU74
+ 364 000c D2F81408 		ldr	r0, [r2, #2068]
+ 365              	.LVL18:
+ 171:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****     return temp;
+ 366              		.loc 1 171 5 is_stmt 1 view .LVU75
+ 172:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c **** }
+ 367              		.loc 1 172 1 is_stmt 0 view .LVU76
+ 368 0010 1843     		orrs	r0, r0, r3
+ 369              	.LVL19:
+ 370              		.loc 1 172 1 view .LVU77
+ 371 0012 7047     		bx	lr
+ 372              	.L34:
+ 373              		.align	2
+ 374              	.L33:
+ 375 0014 00200040 		.word	1073750016
+ 376              		.cfi_endproc
+ 377              	.LFE124:
+ 379              		.section	.text.rtc_flag_get,"ax",%progbits
+ 380              		.align	1
+ 381              		.global	rtc_flag_get
+ 382              		.syntax unified
+ 383              		.thumb
+ 384              		.thumb_func
+ 385              		.fpu fpv4-sp-d16
+ 387              	rtc_flag_get:
+ 388              	.LVL20:
+ 389              	.LFB125:
+ 173:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c **** 
+ 174:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c **** /*!
+ 175:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****     \brief      get RTC flag status 
+ 176:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****     \param[in]  flag: specify which flag status to get
+ 177:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****                 only one parameter can be selected which is shown as below:
+ 178:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****       \arg        RTC_FLAG_SECOND: second interrupt flag
+ 179:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****       \arg        RTC_FLAG_ALARM: alarm interrupt flag
+ 180:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****       \arg        RTC_FLAG_OVERFLOW: overflow interrupt flag
+ 181:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****       \arg        RTC_FLAG_RSYN: registers synchronized flag
+ 182:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****       \arg        RTC_FLAG_LWOF: last write operation finished flag
+ 183:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****     \param[out] none
+ 184:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****     \retval     SET or RESET
+ 185:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c **** */
+ 186:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c **** FlagStatus rtc_flag_get(uint32_t flag)
+ 187:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c **** {
+ 390              		.loc 1 187 1 is_stmt 1 view -0
+ 391              		.cfi_startproc
+ 392              		@ args = 0, pretend = 0, frame = 0
+ 393              		@ frame_needed = 0, uses_anonymous_args = 0
+ 394              		@ link register save eliminated.
+ 188:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****     if(RESET != (RTC_CTL & flag)){
+ 395              		.loc 1 188 5 view .LVU79
+ARM GAS  /tmp/cc4j7RyC.s 			page 11
+
+
+ 396              		.loc 1 188 18 is_stmt 0 view .LVU80
+ 397 0000 034B     		ldr	r3, .L36
+ 398 0002 D3F80438 		ldr	r3, [r3, #2052]
+ 399              		.loc 1 188 7 view .LVU81
+ 400 0006 0342     		tst	r3, r0
+ 189:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****         return SET;
+ 190:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****     }else{
+ 191:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****         return RESET;
+ 192:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****     }
+ 193:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c **** }
+ 401              		.loc 1 193 1 view .LVU82
+ 402 0008 14BF     		ite	ne
+ 403 000a 0120     		movne	r0, #1
+ 404              	.LVL21:
+ 405              		.loc 1 193 1 view .LVU83
+ 406 000c 0020     		moveq	r0, #0
+ 407 000e 7047     		bx	lr
+ 408              	.L37:
+ 409              		.align	2
+ 410              	.L36:
+ 411 0010 00200040 		.word	1073750016
+ 412              		.cfi_endproc
+ 413              	.LFE125:
+ 415              		.section	.text.rtc_flag_clear,"ax",%progbits
+ 416              		.align	1
+ 417              		.global	rtc_flag_clear
+ 418              		.syntax unified
+ 419              		.thumb
+ 420              		.thumb_func
+ 421              		.fpu fpv4-sp-d16
+ 423              	rtc_flag_clear:
+ 424              	.LVL22:
+ 425              	.LFB126:
+ 194:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c **** 
+ 195:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c **** /*!
+ 196:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****     \brief      clear RTC flag status
+ 197:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****     \param[in]  flag: specify which flag status to clear
+ 198:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****                 one or more parameters can be selected which are shown as below:
+ 199:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****       \arg        RTC_FLAG_SECOND: second interrupt flag
+ 200:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****       \arg        RTC_FLAG_ALARM: alarm interrupt flag
+ 201:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****       \arg        RTC_FLAG_OVERFLOW: overflow interrupt flag
+ 202:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****       \arg        RTC_FLAG_RSYN: registers synchronized flag
+ 203:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****     \param[out] none
+ 204:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****     \retval     none
+ 205:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c **** */
+ 206:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c **** void rtc_flag_clear(uint32_t flag)
+ 207:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c **** {
+ 426              		.loc 1 207 1 is_stmt 1 view -0
+ 427              		.cfi_startproc
+ 428              		@ args = 0, pretend = 0, frame = 0
+ 429              		@ frame_needed = 0, uses_anonymous_args = 0
+ 430              		@ link register save eliminated.
+ 208:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****     /* clear RTC flag */
+ 209:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****     RTC_CTL &= ~flag;
+ 431              		.loc 1 209 5 view .LVU85
+ 432              		.loc 1 209 13 is_stmt 0 view .LVU86
+ 433 0000 034A     		ldr	r2, .L39
+ARM GAS  /tmp/cc4j7RyC.s 			page 12
+
+
+ 434 0002 D2F80438 		ldr	r3, [r2, #2052]
+ 435 0006 23EA0003 		bic	r3, r3, r0
+ 436 000a C2F80438 		str	r3, [r2, #2052]
+ 210:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c **** }
+ 437              		.loc 1 210 1 view .LVU87
+ 438 000e 7047     		bx	lr
+ 439              	.L40:
+ 440              		.align	2
+ 441              	.L39:
+ 442 0010 00200040 		.word	1073750016
+ 443              		.cfi_endproc
+ 444              	.LFE126:
+ 446              		.section	.text.rtc_interrupt_flag_get,"ax",%progbits
+ 447              		.align	1
+ 448              		.global	rtc_interrupt_flag_get
+ 449              		.syntax unified
+ 450              		.thumb
+ 451              		.thumb_func
+ 452              		.fpu fpv4-sp-d16
+ 454              	rtc_interrupt_flag_get:
+ 455              	.LVL23:
+ 456              	.LFB127:
+ 211:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c **** 
+ 212:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c **** /*!
+ 213:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****     \brief      get RTC interrupt flag status 
+ 214:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****     \param[in]  flag: specify which flag status to get
+ 215:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****                 only one parameter can be selected which is shown as below:
+ 216:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****       \arg        RTC_INT_FLAG_SECOND: second interrupt flag
+ 217:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****       \arg        RTC_INT_FLAG_ALARM: alarm interrupt flag
+ 218:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****       \arg        RTC_INT_FLAG_OVERFLOW: overflow interrupt flag
+ 219:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****     \param[out] none
+ 220:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****     \retval     SET or RESET
+ 221:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c **** */
+ 222:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c **** FlagStatus rtc_interrupt_flag_get(uint32_t flag)
+ 223:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c **** {
+ 457              		.loc 1 223 1 is_stmt 1 view -0
+ 458              		.cfi_startproc
+ 459              		@ args = 0, pretend = 0, frame = 0
+ 460              		@ frame_needed = 0, uses_anonymous_args = 0
+ 461              		@ link register save eliminated.
+ 224:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****     if(RESET != (RTC_CTL & flag)){
+ 462              		.loc 1 224 5 view .LVU89
+ 463              		.loc 1 224 18 is_stmt 0 view .LVU90
+ 464 0000 034B     		ldr	r3, .L42
+ 465 0002 D3F80438 		ldr	r3, [r3, #2052]
+ 466              		.loc 1 224 7 view .LVU91
+ 467 0006 0342     		tst	r3, r0
+ 225:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****         return SET;
+ 226:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****     }else{
+ 227:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****         return RESET;
+ 228:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****     }
+ 229:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c **** }
+ 468              		.loc 1 229 1 view .LVU92
+ 469 0008 14BF     		ite	ne
+ 470 000a 0120     		movne	r0, #1
+ 471              	.LVL24:
+ 472              		.loc 1 229 1 view .LVU93
+ARM GAS  /tmp/cc4j7RyC.s 			page 13
+
+
+ 473 000c 0020     		moveq	r0, #0
+ 474 000e 7047     		bx	lr
+ 475              	.L43:
+ 476              		.align	2
+ 477              	.L42:
+ 478 0010 00200040 		.word	1073750016
+ 479              		.cfi_endproc
+ 480              	.LFE127:
+ 482              		.section	.text.rtc_interrupt_flag_clear,"ax",%progbits
+ 483              		.align	1
+ 484              		.global	rtc_interrupt_flag_clear
+ 485              		.syntax unified
+ 486              		.thumb
+ 487              		.thumb_func
+ 488              		.fpu fpv4-sp-d16
+ 490              	rtc_interrupt_flag_clear:
+ 491              	.LVL25:
+ 492              	.LFB128:
+ 230:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c **** 
+ 231:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c **** /*!
+ 232:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****     \brief      clear RTC interrupt flag status
+ 233:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****     \param[in]  flag: specify which flag status to clear
+ 234:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****                 one or more parameters can be selected which are shown as below:
+ 235:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****       \arg        RTC_INT_FLAG_SECOND: second interrupt flag
+ 236:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****       \arg        RTC_INT_FLAG_ALARM: alarm interrupt flag
+ 237:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****       \arg        RTC_INT_FLAG_OVERFLOW: overflow interrupt flag
+ 238:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****     \param[out] none
+ 239:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****     \retval     none
+ 240:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c **** */
+ 241:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c **** void rtc_interrupt_flag_clear(uint32_t flag)
+ 242:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c **** {
+ 493              		.loc 1 242 1 is_stmt 1 view -0
+ 494              		.cfi_startproc
+ 495              		@ args = 0, pretend = 0, frame = 0
+ 496              		@ frame_needed = 0, uses_anonymous_args = 0
+ 497              		@ link register save eliminated.
+ 243:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****     /* clear RTC interrupt flag */
+ 244:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****     RTC_CTL &= ~flag;
+ 498              		.loc 1 244 5 view .LVU95
+ 499              		.loc 1 244 13 is_stmt 0 view .LVU96
+ 500 0000 034A     		ldr	r2, .L45
+ 501 0002 D2F80438 		ldr	r3, [r2, #2052]
+ 502 0006 23EA0003 		bic	r3, r3, r0
+ 503 000a C2F80438 		str	r3, [r2, #2052]
+ 245:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c **** }
+ 504              		.loc 1 245 1 view .LVU97
+ 505 000e 7047     		bx	lr
+ 506              	.L46:
+ 507              		.align	2
+ 508              	.L45:
+ 509 0010 00200040 		.word	1073750016
+ 510              		.cfi_endproc
+ 511              	.LFE128:
+ 513              		.section	.text.rtc_interrupt_enable,"ax",%progbits
+ 514              		.align	1
+ 515              		.global	rtc_interrupt_enable
+ 516              		.syntax unified
+ARM GAS  /tmp/cc4j7RyC.s 			page 14
+
+
+ 517              		.thumb
+ 518              		.thumb_func
+ 519              		.fpu fpv4-sp-d16
+ 521              	rtc_interrupt_enable:
+ 522              	.LVL26:
+ 523              	.LFB129:
+ 246:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c **** 
+ 247:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c **** /*!
+ 248:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****     \brief      enable RTC interrupt
+ 249:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****     \param[in]  interrupt: specify which interrupt to enbale
+ 250:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****                 one or more parameters can be selected which are shown as below:
+ 251:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****       \arg        RTC_INT_SECOND: second interrupt
+ 252:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****       \arg        RTC_INT_ALARM: alarm interrupt
+ 253:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****       \arg        RTC_INT_OVERFLOW: overflow interrupt
+ 254:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****     \param[out] none
+ 255:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****     \retval     none
+ 256:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c **** */
+ 257:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c **** void rtc_interrupt_enable(uint32_t interrupt)
+ 258:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c **** {
+ 524              		.loc 1 258 1 is_stmt 1 view -0
+ 525              		.cfi_startproc
+ 526              		@ args = 0, pretend = 0, frame = 0
+ 527              		@ frame_needed = 0, uses_anonymous_args = 0
+ 528              		@ link register save eliminated.
+ 259:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****     RTC_INTEN |= interrupt;
+ 529              		.loc 1 259 5 view .LVU99
+ 530              		.loc 1 259 15 is_stmt 0 view .LVU100
+ 531 0000 034A     		ldr	r2, .L48
+ 532 0002 D2F80038 		ldr	r3, [r2, #2048]
+ 533 0006 0343     		orrs	r3, r3, r0
+ 534 0008 C2F80038 		str	r3, [r2, #2048]
+ 260:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c **** }
+ 535              		.loc 1 260 1 view .LVU101
+ 536 000c 7047     		bx	lr
+ 537              	.L49:
+ 538 000e 00BF     		.align	2
+ 539              	.L48:
+ 540 0010 00200040 		.word	1073750016
+ 541              		.cfi_endproc
+ 542              	.LFE129:
+ 544              		.section	.text.rtc_interrupt_disable,"ax",%progbits
+ 545              		.align	1
+ 546              		.global	rtc_interrupt_disable
+ 547              		.syntax unified
+ 548              		.thumb
+ 549              		.thumb_func
+ 550              		.fpu fpv4-sp-d16
+ 552              	rtc_interrupt_disable:
+ 553              	.LVL27:
+ 554              	.LFB130:
+ 261:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c **** 
+ 262:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c **** /*!
+ 263:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****     \brief      disable RTC interrupt
+ 264:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****     \param[in]  interrupt: specify which interrupt to disbale
+ 265:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****                 one or more parameters can be selected which are shown as below:
+ 266:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****       \arg        RTC_INT_SECOND: second interrupt
+ 267:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****       \arg        RTC_INT_ALARM: alarm interrupt
+ARM GAS  /tmp/cc4j7RyC.s 			page 15
+
+
+ 268:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****       \arg        RTC_INT_OVERFLOW: overflow interrupt
+ 269:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****     \param[out] none
+ 270:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****     \retval     none
+ 271:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c **** */
+ 272:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c **** void rtc_interrupt_disable(uint32_t interrupt)
+ 273:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c **** {
+ 555              		.loc 1 273 1 is_stmt 1 view -0
+ 556              		.cfi_startproc
+ 557              		@ args = 0, pretend = 0, frame = 0
+ 558              		@ frame_needed = 0, uses_anonymous_args = 0
+ 559              		@ link register save eliminated.
+ 274:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c ****     RTC_INTEN &= ~interrupt;
+ 560              		.loc 1 274 5 view .LVU103
+ 561              		.loc 1 274 15 is_stmt 0 view .LVU104
+ 562 0000 034A     		ldr	r2, .L51
+ 563 0002 D2F80038 		ldr	r3, [r2, #2048]
+ 564 0006 23EA0003 		bic	r3, r3, r0
+ 565 000a C2F80038 		str	r3, [r2, #2048]
+ 275:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_rtc.c **** }
+ 566              		.loc 1 275 1 view .LVU105
+ 567 000e 7047     		bx	lr
+ 568              	.L52:
+ 569              		.align	2
+ 570              	.L51:
+ 571 0010 00200040 		.word	1073750016
+ 572              		.cfi_endproc
+ 573              	.LFE130:
+ 575              		.text
+ 576              	.Letext0:
+ 577              		.file 2 "/usr/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h"
+ 578              		.file 3 "../../../../Firmware/CMSIS/GD/GD32E10x/Include/gd32e10x.h"
+ARM GAS  /tmp/cc4j7RyC.s 			page 16
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 gd32e10x_rtc.c
+     /tmp/cc4j7RyC.s:18     .text.rtc_configuration_mode_enter:0000000000000000 $t
+     /tmp/cc4j7RyC.s:26     .text.rtc_configuration_mode_enter:0000000000000000 rtc_configuration_mode_enter
+     /tmp/cc4j7RyC.s:45     .text.rtc_configuration_mode_enter:0000000000000010 $d
+     /tmp/cc4j7RyC.s:50     .text.rtc_configuration_mode_exit:0000000000000000 $t
+     /tmp/cc4j7RyC.s:57     .text.rtc_configuration_mode_exit:0000000000000000 rtc_configuration_mode_exit
+     /tmp/cc4j7RyC.s:75     .text.rtc_configuration_mode_exit:0000000000000010 $d
+     /tmp/cc4j7RyC.s:80     .text.rtc_counter_set:0000000000000000 $t
+     /tmp/cc4j7RyC.s:87     .text.rtc_counter_set:0000000000000000 rtc_counter_set
+     /tmp/cc4j7RyC.s:123    .text.rtc_counter_set:000000000000001c $d
+     /tmp/cc4j7RyC.s:128    .text.rtc_prescaler_set:0000000000000000 $t
+     /tmp/cc4j7RyC.s:135    .text.rtc_prescaler_set:0000000000000000 rtc_prescaler_set
+     /tmp/cc4j7RyC.s:171    .text.rtc_prescaler_set:0000000000000020 $d
+     /tmp/cc4j7RyC.s:176    .text.rtc_lwoff_wait:0000000000000000 $t
+     /tmp/cc4j7RyC.s:183    .text.rtc_lwoff_wait:0000000000000000 rtc_lwoff_wait
+     /tmp/cc4j7RyC.s:206    .text.rtc_lwoff_wait:0000000000000010 $d
+     /tmp/cc4j7RyC.s:211    .text.rtc_register_sync_wait:0000000000000000 $t
+     /tmp/cc4j7RyC.s:218    .text.rtc_register_sync_wait:0000000000000000 rtc_register_sync_wait
+     /tmp/cc4j7RyC.s:245    .text.rtc_register_sync_wait:000000000000001c $d
+     /tmp/cc4j7RyC.s:250    .text.rtc_alarm_config:0000000000000000 $t
+     /tmp/cc4j7RyC.s:257    .text.rtc_alarm_config:0000000000000000 rtc_alarm_config
+     /tmp/cc4j7RyC.s:293    .text.rtc_alarm_config:000000000000001c $d
+     /tmp/cc4j7RyC.s:298    .text.rtc_counter_get:0000000000000000 $t
+     /tmp/cc4j7RyC.s:305    .text.rtc_counter_get:0000000000000000 rtc_counter_get
+     /tmp/cc4j7RyC.s:332    .text.rtc_counter_get:0000000000000010 $d
+     /tmp/cc4j7RyC.s:337    .text.rtc_divider_get:0000000000000000 $t
+     /tmp/cc4j7RyC.s:344    .text.rtc_divider_get:0000000000000000 rtc_divider_get
+     /tmp/cc4j7RyC.s:375    .text.rtc_divider_get:0000000000000014 $d
+     /tmp/cc4j7RyC.s:380    .text.rtc_flag_get:0000000000000000 $t
+     /tmp/cc4j7RyC.s:387    .text.rtc_flag_get:0000000000000000 rtc_flag_get
+     /tmp/cc4j7RyC.s:411    .text.rtc_flag_get:0000000000000010 $d
+     /tmp/cc4j7RyC.s:416    .text.rtc_flag_clear:0000000000000000 $t
+     /tmp/cc4j7RyC.s:423    .text.rtc_flag_clear:0000000000000000 rtc_flag_clear
+     /tmp/cc4j7RyC.s:442    .text.rtc_flag_clear:0000000000000010 $d
+     /tmp/cc4j7RyC.s:447    .text.rtc_interrupt_flag_get:0000000000000000 $t
+     /tmp/cc4j7RyC.s:454    .text.rtc_interrupt_flag_get:0000000000000000 rtc_interrupt_flag_get
+     /tmp/cc4j7RyC.s:478    .text.rtc_interrupt_flag_get:0000000000000010 $d
+     /tmp/cc4j7RyC.s:483    .text.rtc_interrupt_flag_clear:0000000000000000 $t
+     /tmp/cc4j7RyC.s:490    .text.rtc_interrupt_flag_clear:0000000000000000 rtc_interrupt_flag_clear
+     /tmp/cc4j7RyC.s:509    .text.rtc_interrupt_flag_clear:0000000000000010 $d
+     /tmp/cc4j7RyC.s:514    .text.rtc_interrupt_enable:0000000000000000 $t
+     /tmp/cc4j7RyC.s:521    .text.rtc_interrupt_enable:0000000000000000 rtc_interrupt_enable
+     /tmp/cc4j7RyC.s:540    .text.rtc_interrupt_enable:0000000000000010 $d
+     /tmp/cc4j7RyC.s:545    .text.rtc_interrupt_disable:0000000000000000 $t
+     /tmp/cc4j7RyC.s:552    .text.rtc_interrupt_disable:0000000000000000 rtc_interrupt_disable
+     /tmp/cc4j7RyC.s:571    .text.rtc_interrupt_disable:0000000000000010 $d
+
+NO UNDEFINED SYMBOLS

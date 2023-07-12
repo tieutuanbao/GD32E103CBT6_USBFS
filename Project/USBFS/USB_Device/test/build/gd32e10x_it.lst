@@ -1,0 +1,721 @@
+ARM GAS  /tmp/ccPwTv4G.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.eabi_attribute 27, 1
+   3              		.eabi_attribute 28, 1
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.file	"gd32e10x_it.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.section	.text.NMI_Handler,"ax",%progbits
+  18              		.align	1
+  19              		.global	NMI_Handler
+  20              		.arch armv7e-m
+  21              		.syntax unified
+  22              		.thumb
+  23              		.thumb_func
+  24              		.fpu fpv4-sp-d16
+  26              	NMI_Handler:
+  27              	.LFB116:
+  28              		.file 1 "gd32e10x_it.c"
+   1:gd32e10x_it.c **** /*!
+   2:gd32e10x_it.c ****     \file  gd32e10x_it.c
+   3:gd32e10x_it.c ****     \brief main interrupt service routines
+   4:gd32e10x_it.c ****     
+   5:gd32e10x_it.c ****     \version 2017-12-26, V1.0.0, firmware for GD32E10x
+   6:gd32e10x_it.c **** */
+   7:gd32e10x_it.c **** 
+   8:gd32e10x_it.c **** /*
+   9:gd32e10x_it.c ****     Copyright (c) 2017, GigaDevice Semiconductor Inc.
+  10:gd32e10x_it.c **** 
+  11:gd32e10x_it.c ****     All rights reserved.
+  12:gd32e10x_it.c **** 
+  13:gd32e10x_it.c ****     Redistribution and use in source and binary forms, with or without modification, 
+  14:gd32e10x_it.c **** are permitted provided that the following conditions are met:
+  15:gd32e10x_it.c **** 
+  16:gd32e10x_it.c ****     1. Redistributions of source code must retain the above copyright notice, this 
+  17:gd32e10x_it.c ****        list of conditions and the following disclaimer.
+  18:gd32e10x_it.c ****     2. Redistributions in binary form must reproduce the above copyright notice, 
+  19:gd32e10x_it.c ****        this list of conditions and the following disclaimer in the documentation 
+  20:gd32e10x_it.c ****        and/or other materials provided with the distribution.
+  21:gd32e10x_it.c ****     3. Neither the name of the copyright holder nor the names of its contributors 
+  22:gd32e10x_it.c ****        may be used to endorse or promote products derived from this software without 
+  23:gd32e10x_it.c ****        specific prior written permission.
+  24:gd32e10x_it.c **** 
+  25:gd32e10x_it.c ****     THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" 
+  26:gd32e10x_it.c **** AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED 
+  27:gd32e10x_it.c **** WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. 
+  28:gd32e10x_it.c **** IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, 
+  29:gd32e10x_it.c **** INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT 
+  30:gd32e10x_it.c **** NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR 
+ARM GAS  /tmp/ccPwTv4G.s 			page 2
+
+
+  31:gd32e10x_it.c **** PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, 
+  32:gd32e10x_it.c **** WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) 
+  33:gd32e10x_it.c **** ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY 
+  34:gd32e10x_it.c **** OF SUCH DAMAGE.
+  35:gd32e10x_it.c **** */
+  36:gd32e10x_it.c **** 
+  37:gd32e10x_it.c **** #include "gd32e10x_it.h"
+  38:gd32e10x_it.c **** #include "usbd_int.h"
+  39:gd32e10x_it.c **** #include "usb_delay.h"
+  40:gd32e10x_it.c **** #include "custom_hid_core.h"
+  41:gd32e10x_it.c **** 
+  42:gd32e10x_it.c **** extern usb_core_handle_struct usbhs_core_dev;
+  43:gd32e10x_it.c **** extern uint32_t usbfs_prescaler;
+  44:gd32e10x_it.c **** 
+  45:gd32e10x_it.c **** /*!
+  46:gd32e10x_it.c ****     \brief      this function handles NMI exception
+  47:gd32e10x_it.c ****     \param[in]  none
+  48:gd32e10x_it.c ****     \param[out] none
+  49:gd32e10x_it.c ****     \retval     none
+  50:gd32e10x_it.c **** */
+  51:gd32e10x_it.c **** void NMI_Handler(void)
+  52:gd32e10x_it.c **** {
+  29              		.loc 1 52 1 view -0
+  30              		.cfi_startproc
+  31              		@ args = 0, pretend = 0, frame = 0
+  32              		@ frame_needed = 0, uses_anonymous_args = 0
+  33              		@ link register save eliminated.
+  53:gd32e10x_it.c **** }
+  34              		.loc 1 53 1 view .LVU1
+  35 0000 7047     		bx	lr
+  36              		.cfi_endproc
+  37              	.LFE116:
+  39              		.section	.text.HardFault_Handler,"ax",%progbits
+  40              		.align	1
+  41              		.global	HardFault_Handler
+  42              		.syntax unified
+  43              		.thumb
+  44              		.thumb_func
+  45              		.fpu fpv4-sp-d16
+  47              	HardFault_Handler:
+  48              	.LFB117:
+  54:gd32e10x_it.c **** 
+  55:gd32e10x_it.c **** /*!
+  56:gd32e10x_it.c ****     \brief      this function handles HardFault exception
+  57:gd32e10x_it.c ****     \param[in]  none
+  58:gd32e10x_it.c ****     \param[out] none
+  59:gd32e10x_it.c ****     \retval     none
+  60:gd32e10x_it.c **** */
+  61:gd32e10x_it.c **** void HardFault_Handler(void)
+  62:gd32e10x_it.c **** {
+  49              		.loc 1 62 1 view -0
+  50              		.cfi_startproc
+  51              		@ Volatile: function does not return.
+  52              		@ args = 0, pretend = 0, frame = 0
+  53              		@ frame_needed = 0, uses_anonymous_args = 0
+  54              		@ link register save eliminated.
+  55              	.L3:
+ARM GAS  /tmp/ccPwTv4G.s 			page 3
+
+
+  63:gd32e10x_it.c ****     /* if Hard Fault exception occurs, go to infinite loop */
+  64:gd32e10x_it.c ****     while (1);
+  56              		.loc 1 64 5 discriminator 1 view .LVU3
+  57              		.loc 1 64 14 discriminator 1 view .LVU4
+  58              		.loc 1 64 11 discriminator 1 view .LVU5
+  59 0000 FEE7     		b	.L3
+  60              		.cfi_endproc
+  61              	.LFE117:
+  63              		.section	.text.MemManage_Handler,"ax",%progbits
+  64              		.align	1
+  65              		.global	MemManage_Handler
+  66              		.syntax unified
+  67              		.thumb
+  68              		.thumb_func
+  69              		.fpu fpv4-sp-d16
+  71              	MemManage_Handler:
+  72              	.LFB118:
+  65:gd32e10x_it.c **** }
+  66:gd32e10x_it.c **** 
+  67:gd32e10x_it.c **** /*!
+  68:gd32e10x_it.c ****     \brief      this function handles MemManage exception
+  69:gd32e10x_it.c ****     \param[in]  none
+  70:gd32e10x_it.c ****     \param[out] none
+  71:gd32e10x_it.c ****     \retval     none
+  72:gd32e10x_it.c **** */
+  73:gd32e10x_it.c **** void MemManage_Handler(void)
+  74:gd32e10x_it.c **** {
+  73              		.loc 1 74 1 view -0
+  74              		.cfi_startproc
+  75              		@ Volatile: function does not return.
+  76              		@ args = 0, pretend = 0, frame = 0
+  77              		@ frame_needed = 0, uses_anonymous_args = 0
+  78              		@ link register save eliminated.
+  79              	.L5:
+  75:gd32e10x_it.c ****     /* if Memory Manage exception occurs, go to infinite loop */
+  76:gd32e10x_it.c ****     while (1);
+  80              		.loc 1 76 5 discriminator 1 view .LVU7
+  81              		.loc 1 76 14 discriminator 1 view .LVU8
+  82              		.loc 1 76 11 discriminator 1 view .LVU9
+  83 0000 FEE7     		b	.L5
+  84              		.cfi_endproc
+  85              	.LFE118:
+  87              		.section	.text.BusFault_Handler,"ax",%progbits
+  88              		.align	1
+  89              		.global	BusFault_Handler
+  90              		.syntax unified
+  91              		.thumb
+  92              		.thumb_func
+  93              		.fpu fpv4-sp-d16
+  95              	BusFault_Handler:
+  96              	.LFB119:
+  77:gd32e10x_it.c **** }
+  78:gd32e10x_it.c **** 
+  79:gd32e10x_it.c **** /*!
+  80:gd32e10x_it.c ****     \brief      this function handles BusFault exception
+  81:gd32e10x_it.c ****     \param[in]  none
+  82:gd32e10x_it.c ****     \param[out] none
+ARM GAS  /tmp/ccPwTv4G.s 			page 4
+
+
+  83:gd32e10x_it.c ****     \retval     none
+  84:gd32e10x_it.c **** */
+  85:gd32e10x_it.c **** void BusFault_Handler(void)
+  86:gd32e10x_it.c **** {
+  97              		.loc 1 86 1 view -0
+  98              		.cfi_startproc
+  99              		@ Volatile: function does not return.
+ 100              		@ args = 0, pretend = 0, frame = 0
+ 101              		@ frame_needed = 0, uses_anonymous_args = 0
+ 102              		@ link register save eliminated.
+ 103              	.L7:
+  87:gd32e10x_it.c ****     /* if Bus Fault exception occurs, go to infinite loop */
+  88:gd32e10x_it.c ****     while (1);
+ 104              		.loc 1 88 5 discriminator 1 view .LVU11
+ 105              		.loc 1 88 14 discriminator 1 view .LVU12
+ 106              		.loc 1 88 11 discriminator 1 view .LVU13
+ 107 0000 FEE7     		b	.L7
+ 108              		.cfi_endproc
+ 109              	.LFE119:
+ 111              		.section	.text.UsageFault_Handler,"ax",%progbits
+ 112              		.align	1
+ 113              		.global	UsageFault_Handler
+ 114              		.syntax unified
+ 115              		.thumb
+ 116              		.thumb_func
+ 117              		.fpu fpv4-sp-d16
+ 119              	UsageFault_Handler:
+ 120              	.LFB120:
+  89:gd32e10x_it.c **** }
+  90:gd32e10x_it.c **** 
+  91:gd32e10x_it.c **** /*!
+  92:gd32e10x_it.c ****     \brief      this function handles UsageFault exception
+  93:gd32e10x_it.c ****     \param[in]  none
+  94:gd32e10x_it.c ****     \param[out] none
+  95:gd32e10x_it.c ****     \retval     none
+  96:gd32e10x_it.c **** */
+  97:gd32e10x_it.c **** void UsageFault_Handler(void)
+  98:gd32e10x_it.c **** {
+ 121              		.loc 1 98 1 view -0
+ 122              		.cfi_startproc
+ 123              		@ Volatile: function does not return.
+ 124              		@ args = 0, pretend = 0, frame = 0
+ 125              		@ frame_needed = 0, uses_anonymous_args = 0
+ 126              		@ link register save eliminated.
+ 127              	.L9:
+  99:gd32e10x_it.c ****     /* if Usage Fault exception occurs, go to infinite loop */
+ 100:gd32e10x_it.c ****     while (1);
+ 128              		.loc 1 100 5 discriminator 1 view .LVU15
+ 129              		.loc 1 100 14 discriminator 1 view .LVU16
+ 130              		.loc 1 100 11 discriminator 1 view .LVU17
+ 131 0000 FEE7     		b	.L9
+ 132              		.cfi_endproc
+ 133              	.LFE120:
+ 135              		.section	.text.SVC_Handler,"ax",%progbits
+ 136              		.align	1
+ 137              		.global	SVC_Handler
+ 138              		.syntax unified
+ARM GAS  /tmp/ccPwTv4G.s 			page 5
+
+
+ 139              		.thumb
+ 140              		.thumb_func
+ 141              		.fpu fpv4-sp-d16
+ 143              	SVC_Handler:
+ 144              	.LFB121:
+ 101:gd32e10x_it.c **** }
+ 102:gd32e10x_it.c **** 
+ 103:gd32e10x_it.c **** /*!
+ 104:gd32e10x_it.c ****     \brief      this function handles SVC exception
+ 105:gd32e10x_it.c ****     \param[in]  none
+ 106:gd32e10x_it.c ****     \param[out] none
+ 107:gd32e10x_it.c ****     \retval     none
+ 108:gd32e10x_it.c **** */
+ 109:gd32e10x_it.c **** void SVC_Handler(void)
+ 110:gd32e10x_it.c **** {
+ 145              		.loc 1 110 1 view -0
+ 146              		.cfi_startproc
+ 147              		@ args = 0, pretend = 0, frame = 0
+ 148              		@ frame_needed = 0, uses_anonymous_args = 0
+ 149              		@ link register save eliminated.
+ 111:gd32e10x_it.c **** }
+ 150              		.loc 1 111 1 view .LVU19
+ 151 0000 7047     		bx	lr
+ 152              		.cfi_endproc
+ 153              	.LFE121:
+ 155              		.section	.text.DebugMon_Handler,"ax",%progbits
+ 156              		.align	1
+ 157              		.global	DebugMon_Handler
+ 158              		.syntax unified
+ 159              		.thumb
+ 160              		.thumb_func
+ 161              		.fpu fpv4-sp-d16
+ 163              	DebugMon_Handler:
+ 164              	.LFB122:
+ 112:gd32e10x_it.c **** 
+ 113:gd32e10x_it.c **** /*!
+ 114:gd32e10x_it.c ****     \brief      this function handles DebugMon exception
+ 115:gd32e10x_it.c ****     \param[in]  none
+ 116:gd32e10x_it.c ****     \param[out] none
+ 117:gd32e10x_it.c ****     \retval     none
+ 118:gd32e10x_it.c **** */
+ 119:gd32e10x_it.c **** void DebugMon_Handler(void)
+ 120:gd32e10x_it.c **** {
+ 165              		.loc 1 120 1 view -0
+ 166              		.cfi_startproc
+ 167              		@ args = 0, pretend = 0, frame = 0
+ 168              		@ frame_needed = 0, uses_anonymous_args = 0
+ 169              		@ link register save eliminated.
+ 121:gd32e10x_it.c **** }
+ 170              		.loc 1 121 1 view .LVU21
+ 171 0000 7047     		bx	lr
+ 172              		.cfi_endproc
+ 173              	.LFE122:
+ 175              		.section	.text.PendSV_Handler,"ax",%progbits
+ 176              		.align	1
+ 177              		.global	PendSV_Handler
+ 178              		.syntax unified
+ARM GAS  /tmp/ccPwTv4G.s 			page 6
+
+
+ 179              		.thumb
+ 180              		.thumb_func
+ 181              		.fpu fpv4-sp-d16
+ 183              	PendSV_Handler:
+ 184              	.LFB123:
+ 122:gd32e10x_it.c **** 
+ 123:gd32e10x_it.c **** /*!
+ 124:gd32e10x_it.c ****     \brief      this function handles PendSV exception
+ 125:gd32e10x_it.c ****     \param[in]  none
+ 126:gd32e10x_it.c ****     \param[out] none
+ 127:gd32e10x_it.c ****     \retval     none
+ 128:gd32e10x_it.c **** */
+ 129:gd32e10x_it.c **** void PendSV_Handler(void)
+ 130:gd32e10x_it.c **** {
+ 185              		.loc 1 130 1 view -0
+ 186              		.cfi_startproc
+ 187              		@ args = 0, pretend = 0, frame = 0
+ 188              		@ frame_needed = 0, uses_anonymous_args = 0
+ 189              		@ link register save eliminated.
+ 131:gd32e10x_it.c **** }
+ 190              		.loc 1 131 1 view .LVU23
+ 191 0000 7047     		bx	lr
+ 192              		.cfi_endproc
+ 193              	.LFE123:
+ 195              		.section	.text.SysTick_Handler,"ax",%progbits
+ 196              		.align	1
+ 197              		.global	SysTick_Handler
+ 198              		.syntax unified
+ 199              		.thumb
+ 200              		.thumb_func
+ 201              		.fpu fpv4-sp-d16
+ 203              	SysTick_Handler:
+ 204              	.LFB124:
+ 132:gd32e10x_it.c **** 
+ 133:gd32e10x_it.c **** /*!
+ 134:gd32e10x_it.c ****     \brief      this function handles SysTick exception
+ 135:gd32e10x_it.c ****     \param[in]  none
+ 136:gd32e10x_it.c ****     \param[out] none
+ 137:gd32e10x_it.c ****     \retval     none
+ 138:gd32e10x_it.c **** */
+ 139:gd32e10x_it.c **** void SysTick_Handler(void)
+ 140:gd32e10x_it.c **** {
+ 205              		.loc 1 140 1 view -0
+ 206              		.cfi_startproc
+ 207              		@ args = 0, pretend = 0, frame = 0
+ 208              		@ frame_needed = 0, uses_anonymous_args = 0
+ 209              		@ link register save eliminated.
+ 141:gd32e10x_it.c **** }
+ 210              		.loc 1 141 1 view .LVU25
+ 211 0000 7047     		bx	lr
+ 212              		.cfi_endproc
+ 213              	.LFE124:
+ 215              		.section	.text.EXTI0_IRQHandler,"ax",%progbits
+ 216              		.align	1
+ 217              		.global	EXTI0_IRQHandler
+ 218              		.syntax unified
+ 219              		.thumb
+ARM GAS  /tmp/ccPwTv4G.s 			page 7
+
+
+ 220              		.thumb_func
+ 221              		.fpu fpv4-sp-d16
+ 223              	EXTI0_IRQHandler:
+ 224              	.LFB125:
+ 142:gd32e10x_it.c **** 
+ 143:gd32e10x_it.c **** /*!
+ 144:gd32e10x_it.c ****     \brief      this function handles EXTI0_IRQ Handler.
+ 145:gd32e10x_it.c ****     \param[in]  none
+ 146:gd32e10x_it.c ****     \param[out] none
+ 147:gd32e10x_it.c ****     \retval     none
+ 148:gd32e10x_it.c **** */
+ 149:gd32e10x_it.c **** void  EXTI0_IRQHandler (void)
+ 150:gd32e10x_it.c **** {
+ 225              		.loc 1 150 1 view -0
+ 226              		.cfi_startproc
+ 227              		@ args = 0, pretend = 0, frame = 0
+ 228              		@ frame_needed = 0, uses_anonymous_args = 0
+ 229 0000 08B5     		push	{r3, lr}
+ 230              		.cfi_def_cfa_offset 8
+ 231              		.cfi_offset 3, -8
+ 232              		.cfi_offset 14, -4
+ 151:gd32e10x_it.c ****     if (RESET != exti_interrupt_flag_get(WAKEUP_KEY_EXTI_LINE)) {
+ 233              		.loc 1 151 5 view .LVU27
+ 234              		.loc 1 151 18 is_stmt 0 view .LVU28
+ 235 0002 0120     		movs	r0, #1
+ 236 0004 FFF7FEFF 		bl	exti_interrupt_flag_get
+ 237              	.LVL0:
+ 238              		.loc 1 151 8 view .LVU29
+ 239 0008 00B9     		cbnz	r0, .L17
+ 240              	.L14:
+ 152:gd32e10x_it.c ****         if (USB_STATUS_CONFIGURED == usbhs_core_dev.dev.status) { 
+ 153:gd32e10x_it.c **** 			/*
+ 154:gd32e10x_it.c ****             if (RESET == gd_eval_key_state_get(KEY_WAKEUP)) {
+ 155:gd32e10x_it.c ****                 if(send_buffer1[1]) {
+ 156:gd32e10x_it.c ****                     send_buffer1[1] = 0x00;
+ 157:gd32e10x_it.c ****                 } else {
+ 158:gd32e10x_it.c ****                     send_buffer1[1] = 0x01;
+ 159:gd32e10x_it.c ****                 }
+ 160:gd32e10x_it.c ****             }
+ 161:gd32e10x_it.c **** 			*/
+ 162:gd32e10x_it.c ****         }
+ 163:gd32e10x_it.c **** 
+ 164:gd32e10x_it.c ****         /* clear the EXTI line interrupt flag */
+ 165:gd32e10x_it.c ****         exti_interrupt_flag_clear(WAKEUP_KEY_EXTI_LINE);
+ 166:gd32e10x_it.c ****     }
+ 167:gd32e10x_it.c **** }
+ 241              		.loc 1 167 1 view .LVU30
+ 242 000a 08BD     		pop	{r3, pc}
+ 243              	.L17:
+ 152:gd32e10x_it.c ****         if (USB_STATUS_CONFIGURED == usbhs_core_dev.dev.status) { 
+ 244              		.loc 1 152 9 is_stmt 1 view .LVU31
+ 152:gd32e10x_it.c ****         if (USB_STATUS_CONFIGURED == usbhs_core_dev.dev.status) { 
+ 245              		.loc 1 152 56 is_stmt 0 view .LVU32
+ 246 000c 024B     		ldr	r3, .L18
+ 247 000e 5B7B     		ldrb	r3, [r3, #13]	@ zero_extendqisi2
+ 162:gd32e10x_it.c **** 
+ 248              		.loc 1 162 9 is_stmt 1 view .LVU33
+ARM GAS  /tmp/ccPwTv4G.s 			page 8
+
+
+ 165:gd32e10x_it.c ****     }
+ 249              		.loc 1 165 9 view .LVU34
+ 250 0010 0120     		movs	r0, #1
+ 251 0012 FFF7FEFF 		bl	exti_interrupt_flag_clear
+ 252              	.LVL1:
+ 253              		.loc 1 167 1 is_stmt 0 view .LVU35
+ 254 0016 F8E7     		b	.L14
+ 255              	.L19:
+ 256              		.align	2
+ 257              	.L18:
+ 258 0018 00000000 		.word	usbhs_core_dev
+ 259              		.cfi_endproc
+ 260              	.LFE125:
+ 262              		.section	.text.EXTI10_15_IRQHandler,"ax",%progbits
+ 263              		.align	1
+ 264              		.global	EXTI10_15_IRQHandler
+ 265              		.syntax unified
+ 266              		.thumb
+ 267              		.thumb_func
+ 268              		.fpu fpv4-sp-d16
+ 270              	EXTI10_15_IRQHandler:
+ 271              	.LFB126:
+ 168:gd32e10x_it.c **** 
+ 169:gd32e10x_it.c **** 
+ 170:gd32e10x_it.c **** /*!
+ 171:gd32e10x_it.c ****     \brief      this function handles EXTI10_15_IRQ Handler.
+ 172:gd32e10x_it.c ****     \param[in]  none
+ 173:gd32e10x_it.c ****     \param[out] none
+ 174:gd32e10x_it.c ****     \retval     none
+ 175:gd32e10x_it.c **** */
+ 176:gd32e10x_it.c **** void  EXTI10_15_IRQHandler (void)
+ 177:gd32e10x_it.c **** {
+ 272              		.loc 1 177 1 is_stmt 1 view -0
+ 273              		.cfi_startproc
+ 274              		@ args = 0, pretend = 0, frame = 0
+ 275              		@ frame_needed = 0, uses_anonymous_args = 0
+ 276 0000 08B5     		push	{r3, lr}
+ 277              		.cfi_def_cfa_offset 8
+ 278              		.cfi_offset 3, -8
+ 279              		.cfi_offset 14, -4
+ 178:gd32e10x_it.c ****     if (RESET != exti_interrupt_flag_get(TAMPER_KEY_EXTI_LINE)) {
+ 280              		.loc 1 178 5 view .LVU37
+ 281              		.loc 1 178 18 is_stmt 0 view .LVU38
+ 282 0002 4FF40050 		mov	r0, #8192
+ 283 0006 FFF7FEFF 		bl	exti_interrupt_flag_get
+ 284              	.LVL2:
+ 285              		.loc 1 178 8 view .LVU39
+ 286 000a 00B9     		cbnz	r0, .L23
+ 287              	.L20:
+ 179:gd32e10x_it.c ****         if (USB_STATUS_CONFIGURED == usbhs_core_dev.dev.status) {
+ 180:gd32e10x_it.c ****             
+ 181:gd32e10x_it.c ****         }
+ 182:gd32e10x_it.c **** 
+ 183:gd32e10x_it.c ****         /* clear the EXTI line interrupt flag */
+ 184:gd32e10x_it.c ****         exti_interrupt_flag_clear(TAMPER_KEY_EXTI_LINE);
+ 185:gd32e10x_it.c ****     }
+ 186:gd32e10x_it.c **** }
+ARM GAS  /tmp/ccPwTv4G.s 			page 9
+
+
+ 288              		.loc 1 186 1 view .LVU40
+ 289 000c 08BD     		pop	{r3, pc}
+ 290              	.L23:
+ 179:gd32e10x_it.c ****         if (USB_STATUS_CONFIGURED == usbhs_core_dev.dev.status) {
+ 291              		.loc 1 179 9 is_stmt 1 view .LVU41
+ 179:gd32e10x_it.c ****         if (USB_STATUS_CONFIGURED == usbhs_core_dev.dev.status) {
+ 292              		.loc 1 179 56 is_stmt 0 view .LVU42
+ 293 000e 034B     		ldr	r3, .L24
+ 294 0010 5B7B     		ldrb	r3, [r3, #13]	@ zero_extendqisi2
+ 181:gd32e10x_it.c **** 
+ 295              		.loc 1 181 9 is_stmt 1 view .LVU43
+ 184:gd32e10x_it.c ****     }
+ 296              		.loc 1 184 9 view .LVU44
+ 297 0012 4FF40050 		mov	r0, #8192
+ 298 0016 FFF7FEFF 		bl	exti_interrupt_flag_clear
+ 299              	.LVL3:
+ 300              		.loc 1 186 1 is_stmt 0 view .LVU45
+ 301 001a F7E7     		b	.L20
+ 302              	.L25:
+ 303              		.align	2
+ 304              	.L24:
+ 305 001c 00000000 		.word	usbhs_core_dev
+ 306              		.cfi_endproc
+ 307              	.LFE126:
+ 309              		.section	.text.USBFS_IRQHandler,"ax",%progbits
+ 310              		.align	1
+ 311              		.global	USBFS_IRQHandler
+ 312              		.syntax unified
+ 313              		.thumb
+ 314              		.thumb_func
+ 315              		.fpu fpv4-sp-d16
+ 317              	USBFS_IRQHandler:
+ 318              	.LFB127:
+ 187:gd32e10x_it.c **** 
+ 188:gd32e10x_it.c **** /*!
+ 189:gd32e10x_it.c ****     \brief      this function handles USBD interrupt
+ 190:gd32e10x_it.c ****     \param[in]  none
+ 191:gd32e10x_it.c ****     \param[out] none
+ 192:gd32e10x_it.c ****     \retval     none
+ 193:gd32e10x_it.c **** */
+ 194:gd32e10x_it.c **** void  USBFS_IRQHandler (void)
+ 195:gd32e10x_it.c **** {
+ 319              		.loc 1 195 1 is_stmt 1 view -0
+ 320              		.cfi_startproc
+ 321              		@ args = 0, pretend = 0, frame = 0
+ 322              		@ frame_needed = 0, uses_anonymous_args = 0
+ 323 0000 08B5     		push	{r3, lr}
+ 324              		.cfi_def_cfa_offset 8
+ 325              		.cfi_offset 3, -8
+ 326              		.cfi_offset 14, -4
+ 196:gd32e10x_it.c ****     usbd_isr (&usbhs_core_dev);
+ 327              		.loc 1 196 5 view .LVU47
+ 328 0002 0248     		ldr	r0, .L28
+ 329 0004 FFF7FEFF 		bl	usbd_isr
+ 330              	.LVL4:
+ 197:gd32e10x_it.c **** }
+ 331              		.loc 1 197 1 is_stmt 0 view .LVU48
+ARM GAS  /tmp/ccPwTv4G.s 			page 10
+
+
+ 332 0008 08BD     		pop	{r3, pc}
+ 333              	.L29:
+ 334 000a 00BF     		.align	2
+ 335              	.L28:
+ 336 000c 00000000 		.word	usbhs_core_dev
+ 337              		.cfi_endproc
+ 338              	.LFE127:
+ 340              		.section	.text.USBFS_WKUP_IRQHandler,"ax",%progbits
+ 341              		.align	1
+ 342              		.global	USBFS_WKUP_IRQHandler
+ 343              		.syntax unified
+ 344              		.thumb
+ 345              		.thumb_func
+ 346              		.fpu fpv4-sp-d16
+ 348              	USBFS_WKUP_IRQHandler:
+ 349              	.LFB128:
+ 198:gd32e10x_it.c **** 
+ 199:gd32e10x_it.c **** /*!
+ 200:gd32e10x_it.c ****     \brief      this function handles USBD wakeup interrupt request.
+ 201:gd32e10x_it.c ****     \param[in]  none
+ 202:gd32e10x_it.c ****     \param[out] none
+ 203:gd32e10x_it.c ****     \retval     none
+ 204:gd32e10x_it.c **** */
+ 205:gd32e10x_it.c **** void USBFS_WKUP_IRQHandler(void)
+ 206:gd32e10x_it.c **** {
+ 350              		.loc 1 206 1 is_stmt 1 view -0
+ 351              		.cfi_startproc
+ 352              		@ args = 0, pretend = 0, frame = 0
+ 353              		@ frame_needed = 0, uses_anonymous_args = 0
+ 354 0000 08B5     		push	{r3, lr}
+ 355              		.cfi_def_cfa_offset 8
+ 356              		.cfi_offset 3, -8
+ 357              		.cfi_offset 14, -4
+ 207:gd32e10x_it.c ****     if (usbhs_core_dev.cfg.low_power) {
+ 358              		.loc 1 207 5 view .LVU50
+ 359              		.loc 1 207 27 is_stmt 0 view .LVU51
+ 360 0002 0B4B     		ldr	r3, .L34
+ 361              		.loc 1 207 8 view .LVU52
+ 362 0004 9B79     		ldrb	r3, [r3, #6]	@ zero_extendqisi2
+ 363 0006 23B9     		cbnz	r3, .L33
+ 364              	.L31:
+ 208:gd32e10x_it.c ****         SystemInit();
+ 209:gd32e10x_it.c ****         rcu_usb_clock_config(usbfs_prescaler);
+ 210:gd32e10x_it.c **** 
+ 211:gd32e10x_it.c ****         rcu_periph_clock_enable(RCU_USBFS);
+ 212:gd32e10x_it.c **** 
+ 213:gd32e10x_it.c ****         usb_clock_ungate(&usbhs_core_dev);
+ 214:gd32e10x_it.c ****     }
+ 215:gd32e10x_it.c **** 
+ 216:gd32e10x_it.c ****     exti_interrupt_flag_clear(EXTI_18);
+ 365              		.loc 1 216 5 is_stmt 1 view .LVU53
+ 366 0008 4FF48020 		mov	r0, #262144
+ 367 000c FFF7FEFF 		bl	exti_interrupt_flag_clear
+ 368              	.LVL5:
+ 217:gd32e10x_it.c **** }
+ 369              		.loc 1 217 1 is_stmt 0 view .LVU54
+ 370 0010 08BD     		pop	{r3, pc}
+ARM GAS  /tmp/ccPwTv4G.s 			page 11
+
+
+ 371              	.L33:
+ 208:gd32e10x_it.c ****         SystemInit();
+ 372              		.loc 1 208 9 is_stmt 1 view .LVU55
+ 373 0012 FFF7FEFF 		bl	SystemInit
+ 374              	.LVL6:
+ 209:gd32e10x_it.c **** 
+ 375              		.loc 1 209 9 view .LVU56
+ 376 0016 074B     		ldr	r3, .L34+4
+ 377 0018 1868     		ldr	r0, [r3]
+ 378 001a FFF7FEFF 		bl	rcu_usb_clock_config
+ 379              	.LVL7:
+ 211:gd32e10x_it.c **** 
+ 380              		.loc 1 211 9 view .LVU57
+ 381 001e 40F20C50 		movw	r0, #1292
+ 382 0022 FFF7FEFF 		bl	rcu_periph_clock_enable
+ 383              	.LVL8:
+ 213:gd32e10x_it.c ****     }
+ 384              		.loc 1 213 9 view .LVU58
+ 385 0026 0248     		ldr	r0, .L34
+ 386 0028 FFF7FEFF 		bl	usb_clock_ungate
+ 387              	.LVL9:
+ 388 002c ECE7     		b	.L31
+ 389              	.L35:
+ 390 002e 00BF     		.align	2
+ 391              	.L34:
+ 392 0030 00000000 		.word	usbhs_core_dev
+ 393 0034 00000000 		.word	usbfs_prescaler
+ 394              		.cfi_endproc
+ 395              	.LFE128:
+ 397              		.section	.text.TIMER0_UP_TIMER9_IRQHandler,"ax",%progbits
+ 398              		.align	1
+ 399              		.global	TIMER0_UP_TIMER9_IRQHandler
+ 400              		.syntax unified
+ 401              		.thumb
+ 402              		.thumb_func
+ 403              		.fpu fpv4-sp-d16
+ 405              	TIMER0_UP_TIMER9_IRQHandler:
+ 406              	.LFB129:
+ 218:gd32e10x_it.c **** 
+ 219:gd32e10x_it.c **** /*!
+ 220:gd32e10x_it.c ****     \brief      this function handles Timer0 updata interrupt request.
+ 221:gd32e10x_it.c ****     \param[in]  none
+ 222:gd32e10x_it.c ****     \param[out] none
+ 223:gd32e10x_it.c ****     \retval     none
+ 224:gd32e10x_it.c **** */
+ 225:gd32e10x_it.c **** void TIMER0_UP_TIMER9_IRQHandler(void)
+ 226:gd32e10x_it.c **** {
+ 407              		.loc 1 226 1 view -0
+ 408              		.cfi_startproc
+ 409              		@ args = 0, pretend = 0, frame = 0
+ 410              		@ frame_needed = 0, uses_anonymous_args = 0
+ 411              		@ link register save eliminated.
+ 227:gd32e10x_it.c ****     // timer_delay_irq();
+ 228:gd32e10x_it.c **** }
+ 412              		.loc 1 228 1 view .LVU60
+ 413 0000 7047     		bx	lr
+ 414              		.cfi_endproc
+ARM GAS  /tmp/ccPwTv4G.s 			page 12
+
+
+ 415              	.LFE129:
+ 417              		.text
+ 418              	.Letext0:
+ 419              		.file 2 "/usr/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h"
+ 420              		.file 3 "../../../../Firmware/CMSIS/GD/GD32E10x/Include/gd32e10x.h"
+ 421              		.file 4 "../../../../Firmware/GD32E10x_standard_peripheral/Include/gd32e10x_rcu.h"
+ 422              		.file 5 "../../../../Firmware/GD32E10x_standard_peripheral/Include/gd32e10x_exti.h"
+ 423              		.file 6 "../../../../Firmware/GD32E10x_usbfs_driver/Include/usb_core.h"
+ 424              		.file 7 "../../../../Firmware/CMSIS/GD/GD32E10x/Include/system_gd32e10x.h"
+ 425              		.file 8 "../../../../Firmware/GD32E10x_usbfs_driver/Include/usbd_int.h"
+ARM GAS  /tmp/ccPwTv4G.s 			page 13
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 gd32e10x_it.c
+     /tmp/ccPwTv4G.s:18     .text.NMI_Handler:0000000000000000 $t
+     /tmp/ccPwTv4G.s:26     .text.NMI_Handler:0000000000000000 NMI_Handler
+     /tmp/ccPwTv4G.s:40     .text.HardFault_Handler:0000000000000000 $t
+     /tmp/ccPwTv4G.s:47     .text.HardFault_Handler:0000000000000000 HardFault_Handler
+     /tmp/ccPwTv4G.s:64     .text.MemManage_Handler:0000000000000000 $t
+     /tmp/ccPwTv4G.s:71     .text.MemManage_Handler:0000000000000000 MemManage_Handler
+     /tmp/ccPwTv4G.s:88     .text.BusFault_Handler:0000000000000000 $t
+     /tmp/ccPwTv4G.s:95     .text.BusFault_Handler:0000000000000000 BusFault_Handler
+     /tmp/ccPwTv4G.s:112    .text.UsageFault_Handler:0000000000000000 $t
+     /tmp/ccPwTv4G.s:119    .text.UsageFault_Handler:0000000000000000 UsageFault_Handler
+     /tmp/ccPwTv4G.s:136    .text.SVC_Handler:0000000000000000 $t
+     /tmp/ccPwTv4G.s:143    .text.SVC_Handler:0000000000000000 SVC_Handler
+     /tmp/ccPwTv4G.s:156    .text.DebugMon_Handler:0000000000000000 $t
+     /tmp/ccPwTv4G.s:163    .text.DebugMon_Handler:0000000000000000 DebugMon_Handler
+     /tmp/ccPwTv4G.s:176    .text.PendSV_Handler:0000000000000000 $t
+     /tmp/ccPwTv4G.s:183    .text.PendSV_Handler:0000000000000000 PendSV_Handler
+     /tmp/ccPwTv4G.s:196    .text.SysTick_Handler:0000000000000000 $t
+     /tmp/ccPwTv4G.s:203    .text.SysTick_Handler:0000000000000000 SysTick_Handler
+     /tmp/ccPwTv4G.s:216    .text.EXTI0_IRQHandler:0000000000000000 $t
+     /tmp/ccPwTv4G.s:223    .text.EXTI0_IRQHandler:0000000000000000 EXTI0_IRQHandler
+     /tmp/ccPwTv4G.s:258    .text.EXTI0_IRQHandler:0000000000000018 $d
+     /tmp/ccPwTv4G.s:263    .text.EXTI10_15_IRQHandler:0000000000000000 $t
+     /tmp/ccPwTv4G.s:270    .text.EXTI10_15_IRQHandler:0000000000000000 EXTI10_15_IRQHandler
+     /tmp/ccPwTv4G.s:305    .text.EXTI10_15_IRQHandler:000000000000001c $d
+     /tmp/ccPwTv4G.s:310    .text.USBFS_IRQHandler:0000000000000000 $t
+     /tmp/ccPwTv4G.s:317    .text.USBFS_IRQHandler:0000000000000000 USBFS_IRQHandler
+     /tmp/ccPwTv4G.s:336    .text.USBFS_IRQHandler:000000000000000c $d
+     /tmp/ccPwTv4G.s:341    .text.USBFS_WKUP_IRQHandler:0000000000000000 $t
+     /tmp/ccPwTv4G.s:348    .text.USBFS_WKUP_IRQHandler:0000000000000000 USBFS_WKUP_IRQHandler
+     /tmp/ccPwTv4G.s:392    .text.USBFS_WKUP_IRQHandler:0000000000000030 $d
+     /tmp/ccPwTv4G.s:398    .text.TIMER0_UP_TIMER9_IRQHandler:0000000000000000 $t
+     /tmp/ccPwTv4G.s:405    .text.TIMER0_UP_TIMER9_IRQHandler:0000000000000000 TIMER0_UP_TIMER9_IRQHandler
+
+UNDEFINED SYMBOLS
+exti_interrupt_flag_get
+exti_interrupt_flag_clear
+usbhs_core_dev
+usbd_isr
+SystemInit
+rcu_usb_clock_config
+rcu_periph_clock_enable
+usb_clock_ungate
+usbfs_prescaler

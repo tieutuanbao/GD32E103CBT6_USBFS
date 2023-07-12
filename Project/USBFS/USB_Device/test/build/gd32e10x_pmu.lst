@@ -1,0 +1,1437 @@
+ARM GAS  /tmp/cc3iZBRk.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.eabi_attribute 27, 1
+   3              		.eabi_attribute 28, 1
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.file	"gd32e10x_pmu.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.section	.text.pmu_deinit,"ax",%progbits
+  18              		.align	1
+  19              		.global	pmu_deinit
+  20              		.arch armv7e-m
+  21              		.syntax unified
+  22              		.thumb
+  23              		.thumb_func
+  24              		.fpu fpv4-sp-d16
+  26              	pmu_deinit:
+  27              	.LFB116:
+  28              		.file 1 "../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c"
+   1:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c **** /*!
+   2:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****     \file    gd32e10x_pmu.c
+   3:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****     \brief   PMU driver
+   4:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****     
+   5:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****     \version 2017-12-26, V1.0.0, firmware for GD32E10x
+   6:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c **** */
+   7:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c **** 
+   8:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c **** /*
+   9:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****     Copyright (c) 2017, GigaDevice Semiconductor Inc.
+  10:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c **** 
+  11:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****     All rights reserved.
+  12:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c **** 
+  13:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****     Redistribution and use in source and binary forms, with or without modification, 
+  14:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c **** are permitted provided that the following conditions are met:
+  15:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c **** 
+  16:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****     1. Redistributions of source code must retain the above copyright notice, this 
+  17:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****        list of conditions and the following disclaimer.
+  18:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****     2. Redistributions in binary form must reproduce the above copyright notice, 
+  19:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****        this list of conditions and the following disclaimer in the documentation 
+  20:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****        and/or other materials provided with the distribution.
+  21:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****     3. Neither the name of the copyright holder nor the names of its contributors 
+  22:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****        may be used to endorse or promote products derived from this software without 
+  23:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****        specific prior written permission.
+  24:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c **** 
+  25:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****     THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" 
+  26:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c **** AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED 
+  27:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c **** WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. 
+  28:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c **** IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, 
+  29:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c **** INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT 
+  30:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c **** NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR 
+ARM GAS  /tmp/cc3iZBRk.s 			page 2
+
+
+  31:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c **** PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, 
+  32:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c **** WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) 
+  33:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c **** ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY 
+  34:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c **** OF SUCH DAMAGE.
+  35:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c **** */
+  36:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c **** 
+  37:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c **** #include "gd32e10x_pmu.h"
+  38:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c **** 
+  39:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c **** /*!
+  40:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****     \brief      reset PMU register
+  41:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****     \param[in]  none
+  42:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****     \param[out] none
+  43:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****     \retval     none
+  44:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c **** */
+  45:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c **** void pmu_deinit(void)
+  46:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c **** {
+  29              		.loc 1 46 1 view -0
+  30              		.cfi_startproc
+  31              		@ args = 0, pretend = 0, frame = 0
+  32              		@ frame_needed = 0, uses_anonymous_args = 0
+  33 0000 08B5     		push	{r3, lr}
+  34              		.cfi_def_cfa_offset 8
+  35              		.cfi_offset 3, -8
+  36              		.cfi_offset 14, -4
+  47:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****     /* reset PMU */
+  48:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****     rcu_periph_reset_enable(RCU_PMURST);
+  37              		.loc 1 48 5 view .LVU1
+  38 0002 40F21C40 		movw	r0, #1052
+  39 0006 FFF7FEFF 		bl	rcu_periph_reset_enable
+  40              	.LVL0:
+  49:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****     rcu_periph_reset_disable(RCU_PMURST);
+  41              		.loc 1 49 5 view .LVU2
+  42 000a 40F21C40 		movw	r0, #1052
+  43 000e FFF7FEFF 		bl	rcu_periph_reset_disable
+  44              	.LVL1:
+  50:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c **** }
+  45              		.loc 1 50 1 is_stmt 0 view .LVU3
+  46 0012 08BD     		pop	{r3, pc}
+  47              		.cfi_endproc
+  48              	.LFE116:
+  50              		.section	.text.pmu_lvd_select,"ax",%progbits
+  51              		.align	1
+  52              		.global	pmu_lvd_select
+  53              		.syntax unified
+  54              		.thumb
+  55              		.thumb_func
+  56              		.fpu fpv4-sp-d16
+  58              	pmu_lvd_select:
+  59              	.LVL2:
+  60              	.LFB117:
+  51:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c **** 
+  52:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c **** /*!
+  53:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****     \brief      select low voltage detector threshold
+  54:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****     \param[in]  lvdt_n:
+  55:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****                 only one parameter can be selected which is shown as below:
+  56:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****       \arg        PMU_LVDT_0: voltage threshold is 2.1V
+  57:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****       \arg        PMU_LVDT_1: voltage threshold is 2.3V
+ARM GAS  /tmp/cc3iZBRk.s 			page 3
+
+
+  58:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****       \arg        PMU_LVDT_2: voltage threshold is 2.4V
+  59:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****       \arg        PMU_LVDT_3: voltage threshold is 2.6V
+  60:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****       \arg        PMU_LVDT_4: voltage threshold is 2.7V
+  61:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****       \arg        PMU_LVDT_5: voltage threshold is 2.9V
+  62:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****       \arg        PMU_LVDT_6: voltage threshold is 3.0V
+  63:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****       \arg        PMU_LVDT_7: voltage threshold is 3.1V
+  64:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****     \param[out] none
+  65:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****     \retval     none
+  66:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c **** */
+  67:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c **** void pmu_lvd_select(uint32_t lvdt_n)
+  68:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c **** {
+  61              		.loc 1 68 1 is_stmt 1 view -0
+  62              		.cfi_startproc
+  63              		@ args = 0, pretend = 0, frame = 0
+  64              		@ frame_needed = 0, uses_anonymous_args = 0
+  65              		@ link register save eliminated.
+  69:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****     /* disable LVD */
+  70:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****     PMU_CTL &= ~PMU_CTL_LVDEN;
+  66              		.loc 1 70 5 view .LVU5
+  67              		.loc 1 70 13 is_stmt 0 view .LVU6
+  68 0000 084B     		ldr	r3, .L4
+  69 0002 1968     		ldr	r1, [r3]
+  70 0004 21F01001 		bic	r1, r1, #16
+  71 0008 1960     		str	r1, [r3]
+  71:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****     /* clear LVDT bits */
+  72:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****     PMU_CTL &= ~PMU_CTL_LVDT;
+  72              		.loc 1 72 5 is_stmt 1 view .LVU7
+  73              		.loc 1 72 13 is_stmt 0 view .LVU8
+  74 000a 1968     		ldr	r1, [r3]
+  75 000c 21F0E001 		bic	r1, r1, #224
+  76 0010 1960     		str	r1, [r3]
+  73:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****     /* set LVDT bits according to lvdt_n */
+  74:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****     PMU_CTL |= lvdt_n;
+  77              		.loc 1 74 5 is_stmt 1 view .LVU9
+  78              		.loc 1 74 13 is_stmt 0 view .LVU10
+  79 0012 1A68     		ldr	r2, [r3]
+  80 0014 0243     		orrs	r2, r2, r0
+  81 0016 1A60     		str	r2, [r3]
+  75:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****     /* enable LVD */
+  76:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****     PMU_CTL |= PMU_CTL_LVDEN;
+  82              		.loc 1 76 5 is_stmt 1 view .LVU11
+  83              		.loc 1 76 13 is_stmt 0 view .LVU12
+  84 0018 1A68     		ldr	r2, [r3]
+  85 001a 42F01002 		orr	r2, r2, #16
+  86 001e 1A60     		str	r2, [r3]
+  77:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c **** }
+  87              		.loc 1 77 1 view .LVU13
+  88 0020 7047     		bx	lr
+  89              	.L5:
+  90 0022 00BF     		.align	2
+  91              	.L4:
+  92 0024 00700040 		.word	1073770496
+  93              		.cfi_endproc
+  94              	.LFE117:
+  96              		.section	.text.pmu_ldo_output_select,"ax",%progbits
+  97              		.align	1
+  98              		.global	pmu_ldo_output_select
+ARM GAS  /tmp/cc3iZBRk.s 			page 4
+
+
+  99              		.syntax unified
+ 100              		.thumb
+ 101              		.thumb_func
+ 102              		.fpu fpv4-sp-d16
+ 104              	pmu_ldo_output_select:
+ 105              	.LVL3:
+ 106              	.LFB118:
+  78:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c **** 
+  79:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c **** /*!
+  80:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****     \brief      select LDO output voltage
+  81:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****                 this bit set by software when the main PLL closed, before closing PLL, change the s
+  82:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****     \param[in]  ldo_output:
+  83:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****                 only one parameter can be selected which is shown as below:
+  84:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****       \arg        PMU_LDOVS_LOW: LDO output voltage select low mode
+  85:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****       \arg        PMU_LDOVS_NORMAL: LDO output voltage select normal mode
+  86:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****     \param[out] none
+  87:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****     \retval     none
+  88:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c **** */
+  89:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c **** void pmu_ldo_output_select(uint32_t ldo_output)
+  90:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c **** {
+ 107              		.loc 1 90 1 is_stmt 1 view -0
+ 108              		.cfi_startproc
+ 109              		@ args = 0, pretend = 0, frame = 0
+ 110              		@ frame_needed = 0, uses_anonymous_args = 0
+ 111              		@ link register save eliminated.
+  91:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****     PMU_CTL &= ~PMU_CTL_LDOVS;
+ 112              		.loc 1 91 5 view .LVU15
+ 113              		.loc 1 91 13 is_stmt 0 view .LVU16
+ 114 0000 044B     		ldr	r3, .L7
+ 115 0002 1968     		ldr	r1, [r3]
+ 116 0004 21F44041 		bic	r1, r1, #49152
+ 117 0008 1960     		str	r1, [r3]
+  92:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****     PMU_CTL |= ldo_output;
+ 118              		.loc 1 92 5 is_stmt 1 view .LVU17
+ 119              		.loc 1 92 13 is_stmt 0 view .LVU18
+ 120 000a 1A68     		ldr	r2, [r3]
+ 121 000c 0243     		orrs	r2, r2, r0
+ 122 000e 1A60     		str	r2, [r3]
+  93:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c **** }
+ 123              		.loc 1 93 1 view .LVU19
+ 124 0010 7047     		bx	lr
+ 125              	.L8:
+ 126 0012 00BF     		.align	2
+ 127              	.L7:
+ 128 0014 00700040 		.word	1073770496
+ 129              		.cfi_endproc
+ 130              	.LFE118:
+ 132              		.section	.text.pmu_lvd_disable,"ax",%progbits
+ 133              		.align	1
+ 134              		.global	pmu_lvd_disable
+ 135              		.syntax unified
+ 136              		.thumb
+ 137              		.thumb_func
+ 138              		.fpu fpv4-sp-d16
+ 140              	pmu_lvd_disable:
+ 141              	.LFB119:
+  94:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c **** 
+ARM GAS  /tmp/cc3iZBRk.s 			page 5
+
+
+  95:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c **** /*!
+  96:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****     \brief      disable PMU lvd
+  97:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****     \param[in]  none
+  98:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****     \param[out] none
+  99:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****     \retval     none
+ 100:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c **** */
+ 101:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c **** void pmu_lvd_disable(void)
+ 102:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c **** {
+ 142              		.loc 1 102 1 is_stmt 1 view -0
+ 143              		.cfi_startproc
+ 144              		@ args = 0, pretend = 0, frame = 0
+ 145              		@ frame_needed = 0, uses_anonymous_args = 0
+ 146              		@ link register save eliminated.
+ 103:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****     /* disable LVD */
+ 104:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****     PMU_CTL &= ~PMU_CTL_LVDEN;
+ 147              		.loc 1 104 5 view .LVU21
+ 148              		.loc 1 104 13 is_stmt 0 view .LVU22
+ 149 0000 024A     		ldr	r2, .L10
+ 150 0002 1368     		ldr	r3, [r2]
+ 151 0004 23F01003 		bic	r3, r3, #16
+ 152 0008 1360     		str	r3, [r2]
+ 105:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c **** }
+ 153              		.loc 1 105 1 view .LVU23
+ 154 000a 7047     		bx	lr
+ 155              	.L11:
+ 156              		.align	2
+ 157              	.L10:
+ 158 000c 00700040 		.word	1073770496
+ 159              		.cfi_endproc
+ 160              	.LFE119:
+ 162              		.section	.text.pmu_to_sleepmode,"ax",%progbits
+ 163              		.align	1
+ 164              		.global	pmu_to_sleepmode
+ 165              		.syntax unified
+ 166              		.thumb
+ 167              		.thumb_func
+ 168              		.fpu fpv4-sp-d16
+ 170              	pmu_to_sleepmode:
+ 171              	.LVL4:
+ 172              	.LFB120:
+ 106:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c **** 
+ 107:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c **** /*!
+ 108:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****     \brief      PMU work at sleep mode
+ 109:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****     \param[in]  sleepmodecmd:
+ 110:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****                 only one parameter can be selected which is shown as below:
+ 111:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****       \arg        WFI_CMD: use WFI command
+ 112:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****       \arg        WFE_CMD: use WFE command
+ 113:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****     \param[out] none
+ 114:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****     \retval     none
+ 115:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c **** */
+ 116:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c **** void pmu_to_sleepmode(uint8_t sleepmodecmd)
+ 117:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c **** {
+ 173              		.loc 1 117 1 is_stmt 1 view -0
+ 174              		.cfi_startproc
+ 175              		@ args = 0, pretend = 0, frame = 0
+ 176              		@ frame_needed = 0, uses_anonymous_args = 0
+ 177              		@ link register save eliminated.
+ARM GAS  /tmp/cc3iZBRk.s 			page 6
+
+
+ 118:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****     /* clear sleepdeep bit of Cortex-M4 system control register */
+ 119:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****     SCB->SCR &= ~((uint32_t)SCB_SCR_SLEEPDEEP_Msk);
+ 178              		.loc 1 119 5 view .LVU25
+ 179              		.loc 1 119 14 is_stmt 0 view .LVU26
+ 180 0000 044A     		ldr	r2, .L15
+ 181 0002 1369     		ldr	r3, [r2, #16]
+ 182 0004 23F00403 		bic	r3, r3, #4
+ 183 0008 1361     		str	r3, [r2, #16]
+ 120:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****     
+ 121:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****     /* select WFI or WFE command to enter sleep mode */
+ 122:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****     if(WFI_CMD == sleepmodecmd){
+ 184              		.loc 1 122 5 is_stmt 1 view .LVU27
+ 185              		.loc 1 122 7 is_stmt 0 view .LVU28
+ 186 000a 08B9     		cbnz	r0, .L13
+ 123:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****         __WFI();
+ 187              		.loc 1 123 9 is_stmt 1 view .LVU29
+ 188              	.LBB18:
+ 189              	.LBI18:
+ 190              		.file 2 "../../../../Firmware/CMSIS/core_cmInstr.h"
+   1:../../../../Firmware/CMSIS/core_cmInstr.h **** /**************************************************************************//**
+   2:../../../../Firmware/CMSIS/core_cmInstr.h ****  * @file     core_cmInstr.h
+   3:../../../../Firmware/CMSIS/core_cmInstr.h ****  * @brief    CMSIS Cortex-M Core Instruction Access Header File
+   4:../../../../Firmware/CMSIS/core_cmInstr.h ****  * @version  V3.01
+   5:../../../../Firmware/CMSIS/core_cmInstr.h ****  * @date     06. March 2012
+   6:../../../../Firmware/CMSIS/core_cmInstr.h ****  *
+   7:../../../../Firmware/CMSIS/core_cmInstr.h ****  * @note
+   8:../../../../Firmware/CMSIS/core_cmInstr.h ****  * Copyright (C) 2009-2012 ARM Limited. All rights reserved.
+   9:../../../../Firmware/CMSIS/core_cmInstr.h ****  *
+  10:../../../../Firmware/CMSIS/core_cmInstr.h ****  * @par
+  11:../../../../Firmware/CMSIS/core_cmInstr.h ****  * ARM Limited (ARM) is supplying this software for use with Cortex-M
+  12:../../../../Firmware/CMSIS/core_cmInstr.h ****  * processor based microcontrollers.  This file can be freely distributed
+  13:../../../../Firmware/CMSIS/core_cmInstr.h ****  * within development tools that are supporting such ARM based processors.
+  14:../../../../Firmware/CMSIS/core_cmInstr.h ****  *
+  15:../../../../Firmware/CMSIS/core_cmInstr.h ****  * @par
+  16:../../../../Firmware/CMSIS/core_cmInstr.h ****  * THIS SOFTWARE IS PROVIDED "AS IS".  NO WARRANTIES, WHETHER EXPRESS, IMPLIED
+  17:../../../../Firmware/CMSIS/core_cmInstr.h ****  * OR STATUTORY, INCLUDING, BUT NOT LIMITED TO, IMPLIED WARRANTIES OF
+  18:../../../../Firmware/CMSIS/core_cmInstr.h ****  * MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE APPLY TO THIS SOFTWARE.
+  19:../../../../Firmware/CMSIS/core_cmInstr.h ****  * ARM SHALL NOT, IN ANY CIRCUMSTANCES, BE LIABLE FOR SPECIAL, INCIDENTAL, OR
+  20:../../../../Firmware/CMSIS/core_cmInstr.h ****  * CONSEQUENTIAL DAMAGES, FOR ANY REASON WHATSOEVER.
+  21:../../../../Firmware/CMSIS/core_cmInstr.h ****  *
+  22:../../../../Firmware/CMSIS/core_cmInstr.h ****  ******************************************************************************/
+  23:../../../../Firmware/CMSIS/core_cmInstr.h **** 
+  24:../../../../Firmware/CMSIS/core_cmInstr.h **** #ifndef __CORE_CMINSTR_H
+  25:../../../../Firmware/CMSIS/core_cmInstr.h **** #define __CORE_CMINSTR_H
+  26:../../../../Firmware/CMSIS/core_cmInstr.h **** 
+  27:../../../../Firmware/CMSIS/core_cmInstr.h **** 
+  28:../../../../Firmware/CMSIS/core_cmInstr.h **** /* ##########################  Core Instruction Access  ######################### */
+  29:../../../../Firmware/CMSIS/core_cmInstr.h **** /** \defgroup CMSIS_Core_InstructionInterface CMSIS Core Instruction Interface
+  30:../../../../Firmware/CMSIS/core_cmInstr.h ****   Access to dedicated instructions
+  31:../../../../Firmware/CMSIS/core_cmInstr.h ****   @{
+  32:../../../../Firmware/CMSIS/core_cmInstr.h **** */
+  33:../../../../Firmware/CMSIS/core_cmInstr.h **** 
+  34:../../../../Firmware/CMSIS/core_cmInstr.h **** #if   defined ( __CC_ARM ) /*------------------RealView Compiler -----------------*/
+  35:../../../../Firmware/CMSIS/core_cmInstr.h **** /* ARM armcc specific functions */
+  36:../../../../Firmware/CMSIS/core_cmInstr.h **** 
+  37:../../../../Firmware/CMSIS/core_cmInstr.h **** #if (__ARMCC_VERSION < 400677)
+  38:../../../../Firmware/CMSIS/core_cmInstr.h ****   #error "Please use ARM Compiler Toolchain V4.0.677 or later!"
+ARM GAS  /tmp/cc3iZBRk.s 			page 7
+
+
+  39:../../../../Firmware/CMSIS/core_cmInstr.h **** #endif
+  40:../../../../Firmware/CMSIS/core_cmInstr.h **** 
+  41:../../../../Firmware/CMSIS/core_cmInstr.h **** 
+  42:../../../../Firmware/CMSIS/core_cmInstr.h **** /** \brief  No Operation
+  43:../../../../Firmware/CMSIS/core_cmInstr.h **** 
+  44:../../../../Firmware/CMSIS/core_cmInstr.h ****     No Operation does nothing. This instruction can be used for code alignment purposes.
+  45:../../../../Firmware/CMSIS/core_cmInstr.h ****  */
+  46:../../../../Firmware/CMSIS/core_cmInstr.h **** #define __NOP                             __nop
+  47:../../../../Firmware/CMSIS/core_cmInstr.h **** 
+  48:../../../../Firmware/CMSIS/core_cmInstr.h **** 
+  49:../../../../Firmware/CMSIS/core_cmInstr.h **** /** \brief  Wait For Interrupt
+  50:../../../../Firmware/CMSIS/core_cmInstr.h **** 
+  51:../../../../Firmware/CMSIS/core_cmInstr.h ****     Wait For Interrupt is a hint instruction that suspends execution
+  52:../../../../Firmware/CMSIS/core_cmInstr.h ****     until one of a number of events occurs.
+  53:../../../../Firmware/CMSIS/core_cmInstr.h ****  */
+  54:../../../../Firmware/CMSIS/core_cmInstr.h **** #define __WFI                             __wfi
+  55:../../../../Firmware/CMSIS/core_cmInstr.h **** 
+  56:../../../../Firmware/CMSIS/core_cmInstr.h **** 
+  57:../../../../Firmware/CMSIS/core_cmInstr.h **** /** \brief  Wait For Event
+  58:../../../../Firmware/CMSIS/core_cmInstr.h **** 
+  59:../../../../Firmware/CMSIS/core_cmInstr.h ****     Wait For Event is a hint instruction that permits the processor to enter
+  60:../../../../Firmware/CMSIS/core_cmInstr.h ****     a low-power state until one of a number of events occurs.
+  61:../../../../Firmware/CMSIS/core_cmInstr.h ****  */
+  62:../../../../Firmware/CMSIS/core_cmInstr.h **** #define __WFE                             __wfe
+  63:../../../../Firmware/CMSIS/core_cmInstr.h **** 
+  64:../../../../Firmware/CMSIS/core_cmInstr.h **** 
+  65:../../../../Firmware/CMSIS/core_cmInstr.h **** /** \brief  Send Event
+  66:../../../../Firmware/CMSIS/core_cmInstr.h **** 
+  67:../../../../Firmware/CMSIS/core_cmInstr.h ****     Send Event is a hint instruction. It causes an event to be signaled to the CPU.
+  68:../../../../Firmware/CMSIS/core_cmInstr.h ****  */
+  69:../../../../Firmware/CMSIS/core_cmInstr.h **** #define __SEV                             __sev
+  70:../../../../Firmware/CMSIS/core_cmInstr.h **** 
+  71:../../../../Firmware/CMSIS/core_cmInstr.h **** 
+  72:../../../../Firmware/CMSIS/core_cmInstr.h **** /** \brief  Instruction Synchronization Barrier
+  73:../../../../Firmware/CMSIS/core_cmInstr.h **** 
+  74:../../../../Firmware/CMSIS/core_cmInstr.h ****     Instruction Synchronization Barrier flushes the pipeline in the processor,
+  75:../../../../Firmware/CMSIS/core_cmInstr.h ****     so that all instructions following the ISB are fetched from cache or
+  76:../../../../Firmware/CMSIS/core_cmInstr.h ****     memory, after the instruction has been completed.
+  77:../../../../Firmware/CMSIS/core_cmInstr.h ****  */
+  78:../../../../Firmware/CMSIS/core_cmInstr.h **** #define __ISB()                           __isb(0xF)
+  79:../../../../Firmware/CMSIS/core_cmInstr.h **** 
+  80:../../../../Firmware/CMSIS/core_cmInstr.h **** 
+  81:../../../../Firmware/CMSIS/core_cmInstr.h **** /** \brief  Data Synchronization Barrier
+  82:../../../../Firmware/CMSIS/core_cmInstr.h **** 
+  83:../../../../Firmware/CMSIS/core_cmInstr.h ****     This function acts as a special kind of Data Memory Barrier.
+  84:../../../../Firmware/CMSIS/core_cmInstr.h ****     It completes when all explicit memory accesses before this instruction complete.
+  85:../../../../Firmware/CMSIS/core_cmInstr.h ****  */
+  86:../../../../Firmware/CMSIS/core_cmInstr.h **** #define __DSB()                           __dsb(0xF)
+  87:../../../../Firmware/CMSIS/core_cmInstr.h **** 
+  88:../../../../Firmware/CMSIS/core_cmInstr.h **** 
+  89:../../../../Firmware/CMSIS/core_cmInstr.h **** /** \brief  Data Memory Barrier
+  90:../../../../Firmware/CMSIS/core_cmInstr.h **** 
+  91:../../../../Firmware/CMSIS/core_cmInstr.h ****     This function ensures the apparent order of the explicit memory operations before
+  92:../../../../Firmware/CMSIS/core_cmInstr.h ****     and after the instruction, without ensuring their completion.
+  93:../../../../Firmware/CMSIS/core_cmInstr.h ****  */
+  94:../../../../Firmware/CMSIS/core_cmInstr.h **** #define __DMB()                           __dmb(0xF)
+  95:../../../../Firmware/CMSIS/core_cmInstr.h **** 
+ARM GAS  /tmp/cc3iZBRk.s 			page 8
+
+
+  96:../../../../Firmware/CMSIS/core_cmInstr.h **** 
+  97:../../../../Firmware/CMSIS/core_cmInstr.h **** /** \brief  Reverse byte order (32 bit)
+  98:../../../../Firmware/CMSIS/core_cmInstr.h **** 
+  99:../../../../Firmware/CMSIS/core_cmInstr.h ****     This function reverses the byte order in integer value.
+ 100:../../../../Firmware/CMSIS/core_cmInstr.h **** 
+ 101:../../../../Firmware/CMSIS/core_cmInstr.h ****     \param [in]    value  Value to reverse
+ 102:../../../../Firmware/CMSIS/core_cmInstr.h ****     \return               Reversed value
+ 103:../../../../Firmware/CMSIS/core_cmInstr.h ****  */
+ 104:../../../../Firmware/CMSIS/core_cmInstr.h **** #define __REV                             __rev
+ 105:../../../../Firmware/CMSIS/core_cmInstr.h **** 
+ 106:../../../../Firmware/CMSIS/core_cmInstr.h **** 
+ 107:../../../../Firmware/CMSIS/core_cmInstr.h **** /** \brief  Reverse byte order (16 bit)
+ 108:../../../../Firmware/CMSIS/core_cmInstr.h **** 
+ 109:../../../../Firmware/CMSIS/core_cmInstr.h ****     This function reverses the byte order in two unsigned short values.
+ 110:../../../../Firmware/CMSIS/core_cmInstr.h **** 
+ 111:../../../../Firmware/CMSIS/core_cmInstr.h ****     \param [in]    value  Value to reverse
+ 112:../../../../Firmware/CMSIS/core_cmInstr.h ****     \return               Reversed value
+ 113:../../../../Firmware/CMSIS/core_cmInstr.h ****  */
+ 114:../../../../Firmware/CMSIS/core_cmInstr.h **** __attribute__((section(".rev16_text"))) __STATIC_INLINE __ASM uint32_t __REV16(uint32_t value)
+ 115:../../../../Firmware/CMSIS/core_cmInstr.h **** {
+ 116:../../../../Firmware/CMSIS/core_cmInstr.h ****   rev16 r0, r0
+ 117:../../../../Firmware/CMSIS/core_cmInstr.h ****   bx lr
+ 118:../../../../Firmware/CMSIS/core_cmInstr.h **** }
+ 119:../../../../Firmware/CMSIS/core_cmInstr.h **** 
+ 120:../../../../Firmware/CMSIS/core_cmInstr.h **** 
+ 121:../../../../Firmware/CMSIS/core_cmInstr.h **** /** \brief  Reverse byte order in signed short value
+ 122:../../../../Firmware/CMSIS/core_cmInstr.h **** 
+ 123:../../../../Firmware/CMSIS/core_cmInstr.h ****     This function reverses the byte order in a signed short value with sign extension to integer.
+ 124:../../../../Firmware/CMSIS/core_cmInstr.h **** 
+ 125:../../../../Firmware/CMSIS/core_cmInstr.h ****     \param [in]    value  Value to reverse
+ 126:../../../../Firmware/CMSIS/core_cmInstr.h ****     \return               Reversed value
+ 127:../../../../Firmware/CMSIS/core_cmInstr.h ****  */
+ 128:../../../../Firmware/CMSIS/core_cmInstr.h **** __attribute__((section(".revsh_text"))) __STATIC_INLINE __ASM int32_t __REVSH(int32_t value)
+ 129:../../../../Firmware/CMSIS/core_cmInstr.h **** {
+ 130:../../../../Firmware/CMSIS/core_cmInstr.h ****   revsh r0, r0
+ 131:../../../../Firmware/CMSIS/core_cmInstr.h ****   bx lr
+ 132:../../../../Firmware/CMSIS/core_cmInstr.h **** }
+ 133:../../../../Firmware/CMSIS/core_cmInstr.h **** 
+ 134:../../../../Firmware/CMSIS/core_cmInstr.h **** 
+ 135:../../../../Firmware/CMSIS/core_cmInstr.h **** /** \brief  Rotate Right in unsigned value (32 bit)
+ 136:../../../../Firmware/CMSIS/core_cmInstr.h **** 
+ 137:../../../../Firmware/CMSIS/core_cmInstr.h ****     This function Rotate Right (immediate) provides the value of the contents of a register rotated
+ 138:../../../../Firmware/CMSIS/core_cmInstr.h **** 
+ 139:../../../../Firmware/CMSIS/core_cmInstr.h ****     \param [in]    value  Value to rotate
+ 140:../../../../Firmware/CMSIS/core_cmInstr.h ****     \param [in]    value  Number of Bits to rotate
+ 141:../../../../Firmware/CMSIS/core_cmInstr.h ****     \return               Rotated value
+ 142:../../../../Firmware/CMSIS/core_cmInstr.h ****  */
+ 143:../../../../Firmware/CMSIS/core_cmInstr.h **** #define __ROR                             __ror
+ 144:../../../../Firmware/CMSIS/core_cmInstr.h **** 
+ 145:../../../../Firmware/CMSIS/core_cmInstr.h **** 
+ 146:../../../../Firmware/CMSIS/core_cmInstr.h **** #if       (__CORTEX_M >= 0x03)
+ 147:../../../../Firmware/CMSIS/core_cmInstr.h **** 
+ 148:../../../../Firmware/CMSIS/core_cmInstr.h **** /** \brief  Reverse bit order of value
+ 149:../../../../Firmware/CMSIS/core_cmInstr.h **** 
+ 150:../../../../Firmware/CMSIS/core_cmInstr.h ****     This function reverses the bit order of the given value.
+ 151:../../../../Firmware/CMSIS/core_cmInstr.h **** 
+ 152:../../../../Firmware/CMSIS/core_cmInstr.h ****     \param [in]    value  Value to reverse
+ARM GAS  /tmp/cc3iZBRk.s 			page 9
+
+
+ 153:../../../../Firmware/CMSIS/core_cmInstr.h ****     \return               Reversed value
+ 154:../../../../Firmware/CMSIS/core_cmInstr.h ****  */
+ 155:../../../../Firmware/CMSIS/core_cmInstr.h **** #define __RBIT                            __rbit
+ 156:../../../../Firmware/CMSIS/core_cmInstr.h **** 
+ 157:../../../../Firmware/CMSIS/core_cmInstr.h **** 
+ 158:../../../../Firmware/CMSIS/core_cmInstr.h **** /** \brief  LDR Exclusive (8 bit)
+ 159:../../../../Firmware/CMSIS/core_cmInstr.h **** 
+ 160:../../../../Firmware/CMSIS/core_cmInstr.h ****     This function performs a exclusive LDR command for 8 bit value.
+ 161:../../../../Firmware/CMSIS/core_cmInstr.h **** 
+ 162:../../../../Firmware/CMSIS/core_cmInstr.h ****     \param [in]    ptr  Pointer to data
+ 163:../../../../Firmware/CMSIS/core_cmInstr.h ****     \return             value of type uint8_t at (*ptr)
+ 164:../../../../Firmware/CMSIS/core_cmInstr.h ****  */
+ 165:../../../../Firmware/CMSIS/core_cmInstr.h **** #define __LDREXB(ptr)                     ((uint8_t ) __ldrex(ptr))
+ 166:../../../../Firmware/CMSIS/core_cmInstr.h **** 
+ 167:../../../../Firmware/CMSIS/core_cmInstr.h **** 
+ 168:../../../../Firmware/CMSIS/core_cmInstr.h **** /** \brief  LDR Exclusive (16 bit)
+ 169:../../../../Firmware/CMSIS/core_cmInstr.h **** 
+ 170:../../../../Firmware/CMSIS/core_cmInstr.h ****     This function performs a exclusive LDR command for 16 bit values.
+ 171:../../../../Firmware/CMSIS/core_cmInstr.h **** 
+ 172:../../../../Firmware/CMSIS/core_cmInstr.h ****     \param [in]    ptr  Pointer to data
+ 173:../../../../Firmware/CMSIS/core_cmInstr.h ****     \return        value of type uint16_t at (*ptr)
+ 174:../../../../Firmware/CMSIS/core_cmInstr.h ****  */
+ 175:../../../../Firmware/CMSIS/core_cmInstr.h **** #define __LDREXH(ptr)                     ((uint16_t) __ldrex(ptr))
+ 176:../../../../Firmware/CMSIS/core_cmInstr.h **** 
+ 177:../../../../Firmware/CMSIS/core_cmInstr.h **** 
+ 178:../../../../Firmware/CMSIS/core_cmInstr.h **** /** \brief  LDR Exclusive (32 bit)
+ 179:../../../../Firmware/CMSIS/core_cmInstr.h **** 
+ 180:../../../../Firmware/CMSIS/core_cmInstr.h ****     This function performs a exclusive LDR command for 32 bit values.
+ 181:../../../../Firmware/CMSIS/core_cmInstr.h **** 
+ 182:../../../../Firmware/CMSIS/core_cmInstr.h ****     \param [in]    ptr  Pointer to data
+ 183:../../../../Firmware/CMSIS/core_cmInstr.h ****     \return        value of type uint32_t at (*ptr)
+ 184:../../../../Firmware/CMSIS/core_cmInstr.h ****  */
+ 185:../../../../Firmware/CMSIS/core_cmInstr.h **** #define __LDREXW(ptr)                     ((uint32_t ) __ldrex(ptr))
+ 186:../../../../Firmware/CMSIS/core_cmInstr.h **** 
+ 187:../../../../Firmware/CMSIS/core_cmInstr.h **** 
+ 188:../../../../Firmware/CMSIS/core_cmInstr.h **** /** \brief  STR Exclusive (8 bit)
+ 189:../../../../Firmware/CMSIS/core_cmInstr.h **** 
+ 190:../../../../Firmware/CMSIS/core_cmInstr.h ****     This function performs a exclusive STR command for 8 bit values.
+ 191:../../../../Firmware/CMSIS/core_cmInstr.h **** 
+ 192:../../../../Firmware/CMSIS/core_cmInstr.h ****     \param [in]  value  Value to store
+ 193:../../../../Firmware/CMSIS/core_cmInstr.h ****     \param [in]    ptr  Pointer to location
+ 194:../../../../Firmware/CMSIS/core_cmInstr.h ****     \return          0  Function succeeded
+ 195:../../../../Firmware/CMSIS/core_cmInstr.h ****     \return          1  Function failed
+ 196:../../../../Firmware/CMSIS/core_cmInstr.h ****  */
+ 197:../../../../Firmware/CMSIS/core_cmInstr.h **** #define __STREXB(value, ptr)              __strex(value, ptr)
+ 198:../../../../Firmware/CMSIS/core_cmInstr.h **** 
+ 199:../../../../Firmware/CMSIS/core_cmInstr.h **** 
+ 200:../../../../Firmware/CMSIS/core_cmInstr.h **** /** \brief  STR Exclusive (16 bit)
+ 201:../../../../Firmware/CMSIS/core_cmInstr.h **** 
+ 202:../../../../Firmware/CMSIS/core_cmInstr.h ****     This function performs a exclusive STR command for 16 bit values.
+ 203:../../../../Firmware/CMSIS/core_cmInstr.h **** 
+ 204:../../../../Firmware/CMSIS/core_cmInstr.h ****     \param [in]  value  Value to store
+ 205:../../../../Firmware/CMSIS/core_cmInstr.h ****     \param [in]    ptr  Pointer to location
+ 206:../../../../Firmware/CMSIS/core_cmInstr.h ****     \return          0  Function succeeded
+ 207:../../../../Firmware/CMSIS/core_cmInstr.h ****     \return          1  Function failed
+ 208:../../../../Firmware/CMSIS/core_cmInstr.h ****  */
+ 209:../../../../Firmware/CMSIS/core_cmInstr.h **** #define __STREXH(value, ptr)              __strex(value, ptr)
+ARM GAS  /tmp/cc3iZBRk.s 			page 10
+
+
+ 210:../../../../Firmware/CMSIS/core_cmInstr.h **** 
+ 211:../../../../Firmware/CMSIS/core_cmInstr.h **** 
+ 212:../../../../Firmware/CMSIS/core_cmInstr.h **** /** \brief  STR Exclusive (32 bit)
+ 213:../../../../Firmware/CMSIS/core_cmInstr.h **** 
+ 214:../../../../Firmware/CMSIS/core_cmInstr.h ****     This function performs a exclusive STR command for 32 bit values.
+ 215:../../../../Firmware/CMSIS/core_cmInstr.h **** 
+ 216:../../../../Firmware/CMSIS/core_cmInstr.h ****     \param [in]  value  Value to store
+ 217:../../../../Firmware/CMSIS/core_cmInstr.h ****     \param [in]    ptr  Pointer to location
+ 218:../../../../Firmware/CMSIS/core_cmInstr.h ****     \return          0  Function succeeded
+ 219:../../../../Firmware/CMSIS/core_cmInstr.h ****     \return          1  Function failed
+ 220:../../../../Firmware/CMSIS/core_cmInstr.h ****  */
+ 221:../../../../Firmware/CMSIS/core_cmInstr.h **** #define __STREXW(value, ptr)              __strex(value, ptr)
+ 222:../../../../Firmware/CMSIS/core_cmInstr.h **** 
+ 223:../../../../Firmware/CMSIS/core_cmInstr.h **** 
+ 224:../../../../Firmware/CMSIS/core_cmInstr.h **** /** \brief  Remove the exclusive lock
+ 225:../../../../Firmware/CMSIS/core_cmInstr.h **** 
+ 226:../../../../Firmware/CMSIS/core_cmInstr.h ****     This function removes the exclusive lock which is created by LDREX.
+ 227:../../../../Firmware/CMSIS/core_cmInstr.h **** 
+ 228:../../../../Firmware/CMSIS/core_cmInstr.h ****  */
+ 229:../../../../Firmware/CMSIS/core_cmInstr.h **** #define __CLREX                           __clrex
+ 230:../../../../Firmware/CMSIS/core_cmInstr.h **** 
+ 231:../../../../Firmware/CMSIS/core_cmInstr.h **** 
+ 232:../../../../Firmware/CMSIS/core_cmInstr.h **** /** \brief  Signed Saturate
+ 233:../../../../Firmware/CMSIS/core_cmInstr.h **** 
+ 234:../../../../Firmware/CMSIS/core_cmInstr.h ****     This function saturates a signed value.
+ 235:../../../../Firmware/CMSIS/core_cmInstr.h **** 
+ 236:../../../../Firmware/CMSIS/core_cmInstr.h ****     \param [in]  value  Value to be saturated
+ 237:../../../../Firmware/CMSIS/core_cmInstr.h ****     \param [in]    sat  Bit position to saturate to (1..32)
+ 238:../../../../Firmware/CMSIS/core_cmInstr.h ****     \return             Saturated value
+ 239:../../../../Firmware/CMSIS/core_cmInstr.h ****  */
+ 240:../../../../Firmware/CMSIS/core_cmInstr.h **** #define __SSAT                            __ssat
+ 241:../../../../Firmware/CMSIS/core_cmInstr.h **** 
+ 242:../../../../Firmware/CMSIS/core_cmInstr.h **** 
+ 243:../../../../Firmware/CMSIS/core_cmInstr.h **** /** \brief  Unsigned Saturate
+ 244:../../../../Firmware/CMSIS/core_cmInstr.h **** 
+ 245:../../../../Firmware/CMSIS/core_cmInstr.h ****     This function saturates an unsigned value.
+ 246:../../../../Firmware/CMSIS/core_cmInstr.h **** 
+ 247:../../../../Firmware/CMSIS/core_cmInstr.h ****     \param [in]  value  Value to be saturated
+ 248:../../../../Firmware/CMSIS/core_cmInstr.h ****     \param [in]    sat  Bit position to saturate to (0..31)
+ 249:../../../../Firmware/CMSIS/core_cmInstr.h ****     \return             Saturated value
+ 250:../../../../Firmware/CMSIS/core_cmInstr.h ****  */
+ 251:../../../../Firmware/CMSIS/core_cmInstr.h **** #define __USAT                            __usat
+ 252:../../../../Firmware/CMSIS/core_cmInstr.h **** 
+ 253:../../../../Firmware/CMSIS/core_cmInstr.h **** 
+ 254:../../../../Firmware/CMSIS/core_cmInstr.h **** /** \brief  Count leading zeros
+ 255:../../../../Firmware/CMSIS/core_cmInstr.h **** 
+ 256:../../../../Firmware/CMSIS/core_cmInstr.h ****     This function counts the number of leading zeros of a data value.
+ 257:../../../../Firmware/CMSIS/core_cmInstr.h **** 
+ 258:../../../../Firmware/CMSIS/core_cmInstr.h ****     \param [in]  value  Value to count the leading zeros
+ 259:../../../../Firmware/CMSIS/core_cmInstr.h ****     \return             number of leading zeros in value
+ 260:../../../../Firmware/CMSIS/core_cmInstr.h ****  */
+ 261:../../../../Firmware/CMSIS/core_cmInstr.h **** #define __CLZ                             __clz
+ 262:../../../../Firmware/CMSIS/core_cmInstr.h **** 
+ 263:../../../../Firmware/CMSIS/core_cmInstr.h **** #endif /* (__CORTEX_M >= 0x03) */
+ 264:../../../../Firmware/CMSIS/core_cmInstr.h **** 
+ 265:../../../../Firmware/CMSIS/core_cmInstr.h **** 
+ 266:../../../../Firmware/CMSIS/core_cmInstr.h **** 
+ARM GAS  /tmp/cc3iZBRk.s 			page 11
+
+
+ 267:../../../../Firmware/CMSIS/core_cmInstr.h **** #elif defined ( __ICCARM__ ) /*------------------ ICC Compiler -------------------*/
+ 268:../../../../Firmware/CMSIS/core_cmInstr.h **** /* IAR iccarm specific functions */
+ 269:../../../../Firmware/CMSIS/core_cmInstr.h **** 
+ 270:../../../../Firmware/CMSIS/core_cmInstr.h **** #include <cmsis_iar.h>
+ 271:../../../../Firmware/CMSIS/core_cmInstr.h **** 
+ 272:../../../../Firmware/CMSIS/core_cmInstr.h **** 
+ 273:../../../../Firmware/CMSIS/core_cmInstr.h **** #elif defined ( __TMS470__ ) /*---------------- TI CCS Compiler ------------------*/
+ 274:../../../../Firmware/CMSIS/core_cmInstr.h **** /* TI CCS specific functions */
+ 275:../../../../Firmware/CMSIS/core_cmInstr.h **** 
+ 276:../../../../Firmware/CMSIS/core_cmInstr.h **** #include <cmsis_ccs.h>
+ 277:../../../../Firmware/CMSIS/core_cmInstr.h **** 
+ 278:../../../../Firmware/CMSIS/core_cmInstr.h **** 
+ 279:../../../../Firmware/CMSIS/core_cmInstr.h **** #elif defined ( __GNUC__ ) /*------------------ GNU Compiler ---------------------*/
+ 280:../../../../Firmware/CMSIS/core_cmInstr.h **** /* GNU gcc specific functions */
+ 281:../../../../Firmware/CMSIS/core_cmInstr.h **** 
+ 282:../../../../Firmware/CMSIS/core_cmInstr.h **** /** \brief  No Operation
+ 283:../../../../Firmware/CMSIS/core_cmInstr.h **** 
+ 284:../../../../Firmware/CMSIS/core_cmInstr.h ****     No Operation does nothing. This instruction can be used for code alignment purposes.
+ 285:../../../../Firmware/CMSIS/core_cmInstr.h ****  */
+ 286:../../../../Firmware/CMSIS/core_cmInstr.h **** __attribute__( ( always_inline ) ) __STATIC_INLINE void __NOP(void)
+ 287:../../../../Firmware/CMSIS/core_cmInstr.h **** {
+ 288:../../../../Firmware/CMSIS/core_cmInstr.h ****   __ASM volatile ("nop");
+ 289:../../../../Firmware/CMSIS/core_cmInstr.h **** }
+ 290:../../../../Firmware/CMSIS/core_cmInstr.h **** 
+ 291:../../../../Firmware/CMSIS/core_cmInstr.h **** 
+ 292:../../../../Firmware/CMSIS/core_cmInstr.h **** /** \brief  Wait For Interrupt
+ 293:../../../../Firmware/CMSIS/core_cmInstr.h **** 
+ 294:../../../../Firmware/CMSIS/core_cmInstr.h ****     Wait For Interrupt is a hint instruction that suspends execution
+ 295:../../../../Firmware/CMSIS/core_cmInstr.h ****     until one of a number of events occurs.
+ 296:../../../../Firmware/CMSIS/core_cmInstr.h ****  */
+ 297:../../../../Firmware/CMSIS/core_cmInstr.h **** __attribute__( ( always_inline ) ) __STATIC_INLINE void __WFI(void)
+ 191              		.loc 2 297 57 view .LVU30
+ 192              	.LBB19:
+ 298:../../../../Firmware/CMSIS/core_cmInstr.h **** {
+ 299:../../../../Firmware/CMSIS/core_cmInstr.h ****   __ASM volatile ("wfi");
+ 193              		.loc 2 299 3 view .LVU31
+ 194              		.syntax unified
+ 195              	@ 299 "../../../../Firmware/CMSIS/core_cmInstr.h" 1
+ 196 000c 30BF     		wfi
+ 197              	@ 0 "" 2
+ 300:../../../../Firmware/CMSIS/core_cmInstr.h **** }
+ 198              		.loc 2 300 1 is_stmt 0 view .LVU32
+ 199              		.thumb
+ 200              		.syntax unified
+ 201 000e 7047     		bx	lr
+ 202              	.L13:
+ 203              	.LBE19:
+ 204              	.LBE18:
+ 124:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****     }else{
+ 125:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****         __WFE();
+ 205              		.loc 1 125 9 is_stmt 1 view .LVU33
+ 206              	.LBB20:
+ 207              	.LBI20:
+ 301:../../../../Firmware/CMSIS/core_cmInstr.h **** 
+ 302:../../../../Firmware/CMSIS/core_cmInstr.h **** 
+ 303:../../../../Firmware/CMSIS/core_cmInstr.h **** /** \brief  Wait For Event
+ 304:../../../../Firmware/CMSIS/core_cmInstr.h **** 
+ARM GAS  /tmp/cc3iZBRk.s 			page 12
+
+
+ 305:../../../../Firmware/CMSIS/core_cmInstr.h ****     Wait For Event is a hint instruction that permits the processor to enter
+ 306:../../../../Firmware/CMSIS/core_cmInstr.h ****     a low-power state until one of a number of events occurs.
+ 307:../../../../Firmware/CMSIS/core_cmInstr.h ****  */
+ 308:../../../../Firmware/CMSIS/core_cmInstr.h **** __attribute__( ( always_inline ) ) __STATIC_INLINE void __WFE(void)
+ 208              		.loc 2 308 57 view .LVU34
+ 209              	.LBB21:
+ 309:../../../../Firmware/CMSIS/core_cmInstr.h **** {
+ 310:../../../../Firmware/CMSIS/core_cmInstr.h ****   __ASM volatile ("wfe");
+ 210              		.loc 2 310 3 view .LVU35
+ 211              		.syntax unified
+ 212              	@ 310 "../../../../Firmware/CMSIS/core_cmInstr.h" 1
+ 213 0010 20BF     		wfe
+ 214              	@ 0 "" 2
+ 215              		.thumb
+ 216              		.syntax unified
+ 217              	.LBE21:
+ 218              	.LBE20:
+ 126:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****     }
+ 127:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c **** }
+ 219              		.loc 1 127 1 is_stmt 0 view .LVU36
+ 220 0012 7047     		bx	lr
+ 221              	.L16:
+ 222              		.align	2
+ 223              	.L15:
+ 224 0014 00ED00E0 		.word	-536810240
+ 225              		.cfi_endproc
+ 226              	.LFE120:
+ 228              		.section	.text.pmu_to_deepsleepmode,"ax",%progbits
+ 229              		.align	1
+ 230              		.global	pmu_to_deepsleepmode
+ 231              		.syntax unified
+ 232              		.thumb
+ 233              		.thumb_func
+ 234              		.fpu fpv4-sp-d16
+ 236              	pmu_to_deepsleepmode:
+ 237              	.LVL5:
+ 238              	.LFB121:
+ 128:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c **** 
+ 129:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c **** /*!
+ 130:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****     \brief      PMU work at deepsleep mode
+ 131:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****     \param[in]  ldo:
+ 132:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****                 only one parameter can be selected which is shown as below:
+ 133:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****       \arg        PMU_LDO_NORMAL: LDO work at normal power mode when pmu enter deepsleep mode
+ 134:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****       \arg        PMU_LDO_LOWPOWER: LDO work at low power mode when pmu enter deepsleep mode
+ 135:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****     \param[in]  deepsleepmodecmd:
+ 136:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****                 only one parameter can be selected which is shown as below: 
+ 137:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****       \arg        WFI_CMD: use WFI command
+ 138:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****       \arg        WFE_CMD: use WFE command
+ 139:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****     \param[out] none
+ 140:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****     \retval     none
+ 141:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c **** */
+ 142:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c **** void pmu_to_deepsleepmode(uint32_t ldo,uint8_t deepsleepmodecmd)
+ 143:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c **** {
+ 239              		.loc 1 143 1 is_stmt 1 view -0
+ 240              		.cfi_startproc
+ 241              		@ args = 0, pretend = 0, frame = 0
+ 242              		@ frame_needed = 0, uses_anonymous_args = 0
+ARM GAS  /tmp/cc3iZBRk.s 			page 13
+
+
+ 243              		@ link register save eliminated.
+ 244              		.loc 1 143 1 is_stmt 0 view .LVU38
+ 245 0000 10B4     		push	{r4}
+ 246              		.cfi_def_cfa_offset 4
+ 247              		.cfi_offset 4, -4
+ 144:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****     static uint32_t reg_snap[ 4 ];      
+ 248              		.loc 1 144 5 is_stmt 1 view .LVU39
+ 145:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****     /* clear stbmod and ldolp bits */
+ 146:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****     PMU_CTL &= ~((uint32_t)(PMU_CTL_STBMOD | PMU_CTL_LDOLP));
+ 249              		.loc 1 146 5 view .LVU40
+ 250              		.loc 1 146 13 is_stmt 0 view .LVU41
+ 251 0002 234B     		ldr	r3, .L21
+ 252 0004 1C68     		ldr	r4, [r3]
+ 253 0006 24F00304 		bic	r4, r4, #3
+ 254 000a 1C60     		str	r4, [r3]
+ 147:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****     
+ 148:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****     /* set ldolp bit according to pmu_ldo */
+ 149:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****     PMU_CTL |= ldo;
+ 255              		.loc 1 149 5 is_stmt 1 view .LVU42
+ 256              		.loc 1 149 13 is_stmt 0 view .LVU43
+ 257 000c 1A68     		ldr	r2, [r3]
+ 258 000e 0243     		orrs	r2, r2, r0
+ 259 0010 1A60     		str	r2, [r3]
+ 150:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****     
+ 151:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****     /* set sleepdeep bit of Cortex-M4 system control register */
+ 152:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****     SCB->SCR |= SCB_SCR_SLEEPDEEP_Msk;
+ 260              		.loc 1 152 5 is_stmt 1 view .LVU44
+ 261              		.loc 1 152 14 is_stmt 0 view .LVU45
+ 262 0012 204A     		ldr	r2, .L21+4
+ 263 0014 1369     		ldr	r3, [r2, #16]
+ 264 0016 43F00403 		orr	r3, r3, #4
+ 265 001a 1361     		str	r3, [r2, #16]
+ 153:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c **** 
+ 154:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****     reg_snap[ 0 ] = REG32( 0xE000E010U );
+ 266              		.loc 1 154 5 is_stmt 1 view .LVU46
+ 267              		.loc 1 154 21 is_stmt 0 view .LVU47
+ 268 001c 4FF0E023 		mov	r3, #-536813568
+ 269 0020 1869     		ldr	r0, [r3, #16]
+ 270              	.LVL6:
+ 271              		.loc 1 154 19 view .LVU48
+ 272 0022 1D4A     		ldr	r2, .L21+8
+ 273 0024 1060     		str	r0, [r2]
+ 155:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****     reg_snap[ 1 ] = REG32( 0xE000E100U );
+ 274              		.loc 1 155 5 is_stmt 1 view .LVU49
+ 275              		.loc 1 155 21 is_stmt 0 view .LVU50
+ 276 0026 D3F80001 		ldr	r0, [r3, #256]
+ 277              		.loc 1 155 19 view .LVU51
+ 278 002a 5060     		str	r0, [r2, #4]
+ 156:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****     reg_snap[ 2 ] = REG32( 0xE000E104U );
+ 279              		.loc 1 156 5 is_stmt 1 view .LVU52
+ 280              		.loc 1 156 21 is_stmt 0 view .LVU53
+ 281 002c D3F80401 		ldr	r0, [r3, #260]
+ 282              		.loc 1 156 19 view .LVU54
+ 283 0030 9060     		str	r0, [r2, #8]
+ 157:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****     reg_snap[ 3 ] = REG32( 0xE000E108U );
+ 284              		.loc 1 157 5 is_stmt 1 view .LVU55
+ 285              		.loc 1 157 21 is_stmt 0 view .LVU56
+ARM GAS  /tmp/cc3iZBRk.s 			page 14
+
+
+ 286 0032 D3F80801 		ldr	r0, [r3, #264]
+ 287              		.loc 1 157 19 view .LVU57
+ 288 0036 D060     		str	r0, [r2, #12]
+ 158:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****     
+ 159:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****     REG32( 0xE000E010U ) &= 0x00010004U;
+ 289              		.loc 1 159 5 is_stmt 1 view .LVU58
+ 290              		.loc 1 159 26 is_stmt 0 view .LVU59
+ 291 0038 1869     		ldr	r0, [r3, #16]
+ 292 003a 184A     		ldr	r2, .L21+12
+ 293 003c 0240     		ands	r2, r2, r0
+ 294 003e 1A61     		str	r2, [r3, #16]
+ 160:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****     REG32( 0xE000E180U )  = 0XFF7FF83DU;
+ 295              		.loc 1 160 5 is_stmt 1 view .LVU60
+ 296              		.loc 1 160 27 is_stmt 0 view .LVU61
+ 297 0040 174A     		ldr	r2, .L21+16
+ 298 0042 C3F88021 		str	r2, [r3, #384]
+ 161:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****     REG32( 0xE000E184U )  = 0XFFFFF8FFU;
+ 299              		.loc 1 161 5 is_stmt 1 view .LVU62
+ 300              		.loc 1 161 27 is_stmt 0 view .LVU63
+ 301 0046 6FF4E062 		mvn	r2, #1792
+ 302 004a C3F88421 		str	r2, [r3, #388]
+ 162:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****     REG32( 0xE000E188U )  = 0xFFFFFFFFU;  
+ 303              		.loc 1 162 5 is_stmt 1 view .LVU64
+ 304              		.loc 1 162 27 is_stmt 0 view .LVU65
+ 305 004e 4FF0FF32 		mov	r2, #-1
+ 306 0052 C3F88821 		str	r2, [r3, #392]
+ 163:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****     
+ 164:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****     /* select WFI or WFE command to enter deepsleep mode */
+ 165:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****     if(WFI_CMD == deepsleepmodecmd){
+ 307              		.loc 1 165 5 is_stmt 1 view .LVU66
+ 308              		.loc 1 165 7 is_stmt 0 view .LVU67
+ 309 0056 B1B9     		cbnz	r1, .L18
+ 166:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****         __WFI();
+ 310              		.loc 1 166 9 is_stmt 1 view .LVU68
+ 311              	.LBB22:
+ 312              	.LBI22:
+ 297:../../../../Firmware/CMSIS/core_cmInstr.h **** {
+ 313              		.loc 2 297 57 view .LVU69
+ 314              	.LBB23:
+ 299:../../../../Firmware/CMSIS/core_cmInstr.h **** }
+ 315              		.loc 2 299 3 view .LVU70
+ 316              		.syntax unified
+ 317              	@ 299 "../../../../Firmware/CMSIS/core_cmInstr.h" 1
+ 318 0058 30BF     		wfi
+ 319              	@ 0 "" 2
+ 320              		.thumb
+ 321              		.syntax unified
+ 322              	.L19:
+ 323              	.LBE23:
+ 324              	.LBE22:
+ 167:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****     }else{
+ 168:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****         __SEV();
+ 169:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****         __WFE();
+ 170:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****         __WFE();
+ 171:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****     }
+ 172:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c **** 
+ 173:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****     REG32( 0xE000E010U ) = reg_snap[ 0 ] ; 
+ARM GAS  /tmp/cc3iZBRk.s 			page 15
+
+
+ 325              		.loc 1 173 5 view .LVU71
+ 326              		.loc 1 173 36 is_stmt 0 view .LVU72
+ 327 005a 0F4A     		ldr	r2, .L21+8
+ 328 005c 1168     		ldr	r1, [r2]
+ 329              	.LVL7:
+ 330              		.loc 1 173 26 view .LVU73
+ 331 005e 4FF0E023 		mov	r3, #-536813568
+ 332 0062 1961     		str	r1, [r3, #16]
+ 174:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****     REG32( 0xE000E100U ) = reg_snap[ 1 ] ;
+ 333              		.loc 1 174 5 is_stmt 1 view .LVU74
+ 334              		.loc 1 174 36 is_stmt 0 view .LVU75
+ 335 0064 5168     		ldr	r1, [r2, #4]
+ 336              		.loc 1 174 26 view .LVU76
+ 337 0066 C3F80011 		str	r1, [r3, #256]
+ 175:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****     REG32( 0xE000E104U ) = reg_snap[ 2 ] ;
+ 338              		.loc 1 175 5 is_stmt 1 view .LVU77
+ 339              		.loc 1 175 36 is_stmt 0 view .LVU78
+ 340 006a 9168     		ldr	r1, [r2, #8]
+ 341              		.loc 1 175 26 view .LVU79
+ 342 006c C3F80411 		str	r1, [r3, #260]
+ 176:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****     REG32( 0xE000E108U ) = reg_snap[ 3 ] ;  
+ 343              		.loc 1 176 5 is_stmt 1 view .LVU80
+ 344              		.loc 1 176 36 is_stmt 0 view .LVU81
+ 345 0070 D268     		ldr	r2, [r2, #12]
+ 346              		.loc 1 176 26 view .LVU82
+ 347 0072 C3F80821 		str	r2, [r3, #264]
+ 177:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****     
+ 178:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****     /* reset sleepdeep bit of Cortex-M4 system control register */
+ 179:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****     SCB->SCR &= ~((uint32_t)SCB_SCR_SLEEPDEEP_Msk);
+ 348              		.loc 1 179 5 is_stmt 1 view .LVU83
+ 349              		.loc 1 179 14 is_stmt 0 view .LVU84
+ 350 0076 074A     		ldr	r2, .L21+4
+ 351 0078 1369     		ldr	r3, [r2, #16]
+ 352 007a 23F00403 		bic	r3, r3, #4
+ 353 007e 1361     		str	r3, [r2, #16]
+ 180:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c **** }
+ 354              		.loc 1 180 1 view .LVU85
+ 355 0080 5DF8044B 		ldr	r4, [sp], #4
+ 356              		.cfi_remember_state
+ 357              		.cfi_restore 4
+ 358              		.cfi_def_cfa_offset 0
+ 359 0084 7047     		bx	lr
+ 360              	.LVL8:
+ 361              	.L18:
+ 362              		.cfi_restore_state
+ 168:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****         __WFE();
+ 363              		.loc 1 168 9 is_stmt 1 view .LVU86
+ 364              	.LBB24:
+ 365              	.LBI24:
+ 311:../../../../Firmware/CMSIS/core_cmInstr.h **** }
+ 312:../../../../Firmware/CMSIS/core_cmInstr.h **** 
+ 313:../../../../Firmware/CMSIS/core_cmInstr.h **** 
+ 314:../../../../Firmware/CMSIS/core_cmInstr.h **** /** \brief  Send Event
+ 315:../../../../Firmware/CMSIS/core_cmInstr.h **** 
+ 316:../../../../Firmware/CMSIS/core_cmInstr.h ****     Send Event is a hint instruction. It causes an event to be signaled to the CPU.
+ 317:../../../../Firmware/CMSIS/core_cmInstr.h ****  */
+ 318:../../../../Firmware/CMSIS/core_cmInstr.h **** __attribute__( ( always_inline ) ) __STATIC_INLINE void __SEV(void)
+ARM GAS  /tmp/cc3iZBRk.s 			page 16
+
+
+ 366              		.loc 2 318 57 view .LVU87
+ 367              	.LBB25:
+ 319:../../../../Firmware/CMSIS/core_cmInstr.h **** {
+ 320:../../../../Firmware/CMSIS/core_cmInstr.h ****   __ASM volatile ("sev");
+ 368              		.loc 2 320 3 view .LVU88
+ 369              		.syntax unified
+ 370              	@ 320 "../../../../Firmware/CMSIS/core_cmInstr.h" 1
+ 371 0086 40BF     		sev
+ 372              	@ 0 "" 2
+ 373              		.thumb
+ 374              		.syntax unified
+ 375              	.LBE25:
+ 376              	.LBE24:
+ 169:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****         __WFE();
+ 377              		.loc 1 169 9 view .LVU89
+ 378              	.LBB26:
+ 379              	.LBI26:
+ 308:../../../../Firmware/CMSIS/core_cmInstr.h **** {
+ 380              		.loc 2 308 57 view .LVU90
+ 381              	.LBB27:
+ 310:../../../../Firmware/CMSIS/core_cmInstr.h **** }
+ 382              		.loc 2 310 3 view .LVU91
+ 383              		.syntax unified
+ 384              	@ 310 "../../../../Firmware/CMSIS/core_cmInstr.h" 1
+ 385 0088 20BF     		wfe
+ 386              	@ 0 "" 2
+ 387              		.thumb
+ 388              		.syntax unified
+ 389              	.LBE27:
+ 390              	.LBE26:
+ 170:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****     }
+ 391              		.loc 1 170 9 view .LVU92
+ 392              	.LBB28:
+ 393              	.LBI28:
+ 308:../../../../Firmware/CMSIS/core_cmInstr.h **** {
+ 394              		.loc 2 308 57 view .LVU93
+ 395              	.LBB29:
+ 310:../../../../Firmware/CMSIS/core_cmInstr.h **** }
+ 396              		.loc 2 310 3 view .LVU94
+ 397              		.syntax unified
+ 398              	@ 310 "../../../../Firmware/CMSIS/core_cmInstr.h" 1
+ 399 008a 20BF     		wfe
+ 400              	@ 0 "" 2
+ 311:../../../../Firmware/CMSIS/core_cmInstr.h **** 
+ 401              		.loc 2 311 1 is_stmt 0 view .LVU95
+ 402              		.thumb
+ 403              		.syntax unified
+ 404 008c E5E7     		b	.L19
+ 405              	.L22:
+ 406 008e 00BF     		.align	2
+ 407              	.L21:
+ 408 0090 00700040 		.word	1073770496
+ 409 0094 00ED00E0 		.word	-536810240
+ 410 0098 00000000 		.word	.LANCHOR0
+ 411 009c 04000100 		.word	65540
+ 412 00a0 3DF87FFF 		.word	-8390595
+ 413              	.LBE29:
+ARM GAS  /tmp/cc3iZBRk.s 			page 17
+
+
+ 414              	.LBE28:
+ 415              		.cfi_endproc
+ 416              	.LFE121:
+ 418              		.section	.text.pmu_to_standbymode,"ax",%progbits
+ 419              		.align	1
+ 420              		.global	pmu_to_standbymode
+ 421              		.syntax unified
+ 422              		.thumb
+ 423              		.thumb_func
+ 424              		.fpu fpv4-sp-d16
+ 426              	pmu_to_standbymode:
+ 427              	.LVL9:
+ 428              	.LFB122:
+ 181:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c **** 
+ 182:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c **** /*!
+ 183:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****     \brief      pmu work at standby mode
+ 184:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****     \param[in]  standbymodecmd:
+ 185:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****                 only one parameter can be selected which is shown as below:
+ 186:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****       \arg        WFI_CMD: use WFI command
+ 187:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****       \arg        WFE_CMD: use WFE command
+ 188:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****     \param[out] none
+ 189:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****     \retval     none
+ 190:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c **** */
+ 191:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c **** void pmu_to_standbymode(uint8_t standbymodecmd)
+ 192:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c **** {
+ 429              		.loc 1 192 1 is_stmt 1 view -0
+ 430              		.cfi_startproc
+ 431              		@ args = 0, pretend = 0, frame = 0
+ 432              		@ frame_needed = 0, uses_anonymous_args = 0
+ 433              		@ link register save eliminated.
+ 193:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****     /* set sleepdeep bit of Cortex-M4 system control register */
+ 194:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****     SCB->SCR |= SCB_SCR_SLEEPDEEP_Msk;
+ 434              		.loc 1 194 5 view .LVU97
+ 435              		.loc 1 194 14 is_stmt 0 view .LVU98
+ 436 0000 094A     		ldr	r2, .L26
+ 437 0002 1369     		ldr	r3, [r2, #16]
+ 438 0004 43F00403 		orr	r3, r3, #4
+ 439 0008 1361     		str	r3, [r2, #16]
+ 195:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c **** 
+ 196:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****     /* set stbmod bit */
+ 197:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****     PMU_CTL |= PMU_CTL_STBMOD;
+ 440              		.loc 1 197 5 is_stmt 1 view .LVU99
+ 441              		.loc 1 197 13 is_stmt 0 view .LVU100
+ 442 000a 084B     		ldr	r3, .L26+4
+ 443 000c 1A68     		ldr	r2, [r3]
+ 444 000e 42F00202 		orr	r2, r2, #2
+ 445 0012 1A60     		str	r2, [r3]
+ 198:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****         
+ 199:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****     /* reset wakeup flag */
+ 200:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****     PMU_CTL |= PMU_CTL_WURST;
+ 446              		.loc 1 200 5 is_stmt 1 view .LVU101
+ 447              		.loc 1 200 13 is_stmt 0 view .LVU102
+ 448 0014 1A68     		ldr	r2, [r3]
+ 449 0016 42F00402 		orr	r2, r2, #4
+ 450 001a 1A60     		str	r2, [r3]
+ 201:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****     
+ 202:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****     /* select WFI or WFE command to enter standby mode */
+ARM GAS  /tmp/cc3iZBRk.s 			page 18
+
+
+ 203:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****     if(WFI_CMD == standbymodecmd){
+ 451              		.loc 1 203 5 is_stmt 1 view .LVU103
+ 452              		.loc 1 203 7 is_stmt 0 view .LVU104
+ 453 001c 08B9     		cbnz	r0, .L24
+ 204:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****         __WFI();
+ 454              		.loc 1 204 9 is_stmt 1 view .LVU105
+ 455              	.LBB30:
+ 456              	.LBI30:
+ 297:../../../../Firmware/CMSIS/core_cmInstr.h **** {
+ 457              		.loc 2 297 57 view .LVU106
+ 458              	.LBB31:
+ 299:../../../../Firmware/CMSIS/core_cmInstr.h **** }
+ 459              		.loc 2 299 3 view .LVU107
+ 460              		.syntax unified
+ 461              	@ 299 "../../../../Firmware/CMSIS/core_cmInstr.h" 1
+ 462 001e 30BF     		wfi
+ 463              	@ 0 "" 2
+ 300:../../../../Firmware/CMSIS/core_cmInstr.h **** 
+ 464              		.loc 2 300 1 is_stmt 0 view .LVU108
+ 465              		.thumb
+ 466              		.syntax unified
+ 467 0020 7047     		bx	lr
+ 468              	.L24:
+ 469              	.LBE31:
+ 470              	.LBE30:
+ 205:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****     }else{
+ 206:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****         __WFE();
+ 471              		.loc 1 206 9 is_stmt 1 view .LVU109
+ 472              	.LBB32:
+ 473              	.LBI32:
+ 308:../../../../Firmware/CMSIS/core_cmInstr.h **** {
+ 474              		.loc 2 308 57 view .LVU110
+ 475              	.LBB33:
+ 310:../../../../Firmware/CMSIS/core_cmInstr.h **** }
+ 476              		.loc 2 310 3 view .LVU111
+ 477              		.syntax unified
+ 478              	@ 310 "../../../../Firmware/CMSIS/core_cmInstr.h" 1
+ 479 0022 20BF     		wfe
+ 480              	@ 0 "" 2
+ 481              		.thumb
+ 482              		.syntax unified
+ 483              	.LBE33:
+ 484              	.LBE32:
+ 207:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****     }
+ 208:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c **** }
+ 485              		.loc 1 208 1 is_stmt 0 view .LVU112
+ 486 0024 7047     		bx	lr
+ 487              	.L27:
+ 488 0026 00BF     		.align	2
+ 489              	.L26:
+ 490 0028 00ED00E0 		.word	-536810240
+ 491 002c 00700040 		.word	1073770496
+ 492              		.cfi_endproc
+ 493              	.LFE122:
+ 495              		.section	.text.pmu_wakeup_pin_enable,"ax",%progbits
+ 496              		.align	1
+ 497              		.global	pmu_wakeup_pin_enable
+ARM GAS  /tmp/cc3iZBRk.s 			page 19
+
+
+ 498              		.syntax unified
+ 499              		.thumb
+ 500              		.thumb_func
+ 501              		.fpu fpv4-sp-d16
+ 503              	pmu_wakeup_pin_enable:
+ 504              	.LFB123:
+ 209:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c **** 
+ 210:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c **** /*!
+ 211:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****     \brief      enable wakeup pin
+ 212:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****     \param[in]  none
+ 213:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****     \param[out] none
+ 214:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****     \retval     none
+ 215:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c **** */
+ 216:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c **** void pmu_wakeup_pin_enable(void)
+ 217:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c **** {
+ 505              		.loc 1 217 1 is_stmt 1 view -0
+ 506              		.cfi_startproc
+ 507              		@ args = 0, pretend = 0, frame = 0
+ 508              		@ frame_needed = 0, uses_anonymous_args = 0
+ 509              		@ link register save eliminated.
+ 218:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****     PMU_CS |= PMU_CS_WUPEN;
+ 510              		.loc 1 218 5 view .LVU114
+ 511              		.loc 1 218 12 is_stmt 0 view .LVU115
+ 512 0000 024A     		ldr	r2, .L29
+ 513 0002 5368     		ldr	r3, [r2, #4]
+ 514 0004 43F48073 		orr	r3, r3, #256
+ 515 0008 5360     		str	r3, [r2, #4]
+ 219:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c **** }
+ 516              		.loc 1 219 1 view .LVU116
+ 517 000a 7047     		bx	lr
+ 518              	.L30:
+ 519              		.align	2
+ 520              	.L29:
+ 521 000c 00700040 		.word	1073770496
+ 522              		.cfi_endproc
+ 523              	.LFE123:
+ 525              		.section	.text.pmu_wakeup_pin_disable,"ax",%progbits
+ 526              		.align	1
+ 527              		.global	pmu_wakeup_pin_disable
+ 528              		.syntax unified
+ 529              		.thumb
+ 530              		.thumb_func
+ 531              		.fpu fpv4-sp-d16
+ 533              	pmu_wakeup_pin_disable:
+ 534              	.LFB124:
+ 220:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c **** 
+ 221:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c **** /*!
+ 222:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****     \brief      disable wakeup pin
+ 223:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****     \param[in]  none
+ 224:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****     \param[out] none
+ 225:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****     \retval     none
+ 226:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c **** */
+ 227:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c **** void pmu_wakeup_pin_disable(void)
+ 228:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c **** {
+ 535              		.loc 1 228 1 is_stmt 1 view -0
+ 536              		.cfi_startproc
+ 537              		@ args = 0, pretend = 0, frame = 0
+ARM GAS  /tmp/cc3iZBRk.s 			page 20
+
+
+ 538              		@ frame_needed = 0, uses_anonymous_args = 0
+ 539              		@ link register save eliminated.
+ 229:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****     PMU_CS &= ~PMU_CS_WUPEN;
+ 540              		.loc 1 229 5 view .LVU118
+ 541              		.loc 1 229 12 is_stmt 0 view .LVU119
+ 542 0000 024A     		ldr	r2, .L32
+ 543 0002 5368     		ldr	r3, [r2, #4]
+ 544 0004 23F48073 		bic	r3, r3, #256
+ 545 0008 5360     		str	r3, [r2, #4]
+ 230:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c **** }
+ 546              		.loc 1 230 1 view .LVU120
+ 547 000a 7047     		bx	lr
+ 548              	.L33:
+ 549              		.align	2
+ 550              	.L32:
+ 551 000c 00700040 		.word	1073770496
+ 552              		.cfi_endproc
+ 553              	.LFE124:
+ 555              		.section	.text.pmu_backup_write_enable,"ax",%progbits
+ 556              		.align	1
+ 557              		.global	pmu_backup_write_enable
+ 558              		.syntax unified
+ 559              		.thumb
+ 560              		.thumb_func
+ 561              		.fpu fpv4-sp-d16
+ 563              	pmu_backup_write_enable:
+ 564              	.LFB125:
+ 231:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c **** 
+ 232:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c **** /*!
+ 233:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****     \brief      enable write access to the registers in backup domain
+ 234:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****     \param[in]  none
+ 235:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****     \param[out] none
+ 236:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****     \retval     none
+ 237:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c **** */
+ 238:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c **** void pmu_backup_write_enable(void)
+ 239:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c **** {
+ 565              		.loc 1 239 1 is_stmt 1 view -0
+ 566              		.cfi_startproc
+ 567              		@ args = 0, pretend = 0, frame = 0
+ 568              		@ frame_needed = 0, uses_anonymous_args = 0
+ 569              		@ link register save eliminated.
+ 240:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****     PMU_CTL |= PMU_CTL_BKPWEN;
+ 570              		.loc 1 240 5 view .LVU122
+ 571              		.loc 1 240 13 is_stmt 0 view .LVU123
+ 572 0000 024A     		ldr	r2, .L35
+ 573 0002 1368     		ldr	r3, [r2]
+ 574 0004 43F48073 		orr	r3, r3, #256
+ 575 0008 1360     		str	r3, [r2]
+ 241:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c **** }
+ 576              		.loc 1 241 1 view .LVU124
+ 577 000a 7047     		bx	lr
+ 578              	.L36:
+ 579              		.align	2
+ 580              	.L35:
+ 581 000c 00700040 		.word	1073770496
+ 582              		.cfi_endproc
+ 583              	.LFE125:
+ARM GAS  /tmp/cc3iZBRk.s 			page 21
+
+
+ 585              		.section	.text.pmu_backup_write_disable,"ax",%progbits
+ 586              		.align	1
+ 587              		.global	pmu_backup_write_disable
+ 588              		.syntax unified
+ 589              		.thumb
+ 590              		.thumb_func
+ 591              		.fpu fpv4-sp-d16
+ 593              	pmu_backup_write_disable:
+ 594              	.LFB126:
+ 242:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c **** 
+ 243:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c **** /*!
+ 244:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****     \brief      disable write access to the registers in backup domain
+ 245:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****     \param[in]  none
+ 246:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****     \param[out] none
+ 247:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****     \retval     none
+ 248:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c **** */
+ 249:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c **** void pmu_backup_write_disable(void)
+ 250:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c **** {
+ 595              		.loc 1 250 1 is_stmt 1 view -0
+ 596              		.cfi_startproc
+ 597              		@ args = 0, pretend = 0, frame = 0
+ 598              		@ frame_needed = 0, uses_anonymous_args = 0
+ 599              		@ link register save eliminated.
+ 251:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****     PMU_CTL &= ~PMU_CTL_BKPWEN;
+ 600              		.loc 1 251 5 view .LVU126
+ 601              		.loc 1 251 13 is_stmt 0 view .LVU127
+ 602 0000 024A     		ldr	r2, .L38
+ 603 0002 1368     		ldr	r3, [r2]
+ 604 0004 23F48073 		bic	r3, r3, #256
+ 605 0008 1360     		str	r3, [r2]
+ 252:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c **** }
+ 606              		.loc 1 252 1 view .LVU128
+ 607 000a 7047     		bx	lr
+ 608              	.L39:
+ 609              		.align	2
+ 610              	.L38:
+ 611 000c 00700040 		.word	1073770496
+ 612              		.cfi_endproc
+ 613              	.LFE126:
+ 615              		.section	.text.pmu_flag_clear,"ax",%progbits
+ 616              		.align	1
+ 617              		.global	pmu_flag_clear
+ 618              		.syntax unified
+ 619              		.thumb
+ 620              		.thumb_func
+ 621              		.fpu fpv4-sp-d16
+ 623              	pmu_flag_clear:
+ 624              	.LVL10:
+ 625              	.LFB127:
+ 253:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c **** 
+ 254:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c **** /*!
+ 255:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****     \brief      clear flag bit
+ 256:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****     \param[in]  flag_reset:
+ 257:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****                 only one parameter can be selected which is shown as below:
+ 258:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****       \arg        PMU_FLAG_RESET_WAKEUP: reset wakeup flag
+ 259:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****       \arg        PMU_FLAG_RESET_STANDBY: reset standby flag
+ 260:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****     \param[out] none
+ARM GAS  /tmp/cc3iZBRk.s 			page 22
+
+
+ 261:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****     \retval     none
+ 262:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c **** */
+ 263:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c **** void pmu_flag_clear(uint32_t flag_reset)
+ 264:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c **** {
+ 626              		.loc 1 264 1 is_stmt 1 view -0
+ 627              		.cfi_startproc
+ 628              		@ args = 0, pretend = 0, frame = 0
+ 629              		@ frame_needed = 0, uses_anonymous_args = 0
+ 630              		@ link register save eliminated.
+ 265:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****     switch(flag_reset){
+ 631              		.loc 1 265 5 view .LVU130
+ 632 0000 10B1     		cbz	r0, .L41
+ 633 0002 0128     		cmp	r0, #1
+ 634 0004 06D0     		beq	.L42
+ 635 0006 7047     		bx	lr
+ 636              	.L41:
+ 266:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****     case PMU_FLAG_RESET_WAKEUP:
+ 267:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****         /* reset wakeup flag */
+ 268:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****         PMU_CTL |= PMU_CTL_WURST;
+ 637              		.loc 1 268 9 view .LVU131
+ 638              		.loc 1 268 17 is_stmt 0 view .LVU132
+ 639 0008 054A     		ldr	r2, .L44
+ 640 000a 1368     		ldr	r3, [r2]
+ 641 000c 43F00403 		orr	r3, r3, #4
+ 642 0010 1360     		str	r3, [r2]
+ 269:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****         break;
+ 643              		.loc 1 269 9 is_stmt 1 view .LVU133
+ 644 0012 7047     		bx	lr
+ 645              	.L42:
+ 270:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****     case PMU_FLAG_RESET_STANDBY:
+ 271:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****         /* reset standby flag */
+ 272:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****         PMU_CTL |= PMU_CTL_STBRST;
+ 646              		.loc 1 272 9 view .LVU134
+ 647              		.loc 1 272 17 is_stmt 0 view .LVU135
+ 648 0014 024A     		ldr	r2, .L44
+ 649 0016 1368     		ldr	r3, [r2]
+ 650 0018 43F00803 		orr	r3, r3, #8
+ 651 001c 1360     		str	r3, [r2]
+ 273:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****         break;
+ 652              		.loc 1 273 9 is_stmt 1 view .LVU136
+ 274:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****     default:
+ 275:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****         break;
+ 276:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****     }
+ 277:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c **** }
+ 653              		.loc 1 277 1 is_stmt 0 view .LVU137
+ 654 001e 7047     		bx	lr
+ 655              	.L45:
+ 656              		.align	2
+ 657              	.L44:
+ 658 0020 00700040 		.word	1073770496
+ 659              		.cfi_endproc
+ 660              	.LFE127:
+ 662              		.section	.text.pmu_flag_get,"ax",%progbits
+ 663              		.align	1
+ 664              		.global	pmu_flag_get
+ 665              		.syntax unified
+ 666              		.thumb
+ARM GAS  /tmp/cc3iZBRk.s 			page 23
+
+
+ 667              		.thumb_func
+ 668              		.fpu fpv4-sp-d16
+ 670              	pmu_flag_get:
+ 671              	.LVL11:
+ 672              	.LFB128:
+ 278:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c **** 
+ 279:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c **** /*!
+ 280:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****     \brief      get flag state
+ 281:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****     \param[in]  flag:
+ 282:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****                 only one parameter can be selected which is shown as below:
+ 283:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****       \arg        PMU_FLAG_WAKEUP: wakeup flag
+ 284:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****       \arg        PMU_FLAG_STANDBY: standby flag
+ 285:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****       \arg        PMU_FLAG_LVD: lvd flag
+ 286:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****     \param[out] none
+ 287:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****     \retval     FlagStatus: SET or RESET
+ 288:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c **** */
+ 289:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c **** FlagStatus pmu_flag_get(uint32_t flag)
+ 290:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c **** {
+ 673              		.loc 1 290 1 is_stmt 1 view -0
+ 674              		.cfi_startproc
+ 675              		@ args = 0, pretend = 0, frame = 0
+ 676              		@ frame_needed = 0, uses_anonymous_args = 0
+ 677              		@ link register save eliminated.
+ 291:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****     if(RESET != (PMU_CS & flag)){
+ 678              		.loc 1 291 5 view .LVU139
+ 679              		.loc 1 291 18 is_stmt 0 view .LVU140
+ 680 0000 034B     		ldr	r3, .L47
+ 681 0002 5B68     		ldr	r3, [r3, #4]
+ 682              		.loc 1 291 7 view .LVU141
+ 683 0004 0342     		tst	r3, r0
+ 292:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****         return SET;
+ 293:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****     }else{
+ 294:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****         return RESET;
+ 295:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c ****     }
+ 296:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_pmu.c **** }
+ 684              		.loc 1 296 1 view .LVU142
+ 685 0006 14BF     		ite	ne
+ 686 0008 0120     		movne	r0, #1
+ 687              	.LVL12:
+ 688              		.loc 1 296 1 view .LVU143
+ 689 000a 0020     		moveq	r0, #0
+ 690 000c 7047     		bx	lr
+ 691              	.L48:
+ 692 000e 00BF     		.align	2
+ 693              	.L47:
+ 694 0010 00700040 		.word	1073770496
+ 695              		.cfi_endproc
+ 696              	.LFE128:
+ 698              		.section	.bss.reg_snap.0,"aw",%nobits
+ 699              		.align	2
+ 700              		.set	.LANCHOR0,. + 0
+ 703              	reg_snap.0:
+ 704 0000 00000000 		.space	16
+ 704      00000000 
+ 704      00000000 
+ 704      00000000 
+ 705              		.text
+ARM GAS  /tmp/cc3iZBRk.s 			page 24
+
+
+ 706              	.Letext0:
+ 707              		.file 3 "/usr/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h"
+ 708              		.file 4 "../../../../Firmware/CMSIS/core_cm4.h"
+ 709              		.file 5 "../../../../Firmware/CMSIS/GD/GD32E10x/Include/gd32e10x.h"
+ 710              		.file 6 "../../../../Firmware/GD32E10x_standard_peripheral/Include/gd32e10x_rcu.h"
+ARM GAS  /tmp/cc3iZBRk.s 			page 25
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 gd32e10x_pmu.c
+     /tmp/cc3iZBRk.s:18     .text.pmu_deinit:0000000000000000 $t
+     /tmp/cc3iZBRk.s:26     .text.pmu_deinit:0000000000000000 pmu_deinit
+     /tmp/cc3iZBRk.s:51     .text.pmu_lvd_select:0000000000000000 $t
+     /tmp/cc3iZBRk.s:58     .text.pmu_lvd_select:0000000000000000 pmu_lvd_select
+     /tmp/cc3iZBRk.s:92     .text.pmu_lvd_select:0000000000000024 $d
+     /tmp/cc3iZBRk.s:97     .text.pmu_ldo_output_select:0000000000000000 $t
+     /tmp/cc3iZBRk.s:104    .text.pmu_ldo_output_select:0000000000000000 pmu_ldo_output_select
+     /tmp/cc3iZBRk.s:128    .text.pmu_ldo_output_select:0000000000000014 $d
+     /tmp/cc3iZBRk.s:133    .text.pmu_lvd_disable:0000000000000000 $t
+     /tmp/cc3iZBRk.s:140    .text.pmu_lvd_disable:0000000000000000 pmu_lvd_disable
+     /tmp/cc3iZBRk.s:158    .text.pmu_lvd_disable:000000000000000c $d
+     /tmp/cc3iZBRk.s:163    .text.pmu_to_sleepmode:0000000000000000 $t
+     /tmp/cc3iZBRk.s:170    .text.pmu_to_sleepmode:0000000000000000 pmu_to_sleepmode
+     /tmp/cc3iZBRk.s:224    .text.pmu_to_sleepmode:0000000000000014 $d
+     /tmp/cc3iZBRk.s:229    .text.pmu_to_deepsleepmode:0000000000000000 $t
+     /tmp/cc3iZBRk.s:236    .text.pmu_to_deepsleepmode:0000000000000000 pmu_to_deepsleepmode
+     /tmp/cc3iZBRk.s:408    .text.pmu_to_deepsleepmode:0000000000000090 $d
+     /tmp/cc3iZBRk.s:419    .text.pmu_to_standbymode:0000000000000000 $t
+     /tmp/cc3iZBRk.s:426    .text.pmu_to_standbymode:0000000000000000 pmu_to_standbymode
+     /tmp/cc3iZBRk.s:490    .text.pmu_to_standbymode:0000000000000028 $d
+     /tmp/cc3iZBRk.s:496    .text.pmu_wakeup_pin_enable:0000000000000000 $t
+     /tmp/cc3iZBRk.s:503    .text.pmu_wakeup_pin_enable:0000000000000000 pmu_wakeup_pin_enable
+     /tmp/cc3iZBRk.s:521    .text.pmu_wakeup_pin_enable:000000000000000c $d
+     /tmp/cc3iZBRk.s:526    .text.pmu_wakeup_pin_disable:0000000000000000 $t
+     /tmp/cc3iZBRk.s:533    .text.pmu_wakeup_pin_disable:0000000000000000 pmu_wakeup_pin_disable
+     /tmp/cc3iZBRk.s:551    .text.pmu_wakeup_pin_disable:000000000000000c $d
+     /tmp/cc3iZBRk.s:556    .text.pmu_backup_write_enable:0000000000000000 $t
+     /tmp/cc3iZBRk.s:563    .text.pmu_backup_write_enable:0000000000000000 pmu_backup_write_enable
+     /tmp/cc3iZBRk.s:581    .text.pmu_backup_write_enable:000000000000000c $d
+     /tmp/cc3iZBRk.s:586    .text.pmu_backup_write_disable:0000000000000000 $t
+     /tmp/cc3iZBRk.s:593    .text.pmu_backup_write_disable:0000000000000000 pmu_backup_write_disable
+     /tmp/cc3iZBRk.s:611    .text.pmu_backup_write_disable:000000000000000c $d
+     /tmp/cc3iZBRk.s:616    .text.pmu_flag_clear:0000000000000000 $t
+     /tmp/cc3iZBRk.s:623    .text.pmu_flag_clear:0000000000000000 pmu_flag_clear
+     /tmp/cc3iZBRk.s:658    .text.pmu_flag_clear:0000000000000020 $d
+     /tmp/cc3iZBRk.s:663    .text.pmu_flag_get:0000000000000000 $t
+     /tmp/cc3iZBRk.s:670    .text.pmu_flag_get:0000000000000000 pmu_flag_get
+     /tmp/cc3iZBRk.s:694    .text.pmu_flag_get:0000000000000010 $d
+     /tmp/cc3iZBRk.s:699    .bss.reg_snap.0:0000000000000000 $d
+     /tmp/cc3iZBRk.s:703    .bss.reg_snap.0:0000000000000000 reg_snap.0
+
+UNDEFINED SYMBOLS
+rcu_periph_reset_enable
+rcu_periph_reset_disable

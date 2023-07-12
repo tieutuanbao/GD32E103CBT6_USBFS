@@ -1,0 +1,780 @@
+ARM GAS  /tmp/ccTZ7sWf.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.eabi_attribute 27, 1
+   3              		.eabi_attribute 28, 1
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.file	"gd32e10x_exmc.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.section	.text.exmc_norsram_deinit,"ax",%progbits
+  18              		.align	1
+  19              		.global	exmc_norsram_deinit
+  20              		.arch armv7e-m
+  21              		.syntax unified
+  22              		.thumb
+  23              		.thumb_func
+  24              		.fpu fpv4-sp-d16
+  26              	exmc_norsram_deinit:
+  27              	.LFB116:
+  28              		.file 1 "../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c"
+   1:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c **** /*!
+   2:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****     \file  gd32e10x_exmc.c
+   3:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****     \brief EXMC driver
+   4:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****     
+   5:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****     \version 2017-12-26, V1.0.0, firmware for GD32E10x
+   6:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c **** */
+   7:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c **** 
+   8:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c **** /*
+   9:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****     Copyright (c) 2017, GigaDevice Semiconductor Inc.
+  10:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c **** 
+  11:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****     All rights reserved.
+  12:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c **** 
+  13:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****     Redistribution and use in source and binary forms, with or without modification, 
+  14:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c **** are permitted provided that the following conditions are met:
+  15:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c **** 
+  16:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****     1. Redistributions of source code must retain the above copyright notice, this 
+  17:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****        list of conditions and the following disclaimer.
+  18:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****     2. Redistributions in binary form must reproduce the above copyright notice, 
+  19:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****        this list of conditions and the following disclaimer in the documentation 
+  20:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****        and/or other materials provided with the distribution.
+  21:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****     3. Neither the name of the copyright holder nor the names of its contributors 
+  22:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****        may be used to endorse or promote products derived from this software without 
+  23:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****        specific prior written permission.
+  24:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c **** 
+  25:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****     THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" 
+  26:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c **** AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED 
+  27:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c **** WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. 
+  28:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c **** IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, 
+  29:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c **** INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT 
+  30:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c **** NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR 
+ARM GAS  /tmp/ccTZ7sWf.s 			page 2
+
+
+  31:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c **** PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, 
+  32:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c **** WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) 
+  33:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c **** ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY 
+  34:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c **** OF SUCH DAMAGE.
+  35:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c **** */
+  36:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c **** 
+  37:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c **** #include "gd32e10x_exmc.h"
+  38:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c **** 
+  39:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c **** /* EXMC bank0 register reset value */
+  40:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c **** #define BANK0_SNCTL_RESET                 ((uint32_t)0x000030DBU)
+  41:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c **** #define BANK0_SNTCFG_RESET                ((uint32_t)0x0FFFFFFFU)
+  42:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c **** #define BANK0_SNWTCFG_RESET               ((uint32_t)0x0FFFFFFFU)
+  43:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c **** 
+  44:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c **** /* EXMC register bit offset */
+  45:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c **** #define SNCTL_NRMUX_OFFSET                ((uint32_t)1U)
+  46:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c **** #define SNCTL_SBRSTEN_OFFSET              ((uint32_t)8U)
+  47:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c **** #define SNCTL_WRAPEN_OFFSET               ((uint32_t)10U)
+  48:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c **** #define SNCTL_WREN_OFFSET                 ((uint32_t)12U)
+  49:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c **** #define SNCTL_NRWTEN_OFFSET               ((uint32_t)13U)
+  50:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c **** #define SNCTL_EXMODEN_OFFSET              ((uint32_t)14U)
+  51:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c **** #define SNCTL_ASYNCWAIT_OFFSET            ((uint32_t)15U)
+  52:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c **** 
+  53:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c **** #define SNTCFG_AHLD_OFFSET                ((uint32_t)4U)
+  54:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c **** #define SNTCFG_DSET_OFFSET                ((uint32_t)8U)
+  55:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c **** #define SNTCFG_BUSLAT_OFFSET              ((uint32_t)16U)
+  56:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c **** 
+  57:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c **** #define SNWTCFG_WAHLD_OFFSET              ((uint32_t)4U)
+  58:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c **** #define SNWTCFG_WDSET_OFFSET              ((uint32_t)8U)
+  59:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c **** #define SNWTCFG_WBUSLAT_OFFSET            ((uint32_t)16U)
+  60:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c **** 
+  61:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c **** /*!
+  62:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****     \brief      deinitialize EXMC NOR/SRAM bank
+  63:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****     \param[in]  none
+  64:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****     \param[out] none
+  65:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****     \retval     none
+  66:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c **** */
+  67:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c **** void exmc_norsram_deinit(void)
+  68:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c **** {
+  29              		.loc 1 68 1 view -0
+  30              		.cfi_startproc
+  31              		@ args = 0, pretend = 0, frame = 0
+  32              		@ frame_needed = 0, uses_anonymous_args = 0
+  33              		@ link register save eliminated.
+  69:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****     /* reset the registers */
+  70:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****     EXMC_SNCTL = BANK0_SNCTL_RESET;
+  34              		.loc 1 70 5 view .LVU1
+  35              		.loc 1 70 16 is_stmt 0 view .LVU2
+  36 0000 4FF02043 		mov	r3, #-1610612736
+  37 0004 43F2DB02 		movw	r2, #12507
+  38 0008 1A60     		str	r2, [r3]
+  71:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c **** 
+  72:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****     EXMC_SNTCFG = BANK0_SNTCFG_RESET;
+  39              		.loc 1 72 5 is_stmt 1 view .LVU3
+  40              		.loc 1 72 17 is_stmt 0 view .LVU4
+  41 000a 6FF07042 		mvn	r2, #-268435456
+  42 000e 5A60     		str	r2, [r3, #4]
+  73:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****     EXMC_SNWTCFG = BANK0_SNWTCFG_RESET;
+ARM GAS  /tmp/ccTZ7sWf.s 			page 3
+
+
+  43              		.loc 1 73 5 is_stmt 1 view .LVU5
+  44              		.loc 1 73 18 is_stmt 0 view .LVU6
+  45 0010 C3F80421 		str	r2, [r3, #260]
+  74:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c **** }
+  46              		.loc 1 74 1 view .LVU7
+  47 0014 7047     		bx	lr
+  48              		.cfi_endproc
+  49              	.LFE116:
+  51              		.section	.text.exmc_norsram_struct_para_init,"ax",%progbits
+  52              		.align	1
+  53              		.global	exmc_norsram_struct_para_init
+  54              		.syntax unified
+  55              		.thumb
+  56              		.thumb_func
+  57              		.fpu fpv4-sp-d16
+  59              	exmc_norsram_struct_para_init:
+  60              	.LVL0:
+  61              	.LFB117:
+  75:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c **** 
+  76:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c **** /*!
+  77:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****     \brief      initialize the struct exmc_norsram_parameter_struct
+  78:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****     \param[in]  none
+  79:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****     \param[out] exmc_norsram_init_struct: the initialized struct exmc_norsram_parameter_struct poin
+  80:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****     \retval     none
+  81:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c **** */
+  82:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c **** void exmc_norsram_struct_para_init(exmc_norsram_parameter_struct* exmc_norsram_init_struct)
+  83:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c **** {
+  62              		.loc 1 83 1 is_stmt 1 view -0
+  63              		.cfi_startproc
+  64              		@ args = 0, pretend = 0, frame = 0
+  65              		@ frame_needed = 0, uses_anonymous_args = 0
+  66              		@ link register save eliminated.
+  67              		.loc 1 83 1 is_stmt 0 view .LVU9
+  68 0000 30B4     		push	{r4, r5}
+  69              		.cfi_def_cfa_offset 8
+  70              		.cfi_offset 4, -8
+  71              		.cfi_offset 5, -4
+  84:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****     /* configure the structure with default value */
+  85:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****     exmc_norsram_init_struct->address_data_mux = ENABLE;
+  72              		.loc 1 85 5 is_stmt 1 view .LVU10
+  73              		.loc 1 85 48 is_stmt 0 view .LVU11
+  74 0002 0122     		movs	r2, #1
+  75 0004 C262     		str	r2, [r0, #44]
+  86:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****     exmc_norsram_init_struct->memory_type = EXMC_MEMORY_TYPE_NOR;
+  76              		.loc 1 86 5 is_stmt 1 view .LVU12
+  77              		.loc 1 86 43 is_stmt 0 view .LVU13
+  78 0006 0823     		movs	r3, #8
+  79 0008 8362     		str	r3, [r0, #40]
+  87:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****     exmc_norsram_init_struct->databus_width = EXMC_NOR_DATABUS_WIDTH_16B;
+  80              		.loc 1 87 5 is_stmt 1 view .LVU14
+  81              		.loc 1 87 45 is_stmt 0 view .LVU15
+  82 000a 1023     		movs	r3, #16
+  83 000c 4362     		str	r3, [r0, #36]
+  88:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****     exmc_norsram_init_struct->burst_mode = DISABLE;
+  84              		.loc 1 88 5 is_stmt 1 view .LVU16
+  85              		.loc 1 88 42 is_stmt 0 view .LVU17
+  86 000e 0023     		movs	r3, #0
+ARM GAS  /tmp/ccTZ7sWf.s 			page 4
+
+
+  87 0010 0362     		str	r3, [r0, #32]
+  89:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****     exmc_norsram_init_struct->nwait_polarity = EXMC_NWAIT_POLARITY_LOW;
+  88              		.loc 1 89 5 is_stmt 1 view .LVU18
+  89              		.loc 1 89 46 is_stmt 0 view .LVU19
+  90 0012 C361     		str	r3, [r0, #28]
+  90:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****     exmc_norsram_init_struct->wrap_burst_mode = DISABLE;
+  91              		.loc 1 90 5 is_stmt 1 view .LVU20
+  92              		.loc 1 90 47 is_stmt 0 view .LVU21
+  93 0014 8361     		str	r3, [r0, #24]
+  91:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****     exmc_norsram_init_struct->nwait_config = EXMC_NWAIT_CONFIG_BEFORE;
+  94              		.loc 1 91 5 is_stmt 1 view .LVU22
+  95              		.loc 1 91 44 is_stmt 0 view .LVU23
+  96 0016 4361     		str	r3, [r0, #20]
+  92:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****     exmc_norsram_init_struct->memory_write = ENABLE;
+  97              		.loc 1 92 5 is_stmt 1 view .LVU24
+  98              		.loc 1 92 44 is_stmt 0 view .LVU25
+  99 0018 0261     		str	r2, [r0, #16]
+  93:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****     exmc_norsram_init_struct->nwait_signal = ENABLE;
+ 100              		.loc 1 93 5 is_stmt 1 view .LVU26
+ 101              		.loc 1 93 44 is_stmt 0 view .LVU27
+ 102 001a C260     		str	r2, [r0, #12]
+  94:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****     exmc_norsram_init_struct->extended_mode = DISABLE;
+ 103              		.loc 1 94 5 is_stmt 1 view .LVU28
+ 104              		.loc 1 94 45 is_stmt 0 view .LVU29
+ 105 001c 4360     		str	r3, [r0, #4]
+  95:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****     exmc_norsram_init_struct->asyn_wait = DISABLE;
+ 106              		.loc 1 95 5 is_stmt 1 view .LVU30
+ 107              		.loc 1 95 41 is_stmt 0 view .LVU31
+ 108 001e 8360     		str	r3, [r0, #8]
+  96:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****     exmc_norsram_init_struct->write_mode = EXMC_ASYN_WRITE;
+ 109              		.loc 1 96 5 is_stmt 1 view .LVU32
+ 110              		.loc 1 96 42 is_stmt 0 view .LVU33
+ 111 0020 0360     		str	r3, [r0]
+  97:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c **** 
+  98:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****     /* read/write timing configure */
+  99:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****     exmc_norsram_init_struct->read_write_timing->asyn_address_setuptime = 0xFU;
+ 112              		.loc 1 99 5 is_stmt 1 view .LVU34
+ 113              		.loc 1 99 29 is_stmt 0 view .LVU35
+ 114 0022 016B     		ldr	r1, [r0, #48]
+ 115              		.loc 1 99 73 view .LVU36
+ 116 0024 0F22     		movs	r2, #15
+ 117 0026 8A61     		str	r2, [r1, #24]
+ 100:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****     exmc_norsram_init_struct->read_write_timing->asyn_address_holdtime = 0xFU;
+ 118              		.loc 1 100 5 is_stmt 1 view .LVU37
+ 119              		.loc 1 100 29 is_stmt 0 view .LVU38
+ 120 0028 016B     		ldr	r1, [r0, #48]
+ 121              		.loc 1 100 72 view .LVU39
+ 122 002a 4A61     		str	r2, [r1, #20]
+ 101:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****     exmc_norsram_init_struct->read_write_timing->asyn_data_setuptime = 0xFFU;
+ 123              		.loc 1 101 5 is_stmt 1 view .LVU40
+ 124              		.loc 1 101 29 is_stmt 0 view .LVU41
+ 125 002c 046B     		ldr	r4, [r0, #48]
+ 126              		.loc 1 101 70 view .LVU42
+ 127 002e FF21     		movs	r1, #255
+ 128 0030 2161     		str	r1, [r4, #16]
+ 102:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****     exmc_norsram_init_struct->read_write_timing->bus_latency = 0xFU;
+ 129              		.loc 1 102 5 is_stmt 1 view .LVU43
+ARM GAS  /tmp/ccTZ7sWf.s 			page 5
+
+
+ 130              		.loc 1 102 29 is_stmt 0 view .LVU44
+ 131 0032 046B     		ldr	r4, [r0, #48]
+ 132              		.loc 1 102 62 view .LVU45
+ 133 0034 E260     		str	r2, [r4, #12]
+ 103:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****     exmc_norsram_init_struct->read_write_timing->syn_clk_division = EXMC_SYN_CLOCK_RATIO_16_CLK;
+ 134              		.loc 1 103 5 is_stmt 1 view .LVU46
+ 135              		.loc 1 103 29 is_stmt 0 view .LVU47
+ 136 0036 046B     		ldr	r4, [r0, #48]
+ 137              		.loc 1 103 67 view .LVU48
+ 138 0038 4FF47005 		mov	r5, #15728640
+ 139 003c A560     		str	r5, [r4, #8]
+ 104:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****     exmc_norsram_init_struct->read_write_timing->syn_data_latency = EXMC_DATALAT_17_CLK;
+ 140              		.loc 1 104 5 is_stmt 1 view .LVU49
+ 141              		.loc 1 104 67 is_stmt 0 view .LVU50
+ 142 003e 4FF07064 		mov	r4, #251658240
+ 143 0042 056B     		ldr	r5, [r0, #48]
+ 144 0044 6C60     		str	r4, [r5, #4]
+ 105:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****     exmc_norsram_init_struct->read_write_timing->asyn_access_mode = EXMC_ACCESS_MODE_A;
+ 145              		.loc 1 105 5 is_stmt 1 view .LVU51
+ 146              		.loc 1 105 67 is_stmt 0 view .LVU52
+ 147 0046 046B     		ldr	r4, [r0, #48]
+ 148 0048 2360     		str	r3, [r4]
+ 106:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c **** 
+ 107:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****     /* write timing configure, when extended mode is used */
+ 108:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****     exmc_norsram_init_struct->write_timing->asyn_address_setuptime = 0xFU;
+ 149              		.loc 1 108 5 is_stmt 1 view .LVU53
+ 150              		.loc 1 108 68 is_stmt 0 view .LVU54
+ 151 004a 446B     		ldr	r4, [r0, #52]
+ 152 004c A261     		str	r2, [r4, #24]
+ 109:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****     exmc_norsram_init_struct->write_timing->asyn_address_holdtime = 0xFU;
+ 153              		.loc 1 109 5 is_stmt 1 view .LVU55
+ 154              		.loc 1 109 67 is_stmt 0 view .LVU56
+ 155 004e 446B     		ldr	r4, [r0, #52]
+ 156 0050 6261     		str	r2, [r4, #20]
+ 110:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****     exmc_norsram_init_struct->write_timing->asyn_data_setuptime = 0xFFU;
+ 157              		.loc 1 110 5 is_stmt 1 view .LVU57
+ 158              		.loc 1 110 65 is_stmt 0 view .LVU58
+ 159 0052 446B     		ldr	r4, [r0, #52]
+ 160 0054 2161     		str	r1, [r4, #16]
+ 111:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****     exmc_norsram_init_struct->write_timing->bus_latency = 0xFU;
+ 161              		.loc 1 111 5 is_stmt 1 view .LVU59
+ 162              		.loc 1 111 29 is_stmt 0 view .LVU60
+ 163 0056 416B     		ldr	r1, [r0, #52]
+ 164              		.loc 1 111 57 view .LVU61
+ 165 0058 CA60     		str	r2, [r1, #12]
+ 112:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****     exmc_norsram_init_struct->write_timing->asyn_access_mode = EXMC_ACCESS_MODE_A;
+ 166              		.loc 1 112 5 is_stmt 1 view .LVU62
+ 167              		.loc 1 112 29 is_stmt 0 view .LVU63
+ 168 005a 426B     		ldr	r2, [r0, #52]
+ 169              		.loc 1 112 62 view .LVU64
+ 170 005c 1360     		str	r3, [r2]
+ 113:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c **** }
+ 171              		.loc 1 113 1 view .LVU65
+ 172 005e 30BC     		pop	{r4, r5}
+ 173              		.cfi_restore 5
+ 174              		.cfi_restore 4
+ 175              		.cfi_def_cfa_offset 0
+ARM GAS  /tmp/ccTZ7sWf.s 			page 6
+
+
+ 176 0060 7047     		bx	lr
+ 177              		.cfi_endproc
+ 178              	.LFE117:
+ 180              		.section	.text.exmc_norsram_init,"ax",%progbits
+ 181              		.align	1
+ 182              		.global	exmc_norsram_init
+ 183              		.syntax unified
+ 184              		.thumb
+ 185              		.thumb_func
+ 186              		.fpu fpv4-sp-d16
+ 188              	exmc_norsram_init:
+ 189              	.LVL1:
+ 190              	.LFB118:
+ 114:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c **** 
+ 115:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c **** /*!
+ 116:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****     \brief      initialize EXMC NOR/SRAM bank
+ 117:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****     \param[in]  exmc_norsram_parameter_struct: configure the EXMC NOR/SRAM parameter
+ 118:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****                   write_mode: EXMC_ASYN_WRITE,EXMC_SYN_WRITE
+ 119:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****                   extended_mode: ENABLE or DISABLE 
+ 120:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****                   asyn_wait: ENABLE or DISABLE
+ 121:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****                   nwait_signal: ENABLE or DISABLE
+ 122:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****                   memory_write: ENABLE or DISABLE
+ 123:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****                   nwait_config: EXMC_NWAIT_CONFIG_BEFORE,EXMC_NWAIT_CONFIG_DURING
+ 124:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****                   wrap_burst_mode: ENABLE or DISABLE
+ 125:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****                   nwait_polarity: EXMC_NWAIT_POLARITY_LOW,EXMC_NWAIT_POLARITY_HIGH
+ 126:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****                   burst_mode: ENABLE or DISABLE
+ 127:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****                   databus_width: EXMC_NOR_DATABUS_WIDTH_8B,EXMC_NOR_DATABUS_WIDTH_16B
+ 128:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****                   memory_type: EXMC_MEMORY_TYPE_SRAM,EXMC_MEMORY_TYPE_PSRAM,EXMC_MEMORY_TYPE_NOR
+ 129:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****                   address_data_mux: ENABLE or DISABLE
+ 130:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****                   read_write_timing: struct exmc_norsram_timing_parameter_struct set the time
+ 131:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****                   write_timing: struct exmc_norsram_timing_parameter_struct set the time
+ 132:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****     \param[out] none
+ 133:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****     \retval     none
+ 134:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c **** */
+ 135:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c **** void exmc_norsram_init(exmc_norsram_parameter_struct* exmc_norsram_init_struct)
+ 136:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c **** {
+ 191              		.loc 1 136 1 is_stmt 1 view -0
+ 192              		.cfi_startproc
+ 193              		@ args = 0, pretend = 0, frame = 0
+ 194              		@ frame_needed = 0, uses_anonymous_args = 0
+ 195              		@ link register save eliminated.
+ 196              		.loc 1 136 1 is_stmt 0 view .LVU67
+ 197 0000 70B4     		push	{r4, r5, r6}
+ 198              		.cfi_def_cfa_offset 12
+ 199              		.cfi_offset 4, -12
+ 200              		.cfi_offset 5, -8
+ 201              		.cfi_offset 6, -4
+ 137:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****     uint32_t snctl = 0x00000000U, sntcfg = 0x00000000U, snwtcfg = 0x00000000U;
+ 202              		.loc 1 137 5 is_stmt 1 view .LVU68
+ 203              	.LVL2:
+ 138:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c **** 
+ 139:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****     /* get the register value */
+ 140:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****     snctl = EXMC_SNCTL;
+ 204              		.loc 1 140 5 view .LVU69
+ 205              		.loc 1 140 11 is_stmt 0 view .LVU70
+ 206 0002 4FF02043 		mov	r3, #-1610612736
+ 207 0006 1D68     		ldr	r5, [r3]
+ARM GAS  /tmp/ccTZ7sWf.s 			page 7
+
+
+ 208              	.LVL3:
+ 141:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c **** 
+ 142:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****     /* clear relative bits */
+ 143:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****     snctl &= ((uint32_t)~(EXMC_SNCTL_NRMUX | EXMC_SNCTL_NRTP | EXMC_SNCTL_NRW | EXMC_SNCTL_SBRSTEN 
+ 209              		.loc 1 143 5 is_stmt 1 view .LVU71
+ 144:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****                           EXMC_SNCTL_NREN | EXMC_SNCTL_NRWTPOL | EXMC_SNCTL_WRAPEN | EXMC_SNCTL_NRW
+ 145:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****                           EXMC_SNCTL_WREN | EXMC_SNCTL_NRWTEN | EXMC_SNCTL_EXMODEN | EXMC_SNCTL_ASY
+ 146:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****                           EXMC_SNCTL_SYNCWR ));
+ 147:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c **** 
+ 148:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****     snctl |= (uint32_t)(exmc_norsram_init_struct->address_data_mux << SNCTL_NRMUX_OFFSET) |
+ 210              		.loc 1 148 5 view .LVU72
+ 149:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****                         exmc_norsram_init_struct->memory_type |
+ 211              		.loc 1 149 49 is_stmt 0 view .LVU73
+ 212 0008 816A     		ldr	r1, [r0, #40]
+ 150:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****                         exmc_norsram_init_struct->databus_width |
+ 151:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****                        (exmc_norsram_init_struct->burst_mode << SNCTL_SBRSTEN_OFFSET) |
+ 152:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****                         exmc_norsram_init_struct->nwait_polarity |
+ 153:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****                        (exmc_norsram_init_struct->wrap_burst_mode << SNCTL_WRAPEN_OFFSET) |
+ 154:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****                         exmc_norsram_init_struct->nwait_config |
+ 155:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****                        (exmc_norsram_init_struct->memory_write << SNCTL_WREN_OFFSET) |
+ 156:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****                        (exmc_norsram_init_struct->nwait_signal << SNCTL_NRWTEN_OFFSET) |
+ 157:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****                        (exmc_norsram_init_struct->extended_mode << SNCTL_EXMODEN_OFFSET) |
+ 213              		.loc 1 157 49 view .LVU74
+ 214 000a 4268     		ldr	r2, [r0, #4]
+ 215 000c 436A     		ldr	r3, [r0, #36]
+ 216 000e 0B43     		orrs	r3, r3, r1
+ 143:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****                           EXMC_SNCTL_NREN | EXMC_SNCTL_NRWTPOL | EXMC_SNCTL_WRAPEN | EXMC_SNCTL_NRW
+ 217              		.loc 1 143 11 view .LVU75
+ 218 0010 364C     		ldr	r4, .L10
+ 219 0012 2C40     		ands	r4, r4, r5
+ 220              	.LVL4:
+ 143:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****                           EXMC_SNCTL_NREN | EXMC_SNCTL_NRWTPOL | EXMC_SNCTL_WRAPEN | EXMC_SNCTL_NRW
+ 221              		.loc 1 143 11 view .LVU76
+ 222 0014 2343     		orrs	r3, r3, r4
+ 223 0016 C469     		ldr	r4, [r0, #28]
+ 224              	.LVL5:
+ 143:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****                           EXMC_SNCTL_NREN | EXMC_SNCTL_NRWTPOL | EXMC_SNCTL_WRAPEN | EXMC_SNCTL_NRW
+ 225              		.loc 1 143 11 view .LVU77
+ 226 0018 2343     		orrs	r3, r3, r4
+ 227 001a 4469     		ldr	r4, [r0, #20]
+ 228 001c 2343     		orrs	r3, r3, r4
+ 229 001e 0468     		ldr	r4, [r0]
+ 230 0020 2343     		orrs	r3, r3, r4
+ 148:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****                         exmc_norsram_init_struct->memory_type |
+ 231              		.loc 1 148 68 view .LVU78
+ 232 0022 C46A     		ldr	r4, [r0, #44]
+ 233 0024 43EA4403 		orr	r3, r3, r4, lsl #1
+ 151:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****                         exmc_norsram_init_struct->nwait_polarity |
+ 234              		.loc 1 151 62 view .LVU79
+ 235 0028 046A     		ldr	r4, [r0, #32]
+ 236 002a 43EA0423 		orr	r3, r3, r4, lsl #8
+ 153:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****                         exmc_norsram_init_struct->nwait_config |
+ 237              		.loc 1 153 67 view .LVU80
+ 238 002e 8469     		ldr	r4, [r0, #24]
+ 239 0030 43EA8423 		orr	r3, r3, r4, lsl #10
+ 155:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****                        (exmc_norsram_init_struct->nwait_signal << SNCTL_NRWTEN_OFFSET) |
+ 240              		.loc 1 155 64 view .LVU81
+ARM GAS  /tmp/ccTZ7sWf.s 			page 8
+
+
+ 241 0034 0469     		ldr	r4, [r0, #16]
+ 242 0036 43EA0433 		orr	r3, r3, r4, lsl #12
+ 156:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****                        (exmc_norsram_init_struct->extended_mode << SNCTL_EXMODEN_OFFSET) |
+ 243              		.loc 1 156 64 view .LVU82
+ 244 003a C468     		ldr	r4, [r0, #12]
+ 245 003c 43EA4433 		orr	r3, r3, r4, lsl #13
+ 246 0040 43EA8233 		orr	r3, r3, r2, lsl #14
+ 158:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****                        (exmc_norsram_init_struct->asyn_wait << SNCTL_ASYNCWAIT_OFFSET) |
+ 247              		.loc 1 158 61 view .LVU83
+ 248 0044 8468     		ldr	r4, [r0, #8]
+ 148:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****                         exmc_norsram_init_struct->memory_type |
+ 249              		.loc 1 148 11 view .LVU84
+ 250 0046 43EAC433 		orr	r3, r3, r4, lsl #15
+ 251              	.LVL6:
+ 159:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****                         exmc_norsram_init_struct->write_mode;
+ 160:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c **** 
+ 161:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****     sntcfg = (uint32_t)((exmc_norsram_init_struct->read_write_timing->asyn_address_setuptime - 1U )
+ 252              		.loc 1 161 5 is_stmt 1 view .LVU85
+ 253              		.loc 1 161 50 is_stmt 0 view .LVU86
+ 254 004a 056B     		ldr	r5, [r0, #48]
+ 255              		.loc 1 161 12 view .LVU87
+ 256 004c 6C68     		ldr	r4, [r5, #4]
+ 257 004e AE68     		ldr	r6, [r5, #8]
+ 258 0050 3443     		orrs	r4, r4, r6
+ 259 0052 2E68     		ldr	r6, [r5]
+ 260 0054 3443     		orrs	r4, r4, r6
+ 261              		.loc 1 161 94 view .LVU88
+ 262 0056 AE69     		ldr	r6, [r5, #24]
+ 263 0058 06F1FF3C 		add	ip, r6, #-1
+ 264              		.loc 1 161 14 view .LVU89
+ 265 005c 0CF00F0C 		and	ip, ip, #15
+ 266              		.loc 1 161 12 view .LVU90
+ 267 0060 44EA0C04 		orr	r4, r4, ip
+ 162:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****                        (((exmc_norsram_init_struct->read_write_timing->asyn_address_holdtime - 1U )
+ 268              		.loc 1 162 94 view .LVU91
+ 269 0064 6E69     		ldr	r6, [r5, #20]
+ 270 0066 06F1FF3C 		add	ip, r6, #-1
+ 271              		.loc 1 162 101 view .LVU92
+ 272 006a 4FEA0C1C 		lsl	ip, ip, #4
+ 273              		.loc 1 162 125 view .LVU93
+ 274 006e 5FFA8CFC 		uxtb	ip, ip
+ 161:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****                        (((exmc_norsram_init_struct->read_write_timing->asyn_address_holdtime - 1U )
+ 275              		.loc 1 161 12 view .LVU94
+ 276 0072 44EA0C04 		orr	r4, r4, ip
+ 163:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****                        (((exmc_norsram_init_struct->read_write_timing->asyn_data_setuptime - 1U ) <
+ 277              		.loc 1 163 92 view .LVU95
+ 278 0076 2E69     		ldr	r6, [r5, #16]
+ 279 0078 06F1FF3C 		add	ip, r6, #-1
+ 280              		.loc 1 163 99 view .LVU96
+ 281 007c 4FEA0C2C 		lsl	ip, ip, #8
+ 282              		.loc 1 163 123 view .LVU97
+ 283 0080 1FFA8CFC 		uxth	ip, ip
+ 161:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****                        (((exmc_norsram_init_struct->read_write_timing->asyn_address_holdtime - 1U )
+ 284              		.loc 1 161 12 view .LVU98
+ 285 0084 44EA0C04 		orr	r4, r4, ip
+ 164:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****                        (((exmc_norsram_init_struct->read_write_timing->bus_latency - 1U ) << SNTCFG
+ 286              		.loc 1 164 84 view .LVU99
+ARM GAS  /tmp/ccTZ7sWf.s 			page 9
+
+
+ 287 0088 ED68     		ldr	r5, [r5, #12]
+ 288 008a 05F1FF3C 		add	ip, r5, #-1
+ 289              		.loc 1 164 91 view .LVU100
+ 290 008e 4FEA0C4C 		lsl	ip, ip, #16
+ 291              		.loc 1 164 117 view .LVU101
+ 292 0092 0CF4702C 		and	ip, ip, #983040
+ 161:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****                        (((exmc_norsram_init_struct->read_write_timing->asyn_address_holdtime - 1U )
+ 293              		.loc 1 161 12 view .LVU102
+ 294 0096 44EA0C04 		orr	r4, r4, ip
+ 295              	.LVL7:
+ 165:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****                        exmc_norsram_init_struct->read_write_timing->syn_clk_division |
+ 166:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****                        exmc_norsram_init_struct->read_write_timing->syn_data_latency |
+ 167:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****                        exmc_norsram_init_struct->read_write_timing->asyn_access_mode;
+ 168:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c **** 
+ 169:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****     /* nor flash access enable */
+ 170:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****     if(EXMC_MEMORY_TYPE_NOR == exmc_norsram_init_struct->memory_type){
+ 296              		.loc 1 170 5 is_stmt 1 view .LVU103
+ 297              		.loc 1 170 7 is_stmt 0 view .LVU104
+ 298 009a 0829     		cmp	r1, #8
+ 171:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****         snctl |= (uint32_t)EXMC_SNCTL_NREN;
+ 299              		.loc 1 171 9 is_stmt 1 view .LVU105
+ 300              		.loc 1 171 15 is_stmt 0 view .LVU106
+ 301 009c 08BF     		it	eq
+ 302 009e 43F04003 		orreq	r3, r3, #64
+ 303              	.LVL8:
+ 172:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****     }
+ 173:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c **** 
+ 174:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****     /* extended mode configure */
+ 175:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****     if(ENABLE == exmc_norsram_init_struct->extended_mode){
+ 304              		.loc 1 175 5 is_stmt 1 view .LVU107
+ 305              		.loc 1 175 7 is_stmt 0 view .LVU108
+ 306 00a2 012A     		cmp	r2, #1
+ 307 00a4 09D0     		beq	.L9
+ 176:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****         snwtcfg = (uint32_t)((exmc_norsram_init_struct->write_timing->asyn_address_setuptime - 1U) 
+ 177:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****                            (((exmc_norsram_init_struct->write_timing->asyn_address_holdtime -1U ) <
+ 178:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****                            (((exmc_norsram_init_struct->write_timing->asyn_data_setuptime -1U ) << 
+ 179:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****                            (((exmc_norsram_init_struct->write_timing->bus_latency - 1U ) << SNWTCFG
+ 180:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****                             exmc_norsram_init_struct->write_timing->asyn_access_mode;
+ 181:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****     }else{
+ 182:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****         snwtcfg = BANK0_SNWTCFG_RESET;
+ 308              		.loc 1 182 17 view .LVU109
+ 309 00a6 6FF07042 		mvn	r2, #-268435456
+ 310              	.LVL9:
+ 311              	.L6:
+ 183:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****     }
+ 184:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c **** 
+ 185:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****     /* configure the registers */
+ 186:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****     EXMC_SNCTL = snctl;
+ 312              		.loc 1 186 5 is_stmt 1 view .LVU110
+ 313              		.loc 1 186 16 is_stmt 0 view .LVU111
+ 314 00aa 4FF02041 		mov	r1, #-1610612736
+ 315 00ae 0B60     		str	r3, [r1]
+ 187:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****     EXMC_SNTCFG = sntcfg;
+ 316              		.loc 1 187 5 is_stmt 1 view .LVU112
+ 317              		.loc 1 187 17 is_stmt 0 view .LVU113
+ 318 00b0 4C60     		str	r4, [r1, #4]
+ 188:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****     EXMC_SNWTCFG = snwtcfg;
+ARM GAS  /tmp/ccTZ7sWf.s 			page 10
+
+
+ 319              		.loc 1 188 5 is_stmt 1 view .LVU114
+ 320              		.loc 1 188 18 is_stmt 0 view .LVU115
+ 321 00b2 C1F80421 		str	r2, [r1, #260]
+ 189:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c **** }
+ 322              		.loc 1 189 1 view .LVU116
+ 323 00b6 70BC     		pop	{r4, r5, r6}
+ 324              		.cfi_remember_state
+ 325              		.cfi_restore 6
+ 326              		.cfi_restore 5
+ 327              		.cfi_restore 4
+ 328              		.cfi_def_cfa_offset 0
+ 329              	.LVL10:
+ 330              		.loc 1 189 1 view .LVU117
+ 331 00b8 7047     		bx	lr
+ 332              	.LVL11:
+ 333              	.L9:
+ 334              		.cfi_restore_state
+ 176:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****                            (((exmc_norsram_init_struct->write_timing->asyn_address_holdtime -1U ) <
+ 335              		.loc 1 176 9 is_stmt 1 view .LVU118
+ 176:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****                            (((exmc_norsram_init_struct->write_timing->asyn_address_holdtime -1U ) <
+ 336              		.loc 1 176 55 is_stmt 0 view .LVU119
+ 337 00ba 406B     		ldr	r0, [r0, #52]
+ 338              	.LVL12:
+ 176:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****                            (((exmc_norsram_init_struct->write_timing->asyn_address_holdtime -1U ) <
+ 339              		.loc 1 176 94 view .LVU120
+ 340 00bc 8269     		ldr	r2, [r0, #24]
+ 341 00be 013A     		subs	r2, r2, #1
+ 176:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****                            (((exmc_norsram_init_struct->write_timing->asyn_address_holdtime -1U ) <
+ 342              		.loc 1 176 19 view .LVU121
+ 343 00c0 02F00F02 		and	r2, r2, #15
+ 176:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****                            (((exmc_norsram_init_struct->write_timing->asyn_address_holdtime -1U ) <
+ 344              		.loc 1 176 17 view .LVU122
+ 345 00c4 0168     		ldr	r1, [r0]
+ 346 00c6 0A43     		orrs	r2, r2, r1
+ 177:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****                            (((exmc_norsram_init_struct->write_timing->asyn_data_setuptime -1U ) << 
+ 347              		.loc 1 177 93 view .LVU123
+ 348 00c8 4169     		ldr	r1, [r0, #20]
+ 349 00ca 0139     		subs	r1, r1, #1
+ 177:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****                            (((exmc_norsram_init_struct->write_timing->asyn_data_setuptime -1U ) << 
+ 350              		.loc 1 177 99 view .LVU124
+ 351 00cc 0901     		lsls	r1, r1, #4
+ 177:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****                            (((exmc_norsram_init_struct->write_timing->asyn_data_setuptime -1U ) << 
+ 352              		.loc 1 177 125 view .LVU125
+ 353 00ce C9B2     		uxtb	r1, r1
+ 176:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****                            (((exmc_norsram_init_struct->write_timing->asyn_address_holdtime -1U ) <
+ 354              		.loc 1 176 17 view .LVU126
+ 355 00d0 0A43     		orrs	r2, r2, r1
+ 178:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****                            (((exmc_norsram_init_struct->write_timing->bus_latency - 1U ) << SNWTCFG
+ 356              		.loc 1 178 91 view .LVU127
+ 357 00d2 0169     		ldr	r1, [r0, #16]
+ 358 00d4 0139     		subs	r1, r1, #1
+ 178:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****                            (((exmc_norsram_init_struct->write_timing->bus_latency - 1U ) << SNWTCFG
+ 359              		.loc 1 178 97 view .LVU128
+ 360 00d6 0902     		lsls	r1, r1, #8
+ 178:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****                            (((exmc_norsram_init_struct->write_timing->bus_latency - 1U ) << SNWTCFG
+ 361              		.loc 1 178 123 view .LVU129
+ 362 00d8 89B2     		uxth	r1, r1
+ARM GAS  /tmp/ccTZ7sWf.s 			page 11
+
+
+ 176:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****                            (((exmc_norsram_init_struct->write_timing->asyn_address_holdtime -1U ) <
+ 363              		.loc 1 176 17 view .LVU130
+ 364 00da 0A43     		orrs	r2, r2, r1
+ 179:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****                             exmc_norsram_init_struct->write_timing->asyn_access_mode;
+ 365              		.loc 1 179 83 view .LVU131
+ 366 00dc C168     		ldr	r1, [r0, #12]
+ 367 00de 0139     		subs	r1, r1, #1
+ 179:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****                             exmc_norsram_init_struct->write_timing->asyn_access_mode;
+ 368              		.loc 1 179 90 view .LVU132
+ 369 00e0 0904     		lsls	r1, r1, #16
+ 179:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****                             exmc_norsram_init_struct->write_timing->asyn_access_mode;
+ 370              		.loc 1 179 118 view .LVU133
+ 371 00e2 01F47021 		and	r1, r1, #983040
+ 176:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****                            (((exmc_norsram_init_struct->write_timing->asyn_address_holdtime -1U ) <
+ 372              		.loc 1 176 17 view .LVU134
+ 373 00e6 0A43     		orrs	r2, r2, r1
+ 374              	.LVL13:
+ 176:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****                            (((exmc_norsram_init_struct->write_timing->asyn_address_holdtime -1U ) <
+ 375              		.loc 1 176 17 view .LVU135
+ 376 00e8 DFE7     		b	.L6
+ 377              	.L11:
+ 378 00ea 00BF     		.align	2
+ 379              	.L10:
+ 380 00ec 8100F7FF 		.word	-589695
+ 381              		.cfi_endproc
+ 382              	.LFE118:
+ 384              		.section	.text.exmc_norsram_enable,"ax",%progbits
+ 385              		.align	1
+ 386              		.global	exmc_norsram_enable
+ 387              		.syntax unified
+ 388              		.thumb
+ 389              		.thumb_func
+ 390              		.fpu fpv4-sp-d16
+ 392              	exmc_norsram_enable:
+ 393              	.LFB119:
+ 190:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c **** 
+ 191:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c **** /*!
+ 192:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****     \brief      enable EXMC NOR/PSRAM bank 
+ 193:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****     \param[in]  none
+ 194:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****     \param[out] none
+ 195:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****     \retval     none
+ 196:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c **** */
+ 197:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c **** void exmc_norsram_enable(void)
+ 198:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c **** {
+ 394              		.loc 1 198 1 is_stmt 1 view -0
+ 395              		.cfi_startproc
+ 396              		@ args = 0, pretend = 0, frame = 0
+ 397              		@ frame_needed = 0, uses_anonymous_args = 0
+ 398              		@ link register save eliminated.
+ 199:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****     EXMC_SNCTL |= (uint32_t)EXMC_SNCTL_NRBKEN;
+ 399              		.loc 1 199 5 view .LVU137
+ 400              		.loc 1 199 16 is_stmt 0 view .LVU138
+ 401 0000 4FF02042 		mov	r2, #-1610612736
+ 402 0004 1368     		ldr	r3, [r2]
+ 403 0006 43F00103 		orr	r3, r3, #1
+ 404 000a 1360     		str	r3, [r2]
+ 200:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c **** }
+ARM GAS  /tmp/ccTZ7sWf.s 			page 12
+
+
+ 405              		.loc 1 200 1 view .LVU139
+ 406 000c 7047     		bx	lr
+ 407              		.cfi_endproc
+ 408              	.LFE119:
+ 410              		.section	.text.exmc_norsram_disable,"ax",%progbits
+ 411              		.align	1
+ 412              		.global	exmc_norsram_disable
+ 413              		.syntax unified
+ 414              		.thumb
+ 415              		.thumb_func
+ 416              		.fpu fpv4-sp-d16
+ 418              	exmc_norsram_disable:
+ 419              	.LFB120:
+ 201:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c **** 
+ 202:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c **** /*!
+ 203:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****     \brief      disable EXMC NOR/PSRAM bank 
+ 204:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****     \param[in]  none
+ 205:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****     \param[out] none
+ 206:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****     \retval     none
+ 207:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c **** */
+ 208:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c **** void exmc_norsram_disable(void)
+ 209:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c **** {
+ 420              		.loc 1 209 1 is_stmt 1 view -0
+ 421              		.cfi_startproc
+ 422              		@ args = 0, pretend = 0, frame = 0
+ 423              		@ frame_needed = 0, uses_anonymous_args = 0
+ 424              		@ link register save eliminated.
+ 210:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****     EXMC_SNCTL &= ~(uint32_t)EXMC_SNCTL_NRBKEN;
+ 425              		.loc 1 210 5 view .LVU141
+ 426              		.loc 1 210 16 is_stmt 0 view .LVU142
+ 427 0000 4FF02042 		mov	r2, #-1610612736
+ 428 0004 1368     		ldr	r3, [r2]
+ 429 0006 23F00103 		bic	r3, r3, #1
+ 430 000a 1360     		str	r3, [r2]
+ 211:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c **** }
+ 431              		.loc 1 211 1 view .LVU143
+ 432 000c 7047     		bx	lr
+ 433              		.cfi_endproc
+ 434              	.LFE120:
+ 436              		.section	.text.exmc_norsram_page_size_config,"ax",%progbits
+ 437              		.align	1
+ 438              		.global	exmc_norsram_page_size_config
+ 439              		.syntax unified
+ 440              		.thumb
+ 441              		.thumb_func
+ 442              		.fpu fpv4-sp-d16
+ 444              	exmc_norsram_page_size_config:
+ 445              	.LVL14:
+ 446              	.LFB121:
+ 212:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c **** 
+ 213:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c **** /*!
+ 214:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****     \brief      configure CRAM page size 
+ 215:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****     \param[in]  page_size: CRAM page size
+ 216:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****                 only one parameter can be selected which is shown as below:
+ 217:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****       \arg        EXMC_CRAM_AUTO_SPLIT: the clock is generated only during synchronous access
+ 218:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****       \arg        EXMC_CRAM_PAGE_SIZE_128_BYTES: page size is 128 bytes
+ 219:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****       \arg        EXMC_CRAM_PAGE_SIZE_256_BYTES: page size is 256 bytes
+ARM GAS  /tmp/ccTZ7sWf.s 			page 13
+
+
+ 220:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****       \arg        EXMC_CRAM_PAGE_SIZE_512_BYTES: page size is 512 bytes
+ 221:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****       \arg        EXMC_CRAM_PAGE_SIZE_1024_BYTES: page size is 1024 bytes
+ 222:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****     \param[out] none
+ 223:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****     \retval     none
+ 224:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c **** */
+ 225:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c **** void exmc_norsram_page_size_config(uint32_t page_size)
+ 226:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c **** {
+ 447              		.loc 1 226 1 is_stmt 1 view -0
+ 448              		.cfi_startproc
+ 449              		@ args = 0, pretend = 0, frame = 0
+ 450              		@ frame_needed = 0, uses_anonymous_args = 0
+ 451              		@ link register save eliminated.
+ 227:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****     /* reset the bits */
+ 228:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****     EXMC_SNCTL &= ~EXMC_SNCTL_CPS;
+ 452              		.loc 1 228 5 view .LVU145
+ 453              		.loc 1 228 16 is_stmt 0 view .LVU146
+ 454 0000 4FF02043 		mov	r3, #-1610612736
+ 455 0004 1968     		ldr	r1, [r3]
+ 456 0006 21F4E021 		bic	r1, r1, #458752
+ 457 000a 1960     		str	r1, [r3]
+ 229:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****     /* set the CPS bits */
+ 230:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c ****     EXMC_SNCTL |= page_size;
+ 458              		.loc 1 230 5 is_stmt 1 view .LVU147
+ 459              		.loc 1 230 16 is_stmt 0 view .LVU148
+ 460 000c 1A68     		ldr	r2, [r3]
+ 461 000e 0243     		orrs	r2, r2, r0
+ 462 0010 1A60     		str	r2, [r3]
+ 231:../../../../Firmware/GD32E10x_standard_peripheral/Source/gd32e10x_exmc.c **** }
+ 463              		.loc 1 231 1 view .LVU149
+ 464 0012 7047     		bx	lr
+ 465              		.cfi_endproc
+ 466              	.LFE121:
+ 468              		.text
+ 469              	.Letext0:
+ 470              		.file 2 "../../../../Firmware/GD32E10x_standard_peripheral/Include/gd32e10x_exmc.h"
+ 471              		.file 3 "/usr/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h"
+ 472              		.file 4 "../../../../Firmware/CMSIS/GD/GD32E10x/Include/gd32e10x.h"
+ARM GAS  /tmp/ccTZ7sWf.s 			page 14
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 gd32e10x_exmc.c
+     /tmp/ccTZ7sWf.s:18     .text.exmc_norsram_deinit:0000000000000000 $t
+     /tmp/ccTZ7sWf.s:26     .text.exmc_norsram_deinit:0000000000000000 exmc_norsram_deinit
+     /tmp/ccTZ7sWf.s:52     .text.exmc_norsram_struct_para_init:0000000000000000 $t
+     /tmp/ccTZ7sWf.s:59     .text.exmc_norsram_struct_para_init:0000000000000000 exmc_norsram_struct_para_init
+     /tmp/ccTZ7sWf.s:181    .text.exmc_norsram_init:0000000000000000 $t
+     /tmp/ccTZ7sWf.s:188    .text.exmc_norsram_init:0000000000000000 exmc_norsram_init
+     /tmp/ccTZ7sWf.s:380    .text.exmc_norsram_init:00000000000000ec $d
+     /tmp/ccTZ7sWf.s:385    .text.exmc_norsram_enable:0000000000000000 $t
+     /tmp/ccTZ7sWf.s:392    .text.exmc_norsram_enable:0000000000000000 exmc_norsram_enable
+     /tmp/ccTZ7sWf.s:411    .text.exmc_norsram_disable:0000000000000000 $t
+     /tmp/ccTZ7sWf.s:418    .text.exmc_norsram_disable:0000000000000000 exmc_norsram_disable
+     /tmp/ccTZ7sWf.s:437    .text.exmc_norsram_page_size_config:0000000000000000 $t
+     /tmp/ccTZ7sWf.s:444    .text.exmc_norsram_page_size_config:0000000000000000 exmc_norsram_page_size_config
+
+NO UNDEFINED SYMBOLS
